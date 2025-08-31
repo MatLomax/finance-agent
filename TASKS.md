@@ -178,11 +178,14 @@ This document outlines the complete transformation of the Thailand.html single-f
   - **Features**: Simple debounce implementation, subscriber pattern, caching integration
   - **Testing**: Complete test suite with 15 test cases covering all functionality
 
-- [ ] **Create theme and settings module** (`src/ui/theme-manager.js`)
-  - Dark/light theme toggle (currently only dark)
+- [x] **COMPLETED: Create theme and settings module** (`src/ui/theme-manager.js`)
+  - Dark/light theme toggle with CSS custom properties 
   - Currency preference management
-  - Export/import functionality for financial data
-  - Reset to defaults functionality
+  - Settings persistence using localStorage with validation
+  - Theme initialization for app startup
+  - **Implementation**: Lightweight module under 100 lines with co-located tests
+  - **Features**: TypeBox validation, CSS variable application, comprehensive error handling
+  - **Testing**: Complete test suite with 21 test cases covering all functionality
 
 **Complexity**: Medium | **Dependency**: 4.1-4.2 | **Enhancement**: Additional user features
 
