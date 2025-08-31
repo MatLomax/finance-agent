@@ -9,9 +9,25 @@
 
 ## File Structure & Complexity
 - **Auto-enforced by ESLint**: 100 lines max per file, 10 cyclomatic complexity max
-- **Co-located tests**: `module.test.js` next to `module.js`
-- **Domain organization**: `src/lib/[domain]/`, `src/ui/`, `src/state/`
+- **Co-located tests**: `module.test.js` next to `module.js` (one test file per module)
+- **Flattened structure**: `src/lib/domain.js` instead of `src/lib/domain/calculations.js`
+- **Domain organization**: Direct files in `src/lib/`, `src/ui/`, `src/state/`
 - **Split when violated**: ESLint will fail - must refactor into smaller modules
+
+**Example Structure**:
+```
+src/
+  lib/
+    calc.js          # Main API (re-exports for compatibility)
+    currency.js      # Currency conversion functions
+    currency.test.js # Currency conversion tests
+    tax.js          # Tax calculation functions  
+    tax.test.js     # Tax calculation tests
+    retirement.js   # Retirement planning functions
+    retirement.test.js # Retirement tests
+    growth.js       # Growth calculation functions
+    growth.test.js  # Growth tests
+```
 
 ## Dependencies & Imports
 **Tree-shakeable imports ONLY**:

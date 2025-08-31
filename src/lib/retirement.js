@@ -9,7 +9,7 @@
  */
 
 import { Type } from '@sinclair/typebox';
-import { validate } from '../validators.js';
+import { validate } from './validators.js';
 
 /**
  * Schema for retirement withdrawal calculations

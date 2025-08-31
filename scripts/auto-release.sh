@@ -77,19 +77,17 @@ create_github_release() {
     
     # Create release archive with essential files including minified build
     local archive_name="finance-agent-v${version}.tar.gz"
-    tar -czf "$archive_name" \
-        .cursor/ \
-        scripts/ \
-        src/ \
-        dist/ \
-        package.json \
-        tsconfig.json \
-        build.js \
-        README.md \
-        .vscode/ \
-        .gitignore \
-        .nvmrc \
-        --exclude-vcs
+    
+    # Create list of files to include, checking if they exist
+    local files_to_include=()
+    for file in .cursor scripts src dist package.json tsconfig.json build.js README.md .vscode .gitignore .nvmrc; do
+        if [ -e "$file" ]; then
+            files_to_include+=("$file")
+        fi
+    done
+    
+    # Create tar archive with only existing files
+    tar --exclude-vcs -czf "$archive_name" "${files_to_include[@]}"
     
     # Create GitHub release
     gh release create "v${version}" \

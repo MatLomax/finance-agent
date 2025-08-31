@@ -7,26 +7,26 @@
  */
 
 // Re-export all functions for backward compatibility
-export { convertUsdToEur, convertEurToThb } from './currency/index.js';
-export { calculateNetSalary } from './tax/index.js';
+export { convertUsdToEur, convertEurToThb } from './currency.js';
+export { calculateNetSalary } from './tax.js';
 export { 
   calculateMonthlyExpenses, 
   calculateAnnualExpenses, 
   calculateEmergencyFundTarget 
-} from './expenses/index.js';
+} from './expenses.js';
 export { 
   calculateInvestmentGrossIncome, 
   calculateInvestmentNetIncome 
-} from './investments/index.js';
+} from './investments.js';
 export { 
   calculateRetirementShortfall, 
   calculateMaxWithdrawal 
-} from './retirement/index.js';
+} from './retirement.js';
 export { 
   calculateDebtPayment, 
   calculateAllocationAmounts 
-} from './allocations/index.js';
+} from './allocations.js';
 export { 
   calculatePercentageGrowth, 
   calculateAbsoluteGrowth 
-} from './growth/index.js';
+} from './growth.js';

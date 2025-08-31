@@ -8,9 +8,7 @@
  */
 
 import { Type } from '@sinclair/typebox';
-import { validate } from '../validators.js';
-
-
+import { validate } from './validators.js';
 
 /**
  * Schema for currency conversion calculations
@@ -19,8 +17,6 @@ const CurrencyConversionSchema = Type.Object({
   amount: Type.Number({ minimum: 0 }),
   exchangeRate: Type.Number({ exclusiveMinimum: 0 })
 });
-
-
 
 /**
  * Converts USD amount to EUR using exchange rate
