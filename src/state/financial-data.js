@@ -1,21 +1,14 @@
 /**
- * @fileoverview localStorage persistence module for financial data
+ * @fileoverview Financial data persistence and management
  * 
- * This module provides a clean interface for persisting and retrieving financial
- * input data using the browser's localStorage API. It includes data migration
- * handling, validation, and observer pattern for state change notifications.
- * 
- * Key Features:
- * - Type-safe data persistence with runtime validation
- * - Default value management and restoration
- * - State change notification system via observer pattern
- * - Data migration handling for schema evolution
- * - Error handling and graceful degradation
+ * Manages storage, loading, and validation of financial input data with 
+ * localStorage persistence, schema versioning, and change notifications.
  */
 
+import { formatISO } from 'date-fns';
 import { validateFinancialData, migrateData } from './validation.js';
 import { getDefaultFinancialData } from './defaults.js';
-import { addObserver, removeObserver, notifyObservers } from './observers.js';
+import { notifyObservers, addObserver, removeObserver } from './observers.js';
 
 /**
  * Storage key for financial data in localStorage
@@ -104,7 +97,7 @@ export function saveFinancialData(data) {
     const dataToSave = {
       ...data,
       schemaVersion: SCHEMA_VERSION,
-      lastUpdated: new Date().toISOString()
+      lastUpdated: formatISO(new Date())
     };
     
     localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));

@@ -41,7 +41,7 @@ run_check() {
 
     # Run command in background and capture output to temp file
     # Force color output for various tools
-    FORCE_COLOR=1 NO_COLOR= CLICOLOR_FORCE=1 eval "$command" > "$temp_file" 2>&1 &
+    FORCE_COLOR=1 CLICOLOR_FORCE=1 eval "$command" > "$temp_file" 2>&1 &
     local cmd_pid=$!
 
     # Show spinner while command runs
@@ -157,11 +157,19 @@ if [ "$TEST" = true ]; then
     fi
 fi
 
-# Check bundle size (if build exists)
-if [ "$BUILD" = true ] && [ -f "build.js" ]; then
-    if ! run_check "npm run build && du -sh dist/ | awk '{if(\$1 ~ /[0-9]+M/ || (\$1 ~ /[0-9]+K/ && \$1+0 > 20)) exit 1}'" "Bundle Size Check"; then
-        echo -e "${RED}💥 Bundle size exceeds 20KB limit${NC}"
+# Check bundle size
+if [ "$BUILD" = true ]; then
+    if ! run_check "npm run build:check" "Bundle Size Check"; then
+        echo -e "${RED}💥 Bundle build failed${NC}"
         exit 1
+    fi
+fi
+
+# Check for unused files and exports
+if [ "$DEPS" = true ]; then
+    if ! run_check "npm run knip" "Unused Files/Exports Check"; then
+        echo -e "${YELLOW}⚠️  Unused files or exports detected - consider running 'npm run knip:fix'${NC}"
+        # Don't exit on knip failures, just warn
     fi
 fi
 

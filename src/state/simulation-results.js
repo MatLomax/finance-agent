@@ -193,7 +193,7 @@ export function getSimulationCacheStats() {
  * 
  * Used for testing or when starting fresh performance measurement.
  */
-export function resetCacheStats() {
+function resetCacheStats() {
   cacheStats.hits = 0;
   cacheStats.misses = 0;
   // Don't reset entries count as cache may still contain data
@@ -204,7 +204,7 @@ export function resetCacheStats() {
  * 
  * @returns {boolean} True if cache contains simulation results
  */
-export function hasSimulationCache() {
+function hasSimulationCache() {
   return simulationCache.size > 0;
 }
 
@@ -213,7 +213,7 @@ export function hasSimulationCache() {
  * 
  * @returns {number} Number of cached simulation results
  */
-export function getSimulationCacheSize() {
+function getSimulationCacheSize() {
   return simulationCache.size;
 }
 
@@ -225,7 +225,7 @@ export function getSimulationCacheSize() {
  * 
  * @returns {number} Estimated memory usage in bytes
  */
-export function estimateCacheMemoryUsage() {
+function estimateCacheMemoryUsage() {
   let totalSize = 0;
   
   for (const [key, value] of simulationCache) {
@@ -247,6 +247,6 @@ export function estimateCacheMemoryUsage() {
  * @param {Record<string, any>} input2 - Second input to compare  
  * @returns {boolean} True if inputs would generate identical cache keys
  */
-export function wouldCacheKeyMatch(input1, input2) {
+function wouldCacheKeyMatch(input1, input2) {
   return generateCacheKey(input1) === generateCacheKey(input2);
 }

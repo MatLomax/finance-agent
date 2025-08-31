@@ -1,13 +1,15 @@
 {
   "name": "finance-agent",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "Ultra-lightweight vanilla JavaScript finance agent",
   "type": "module",
   "main": "src/main.js",
   "scripts": {
     "dev": "python -m http.server 3000 --directory .",
-    "build": "node build.js",
+    "build": "esbuild src/main.js --bundle --minify --sourcemap --target=es2022 --format=esm --outdir=dist --splitting --chunk-names=[name]-[hash] --asset-names=[name]-[hash] --metafile=dist/meta.json --tree-shaking=true --define:process.env.NODE_ENV=\\\"production\\\"",
+    "build:clean": "rm -rf dist/* && npm run build",
     "build:analyze": "npm run build && echo 'Build analysis complete - see dist/meta.json for details'",
+    "build:check": "npm run build:clean && node -e \"const meta=require('./dist/meta.json'); const size=Object.entries(meta.outputs).filter(([path,o])=>!path.endsWith('.map')).reduce((s,[,o])=>s+o.bytes,0); const limit=15*1024; console.log('Bundle size:',Math.round(size/1024*100)/100,'KB'); if(size>limit) process.exit(1);\"",
     "test": "node --test src/**/*.test.js src/**/**/*.test.js",
     "test:watch": "node --test --watch src/**/*.test.js src/**/**/*.test.js",
     "test:coverage": "node --test --experimental-test-coverage src/**/*.test.js src/**/**/*.test.js",
@@ -15,6 +17,9 @@
     "type-check:watch": "tsc --noEmit --watch",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
+    "knip": "knip",
+    "knip:fix": "knip --fix",
+    "clean": "npm run knip:fix && npm run lint:fix",
     "check": "./scripts/check.sh",
     "check:fast": "./scripts/check.sh --fast",
     "precommit": "./scripts/check.sh",
@@ -29,10 +34,12 @@
     "uplot": "^1.6.32"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^18.0.0",
     "esbuild": "^0.19.0",
     "eslint": "^8.50.0",
     "jsdom": "^26.1.0",
+    "knip": "^5.63.0",
     "typescript": "^5.0.0"
   },
   "engines": {

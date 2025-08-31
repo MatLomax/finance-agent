@@ -8,6 +8,7 @@
  * @module calculation-controller
  */
 
+import { debounce, pull } from 'lodash-es';
 import { simulateWealthTrajectory } from '../lib/simulate-wealth.js';
 import { loadFinancialData } from '../state/financial-data.js';
 import { getCachedSimulation, setCachedSimulation } from '../state/simulation-results.js';
@@ -19,22 +20,6 @@ let isCalculating = false;
 const subscribers = [];
 
 /**
- * Simple debounce implementation for calculation triggers.
- * 
- * @param {Function} func - Function to debounce
- * @param {number} wait - Milliseconds to delay
- * @returns {Function} Debounced function
- */
-function debounce(func, wait) {
-  /** @type {ReturnType<typeof setTimeout>|undefined} */
-  let timeout;
-  return function(/** @type {...any} */ ...args) {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-}
-
-/**
  * Subscribe to calculation state changes.
  * 
  * @param {Function} callback - Function called with calculation events
@@ -43,8 +28,7 @@ function debounce(func, wait) {
 export function subscribeToCalculations(callback) {
   subscribers.push(callback);
   return () => {
-    const index = subscribers.indexOf(callback);
-    if (index > -1) subscribers.splice(index, 1);
+    pull(subscribers, callback);
   };
 }
 

@@ -6,6 +6,8 @@
  * between the data layer and UI components.
  */
 
+import { pull } from 'lodash-es';
+
 /**
  * Observer registry for state change notifications
  * 
@@ -41,12 +43,9 @@ export function addObserver(callback) {
  * @returns {boolean} True if observer was found and removed, false otherwise
  */
 export function removeObserver(callback) {
-  const index = observers.indexOf(callback);
-  if (index > -1) {
-    observers.splice(index, 1);
-    return true;
-  }
-  return false;
+  const initialLength = observers.length;
+  pull(observers, callback);
+  return observers.length < initialLength;
 }
 
 /**

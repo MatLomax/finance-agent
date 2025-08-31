@@ -8,6 +8,8 @@
  * All functions are pure with comprehensive validation and educational documentation.
  */
 
+import { sum } from 'lodash-es';
+
 
 
 /**
@@ -35,9 +37,9 @@ export function calculateMonthlyExpenses(expenses) {
     }
   }
   
-  // Sum all expense categories
+  // Sum all expense categories using lodash for cleaner code
   // This gives us the total monthly cost of living
-  return expenseValues.reduce((total, expense) => total + expense, 0);
+  return sum(expenseValues);
 }
 
 /**

@@ -6,6 +6,8 @@
  * and handles schema evolution over time.
  */
 
+import { formatISO } from 'date-fns';
+
 /**
  * Required numeric fields in financial data
  */
@@ -122,7 +124,7 @@ export function migrateData(data) {
     data = {
       ...data,
       schemaVersion: 1,
-      lastUpdated: new Date().toISOString(),
+      lastUpdated: formatISO(new Date()),
       version: '1.0.0'
     };
   }

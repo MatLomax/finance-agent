@@ -1,0 +1,29 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "entry": [
+    "src/main.js",
+    "src/**/*.test.js"
+  ],
+  "project": [
+    "src/**/*.js"
+  ],
+  "ignore": [
+    "build.js",
+    "dist/**/*",
+    "scripts/**/*"
+  ],
+  "ignoreExportsUsedInFile": true,
+  "includeEntryExports": true,
+  "rules": {
+    "files": "warn",
+    "dependencies": "warn",
+    "unlisted": "error",
+    "exports": "warn",
+    "nsExports": "warn",
+    "classMembers": "warn",
+    "types": "warn",
+    "nsTypes": "warn",
+    "enumMembers": "warn",
+    "duplicates": "error"
+  }
+}

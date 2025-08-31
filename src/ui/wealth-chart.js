@@ -5,6 +5,7 @@
  * Visualizes debt, savings, investments, and net wealth over time with phase transitions.
  */
 
+import uPlot from 'uplot';
 import { createElement, batchDOMUpdates } from '../utils/dom-helpers.js';
 import { formatMoney } from '../utils/formatting/currency.js';
 import { Type } from '@sinclair/typebox';
@@ -61,7 +62,7 @@ export function formatChartTooltip(data) {
 }
 
 /**
- * Creates an interactive wealth trajectory chart placeholder
+ * Creates an interactive wealth trajectory chart using μPlot
  * @param {any[]} simulationData - Array of yearly simulation results
  * @returns {HTMLElement} Chart container element
  */
@@ -77,7 +78,30 @@ export function createWealthChart(simulationData) {
     container.appendChild(chartElement);
     
     if (chartData && chartData[0] && chartData[0].length > 0) {
-      chartElement.innerHTML = '<p>Interactive chart will be implemented with μPlot</p>';
+      // Create uPlot configuration
+      const opts = {
+        title: 'Wealth Trajectory',
+        width: 800,
+        height: 400,
+        series: [
+          {},
+          { label: 'Debt', stroke: '#ef4444', fill: '#ef444410' },
+          { label: 'Savings', stroke: '#10b981', fill: '#10b98110' },
+          { label: 'Investments', stroke: '#3b82f6', fill: '#3b82f610' },
+          { label: 'Net Wealth', stroke: '#8b5cf6', width: 3 }
+        ],
+        axes: [
+          { label: 'Age' },
+          { 
+            label: 'Amount (€)', 
+            values: (/** @type {any} */ _, /** @type {number[]} */ vals) => 
+              vals.map(/** @type {(v: number) => string} */ v => formatMoney(v).replace('€', '€ '))
+          }
+        ]
+      };
+      
+      // Create the chart - convert data to proper format for uPlot
+      new uPlot(opts, /** @type {any} */ (chartData), chartElement);
     } else {
       chartElement.innerHTML = '<p>No data available for chart</p>';
     }

@@ -8,6 +8,7 @@
  * All functions are pure with TypeBox validation and educational documentation.
  */
 
+import { clamp } from 'lodash-es';
 import { Type } from '@sinclair/typebox';
 import { validate } from './validators.js';
 
@@ -54,10 +55,10 @@ const DebtPaymentSchema = Type.Object({
 export function calculateDebtPayment(currentDebt, availablePayment) {
   validate(DebtPaymentSchema, { currentDebt, availablePayment });
   
-  // Take the minimum of debt owed and payment available
+  // Clamp the payment between 0 and current debt
   // This ensures we never overpay (pay more than debt balance)
-  // and never pay more than we have available
-  return Math.min(currentDebt, Math.max(0, availablePayment));
+  // and never pay negative amounts
+  return clamp(availablePayment, 0, currentDebt);
 }
 
 /**

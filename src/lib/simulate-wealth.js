@@ -11,6 +11,7 @@
  * based on current financial state, ensuring optimal capital deployment.
  */
 
+import { clamp } from 'lodash-es';
 import { processSimulationYear } from './simulation-helpers.js';
 
 // JSDoc type definitions for wealth simulation
@@ -71,7 +72,7 @@ export function calculateAllocationAmounts(freeCapital, phase, allocations, curr
   const investmentAlloc = phaseAllocations.investments / 100;
   
   // Calculate allocation amounts
-  const debtPayment = Math.min(currentDebt, Math.max(0, freeCapital * debtAlloc));
+  const debtPayment = clamp(freeCapital * debtAlloc, 0, currentDebt);
   const savingsContribution = freeCapital * savingsAlloc;
   const investmentContribution = freeCapital * investmentAlloc;
   

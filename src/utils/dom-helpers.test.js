@@ -140,14 +140,14 @@ describe('DOM Helper Utilities', () => {
     it('should throw error for invalid property name', () => {
       assert.throws(
         () => setCustomProperty('', 'value'),
-        /Expected string length greater or equal to 1/
+        /Property name must be a non-empty string/
       );
     });
 
     it('should throw error for invalid property value', () => {
       assert.throws(
         () => setCustomProperty('--test', null),
-        /Expected string/
+        /Property value must be a string/
       );
     });
   });

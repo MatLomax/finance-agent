@@ -1,31 +1,20 @@
 /**
- * @fileoverview Theme and settings management module
- * 
- * Provides theme switching (dark/light mode) and settings persistence.
+ * @fileoverview Lightweight theme management
+ * Theme switching and settings persistence without heavy dependencies.
  */
 
-import { Type } from '@sinclair/typebox';
-import { Value } from '@sinclair/typebox/value';
+import { formatISO } from 'date-fns';
 import { setCustomProperty } from '../utils/dom-helpers.js';
-
-// Validation schemas
-const ThemeSchema = Type.Union([Type.Literal('dark'), Type.Literal('light')]);
-const SettingsSchema = Type.Object({
-  theme: ThemeSchema,
-  preferredCurrency: Type.String(),
-  schemaVersion: Type.Number(),
-  lastUpdated: Type.String()
-});
 
 const STORAGE_KEY = 'finance-agent-settings';
 const DEFAULT_SETTINGS = {
   theme: 'dark',
   preferredCurrency: 'EUR',
   schemaVersion: 1,
-  lastUpdated: new Date().toISOString()
+  lastUpdated: formatISO(new Date())
 };
 
-const THEME_VARIABLES = {
+const THEME_VARS = {
   dark: {
     '--bg-primary': '#0f0f23',
     '--bg-secondary': '#1a1a2e',
@@ -45,31 +34,45 @@ const THEME_VARIABLES = {
 };
 
 /**
- * Load settings from localStorage with fallback to defaults
- * 
- * @returns {{theme: string, preferredCurrency: string, schemaVersion: number, lastUpdated: string}} Settings object
+ * Load theme settings from localStorage with fallback to defaults
+ * @returns {Object} Settings object
  */
 export function loadSettings() {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) return { ...DEFAULT_SETTINGS };
-    
-    const parsed = JSON.parse(stored);
-    return Value.Check(SettingsSchema, parsed) ? parsed : { ...DEFAULT_SETTINGS };
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (isValidSettings(parsed)) {
+        return parsed;
+      }
+    }
   } catch {
-    return { ...DEFAULT_SETTINGS };
+    // Fall through to default
   }
+  return { ...DEFAULT_SETTINGS };
 }
 
 /**
- * Save settings to localStorage
- * 
- * @param {{theme: string, preferredCurrency: string, schemaVersion: number, lastUpdated: string}} settings - Settings to save
- * @returns {boolean} Success status
+ * Simple settings validation
+ * @param {any} settings - Settings to validate
+ * @returns {boolean} True if valid
+ */
+function isValidSettings(settings) {
+  return settings &&
+         typeof settings === 'object' &&
+         (settings.theme === 'dark' || settings.theme === 'light') &&
+         typeof settings.preferredCurrency === 'string' &&
+         typeof settings.schemaVersion === 'number';
+}
+
+/**
+ * Save settings to storage
+ * @param {object} settings - Settings to save
+ * @returns {boolean} True if saved successfully
  */
 export function saveSettings(settings) {
   try {
-    if (!Value.Check(SettingsSchema, settings)) return false;
+    if (!isValidSettings(settings)) return false;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
     return true;
   } catch {
@@ -78,34 +81,29 @@ export function saveSettings(settings) {
 }
 
 /**
- * Apply theme CSS variables to document root
- * 
- * @param {string} theme - Theme name
+ * Apply theme variables to DOM
+ * @param {string} theme - Theme name ('dark' | 'light')
  */
 function applyTheme(theme) {
-  const variables = THEME_VARIABLES[/** @type {'dark' | 'light'} */ (theme)];
-  if (!variables) return;
-  
-  Object.entries(variables).forEach(([prop, value]) => {
-    setCustomProperty(prop, value);
-  });
-  
-  document.documentElement.setAttribute('data-theme', theme);
+  if (theme === 'dark' || theme === 'light') {
+    const variables = THEME_VARS[theme];
+    Object.entries(variables).forEach(([property, value]) => {
+      setCustomProperty(property, value);
+    });
+    document.documentElement.setAttribute('data-theme', theme);
+  }
 }
 
 /**
- * Set theme and persist preference
- * 
- * @param {string} theme - Theme name ('dark' or 'light')
- * @returns {boolean} Success status
+ * Set theme and persist
+ * @param {string} theme - Theme to set
+ * @returns {boolean} True if successful
  */
 export function setTheme(theme) {
-  if (!Value.Check(ThemeSchema, theme)) return false;
+  if (theme !== 'dark' && theme !== 'light') return false;
   
-  const settings = loadSettings();
-  const updated = { ...settings, theme };
-  
-  if (saveSettings(updated)) {
+  const settings = { ...loadSettings(), theme };
+  if (saveSettings(settings)) {
     applyTheme(theme);
     return true;
   }
@@ -113,23 +111,20 @@ export function setTheme(theme) {
 }
 
 /**
- * Toggle between dark and light themes
- * 
- * @returns {string} New theme name
+ * Toggle between dark and light theme
+ * @returns {string} New theme
  */
 export function toggleTheme() {
-  const settings = loadSettings();
-  const currentTheme = /** @type {string} */ (settings.theme);
+  const currentTheme = /** @type {{ theme: string }} */ (loadSettings()).theme;
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
   setTheme(newTheme);
   return newTheme;
 }
 
 /**
- * Initialize theme on app startup
+ * Initialize theme system
  */
 export function initializeTheme() {
-  const settings = loadSettings();
-  const theme = /** @type {string} */ (settings.theme);
-  applyTheme(theme);
+  const settings = /** @type {{ theme: string }} */ (loadSettings());
+  applyTheme(settings.theme);
 }

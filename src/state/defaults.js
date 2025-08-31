@@ -6,6 +6,8 @@
  * point for a software engineer relocating to Thailand.
  */
 
+import { formatISO } from 'date-fns';
+
 /**
  * Current data schema version for migration handling
  */
@@ -97,7 +99,7 @@ const DEFAULT_FINANCIAL_DATA = {
   retirementSafetyBuffer: 10,      // Safety buffer years before end of life
   
   // Metadata
-  lastUpdated: new Date().toISOString(),
+  lastUpdated: formatISO(new Date()),
   version: '1.0.0'
 };
 
