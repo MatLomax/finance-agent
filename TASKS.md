@@ -1,0 +1,290 @@
+# Finance Agent Overhaul Tasks
+
+This document outlines the complete transformation of the Thailand.html single-file application into a modern, modular vanilla JavaScript finance agent following the project's architectural standards.
+
+## Phase 1: Project Foundation & Setup (Infrastructure)
+
+### 1.1 Core Architecture Setup
+- [x] **Verify environment requirements** (Node.js 18+, npm, git, GitHub CLI)
+- [x] **Update package.json dependencies** for TypeBox, lodash-es, date-fns with tree-shakeable imports
+- [x] **Configure TypeScript type checking** with tsconfig.json for JSDoc validation
+- [ ] **Setup ESLint configuration** for code quality enforcement
+- [x] **Verify build system** and bundle size validation tools
+- [x] **Test automation scripts** (check.sh, auto-commit.sh, auto-release.sh)
+
+**Complexity**: Low-Medium | **Dependency**: None | **Estimated Lines**: 50-100 config changes
+
+### 1.2 Base Constants & Standards
+- [x] **Extract all financial constants** from Thailand.html into `src/lib/consts.js`
+  - Exchange rates, tax rates, default values
+  - UI styling constants, validation limits
+  - Performance thresholds (MAX_BUNDLE_SIZE_KB, etc.)
+- [x] **Create approved library imports reference** following tree-shaking requirements
+- [x] **Setup educational commenting standards** validation
+
+**Complexity**: Low | **Dependency**: 1.1 | **Critical**: All subsequent modules depend on these constants
+
+## Phase 2: Core Business Logic (Pure Functions)
+
+### 2.1 Financial Calculation Functions
+- [x] **Create income calculation module** (`src/lib/calc.js` - consolidated)
+  - Gross to net salary conversion with tax application
+  - Multi-year tax progression (tax-free vs taxed years)
+  - Currency conversion (USD → EUR → THB)
+  - TDD: Test edge cases, validation, currency precision
+  
+- [x] **Create expense aggregation module** (`src/lib/calc.js` - consolidated)
+  - Monthly expense categorization and totaling
+  - Annual expense projection
+  - Emergency fund target calculation (6-month rule)
+  - TDD: Test category validation, mathematical accuracy
+
+- [x] **Create compound interest module** (`src/lib/calc.js` - consolidated)
+  - Investment growth projections with configurable returns
+  - Debt payoff calculations with interest
+  - Present/future value calculations
+  - TDD: Test mathematical formulas, edge cases (zero rates, negative values)
+
+**Complexity**: Medium | **Dependency**: 1.2 | **Critical**: Core financial engine
+**Educational Focus**: Step-by-step formula breakdowns, real-world examples
+
+### 2.2 Financial Planning Engine
+- [ ] **Create wealth simulation module** (`src/lib/simulate-wealth.js`)
+  - Multi-phase financial planning (debt elimination → emergency fund → retirement)
+  - Dynamic allocation strategy based on current financial state
+  - Optimal retirement age calculation algorithm
+  - Year-by-year wealth trajectory modeling
+  - TDD: Test phase transitions, edge cases, mathematical accuracy
+
+- [ ] **Create phase management module** (`src/lib/financial-phases.js`)
+  - Phase detection logic (current financial state analysis)
+  - Allocation percentage management per phase
+  - Milestone tracking and achievement detection
+  - TDD: Test phase boundaries, allocation calculations
+
+**Complexity**: High | **Dependency**: 2.1 | **Critical**: Core planning algorithm
+**Note**: This is the most complex part - the current 300+ line simulation algorithm needs careful modularization
+
+### 2.3 Data Validation & Types
+- [x] **Create TypeBox validation schemas** (`src/lib/calc.js` - inline schemas)
+  - `financial-input.js`: Income, expenses, starting position schemas
+  - `simulation-result.js`: Wealth simulation output schemas  
+  - `user-preferences.js`: Settings and configuration schemas
+  - Runtime validation functions with educational error messages
+
+- [x] **Create utility validators** (`src/lib/calc.js` - inline validation)
+  - Currency amount validation (positive values, reasonable limits)
+  - Percentage validation (0-100%, decimal handling)
+  - Age and time period validation
+  - TDD: Test all validation scenarios, error messages
+
+**Complexity**: Medium | **Dependency**: 2.1-2.2 | **Essential**: Type safety throughout
+
+## Phase 3: Data Management & Persistence
+
+### 3.1 State Management
+- [ ] **Create localStorage persistence module** (`src/state/financial-data.js`)
+  - Save/load financial input data
+  - Default value management and restoration
+  - Observer pattern for state change notifications
+  - Data migration handling for schema changes
+
+- [ ] **Create simulation state module** (`src/state/simulation-results.js`)
+  - Cache simulation results to avoid recalculation
+  - State invalidation when inputs change
+  - Performance optimization for large datasets
+
+**Complexity**: Medium | **Dependency**: 2.3 | **Critical**: User experience (data persistence)
+
+### 3.2 Utilities & Formatters
+- [x] **Create formatting utilities** (`src/utils/formatters.js`)
+  - Currency formatting with locale support
+  - Percentage formatting
+  - Number rounding for display (match current behavior)
+  - Delta formatting with colors and symbols
+  - TDD: Test formatting accuracy, edge cases
+
+- [ ] **Create DOM helper utilities** (`src/utils/dom-helpers.js`)
+  - Element creation helpers
+  - Event delegation utilities
+  - CSS custom property management
+  - Performance-optimized DOM updates
+
+**Complexity**: Low | **Dependency**: None | **Usage**: Throughout UI modules
+
+## Phase 4: User Interface Modules
+
+### 4.1 Input Components
+- [ ] **Create form input module** (`src/ui/financial-inputs.js`)
+  - Income input section (salary, exchange rates, tax rate)
+  - Expense input section (all 12 expense categories)
+  - Starting position inputs (age, debt, savings, investments)
+  - Phase allocation inputs (3 phases with percentage sliders)
+  - Real-time validation and feedback
+  - Auto-save to localStorage on change
+
+**Complexity**: Medium | **Dependency**: 3.1, 2.3 | **Critical**: Primary user interaction
+
+### 4.2 Results Display Components  
+- [ ] **Create summary cards module** (`src/ui/summary-cards.js`)
+  - Overview card: income, expenses, emergency fund target
+  - Milestone summary: debt-free age, emergency fund completion, retirement age
+  - Final wealth projection
+
+- [ ] **Create phase tables module** (`src/ui/phase-tables.js`)
+  - Dynamic table generation for each financial phase
+  - Year-by-year breakdown with formatted numbers
+  - Delta calculations and color coding
+  - Milestone highlighting (last row of each phase)
+
+- [ ] **Create chart visualization module** (`src/ui/wealth-chart.js`)
+  - Canvas-based wealth trajectory chart
+  - Phase transitions marked visually
+  - Interactive hover details
+  - Responsive design for mobile
+
+**Complexity**: Medium-High | **Dependency**: 4.1, 2.2 | **Enhancement**: Better data visualization than current tables-only approach
+
+### 4.3 Interactive Features
+- [ ] **Create calculation engine controller** (`src/ui/calculation-controller.js`)
+  - Orchestrate calculation triggers
+  - Debounced recalculation on input changes
+  - Loading states and error handling
+  - Performance optimization (avoid unnecessary recalculations)
+
+- [ ] **Create theme and settings module** (`src/ui/theme-manager.js`)
+  - Dark/light theme toggle (currently only dark)
+  - Currency preference management
+  - Export/import functionality for financial data
+  - Reset to defaults functionality
+
+**Complexity**: Medium | **Dependency**: 4.1-4.2 | **Enhancement**: Additional user features
+
+## Phase 5: Application Assembly & Integration
+
+### 5.1 Main Application Module
+- [x] **Create main application controller** (`src/main.js`)
+  - Initialize all UI modules
+  - Setup event listeners and data flow
+  - Handle application lifecycle
+  - Error boundary and graceful degradation
+
+- [x] **Create HTML structure** (`dist/index.html`)
+  - Semantic HTML5 structure
+  - CSS custom properties for theming
+  - Import maps for module loading (zero-build approach)
+  - Meta tags and accessibility attributes
+
+**Complexity**: Medium | **Dependency**: All previous phases | **Critical**: Application entry point
+
+### 5.2 Styling & Assets
+- [ ] **Extract and modularize CSS** (`src/styles/`)
+  - Component-specific stylesheets
+  - CSS custom properties for theming
+  - Responsive design improvements
+  - Performance optimization (critical CSS inlining)
+
+- [ ] **Optimize assets and bundling**
+  - Implement code splitting for non-critical modules
+  - Setup lazy loading for chart module
+  - Verify bundle size < 15KB gzipped
+  - Test loading performance on 3G
+
+**Complexity**: Low-Medium | **Dependency**: 5.1 | **Critical**: Performance targets
+
+## Phase 6: Testing & Quality Assurance
+
+### 6.1 Comprehensive Test Suite
+- [x] **Unit tests for all pure functions** (src/lib/\_\_tests\_\_/)
+  - Test mathematical accuracy with known values
+  - Test edge cases and error conditions
+  - Achieve 100% test coverage
+  - Performance testing (functions complete in < 50ms)
+
+- [ ] **Integration tests for UI modules**
+  - DOM manipulation testing with jsdom
+  - User interaction simulation
+  - Data flow testing (input → calculation → display)
+
+- [ ] **End-to-end behavior testing**
+  - Complete user workflow testing
+  - Data persistence testing
+  - Error recovery testing
+
+**Complexity**: High | **Dependency**: All modules complete | **Critical**: Quality gates must pass
+
+### 6.2 Performance & Bundle Optimization
+- [ ] **Bundle size validation and optimization**
+  - Measure actual bundle size vs 15KB target
+  - Identify and eliminate unnecessary imports
+  - Implement tree-shaking optimizations
+  - Test loading performance metrics
+
+- [ ] **Runtime performance testing**
+  - Memory usage profiling
+  - Main thread blocking measurement
+  - Calculation performance benchmarking
+  - Mobile device testing
+
+**Complexity**: Medium | **Dependency**: 6.1 | **Critical**: Performance targets
+
+## Phase 7: Documentation & Deployment
+
+### 7.1 Documentation
+- [ ] **Update README.md** with new architecture overview
+- [ ] **Create API documentation** for all modules
+- [ ] **Write migration guide** from single-file to modular approach
+- [ ] **Document deployment procedures** and quality gates
+
+### 7.2 Release Preparation
+- [ ] **Final quality gate validation**
+  - All tests passing
+  - Bundle size within limits
+  - Educational comments validation
+  - Performance targets met
+
+- [ ] **Automated release preparation**
+  - Version tagging
+  - Changelog generation
+  - GitHub release with assets
+
+**Complexity**: Low | **Dependency**: 6.2 complete | **Final**: Ready for production
+
+---
+
+## Key Implementation Notes
+
+### Architecture Principles
+- **Pure Functions**: All business logic in `src/lib/` with no side effects
+- **Native Web APIs**: No framework dependencies, use modern browser features
+- **Educational Code**: Every function includes step-by-step explanations of financial concepts
+- **Performance First**: Bundle size < 15KB, TTI < 300ms on 3G
+
+### Development Workflow
+1. **Test-Driven Development**: Write tests before implementation
+2. **Quality Gates**: All checks must pass before commit (type check, lint, test, coverage, bundle size)
+3. **Educational Documentation**: JSDoc with business context and formula explanations
+4. **Automated Workflow**: Use `npm run ship` for complete development → release cycle
+
+### Critical Dependencies
+- **TypeBox**: Runtime validation (~2KB per schema)
+- **lodash-es**: Utilities (~500B per function) - MUST use ES module version
+- **date-fns**: Date handling (~1.5KB per function)
+- **Tree-shaking essential**: Use specific imports only
+
+### Current Feature Parity
+The modular version must maintain 100% feature parity with Thailand.html:
+- All financial calculations identical
+- Same default values and behavior
+- Same dark theme design
+- Same responsive layout
+- Same localStorage persistence
+- Enhanced: Better modularity, testing, and maintainability
+
+### Estimated Completion
+- **Simple tasks** (1.1, 1.2, 3.2, 7.1): 1-2 hours each
+- **Medium tasks** (2.1, 2.3, 4.1, 4.2): 2-4 hours each  
+- **Complex tasks** (2.2, 4.2 charts, 6.1): 4-6 hours each
+- **Total estimated effort**: 40-60 hours of focused development
+
+This transformation will result in a maintainable, testable, performant finance agent that serves as an excellent example of vanilla JavaScript architecture done right.

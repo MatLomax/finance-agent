@@ -1,0 +1,83 @@
+/**
+ * @fileoverview Growth and change calculation functions for financial analysis
+ * 
+ * This module provides percentage and absolute growth calculations used
+ * throughout the finance agent for tracking portfolio performance,
+ * wealth progression, and financial metrics over time.
+ * 
+ * All functions are pure with TypeBox validation and educational documentation.
+ */
+
+import { Type } from '@sinclair/typebox';
+import { validate } from '../validators.js';
+
+
+
+/**
+ * Schema for percentage growth calculations
+ */
+const PercentageGrowthSchema = Type.Object({
+  current: Type.Number(),
+  previous: Type.Number()
+});
+
+
+
+/**
+ * Calculates percentage growth between two values
+ * 
+ * Uses the formula: Growth % = ((Current - Previous) / Previous) × 100
+ * This is the standard percentage change calculation used in finance.
+ * 
+ * @param {number} current - Current value
+ * @param {number} previous - Previous value (must not be zero)
+ * @returns {number} Percentage growth (positive for growth, negative for decline)
+ * 
+ * @example
+ * const growth = calculatePercentageGrowth(110000, 100000);
+ * // Returns: 10
+ * // Explanation: ((€110,000 - €100,000) / €100,000) × 100 = 10%
+ * 
+ * @throws {Error} If previous value is zero or validation fails
+ */
+export function calculatePercentageGrowth(current, previous) {
+  validate(PercentageGrowthSchema, { current, previous });
+  
+  if (previous === 0) {
+    throw new Error('Previous value cannot be zero for percentage calculation');
+  }
+  
+  // Calculate the change amount
+  const change = current - previous;
+  
+  // Calculate percentage change: (change / original) × 100
+  // This gives us the percentage increase or decrease
+  const percentageChange = (change / previous) * 100;
+  
+  return percentageChange;
+}
+
+/**
+ * Calculates absolute growth between two values
+ * 
+ * Simple subtraction: Growth = Current - Previous
+ * Used to show absolute change in monetary amounts.
+ * 
+ * @param {number} current - Current value
+ * @param {number} previous - Previous value
+ * @returns {number} Absolute growth (positive for growth, negative for decline)
+ * 
+ * @example
+ * const growth = calculateAbsoluteGrowth(110000, 100000);
+ * // Returns: 10000
+ * // Explanation: €110,000 - €100,000 = €10,000 absolute growth
+ * 
+ * @throws {Error} If input validation fails
+ */
+export function calculateAbsoluteGrowth(current, previous) {
+  validate(PercentageGrowthSchema, { current, previous });
+  
+  // Simple subtraction to get absolute change
+  // Positive result indicates growth, negative indicates decline
+  return current - previous;
+}

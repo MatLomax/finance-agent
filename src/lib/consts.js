@@ -8,9 +8,7 @@
  * Last updated: Based on comprehensive rule file analysis and discrepancy resolution
  */
 
-// =============================================================================
-// BUNDLE SIZE AND PERFORMANCE CONSTRAINTS
-// =============================================================================
+
 
 /**
  * Maximum total bundle size in kilobytes (gzipped)
@@ -48,13 +46,12 @@ export const MAX_FCP_MS = 400;
  */
 export const MAX_LCP_MS = 600;
 
-// =============================================================================
-// CODE ORGANIZATION AND SIZE LIMITS
-// =============================================================================
+
 
 /**
- * Maximum lines per file (including comments and documentation)
- * Allows for comprehensive educational comments while maintaining readability
+ * Maximum lines per file (code only, comments excluded)
+ * Encourages modular code structure while allowing comprehensive documentation
+ * Comments are excluded to promote detailed JSDoc and educational documentation
  */
 export const MAX_LINES_PER_FILE = 100;
 
@@ -63,6 +60,31 @@ export const MAX_LINES_PER_FILE = 100;
  * Excludes comments, JSDoc, and validation - focuses on core logic
  */
 export const MAX_IMPLEMENTATION_LINES_PER_FUNCTION = 30;
+
+/**
+ * Maximum cyclomatic complexity per function
+ * Measures the number of linearly independent paths through code
+ * Higher values indicate functions that should be broken down
+ */
+export const MAX_CYCLOMATIC_COMPLEXITY = 10;
+
+/**
+ * Maximum number of statements per function
+ * Prevents overly long functions that try to do too much
+ */
+export const MAX_STATEMENTS_PER_FUNCTION = 20;
+
+/**
+ * Maximum function parameters
+ * Functions with too many parameters often indicate design issues
+ */
+export const MAX_FUNCTION_PARAMETERS = 5;
+
+/**
+ * Maximum nesting depth
+ * Deeply nested code is harder to read and test
+ */
+export const MAX_NESTING_DEPTH = 4;
 
 /**
  * Maximum runtime dependencies allowed in package.json
@@ -76,9 +98,7 @@ export const MAX_RUNTIME_DEPENDENCIES = 5;
  */
 export const MAX_DEPENDENCY_SIZE_KB = 50;
 
-// =============================================================================
-// TESTING AND QUALITY CONSTRAINTS
-// =============================================================================
+
 
 /**
  * Maximum execution time for pure function tests in milliseconds
@@ -110,9 +130,7 @@ export const REQUIRED_TEST_COVERAGE_PERCENT = 100;
  */
 export const MAX_MAIN_THREAD_BLOCKING_MS = 8;
 
-// =============================================================================
-// FILE STRUCTURE AND NAMING PATTERNS
-// =============================================================================
+
 
 /**
  * Standard test directory name
@@ -150,9 +168,7 @@ export const AUTO_COMMIT_SCRIPT_PATH = './scripts/auto-commit.sh';
  */
 export const AUTO_RELEASE_SCRIPT_PATH = './scripts/auto-release.sh';
 
-// =============================================================================
-// DEVELOPMENT WORKFLOW CONSTANTS
-// =============================================================================
+
 
 /**
  * Minimum Node.js version required
@@ -178,9 +194,7 @@ export const TYPESCRIPT_MODE = 'type-check-only';
  */
 export const PACKAGE_TYPE = 'module';
 
-// =============================================================================
-// VALIDATION AND TYPE SAFETY
-// =============================================================================
+
 
 /**
  * Runtime validation library
@@ -206,9 +220,7 @@ export const MAX_DESCRIPTION_LENGTH = 500;
  */
 export const MIN_DESCRIPTION_LENGTH = 1;
 
-// =============================================================================
-// FINANCIAL DOMAIN CONSTANTS
-// =============================================================================
+
 
 /**
  * Transaction types allowed in the system
@@ -228,9 +240,7 @@ export const CURRENCY_PRECISION = 2;
  */
 export const USE_CENTS_INTERNALLY = true;
 
-// =============================================================================
-// AUTOMATION AND CI/CD CONSTANTS
-// =============================================================================
+
 
 /**
  * Default branch for releases

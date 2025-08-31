@@ -26,15 +26,19 @@ globs: ["src/**/*.js"]
 - Tests must run in < 50ms total (pure JS is faster) (See MAX_PURE_FUNCTION_TEST_TIME_MS in src/lib/consts.js)
 
 ## File Structure
+**When files grow beyond 100 lines, use domain-based organization:**
 ```
-src/lib/
-├── __tests__/
-│   ├── calculate-interest.test.js
-│   └── format-currency.test.js
-├── validators.js              # Shared validation utilities
-├── calculate-interest.js
-└── format-currency.js
+src/lib/[domain]/
+├── __tests__/                # All tests for this domain
+│   ├── [function1].test.js   # Individual function tests
+│   └── integration.test.js   # Cross-function tests
+├── index.js                  # Public API exports
+├── [function1].js            # Single-purpose modules (max 100 lines)
+├── [function2].js            # Single-purpose modules (max 100 lines)
+└── types.js                  # TypeBox schemas for this domain
 ```
+
+**See `file-structure.mdc` for complete splitting strategies and refactoring guidelines.**
 
 ## Documentation Requirements
 Each function file must include JSDoc comments for TypeScript type checking + TypeBox validation:
@@ -111,6 +115,14 @@ export function calculateCompoundInterest(principal, rate, time, compounding) {
 - Maximum 30 lines of implementation code per function (allowing for detailed comments) (See MAX_IMPLEMENTATION_LINES_PER_FUNCTION in src/lib/consts.js)
 - Pure JavaScript ES2022+ - no polyfills, no transpilation
 - Runtime validation on all inputs
+
+## Automatic Complexity Enforcement
+- **ESLint automatically enforces complexity limits** - see `file-structure.mdc` for complete guidelines
+- **Files exceeding 100 lines of CODE MUST be split** into focused modules (comments excluded from count)
+- **Functions exceeding complexity limits MUST be refactored** into smaller functions
+- **Comments are ENCOURAGED** - JSDoc and educational comments don't count toward line limits
+- **Test files have relaxed limits** - Unlimited lines, 5 nested callbacks for describe/describe/it/function structure
+- **No exceptions** - quality gates will fail until violations are resolved
 
 ## Code Comment Standards
 - **Follow comments.mdc**: All commenting standards are defined in the dedicated comments.mdc file

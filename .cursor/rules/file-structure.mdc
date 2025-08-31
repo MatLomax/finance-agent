@@ -1,0 +1,250 @@
+---
+description: File structure, complexity management, and automatic splitting guidelines
+globs: ["src/**/*.js"]
+alwaysApply: true
+---
+
+# File Structure and Complexity Management
+
+## Automatic Complexity Enforcement
+
+ESLint automatically enforces these limits on EVERY file:
+
+### File Length Limits
+- **Production files**: 100 lines max (code only, comments excluded)
+- **Test files**: Unlimited lines (comprehensive testing encouraged)
+- **Purpose**: Forces modular production code while allowing thorough testing
+- **Action required**: Split production files when code exceeds the limit
+
+### Function Complexity Limits
+- **Cyclomatic complexity**: ≤10 per function
+- **Statements per function**: ≤20 per function  
+- **Function parameters**: ≤5 per function
+- **Nesting depth**: ≤4 levels
+- **Lines per function**: ≤50 (excluding comments)
+
+### When ESLint Complexity Rules Trigger
+
+**You MUST split the file when you see these ESLint errors:**
+```
+error: File has too many lines (150). Maximum allowed is 100
+error: Function 'complexCalculation' has a complexity of 15. Maximum allowed is 10
+error: Function 'processData' has too many statements (25). Maximum allowed is 20
+```
+
+## File Splitting Strategies
+
+### 1. Split by Function Category
+**Before**: One large `calculations.js` file
+```javascript
+// ❌ BAD: src/lib/calculations.js (582 lines)
+export function convertUsdToEur() { /* ... */ }
+export function calculateTax() { /* ... */ }
+export function calculateCompoundInterest() { /* ... */ }
+export function formatCurrency() { /* ... */ }
+export function validateInput() { /* ... */ }
+// ... 20+ more functions
+```
+
+**After**: Multiple focused files
+```javascript
+// ✅ GOOD: Split by domain responsibility
+src/lib/currency/
+├── __tests__/
+│   ├── conversions.test.js
+│   └── formatting.test.js
+├── conversions.js        # convertUsdToEur, convertEurToThb
+└── formatting.js         # formatCurrency, formatPercentage
+
+src/lib/financial/
+├── __tests__/
+│   ├── taxes.test.js
+│   ├── interest.test.js
+│   └── investments.test.js
+├── taxes.js              # calculateTax, calculateNetSalary
+├── interest.js           # calculateCompoundInterest, calculateSimpleInterest
+└── investments.js        # calculateROI, calculateDividends
+
+src/lib/validation/
+├── __tests__/
+│   └── validators.test.js
+└── validators.js         # validateInput, validateAmount, validateRate
+```
+
+### 2. Split by Data Flow
+```javascript
+// Input processing
+src/lib/input/
+├── parsers.js           # parseUserInput, sanitizeData
+└── validators.js        # validateFinancialData
+
+// Core calculations  
+src/lib/calculations/
+├── basic.js            # add, subtract, multiply, divide
+├── financial.js        # interest, loans, investments
+└── taxes.js            # tax calculations
+
+// Output formatting
+src/lib/output/
+├── formatters.js       # currency, percentage, dates
+└── reports.js          # generateReport, createSummary
+```
+
+### 3. Split Complex Functions
+
+**When a function has >10 complexity or >20 statements:**
+
+```javascript
+// ❌ BAD: Complex function (complexity = 15)
+export function calculateRetirementPlan(income, expenses, age, targetAge, riskLevel) {
+  if (age >= targetAge) throw new Error('Invalid age');
+  
+  let savings = 0;
+  let investments = 0;
+  let projection = [];
+  
+  for (let currentAge = age; currentAge < targetAge; currentAge++) {
+    if (riskLevel === 'low') {
+      // 20+ lines of complex logic
+    } else if (riskLevel === 'medium') {
+      // 20+ lines of complex logic  
+    } else if (riskLevel === 'high') {
+      // 20+ lines of complex logic
+    }
+    
+    if (currentAge < 35) {
+      // 10+ lines of age-specific logic
+    } else if (currentAge < 50) {
+      // 10+ lines of age-specific logic
+    } else {
+      // 10+ lines of age-specific logic
+    }
+    
+    projection.push(/* complex calculation */);
+  }
+  
+  return projection;
+}
+```
+
+**✅ GOOD: Split into focused functions**
+```javascript
+// src/lib/retirement/plan-calculator.js
+export function calculateRetirementPlan(input) {
+  validateRetirementInput(input);
+  
+  const yearlyData = generateYearlyProjections(input);
+  const summary = createRetirementSummary(yearlyData);
+  
+  return { yearlyData, summary };
+}
+
+// src/lib/retirement/risk-strategies.js  
+export function applyRiskStrategy(amount, riskLevel) {
+  const strategies = {
+    low: applyConservativeStrategy,
+    medium: applyModerateStrategy, 
+    high: applyAggressiveStrategy
+  };
+  
+  return strategies[riskLevel](amount);
+}
+
+// src/lib/retirement/age-adjustments.js
+export function calculateAgeAdjustment(age, baseAmount) {
+  if (age < 35) return applyYoungAdultStrategy(baseAmount);
+  if (age < 50) return applyMidCareerStrategy(baseAmount);
+  return applyPreRetirementStrategy(baseAmount);
+}
+```
+
+## Directory Structure Guidelines
+
+### Standard Module Layout
+```
+src/lib/[domain]/
+├── __tests__/           # All tests for this domain
+│   ├── [function1].test.js
+│   ├── [function2].test.js
+│   └── integration.test.js
+├── index.js            # Public API exports
+├── [function1].js      # Single-purpose modules
+├── [function2].js      # Single-purpose modules
+└── types.js            # TypeBox schemas for this domain
+```
+
+### Test File Naming
+- **Unit tests**: `[function-name].test.js`
+- **Integration tests**: `integration.test.js` 
+- **End-to-end tests**: `e2e.test.js`
+
+## Refactoring Process
+
+### 1. Identify Violations
+```bash
+# Run ESLint to see complexity violations
+npm run lint
+
+# Look for these error patterns:
+# - File has too many lines
+# - Function has a complexity of X
+# - Function has too many statements
+```
+
+### 2. Plan the Split
+1. **Group related functions** by domain/responsibility
+2. **Identify shared dependencies** (move to utilities)
+3. **Plan the directory structure**
+4. **Design the public API** (what gets exported)
+
+### 3. Execute the Split
+1. **Create new directory structure**
+2. **Move functions to appropriate files**
+3. **Update imports/exports**
+4. **Move and update test files**
+5. **Verify all tests still pass**
+
+### 4. Validate the Result
+```bash
+# Ensure no ESLint violations
+npm run lint
+
+# Ensure all tests pass
+npm run test
+
+# Ensure build still works
+npm run build
+
+# Run full quality gate
+npm run check
+```
+
+## Benefits of This Approach
+
+### Developer Experience
+- **Faster file navigation** - smaller, focused files
+- **Easier debugging** - isolated functionality
+- **Better IDE performance** - smaller files load faster
+- **Clearer git diffs** - changes are more localized
+
+### Code Quality
+- **Forced modularity** - can't create monolithic files
+- **Better testability** - smaller functions are easier to test
+- **Reduced complexity** - functions must stay simple
+- **Improved readability** - easier to understand purpose
+
+### Maintenance
+- **Easier refactoring** - changes are more isolated
+- **Better collaboration** - less merge conflicts
+- **Clearer responsibilities** - each file has a clear purpose
+- **Improved reusability** - small modules are more reusable
+
+## Integration with Existing Workflow
+
+The complexity checks are **automatically enforced** by:
+1. **ESLint** - Runs on every `npm run lint`
+2. **Quality gates** - `npm run check` fails if violations exist
+3. **Pre-commit hooks** - `npm run precommit` prevents bad commits
+4. **CI/CD pipeline** - Automated releases require passing checks
+
+**No additional tools needed** - ESLint handles everything automatically!
