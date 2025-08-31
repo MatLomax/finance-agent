@@ -121,12 +121,43 @@ if ! git diff --cached --quiet; then
     echo -e "${GREEN}New version: ${new_version}${NC}"
     echo ""
     
-    # Update package.json version
+    # Update package.json version (also updates package-lock.json)
     npm version "$new_version" --no-git-tag-version
-    git add package.json
+    git add package.json package-lock.json
+    
+    # Analyze staged changes to create meaningful commit title
+    staged_files=$(git diff --cached --name-only)
+    commit_title="feat: add UI formatting utilities module"
+    
+    # Check for different types of changes to create meaningful titles
+    if echo "$staged_files" | grep -q "src/lib/.*\.js$"; then
+        if echo "$staged_files" | grep -q "__tests__"; then
+            commit_title="feat: add pure calculation functions with comprehensive tests"
+        else
+            commit_title="feat: add pure mathematical calculation functions"
+        fi
+    elif echo "$staged_files" | grep -q "src/utils/.*\.js$"; then
+        if echo "$staged_files" | grep -q "formatters"; then
+            commit_title="feat: add UI formatting utilities module"
+        else
+            commit_title="feat: add utility functions"
+        fi
+    elif echo "$staged_files" | grep -q "src/ui/.*\.js$"; then
+        commit_title="feat: add UI component modules"
+    elif echo "$staged_files" | grep -q "src/state/.*\.js$"; then
+        commit_title="feat: add state management modules"
+    elif echo "$staged_files" | grep -q "\.cursor/rules/.*\.mdc$"; then
+        commit_title="feat: add/update AI agent rules"
+    elif echo "$staged_files" | grep -q "scripts/.*\.sh$"; then
+        commit_title="feat: add/update automation scripts"
+    elif echo "$staged_files" | grep -q "^[^/]*\.json$\|^[^/]*\.js$"; then
+        commit_title="feat: update project configuration"
+    else
+        commit_title="feat: v${new_version} - automated commit"
+    fi
     
     # Generate commit message and changelog
-    commit_message="feat: v${new_version} - AI agent automated commit
+    commit_message="${commit_title}
 
 $(generate_changelog "$new_version")
 
@@ -141,9 +172,6 @@ Automated commit by AI development agent following quality gate validation."
     # Push to remote
     git push origin main
     echo -e "${GREEN}🚀 Pushed to remote repository${NC}"
-    
-    # Store version for release script
-    echo "$new_version" > .last-version
     
 else
     echo -e "${YELLOW}⚠️  No staged changes found${NC}"

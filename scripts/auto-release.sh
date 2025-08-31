@@ -8,13 +8,9 @@ WHITE='\033[1;37m'
 GREY='\033[0;37m'
 NC='\033[0m' # No Color
 
-# Function to get version from package.json or .last-version
+# Function to get version from package.json (single source of truth)
 get_version() {
-    if [ -f ".last-version" ]; then
-        cat .last-version
-    else
-        node -p "require('./package.json').version"
-    fi
+    node -p "require('./package.json').version"
 }
 
 # Function to generate release notes
@@ -146,8 +142,7 @@ echo -e "${GREEN}✅ Git tag v${version} created and pushed${NC}"
 # Create GitHub release
 create_github_release "$version"
 
-# Clean up version tracking file
-rm -f .last-version
+# Note: Using package.json as single source of truth for version
 
 echo ""
 echo -e "${GREEN}🎉 Release v${version} completed successfully!${NC}"
