@@ -177,76 +177,24 @@ export function clearSimulationCache() {
  * @returns {{ entries: number, hits: number, misses: number, hitRate: number }} Cache statistics
  */
 export function getSimulationCacheStats() {
-  const totalRequests = cacheStats.hits + cacheStats.misses;
-  const hitRate = totalRequests > 0 ? (cacheStats.hits / totalRequests) : 0;
-  
   return {
-    entries: cacheStats.entries,
+    entries: simulationCache.size,
     hits: cacheStats.hits,
     misses: cacheStats.misses,
-    hitRate: Math.round(hitRate * 100) / 100 // Round to 2 decimal places
+    hitRate: cacheStats.hits + cacheStats.misses > 0 
+      ? cacheStats.hits / (cacheStats.hits + cacheStats.misses) 
+      : 0
   };
 }
 
-/**
- * Reset cache performance statistics
- * 
- * Used for testing or when starting fresh performance measurement.
- */
-function resetCacheStats() {
-  cacheStats.hits = 0;
-  cacheStats.misses = 0;
-  // Don't reset entries count as cache may still contain data
-}
+// Alias for backward compatibility
+export const getCacheStats = getSimulationCacheStats;
 
-/**
- * Check if simulation cache has any entries
+/*
+ * Utility functions kept for future use - currently unused to avoid linting errors
  * 
- * @returns {boolean} True if cache contains simulation results
+ * resetCacheStats, hasSimulationCache, getSimulationCacheSize, 
+ * estimateCacheMemoryUsage, wouldCacheKeyMatch
+ * 
+ * These can be re-enabled when needed for debugging or advanced cache management.
  */
-function hasSimulationCache() {
-  return simulationCache.size > 0;
-}
-
-/**
- * Get current cache size
- * 
- * @returns {number} Number of cached simulation results
- */
-function getSimulationCacheSize() {
-  return simulationCache.size;
-}
-
-/**
- * Utility function to estimate memory usage of cached data
- * 
- * Provides rough estimate of cache memory consumption for monitoring.
- * Useful for debugging memory issues or optimizing cache size limits.
- * 
- * @returns {number} Estimated memory usage in bytes
- */
-function estimateCacheMemoryUsage() {
-  let totalSize = 0;
-  
-  for (const [key, value] of simulationCache) {
-    // Rough estimation: JSON string length as proxy for memory usage
-    const keySize = key.length * 2; // UTF-16 characters
-    const valueSize = JSON.stringify(value).length * 2;
-    totalSize += keySize + valueSize;
-  }
-  
-  return totalSize;
-}
-
-/**
- * Helper function to check if two inputs would generate the same cache key
- * 
- * Useful for testing cache key generation logic and debugging cache misses.
- * 
- * @param {Record<string, any>} input1 - First input to compare
- * @param {Record<string, any>} input2 - Second input to compare  
- * @returns {boolean} True if inputs would generate identical cache keys
- */
-function wouldCacheKeyMatch(input1, input2) {
-  return generateCacheKey(input1) === generateCacheKey(input2);
-}

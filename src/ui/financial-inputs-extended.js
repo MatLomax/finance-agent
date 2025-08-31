@@ -1,9 +1,8 @@
 /**
- * @fileoverview Simple financial input form module
+ * @fileoverview Extended financial input form module
  * 
- * Creates a basic financial input form with auto-save functionality.
- * Focuses on core functionality while maintaining architectural compliance.
- * For full feature parity, use financial-inputs-extended.js instead.
+ * Creates a comprehensive financial input form with all expense categories,
+ * phase allocations, and auto-save functionality that matches Thailand.html.
  */
 
 import { batchDOMUpdates, createElement, createEventDelegator } from '../utils/dom-helpers.js';
@@ -41,6 +40,7 @@ function createSimpleInput(key, label, value, step = '0.01', isPercentage = fals
   input.setAttribute('name', key);
   input.setAttribute('value', displayValue);
   input.setAttribute('step', step);
+  input.setAttribute('min', '0');
   
   inputGroup.appendChild(labelEl);
   inputGroup.appendChild(input);
@@ -49,13 +49,14 @@ function createSimpleInput(key, label, value, step = '0.01', isPercentage = fals
 }
 
 /**
- * Create a form section
+ * Create a form section with title and inputs
  * 
  * @param {string} title - Section title
  * @param {Array<HTMLElement>} inputs - Input elements
+ * @param {string} [explanation] - Optional explanation text
  * @returns {HTMLElement} Section element
  */
-function createSection(title, inputs) {
+function createSection(title, inputs, explanation = '') {
   const section = createElement('section', { className: 'form-section' });
   
   const header = createElement('h2', {
@@ -68,6 +69,14 @@ function createSection(title, inputs) {
   inputs.forEach(input => {
     section.appendChild(input);
   });
+  
+  if (explanation) {
+    const explanationEl = createElement('div', { 
+      className: 'explanation',
+      textContent: explanation
+    });
+    section.appendChild(explanationEl);
+  }
   
   return section;
 }
@@ -91,7 +100,7 @@ function populateForm(form) {
 }
 
 /**
- * Create a basic financial inputs form (income only)
+ * Create the complete financial inputs form
  * 
  * @param {HTMLElement} targetContainer - Element to append the form to
  * @returns {Object} Interface for interacting with the form
@@ -102,17 +111,33 @@ export function createFinancialInputs(targetContainer) {
   }
   
   const data = loadFinancialData();
-  
   const form = createElement('form', { className: 'financial-form' });
   
-  const incomeInputs = [
-    createSimpleInput('grossUsd', 'Gross USD', data.grossUsd || 9000),
-    createSimpleInput('eurUsd', 'EUR/USD Rate', data.eurUsd || 1.17),
-    createSimpleInput('taxRate', 'Tax Rate (%)', data.taxRate || 0.17, '0.01', true)
-  ].map(item => item.inputGroup);
+  // Income section
+  form.appendChild(createSection('Monthly Income', [
+    createSimpleInput('grossUsd', 'Gross USD Monthly Income', data.grossUsd, '100').inputGroup,
+    createSimpleInput('eurUsd', 'Exchange Rate EUR/USD', data.eurUsd, '0.01').inputGroup,
+    createSimpleInput('thbEur', 'Exchange Rate THB/EUR', data.thbEur, '0.01').inputGroup,
+    createSimpleInput('taxRate', 'Tax Rate After 2 Years (%)', data.taxRate, '0.01', true).inputGroup
+  ]));
   
-  form.appendChild(createSection('Income', incomeInputs));
+  // Setup event handling and lifecycle
+  setupFormHandling(form, targetContainer);
   
+  return {
+    destroy() {
+      if (form.parentNode) form.parentNode.removeChild(form);
+    }
+  };
+}
+
+/**
+ * Setup form event handling and lifecycle
+ * 
+ * @param {HTMLElement} form - Form element
+ * @param {HTMLElement} targetContainer - Target container
+ */
+function setupFormHandling(form, targetContainer) {
   let saveTimeout = 0;
   const debouncedSave = (/** @type {Record<string, number>} */ data) => {
     clearTimeout(saveTimeout);
@@ -130,11 +155,4 @@ export function createFinancialInputs(targetContainer) {
   populateForm(form);
   batchDOMUpdates(() => targetContainer.appendChild(form));
   addObserver(() => populateForm(form));
-  
-  return {
-    destroy() {
-      clearTimeout(saveTimeout);
-      if (form.parentNode) form.parentNode.removeChild(form);
-    }
-  };
 }

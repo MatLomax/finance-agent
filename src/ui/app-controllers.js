@@ -6,7 +6,7 @@
  */
 
 import { toggleTheme } from './theme-manager.js';
-import { createFinancialInputs } from './financial-inputs.js';
+import { createFinancialInputs } from './financial-inputs-extended.js';
 import { createSummaryCards } from './summary-cards.js';
 import { createPhaseTable } from './phase-tables.js';
 import { triggerCalculation, subscribeToCalculations, debouncedCalculation } from './calculation-controller.js';
