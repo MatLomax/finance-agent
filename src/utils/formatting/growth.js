@@ -173,7 +173,7 @@ export function formatDelta(current, previous, minThreshold = 1, currency = '€
   const delta = current - previous;
   if (Math.abs(delta) < minThreshold) return '';
   
-  const sign = delta >= 0 ? '+ ' : '';
+  const sign = delta >= 0 ? '+ ' : '- ';
   const color = delta >= 0 ? '#10b981' : '#ef4444';
   const formattedDelta = formatMoney(Math.abs(delta), currency);
   
