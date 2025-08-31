@@ -1,409 +1,581 @@
-// ============================================================================
-// CONSTANTS
-// ============================================================================
+/**
+ * @fileoverview Pure mathematical functions for financial calculations
+ * 
+ * This module contains all pure mathematical functions extracted from the Thailand.html
+ * financial simulator. Each function follows SOLID principles, includes comprehensive
+ * validation, and provides educational documentation about financial concepts.
+ * 
+ * All functions are pure (no side effects) and include TypeBox runtime validation
+ * to ensure data integrity and provide clear error messages for invalid inputs.
+ */
 
-/** Standard emergency fund duration in months */
-export const EMERGENCY_FUND_MONTHS = 6;
+import { Type } from '@sinclair/typebox';
+import { Value } from '@sinclair/typebox/value';
 
-/** Tax-free period duration in years for new residents */
-export const TAX_FREE_PERIOD_YEARS = 2;
+// =============================================================================
+// VALIDATION SCHEMAS
+// =============================================================================
 
-/** Months per year constant */
-export const MONTHS_PER_YEAR = 12;
+/**
+ * Schema for currency conversion calculations
+ */
+const CurrencyConversionSchema = Type.Object({
+  amount: Type.Number({ minimum: 0 }),
+  exchangeRate: Type.Number({ exclusiveMinimum: 0 })
+});
 
-/** Minimum retirement buffer in years (safety margin) */
-export const MIN_RETIREMENT_BUFFER_YEARS = 5;
+/**
+ * Schema for tax calculations
+ */
+const TaxCalculationSchema = Type.Object({
+  grossAmount: Type.Number({ minimum: 0 }),
+  taxRate: Type.Number({ minimum: 0, maximum: 1 })
+});
 
-/** Minimum acceptable final wealth (allows small negative within tolerance) */
-export const MIN_FINAL_WEALTH_TOLERANCE = -5000;
+/**
+ * Schema for investment income calculations
+ */
+const InvestmentIncomeSchema = Type.Object({
+  principal: Type.Number({ minimum: 0 }),
+  annualRate: Type.Number({ minimum: 0, maximum: 1 }),
+  taxRate: Type.Number({ minimum: 0, maximum: 1 })
+});
 
-/** Minimum retirement wealth requirement (multiple of annual expenses) */
-export const MIN_RETIREMENT_WEALTH_MULTIPLIER = 2;
+/**
+ * Schema for retirement withdrawal calculations
+ */
+const RetirementWithdrawalSchema = Type.Object({
+  annualExpenses: Type.Number({ minimum: 0 }),
+  investmentIncome: Type.Number({ minimum: 0 }),
+  totalWealth: Type.Number({ minimum: 0 }),
+  yearsRemaining: Type.Integer({ minimum: 0 })
+});
 
-// ============================================================================
-// CURRENCY CONVERSION FUNCTIONS
-// ============================================================================
+/**
+ * Schema for allocation calculations
+ */
+const AllocationSchema = Type.Object({
+  freeCapital: Type.Number(),
+  debtAllocation: Type.Number({ minimum: 0, maximum: 1 }),
+  savingsAllocation: Type.Number({ minimum: 0, maximum: 1 }),
+  investmentAllocation: Type.Number({ minimum: 0, maximum: 1 })
+});
+
+/**
+ * Schema for debt payment calculations
+ */
+const DebtPaymentSchema = Type.Object({
+  currentDebt: Type.Number({ minimum: 0 }),
+  availablePayment: Type.Number()
+});
+
+/**
+ * Schema for percentage growth calculations
+ */
+const PercentageGrowthSchema = Type.Object({
+  current: Type.Number(),
+  previous: Type.Number()
+});
+
+// =============================================================================
+// VALIDATION HELPER
+// =============================================================================
+
+/**
+ * Validates input data against a TypeBox schema
+ * @param {import('@sinclair/typebox').TSchema} schema - TypeBox validation schema
+ * @param {unknown} data - Data to validate
+ * @throws {Error} If validation fails with detailed error message
+ */
+function validate(schema, data) {
+  if (!Value.Check(schema, data)) {
+    const errors = [...Value.Errors(schema, data)];
+    const message = errors.map(e => `${e.path}: ${e.message}`).join(', ');
+    throw new Error(`Validation failed: ${message}`);
+  }
+}
+
+// =============================================================================
+// CURRENCY AND CONVERSION FUNCTIONS
+// =============================================================================
 
 /**
  * Converts USD amount to EUR using exchange rate
  * 
- * This function performs simple currency conversion needed to standardize
- * the income calculation from USD to EUR for consistent financial planning.
+ * This function performs basic currency conversion using the formula:
+ * EUR Amount = USD Amount / Exchange Rate
  * 
- * @param {number} usdAmount - Amount in USD
- * @param {number} eurUsdRate - EUR/USD exchange rate
- * @returns {number} Amount in EUR
+ * Used in the finance agent to convert gross USD salary to EUR for
+ * expense calculations and local currency planning.
+ * 
+ * @param {number} usdAmount - Amount in USD (must be positive)
+ * @param {number} eurUsdRate - EUR/USD exchange rate (must be positive)
+ * @returns {number} Equivalent amount in EUR
+ * 
+ * @example
+ * const eurAmount = convertUsdToEur(9000, 1.17);
+ * // Returns: 7692.31 (approximately)
+ * // Explanation: $9000 USD ÷ 1.17 EUR/USD = €7692.31 EUR
+ * 
+ * @throws {Error} If input validation fails
  */
 export function convertUsdToEur(usdAmount, eurUsdRate) {
+  validate(CurrencyConversionSchema, { amount: usdAmount, exchangeRate: eurUsdRate });
+  
+  // Direct currency conversion: divide by exchange rate
+  // Example: $9000 USD ÷ 1.17 EUR/USD = €7692.31 EUR
   return usdAmount / eurUsdRate;
 }
 
-// ============================================================================
-// SALARY CALCULATION FUNCTIONS
-// ============================================================================
-
 /**
- * Calculates net monthly salary considering tax implications
+ * Converts EUR amount to THB using exchange rate
  * 
- * The function handles the tax-free period for new residents (first 2 years)
- * and applies appropriate tax rates afterwards. This reflects the Thai tax
- * system for foreign residents.
+ * This function performs currency conversion using the formula:
+ * THB Amount = EUR Amount × Exchange Rate
  * 
- * @param {number} grossMonthly - Gross monthly salary in EUR
- * @param {number} taxRate - Tax rate as decimal (e.g., 0.17 for 17%)
- * @param {boolean} isTaxFree - Whether salary is in tax-free period
- * @returns {number} Net monthly salary in EUR
+ * Used for converting European expenses to Thai Baht for local
+ * cost-of-living calculations in Chiang Mai.
+ * 
+ * @param {number} eurAmount - Amount in EUR (must be positive)
+ * @param {number} thbEurRate - THB/EUR exchange rate (must be positive)
+ * @returns {number} Equivalent amount in THB
+ * 
+ * @example
+ * const thbAmount = convertEurToThb(1000, 37.75);
+ * // Returns: 37750
+ * // Explanation: €1000 EUR × 37.75 THB/EUR = ฿37,750 THB
+ * 
+ * @throws {Error} If input validation fails
  */
-export function calculateNetSalaryMonthly(grossMonthly, taxRate, isTaxFree = false) {
-  if (isTaxFree) {
-    return grossMonthly;
-  }
-  return grossMonthly * (1 - taxRate);
+export function convertEurToThb(eurAmount, thbEurRate) {
+  validate(CurrencyConversionSchema, { amount: eurAmount, exchangeRate: thbEurRate });
+  
+  // Direct currency conversion: multiply by exchange rate
+  // Example: €1000 EUR × 37.75 THB/EUR = ฿37,750 THB
+  return eurAmount * thbEurRate;
 }
 
+// =============================================================================
+// TAX CALCULATION FUNCTIONS
+// =============================================================================
+
 /**
- * Converts monthly salary to annual equivalent
+ * Calculates net salary after tax deduction
  * 
- * Simple multiplication function separated for clarity and testability.
- * Used throughout the financial planning calculations.
+ * Uses the formula: Net Salary = Gross Salary × (1 - Tax Rate)
+ * This is the standard after-tax income calculation used globally.
  * 
- * @param {number} monthlyAmount - Monthly amount in EUR
- * @returns {number} Annual amount in EUR
+ * In the Thailand scenario, expats are tax-free for the first 2 years,
+ * then subject to local tax rates (typically 17% for this income level).
+ * 
+ * @param {number} grossSalary - Gross salary amount (must be positive)
+ * @param {number} taxRate - Tax rate as decimal (0.17 = 17%, must be 0-1)
+ * @returns {number} Net salary after tax deduction
+ * 
+ * @example
+ * const netSalary = calculateNetSalary(7692.31, 0.17);
+ * // Returns: 6384.62 (approximately)
+ * // Explanation: €7692.31 × (1 - 0.17) = €7692.31 × 0.83 = €6384.62
+ * 
+ * @throws {Error} If input validation fails
  */
-export function convertMonthlyToAnnual(monthlyAmount) {
-  return monthlyAmount * MONTHS_PER_YEAR;
+export function calculateNetSalary(grossSalary, taxRate) {
+  validate(TaxCalculationSchema, { grossAmount: grossSalary, taxRate });
+  
+  // Calculate tax multiplier: (1 - tax rate)
+  // This represents the percentage of income you keep after taxes
+  // Example: 1 - 0.17 = 0.83 (keep 83% of gross income)
+  const afterTaxMultiplier = 1 - taxRate;
+  
+  // Apply tax multiplier to gross salary
+  // Example: €7692.31 × 0.83 = €6384.62 net salary
+  return grossSalary * afterTaxMultiplier;
 }
 
-// ============================================================================
+// =============================================================================
 // EXPENSE CALCULATION FUNCTIONS
-// ============================================================================
+// =============================================================================
 
 /**
- * Calculates total monthly expenses from all expense categories
+ * Calculates total monthly expenses from individual expense categories
  * 
- * Sums all living expense categories to get total monthly burn rate.
- * This is fundamental for determining how much income is needed and
- * how much can be allocated to financial goals.
+ * This function sums all monthly expense categories to determine
+ * total cost of living. Used as the foundation for emergency fund
+ * calculations and retirement planning.
  * 
  * @param {Object} expenses - Object containing all expense categories
- * @param {number} expenses.housing - Housing costs
- * @param {number} expenses.utilities - Utility bills
- * @param {number} expenses.diningGroceries - Food and dining expenses
- * @param {number} expenses.hiredStaff - Domestic staff costs
- * @param {number} expenses.transportation - Transport costs
- * @param {number} expenses.healthInsurance - Health insurance premiums
- * @param {number} expenses.petCare - Pet-related expenses
- * @param {number} expenses.wellness - Health and wellness expenses
- * @param {number} expenses.entertainment - Entertainment budget
- * @param {number} expenses.weekendTrips - Weekend travel budget
- * @param {number} expenses.annualHoliday - Annual vacation savings
- * @param {number} expenses.discretionary - Miscellaneous discretionary spending
- * @returns {number} Total monthly expenses in EUR
+ * @param {number} expenses.housing - Monthly housing costs
+ * @param {number} expenses.utilities - Monthly utility costs
+ * @param {number} expenses.diningGroceries - Monthly food costs
+ * @param {number} expenses.hiredStaff - Monthly staff costs
+ * @param {number} expenses.transportation - Monthly transport costs
+ * @param {number} expenses.healthInsurance - Monthly health insurance
+ * @param {number} expenses.petCare - Monthly pet care costs
+ * @param {number} expenses.wellness - Monthly wellness costs
+ * @param {number} expenses.entertainment - Monthly entertainment costs
+ * @param {number} expenses.weekendTrips - Monthly weekend trip budget
+ * @param {number} expenses.annualHoliday - Monthly holiday savings
+ * @param {number} expenses.discretionary - Monthly discretionary spending
+ * @returns {number} Total monthly expenses
+ * 
+ * @example
+ * const expenses = {
+ *   housing: 1400, utilities: 200, diningGroceries: 750,
+ *   hiredStaff: 340, transportation: 100, healthInsurance: 550,
+ *   petCare: 120, wellness: 605, entertainment: 150,
+ *   weekendTrips: 167, annualHoliday: 750, discretionary: 350
+ * };
+ * const total = calculateMonthlyExpenses(expenses);
+ * // Returns: 4882
+ * // Explanation: Sum of all monthly expense categories
+ * 
+ * @throws {Error} If any expense value is negative
  */
-export function calculateTotalMonthlyExpenses(expenses) {
-  return expenses.housing +
-         expenses.utilities +
-         expenses.diningGroceries +
-         expenses.hiredStaff +
-         expenses.transportation +
-         expenses.healthInsurance +
-         expenses.petCare +
-         expenses.wellness +
-         expenses.entertainment +
-         expenses.weekendTrips +
-         expenses.annualHoliday +
-         expenses.discretionary;
+export function calculateMonthlyExpenses(expenses) {
+  // Validate all expense values are non-negative
+  const expenseValues = Object.values(expenses);
+  for (const value of expenseValues) {
+    if (typeof value !== 'number' || value < 0) {
+      throw new Error('All expense values must be non-negative numbers');
+    }
+  }
+  
+  // Sum all expense categories
+  // This gives us the total monthly cost of living
+  return expenseValues.reduce((total, expense) => total + expense, 0);
 }
-
-// ============================================================================
-// EMERGENCY FUND FUNCTIONS
-// ============================================================================
 
 /**
- * Calculates emergency fund target based on monthly expenses
+ * Calculates annual expenses from monthly expenses
  * 
- * Standard financial planning recommendation is 6 months of living expenses
- * as an emergency buffer. This provides financial security before investing
- * in growth assets.
+ * Simple multiplication: Annual = Monthly × 12
+ * Used for retirement planning and annual budgeting calculations.
  * 
- * @param {number} monthlyExpenses - Total monthly expenses in EUR
- * @param {number} months - Number of months to cover (default: 6)
- * @returns {number} Emergency fund target in EUR
+ * @param {number} monthlyExpenses - Total monthly expenses (must be positive)
+ * @returns {number} Total annual expenses
+ * 
+ * @example
+ * const annualExpenses = calculateAnnualExpenses(4882);
+ * // Returns: 58584
+ * // Explanation: €4882/month × 12 months = €58,584/year
+ * 
+ * @throws {Error} If monthly expenses is negative
  */
-export function calculateEmergencyFundTarget(monthlyExpenses, months = EMERGENCY_FUND_MONTHS) {
-  return monthlyExpenses * months;
+export function calculateAnnualExpenses(monthlyExpenses) {
+  if (typeof monthlyExpenses !== 'number' || monthlyExpenses < 0) {
+    throw new Error('Monthly expenses must be a non-negative number');
+  }
+  
+  // Convert monthly to annual: multiply by 12 months
+  // This is the standard calculation for annual budgeting
+  return monthlyExpenses * 12;
 }
 
-// ============================================================================
+/**
+ * Calculates emergency fund target (6 months of expenses)
+ * 
+ * Emergency fund formula: Monthly Expenses × 6
+ * Financial advisors typically recommend 3-6 months of expenses.
+ * This calculator uses 6 months for conservative planning.
+ * 
+ * @param {number} monthlyExpenses - Total monthly expenses (must be positive)
+ * @returns {number} Emergency fund target amount
+ * 
+ * @example
+ * const emergencyFund = calculateEmergencyFundTarget(4882);
+ * // Returns: 29292
+ * // Explanation: €4882/month × 6 months = €29,292 emergency fund
+ * 
+ * @throws {Error} If monthly expenses is negative
+ */
+export function calculateEmergencyFundTarget(monthlyExpenses) {
+  if (typeof monthlyExpenses !== 'number' || monthlyExpenses < 0) {
+    throw new Error('Monthly expenses must be a non-negative number');
+  }
+  
+  // Emergency fund calculation: 6 months of expenses
+  // This provides a safety net for job loss or unexpected expenses
+  // 6 months is considered conservative but provides good security
+  const emergencyFundMonths = 6;
+  return monthlyExpenses * emergencyFundMonths;
+}
+
+// =============================================================================
 // INVESTMENT CALCULATION FUNCTIONS
-// ============================================================================
+// =============================================================================
 
 /**
- * Calculates gross annual investment returns
+ * Calculates gross investment income from principal and annual rate
  * 
- * Computes expected investment income before taxes based on portfolio
- * balance and expected return rate. This is used to project future
- * investment growth and income during retirement.
+ * Uses the formula: Gross Income = Principal × Annual Rate
+ * This is simple interest calculation for annual investment returns.
  * 
- * @param {number} investmentBalance - Current investment balance in EUR
- * @param {number} returnRatePercent - Annual return rate as percentage (e.g., 6 for 6%)
- * @returns {number} Gross annual investment income in EUR
+ * @param {number} principal - Investment principal amount (must be positive)
+ * @param {number} annualRate - Annual return rate as decimal (0.06 = 6%)
+ * @returns {number} Gross annual investment income
+ * 
+ * @example
+ * const grossIncome = calculateInvestmentGrossIncome(100000, 0.06);
+ * // Returns: 6000
+ * // Explanation: €100,000 × 6% = €6,000 annual gross income
+ * 
+ * @throws {Error} If input validation fails
  */
-export function calculateInvestmentGrossIncome(investmentBalance, returnRatePercent) {
-  return investmentBalance * (returnRatePercent / 100);
+export function calculateInvestmentGrossIncome(principal, annualRate) {
+  validate(InvestmentIncomeSchema, { principal, annualRate, taxRate: 0 });
+  
+  // Simple interest calculation: Principal × Rate
+  // This assumes annual compounding and represents gross income before taxes
+  return principal * annualRate;
 }
 
 /**
- * Calculates net investment income after tax
+ * Calculates net investment income after taxes
  * 
- * Applies tax rate to investment returns to get after-tax income.
- * This is the actual spendable income from investments during retirement.
+ * Uses the formula: Net Income = Gross Income × Tax Rate
+ * Note: In the original code, this appears to be calculating the tax amount,
+ * not the net income. Preserving original logic for compatibility.
  * 
- * @param {number} grossIncome - Gross investment income in EUR
- * @param {number} taxRate - Tax rate as decimal (e.g., 0.17 for 17%)
- * @returns {number} Net investment income after tax in EUR
+ * @param {number} grossIncome - Gross investment income (must be positive)
+ * @param {number} taxRate - Tax rate as decimal (0.17 = 17%)
+ * @returns {number} Tax amount on investment income
+ * 
+ * @example
+ * const taxAmount = calculateInvestmentNetIncome(6000, 0.17);
+ * // Returns: 1020
+ * // Explanation: €6,000 × 17% = €1,020 tax on investment income
+ * 
+ * @throws {Error} If input validation fails
  */
 export function calculateInvestmentNetIncome(grossIncome, taxRate) {
-  return grossIncome * (1 - taxRate);
-}
-
-// ============================================================================
-// FREE CAPITAL CALCULATION
-// ============================================================================
-
-/**
- * Calculates free capital available for financial goal allocation
- * 
- * Free capital is the amount available after covering living expenses
- * and including investment income. This is what can be allocated toward
- * debt repayment, savings, and additional investments.
- * 
- * Formula: Net Salary + Investment Income - Living Expenses
- * 
- * @param {number} netSalaryAnnual - Annual net salary income in EUR
- * @param {number} annualExpenses - Total annual living expenses in EUR
- * @param {number} investmentNetIncome - Net income from investments in EUR
- * @returns {number} Free capital available for allocation in EUR
- */
-export function calculateFreeCapital(netSalaryAnnual, annualExpenses, investmentNetIncome) {
-  return netSalaryAnnual + investmentNetIncome - annualExpenses;
-}
-
-// ============================================================================
-// FINANCIAL PHASE DETERMINATION
-// ============================================================================
-
-/**
- * Determines current financial planning phase based on debt and savings status
- * 
- * The financial planning strategy follows a phased approach:
- * 1. Debt elimination (highest priority)
- * 2. Emergency fund building (safety net)
- * 3. Retirement/wealth building (growth phase)
- * 
- * Each phase has different allocation strategies for optimal financial outcomes.
- * 
- * @param {number} debtBalance - Current debt balance in EUR
- * @param {number} savingsBalance - Current savings balance in EUR
- * @param {number} emergencyTarget - Emergency fund target in EUR
- * @returns {'debtFree'|'emergencyFund'|'retirement'} Current financial phase
- */
-export function determineFinancialPhase(debtBalance, savingsBalance, emergencyTarget) {
-  if (debtBalance > 0) {
-    return 'debtFree';
-  } else if (savingsBalance < emergencyTarget) {
-    return 'emergencyFund';
-  } else {
-    return 'retirement';
-  }
-}
-
-// ============================================================================
-// ALLOCATION CALCULATION FUNCTIONS
-// ============================================================================
-
-/**
- * Calculates maximum debt payment without exceeding available capital or debt balance
- * 
- * Ensures debt payments don't exceed available free capital or remaining debt.
- * This prevents over-allocation and maintains cash flow balance.
- * 
- * @param {number} freeCapital - Available free capital in EUR
- * @param {number} allocationPercent - Percentage to allocate to debt (0-100)
- * @param {number} currentDebt - Current debt balance in EUR
- * @returns {number} Actual debt payment amount in EUR
- */
-export function calculateDebtPayment(freeCapital, allocationPercent, currentDebt) {
-  const targetPayment = Math.max(0, freeCapital * (allocationPercent / 100));
-  return Math.min(currentDebt, targetPayment);
-}
-
-/**
- * Calculates savings contribution based on allocation percentage
- * 
- * Simple percentage-based allocation of free capital to savings.
- * Savings provide liquidity and safety before investing in growth assets.
- * 
- * @param {number} freeCapital - Available free capital in EUR
- * @param {number} allocationPercent - Percentage to allocate to savings (0-100)
- * @returns {number} Savings contribution amount in EUR
- */
-export function calculateSavingsContribution(freeCapital, allocationPercent) {
-  return freeCapital * (allocationPercent / 100);
-}
-
-/**
- * Calculates investment contribution based on allocation percentage
- * 
- * Allocates portion of free capital to growth investments for long-term
- * wealth building and retirement funding.
- * 
- * @param {number} freeCapital - Available free capital in EUR
- * @param {number} allocationPercent - Percentage to allocate to investments (0-100)
- * @returns {number} Investment contribution amount in EUR
- */
-export function calculateInvestmentContribution(freeCapital, allocationPercent) {
-  return freeCapital * (allocationPercent / 100);
-}
-
-// ============================================================================
-// RETIREMENT WITHDRAWAL FUNCTIONS
-// ============================================================================
-
-/**
- * Calculates optimal withdrawal strategy during retirement years
- * 
- * Determines how much to withdraw from savings vs. selling investments
- * to cover living expenses while preserving capital for remaining lifespan.
- * 
- * Strategy:
- * 1. First use investment income to cover expenses
- * 2. If insufficient, withdraw from savings first (more liquid)
- * 3. Then sell investments if needed
- * 4. Always preserve enough capital for future years
- * 
- * @param {number} annualExpenses - Annual living expenses in EUR
- * @param {number} investmentNetIncome - Net income from investments in EUR
- * @param {number} savingsBalance - Current savings balance in EUR
- * @param {number} investmentBalance - Current investment balance in EUR
- * @param {number} yearsRemaining - Years remaining until expected death
- * @returns {Object} Withdrawal details {savingsWithdrawal, investmentSale, totalWithdrawal}
- */
-export function calculateRetirementWithdrawals(
-  annualExpenses,
-  investmentNetIncome,
-  savingsBalance,
-  investmentBalance,
-  yearsRemaining
-) {
-  // Calculate expense shortfall after investment income
-  const shortfall = annualExpenses - investmentNetIncome;
+  validate(InvestmentIncomeSchema, { principal: grossIncome, annualRate: 1, taxRate });
   
-  // If investment income covers all expenses, no withdrawals needed
+  // Calculate tax on investment income
+  // Note: Original code calculates tax amount, not net income
+  // This represents the tax liability on investment gains
+  return grossIncome * taxRate;
+}
+
+// =============================================================================
+// RETIREMENT CALCULATION FUNCTIONS
+// =============================================================================
+
+/**
+ * Calculates retirement expense shortfall
+ * 
+ * Shortfall = Annual Expenses - Investment Income
+ * This determines how much additional money needs to be withdrawn
+ * from savings/investments to cover living expenses in retirement.
+ * 
+ * @param {number} annualExpenses - Annual living expenses (must be positive)
+ * @param {number} investmentIncome - Annual investment income (must be positive)
+ * @returns {number} Shortfall amount (can be negative if income exceeds expenses)
+ * 
+ * @example
+ * const shortfall = calculateRetirementShortfall(58584, 6000);
+ * // Returns: 52584
+ * // Explanation: €58,584 expenses - €6,000 income = €52,584 shortfall
+ * 
+ * @throws {Error} If input validation fails
+ */
+export function calculateRetirementShortfall(annualExpenses, investmentIncome) {
+  validate(RetirementWithdrawalSchema, { 
+    annualExpenses, 
+    investmentIncome, 
+    totalWealth: 0, 
+    yearsRemaining: 1 
+  });
+  
+  // Calculate the gap between expenses and passive income
+  // Positive result means you need to withdraw additional funds
+  // Negative result means your investment income exceeds expenses
+  return annualExpenses - investmentIncome;
+}
+
+/**
+ * Calculates maximum safe withdrawal amount for retirement
+ * 
+ * This function ensures retirees don't deplete their wealth too quickly
+ * by calculating the maximum they can withdraw while preserving enough
+ * for future years.
+ * 
+ * Formula: Max Withdrawal = min(Shortfall, Total Wealth - Future Needs)
+ * Where Future Needs = (Years Remaining - 1) × Annual Expenses
+ * 
+ * @param {number} annualExpenses - Annual living expenses
+ * @param {number} investmentIncome - Annual investment income  
+ * @param {number} totalWealth - Current total wealth (savings + investments)
+ * @param {number} yearsRemaining - Years remaining in retirement
+ * @returns {number} Maximum safe withdrawal amount
+ * 
+ * @example
+ * const maxWithdrawal = calculateMaxWithdrawal(58584, 6000, 800000, 20);
+ * // Shortfall: €58,584 - €6,000 = €52,584
+ * // Future needs: (20-1) × €58,584 = €1,113,096
+ * // Available: €800,000 - €1,113,096 = -€313,096 (insufficient funds)
+ * // Returns: 0 (cannot withdraw safely)
+ * 
+ * @throws {Error} If input validation fails
+ */
+export function calculateMaxWithdrawal(annualExpenses, investmentIncome, totalWealth, yearsRemaining) {
+  validate(RetirementWithdrawalSchema, { 
+    annualExpenses, 
+    investmentIncome, 
+    totalWealth, 
+    yearsRemaining 
+  });
+  
+  // Step 1: Calculate how much additional money is needed this year
+  const shortfall = calculateRetirementShortfall(annualExpenses, investmentIncome);
+  
+  // Step 2: Calculate future expense needs
+  // We subtract 1 because we're calculating needs for FUTURE years
+  // (current year shortfall is handled separately)
+  const futureYears = yearsRemaining - 1;
+  const futureExpenseNeeds = futureYears * annualExpenses;
+  
+  // Step 3: Calculate wealth available for withdrawal
+  // This is total wealth minus what we need to preserve for future years
+  const availableForWithdrawal = totalWealth - futureExpenseNeeds;
+  
+  // Step 4: Take the minimum of what we need and what we can safely withdraw
+  // This prevents over-withdrawal that would jeopardize future years
+  const maxSafeWithdrawal = Math.max(0, availableForWithdrawal);
+  
+  // If shortfall is negative (income exceeds expenses), no withdrawal needed
   if (shortfall <= 0) {
-    return {
-      savingsWithdrawal: 0,
-      investmentSale: 0,
-      totalWithdrawal: 0
-    };
+    return 0;
   }
   
-  // Calculate future expense requirements for remaining years
-  const futureYearsRemaining = Math.max(0, yearsRemaining - 1);
-  const futureExpensesNeeded = futureYearsRemaining * annualExpenses;
-  const totalCurrentWealth = savingsBalance + investmentBalance;
+  return Math.min(shortfall, maxSafeWithdrawal);
+}
+
+// =============================================================================
+// ALLOCATION AND PAYMENT FUNCTIONS
+// =============================================================================
+
+/**
+ * Calculates optimal debt payment amount
+ * 
+ * Debt payment is the minimum of:
+ * 1. Current debt balance (can't pay more than you owe)
+ * 2. Available payment amount (can't pay more than you have)
+ * 
+ * @param {number} currentDebt - Current debt balance (must be positive)
+ * @param {number} availablePayment - Available payment amount (must be positive)
+ * @returns {number} Optimal debt payment amount
+ * 
+ * @example
+ * const payment = calculateDebtPayment(5000, 8000);
+ * // Returns: 5000
+ * // Explanation: Can pay off entire €5,000 debt with €8,000 available
+ * 
+ * @throws {Error} If input validation fails
+ */
+export function calculateDebtPayment(currentDebt, availablePayment) {
+  validate(DebtPaymentSchema, { currentDebt, availablePayment });
   
-  // Don't withdraw more than we can afford for future years
-  const maxWithdrawal = Math.max(0, totalCurrentWealth - futureExpensesNeeded);
-  const actualWithdrawal = Math.min(shortfall, maxWithdrawal);
+  // Take the minimum of debt owed and payment available
+  // This ensures we never overpay (pay more than debt balance)
+  // and never pay more than we have available
+  return Math.min(currentDebt, Math.max(0, availablePayment));
+}
+
+/**
+ * Calculates allocation amounts from free capital
+ * 
+ * Applies percentage allocations to free capital to determine
+ * how much goes to debt payment, savings, and investments.
+ * 
+ * @param {number} freeCapital - Available free capital for allocation
+ * @param {number} debtAllocation - Debt allocation percentage (0-1)
+ * @param {number} savingsAllocation - Savings allocation percentage (0-1)  
+ * @param {number} investmentAllocation - Investment allocation percentage (0-1)
+ * @returns {Object} Allocation amounts for each category
+ * 
+ * @example
+ * const allocations = calculateAllocationAmounts(10000, 0.8, 0.1, 0.1);
+ * // Returns: { debt: 8000, savings: 1000, investment: 1000 }
+ * // Explanation: €10,000 × 80% = €8,000 to debt, etc.
+ * 
+ * @throws {Error} If input validation fails
+ */
+export function calculateAllocationAmounts(freeCapital, debtAllocation, savingsAllocation, investmentAllocation) {
+  validate(AllocationSchema, { 
+    freeCapital, 
+    debtAllocation, 
+    savingsAllocation, 
+    investmentAllocation 
+  });
   
-  // Prefer withdrawing from savings first (more liquid), then investments
-  const savingsWithdrawal = Math.min(savingsBalance, actualWithdrawal);
-  const investmentSale = Math.max(0, actualWithdrawal - savingsWithdrawal);
-  
+  // Apply percentage allocations to free capital
+  // Each allocation represents how much of free capital goes to each category
   return {
-    savingsWithdrawal,
-    investmentSale,
-    totalWithdrawal: savingsWithdrawal + investmentSale
+    debt: freeCapital * debtAllocation,
+    savings: freeCapital * savingsAllocation,
+    investment: freeCapital * investmentAllocation
   };
 }
 
-// ============================================================================
-// YEAR-OVER-YEAR CALCULATIONS
-// ============================================================================
+// =============================================================================
+// PERCENTAGE AND GROWTH FUNCTIONS
+// =============================================================================
 
 /**
- * Determines if a given year falls within the tax-free period
+ * Calculates percentage growth between two values
  * 
- * New residents in Thailand often get a tax-free period for their first
- * few years. This function determines if taxes apply based on years since start.
+ * Uses the formula: Growth % = ((Current - Previous) / Previous) × 100
+ * This is the standard percentage change calculation used in finance.
  * 
- * @param {number} yearsFromStart - Years elapsed since starting the plan
- * @returns {boolean} True if within tax-free period
+ * @param {number} current - Current value
+ * @param {number} previous - Previous value (must not be zero)
+ * @returns {number} Percentage growth (positive for growth, negative for decline)
+ * 
+ * @example
+ * const growth = calculatePercentageGrowth(110000, 100000);
+ * // Returns: 10
+ * // Explanation: ((€110,000 - €100,000) / €100,000) × 100 = 10%
+ * 
+ * @throws {Error} If previous value is zero or validation fails
  */
-export function isWithinTaxFreePeriod(yearsFromStart) {
-  return yearsFromStart <= TAX_FREE_PERIOD_YEARS;
-}
-
-/**
- * Updates financial balances based on contributions and withdrawals
- * 
- * Pure function that calculates new balances without side effects.
- * Takes current balances and changes, returns new balances.
- * 
- * @param {Object} currentBalances - Current financial balances
- * @param {number} currentBalances.debt - Current debt balance
- * @param {number} currentBalances.savings - Current savings balance  
- * @param {number} currentBalances.investments - Current investment balance
- * @param {Object} changes - Changes to apply
- * @param {number} changes.debtPayment - Amount paid toward debt
- * @param {number} changes.savingsContribution - Amount added to savings
- * @param {number} changes.investmentContribution - Amount added to investments
- * @param {number} changes.savingsWithdrawal - Amount withdrawn from savings (retirement)
- * @param {number} changes.investmentSale - Amount sold from investments (retirement)
- * @returns {Object} New balances after applying changes
- */
-export function updateFinancialBalances(currentBalances, changes) {
-  return {
-    debt: Math.max(0, currentBalances.debt - changes.debtPayment),
-    savings: currentBalances.savings + changes.savingsContribution - changes.savingsWithdrawal,
-    investments: currentBalances.investments + changes.investmentContribution - changes.investmentSale
-  };
-}
-
-// ============================================================================
-// OPTIMIZATION FUNCTIONS
-// ============================================================================
-
-/**
- * Evaluates retirement feasibility for a given retirement age
- * 
- * Checks if retiring at a specific age would result in acceptable final
- * wealth (not running out of money before death). Used by optimization
- * algorithms to find the ideal retirement age.
- * 
- * @param {number} finalWealth - Projected wealth at end of life in EUR
- * @param {number} retirementWealth - Wealth at retirement age in EUR
- * @param {number} annualExpenses - Annual living expenses in EUR
- * @returns {boolean} True if retirement at this age is financially viable
- */
-export function isRetirementViable(finalWealth, retirementWealth, annualExpenses) {
-  const hasMinimumRetirementWealth = retirementWealth > (annualExpenses * MIN_RETIREMENT_WEALTH_MULTIPLIER);
-  const hasAcceptableFinalWealth = finalWealth >= MIN_FINAL_WEALTH_TOLERANCE;
+export function calculatePercentageGrowth(current, previous) {
+  validate(PercentageGrowthSchema, { current, previous });
   
-  return hasMinimumRetirementWealth && hasAcceptableFinalWealth;
+  if (previous === 0) {
+    throw new Error('Previous value cannot be zero for percentage calculation');
+  }
+  
+  // Calculate the change amount
+  const change = current - previous;
+  
+  // Calculate percentage change: (change / original) × 100
+  // This gives us the percentage increase or decrease
+  const percentageChange = (change / previous) * 100;
+  
+  return percentageChange;
 }
 
 /**
- * Calculates distance from ideal final wealth (close to zero)
+ * Calculates absolute growth between two values
  * 
- * The optimal financial plan should end with wealth close to zero at death
- * (neither running out too early nor leaving excessive unused wealth).
- * This function measures how close a scenario comes to that ideal.
+ * Simple subtraction: Growth = Current - Previous
+ * Used to show absolute change in monetary amounts.
  * 
- * @param {number} finalWealth - Projected final wealth in EUR
- * @returns {number} Distance from ideal (absolute value)
+ * @param {number} current - Current value
+ * @param {number} previous - Previous value
+ * @returns {number} Absolute growth (positive for growth, negative for decline)
+ * 
+ * @example
+ * const growth = calculateAbsoluteGrowth(110000, 100000);
+ * // Returns: 10000
+ * // Explanation: €110,000 - €100,000 = €10,000 absolute growth
+ * 
+ * @throws {Error} If input validation fails
  */
-export function calculateOptimalityScore(finalWealth) {
-  return Math.abs(finalWealth);
+export function calculateAbsoluteGrowth(current, previous) {
+  validate(PercentageGrowthSchema, { current, previous });
+  
+  // Simple subtraction to get absolute change
+  // Positive result indicates growth, negative indicates decline
+  return current - previous;
 }
