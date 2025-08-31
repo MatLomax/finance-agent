@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chiang Mai Financial Simulator</title>
+<style>
+  body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0; 
+    padding: 20px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    background-color: #0f172a; 
+    color: #e2e8f0; 
+    line-height: 1.6;
+  }
+  h1 { 
+    text-align: center; 
+    color: #3b82f6; 
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+  h2 { 
+    color: #60a5fa; 
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  h3 { 
+    color: #93c5fd; 
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  label { 
+    display: block; 
+    margin-top: 1em; 
+    font-weight: 500; 
+    color: #cbd5e1;
+  }
+  input[type=number] { 
+    width: 150px; 
+    padding: 10px; 
+    margin-top: 0.5em; 
+    background-color: #1e293b; 
+    border: 2px solid #334155; 
+    border-radius: 8px; 
+    color: #e2e8f0; 
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+  input[type=number]:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .section { 
+    background-color: #1e293b; 
+    border: 1px solid #334155; 
+    padding: 24px; 
+    margin: 20px 0; 
+    border-radius: 16px; 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+  .result { 
+    background-color: #0f172a; 
+    padding: 20px; 
+    border-radius: 12px; 
+    margin-top: 15px; 
+    border: 1px solid #334155;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .formula { 
+    font-size: 0.85em; 
+    color: #94a3b8; 
+    margin-top: 6px; 
+    font-family: 'Courier New', monospace; 
+    background-color: #1e293b;
+    padding: 8px;
+    border-radius: 6px;
+    border-left: 3px solid #3b82f6;
+  }
+  button { 
+    margin-top: 20px; 
+    padding: 12px 24px; 
+    font-size: 1rem; 
+    cursor: pointer; 
+    background-color: #3b82f6; 
+    color: white; 
+    border: none; 
+    border-radius: 10px; 
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+  button:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+  }
+  button:active {
+    transform: translateY(0);
+  }
+  table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 15px; 
+    background-color: #1e293b;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+  th, td { 
+    padding: 12px; 
+    border-bottom: 1px solid #334155; 
+    text-align: right; 
+  }
+  th { 
+    background-color: #334155; 
+    color: #60a5fa;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+  }
+  td {
+    background-color: #1e293b;
+  }
+  tr:hover td {
+    background-color: #253041;
+  }
+  .explanation { 
+    font-size: 0.9em; 
+    color: #94a3b8; 
+    margin-top: 8px; 
+    font-style: italic;
+  }
+  .milestone-row {
+    background-color: #1e40af !important;
+    color: #bfdbfe;
+    font-weight: bold;
+  }
+  .milestone-row:hover {
+    background-color: #1e3a8a !important;
+  }
+  .milestone-summary {
+    background-color: #1e40af;
+    color: #bfdbfe;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border: 1px solid #3b82f6;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+  }
+
+  .phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  .phase-age-range {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #3b82f6;
+    letter-spacing: 0.05em;
+  }
+  .phase-card {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+  .phase-card-header {
+    padding: 24px 24px 16px 24px;
+    border-bottom: 1px solid #334155;
+  }
+</style>
+</head>
+<body>
+<h1>Chiang Mai Financial Simulator</h1>
+<div class="section">
+<h2>Monthly Income</h2>
+<label>Gross USD Monthly Income <input type="number" id="grossUsd" min="0" step="100" /></label>
+<label>Exchange Rate EUR/USD <input type="number" id="eurUsd" min="0" step="0.01" /></label>
+<label>Exchange Rate THB/EUR <input type="number" id="thbEur" min="0" step="0.01" /></label>
+<label>Tax Rate After 2 Years (decimal, e.g. 0.17 for 17%) <input type="number" id="taxRate" min="0" max="1" step="0.01" /></label>
+<div class="explanation">Net income calculation: <code>Net = Gross * (1 - Tax Rate)</code></div>
+</div>
+<div class="section">
+<h2>Monthly Expenses (EUR)</h2>
+<label>Housing <input type="number" id="housing" min="0" step="10" /></label>
+<label>Utilities <input type="number" id="utilities" min="0" step="10" /></label>
+<label>Dining & Groceries <input type="number" id="diningGroceries" min="0" step="10" /></label>
+<label>Hired Staff <input type="number" id="hiredStaff" min="0" step="10" /></label>
+<label>Transportation <input type="number" id="transportation" min="0" step="10" /></label>
+<label>Health Insurance <input type="number" id="healthInsurance" min="0" step="10" /></label>
+<label>Pet Care <input type="number" id="petCare" min="0" step="10" /></label>
+<label>Wellness <input type="number" id="wellness" min="0" step="10" /></label>
+<label>Entertainment <input type="number" id="entertainment" min="0" step="10" /></label>
+<label>Weekend Trips <input type="number" id="weekendTrips" min="0" step="10" /></label>
+<label>Annual Holiday Savings <input type="number" id="annualHoliday" min="0" step="10" /></label>
+<label>Discretionary <input type="number" id="discretionary" min="0" step="10" /></label>
+</div>
+
+<div class="section">
+<h2>Starting Financial Position</h2>
+<label>Current Age <input type="number" id="currentAge" min="0" max="120" step="1" /></label>
+<label>Expected Lifespan <input type="number" id="lifespan" min="0" max="150" step="1" /></label>
+<label>Expected Annual Investment Return % <input type="number" id="investmentReturnRate" min="0" max="100" step="0.1" /></label>
+<label>Total Debt (EUR) <input type="number" id="totalDebt" min="0" step="1000" /></label>
+<label>Total Savings (EUR) <input type="number" id="totalSavings" min="0" step="1000" /></label>
+<label>Total Investments (EUR) <input type="number" id="totalInvestments" min="0" step="1000" /></label>
+</div>
+
+<div class="grid">
+<div class="section">
+<h2>Phase 1: Debt Elimination</h2>
+<label>Debt Repayment % <input type="number" id="allocDebt1" min="0" max="100" step="1" /></label>
+<label>Savings % <input type="number" id="allocSavings1" min="0" max="100" step="1" /></label>
+<label>Investment % <input type="number" id="allocInvestment1" min="0" max="100" step="1" /></label>
+<div class="explanation">Focus primarily on debt elimination until debt-free.</div>
+</div>
+
+<div class="section">
+<h2>Phase 2: Emergency Fund</h2>
+<label>Debt Repayment % <input type="number" id="allocDebt2" min="0" max="100" step="1" /></label>
+<label>Savings % <input type="number" id="allocSavings2" min="0" max="100" step="1" /></label>
+<label>Investment % <input type="number" id="allocInvestment2" min="0" max="100" step="1" /></label>
+<div class="explanation">Build 6-month emergency fund after becoming debt-free.</div>
+</div>
+
+<div class="section">
+<h2>Phase 3: Retirement Planning</h2>
+<label>Savings % <input type="number" id="allocSavings3" min="0" max="100" step="1" /></label>
+<label>Investment % <input type="number" id="allocInvestment3" min="0" max="100" step="1" /></label>
+<div class="explanation">Build wealth for retirement after emergency fund is complete.</div>
+</div>
+</div>
+<div id="output" class="section"></div>
+
+<script>
+function loadDefaults() {
+  if (!localStorage.getItem('simulatorValues')) {
+    const defaults = {
+      grossUsd: 9000,
+      eurUsd: 1.17,
+      thbEur: 37.75,
+      taxRate: 0.17,
+      housing: 1400,
+      utilities: 200,
+      diningGroceries: 750,
+      hiredStaff: 340,
+      transportation: 100,
+      healthInsurance: 550,
+      petCare: 120,
+      wellness: 605,
+      entertainment: 150,
+      weekendTrips: 167,
+      annualHoliday: 750,
+      discretionary: 350,
+      allocDebt1: 80, allocSavings1: 10, allocInvestment1: 10,
+      allocDebt2: 0, allocSavings2: 70, allocInvestment2: 30,
+      allocSavings3: 20, allocInvestment3: 80,
+      currentAge: 33,
+      lifespan: 90,
+      investmentReturnRate: 6,
+      totalDebt: 75000,
+      totalSavings: 0,
+      totalInvestments: 0
+    };
+    localStorage.setItem('simulatorValues', JSON.stringify(defaults));
+  }
+  const values = JSON.parse(localStorage.getItem('simulatorValues'));
+  for (const [key, value] of Object.entries(values)) {
+    const element = document.getElementById(key);
+    if (element) {
+      element.value = value;
+    }
+  }
+}
+
+// Helper function to format numbers nicely
+function formatMoney(amount) {
+  let rounded;
+  if (Math.abs(amount) >= 10000) {
+    rounded = Math.round(amount / 100) * 100; // Round to nearest 100
+  } else {
+    rounded = Math.round(amount / 10) * 10; // Round to nearest 10
+  }
+  return '€' + rounded.toLocaleString('en-US');
+}
+
+// Helper function to format growth amounts
+function formatGrowth(current, previous) {
+  if (!previous || previous === 0) return '';
+  const growth = current - previous;
+  const percentage = ((growth / previous) * 100);
+  const sign = growth >= 0 ? '+' : '';
+  const formattedGrowth = Math.round(growth / 100) * 100; // Round to nearest 100
+  return ` <span style="color: ${growth >= 0 ? '#10b981' : '#ef4444'}; font-size: 0.85em;">(${sign}€${Math.abs(formattedGrowth).toLocaleString('en-US')} / ${sign}${percentage.toFixed(1)}%)</span>`;
+}
+
+function calculate() {
+  try {
+    console.log('Calculate function started');
+    
+    // Save values to localStorage
+    const values = {};
+    ['grossUsd','eurUsd','thbEur','taxRate','housing','utilities','diningGroceries','hiredStaff','transportation','healthInsurance','petCare','wellness','entertainment','weekendTrips','annualHoliday','discretionary','allocDebt1','allocSavings1','allocInvestment1','allocDebt2','allocSavings2','allocInvestment2','allocSavings3','allocInvestment3','currentAge','lifespan','investmentReturnRate','totalDebt','totalSavings','totalInvestments'].forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+        values[id] = parseFloat(element.value) || 0;
+      } else {
+        console.warn(`Element not found: ${id}`);
+        values[id] = 0;
+      }
+    });
+    localStorage.setItem('simulatorValues', JSON.stringify(values));
+
+    console.log('Values loaded:', values);
+
+    // Basic income calculations
+    const grossSalaryMonthly = values.grossUsd / values.eurUsd;
+    const netSalaryMonthly0 = grossSalaryMonthly; // Tax-free first 2 years
+    const netSalaryMonthly1 = grossSalaryMonthly - (grossSalaryMonthly * values.taxRate); // After 2 years with tax
+    
+    const monthlyExpenses = values.housing + values.utilities + values.diningGroceries + values.hiredStaff + values.transportation + values.healthInsurance + values.petCare + values.wellness + values.entertainment + values.weekendTrips + values.annualHoliday + values.discretionary;
+    const annualExpenses = monthlyExpenses * 12;
+    const emergencyFundTarget = monthlyExpenses * 6;
+
+    console.log('Basic calculations:', { grossSalaryMonthly, netSalaryMonthly0, netSalaryMonthly1, monthlyExpenses, annualExpenses, emergencyFundTarget });
+
+  // Function to simulate wealth journey for a given retirement age
+  function simulateWealth(testRetirementAge) {
+    let debt = values.totalDebt;
+    let savings = values.totalSavings;
+    let investments = values.totalInvestments;
+    
+    const results = [];
+    
+    for (let age = values.currentAge; age <= values.lifespan; age++) {
+      const yearsFromStart = age - values.currentAge;
+      const isRetired = age >= testRetirementAge;
+      
+      // Year 0: Only show starting values, no calculations
+      if (yearsFromStart === 0) {
+        results.push({
+          age,
+          debt: values.totalDebt,
+          savings: values.totalSavings,
+          investments: values.totalInvestments,
+          isRetired: false,
+          freeCapital: 0,
+          investmentGrossIncome: 0,
+          investmentNetIncome: 0,
+          savingsWithdrawal: 0,
+          investmentSale: 0
+        });
+        continue;
+      }
+      
+      // Years 1+: Apply calculations
+      const investmentGrossIncome = investments * (values.investmentReturnRate / 100);
+      const investmentNetIncome = investmentGrossIncome * values.taxRate;
+      
+      let freeCapital;
+      let savingsWithdrawal = 0;
+      let investmentSale = 0;
+      
+      if (isRetired) {
+        // In retirement: withdraw from savings and sell investments to cover expenses
+        const shortfall = annualExpenses - investmentNetIncome;
+        
+        // Calculate years remaining after this year
+        const yearsRemaining = values.lifespan - age;
+        
+        // Ensure we never deplete wealth below what's needed for future years
+        const futureExpensesNeeded = (yearsRemaining - 1) * annualExpenses;
+        const totalCurrentWealth = savings + investments;
+        const maxWithdrawal = Math.max(0, totalCurrentWealth - futureExpensesNeeded);
+        
+        const actualWithdrawal = Math.min(shortfall, maxWithdrawal);
+        savingsWithdrawal = Math.min(savings, actualWithdrawal);
+        investmentSale = Math.max(0, actualWithdrawal - savingsWithdrawal);
+        
+        savings -= savingsWithdrawal;
+        investments -= investmentSale;
+        freeCapital = -(savingsWithdrawal + investmentSale);
+      } else {
+        // Working: calculate salary and free capital
+        let netSalaryAnnual = 0;
+        const netSalaryMonthly = yearsFromStart <= 2 ? netSalaryMonthly0 : netSalaryMonthly1;
+        netSalaryAnnual = netSalaryMonthly * 12;
+        
+        freeCapital = netSalaryAnnual - annualExpenses + investmentNetIncome;
+        
+        // Determine current phase for allocation (based on CURRENT balances)
+        let currentPhase = 'retirement';
+        if (debt > 0) {
+          currentPhase = 'debtFree';
+        } else if (savings < emergencyFundTarget) {
+          currentPhase = 'emergencyFund';
+        }
+        
+        // Get allocation for current phase
+        let allocDebt = 0, allocSavings = 0, allocInvestment = 0;
+        
+        if (currentPhase === 'debtFree') {
+          allocDebt = (values.allocDebt1 || 80) / 100;
+          allocSavings = (values.allocSavings1 || 10) / 100;
+          allocInvestment = (values.allocInvestment1 || 10) / 100;
+        } else if (currentPhase === 'emergencyFund') {
+          allocDebt = (values.allocDebt2 || 0) / 100;
+          allocSavings = (values.allocSavings2 || 70) / 100;
+          allocInvestment = (values.allocInvestment2 || 30) / 100;
+        } else {
+          allocDebt = 0;
+          allocSavings = (values.allocSavings3 || 20) / 100;
+          allocInvestment = (values.allocInvestment3 || 80) / 100;
+        }
+
+        // Apply allocations to free capital
+        const debtPayment = Math.min(debt, Math.max(0, freeCapital * allocDebt));
+        const savingsContribution = freeCapital * allocSavings;
+        const investmentContribution = freeCapital * allocInvestment;
+
+        // Update balances
+        debt = Math.max(0, debt - debtPayment);
+        savings += savingsContribution;
+        investments += investmentContribution;
+      }
+      
+      results.push({
+        age,
+        debt,
+        savings,
+        investments,
+        isRetired,
+        freeCapital,
+        investmentGrossIncome,
+        investmentNetIncome,
+        savingsWithdrawal: isRetired ? savingsWithdrawal : 0,
+        investmentSale: isRetired ? investmentSale : 0
+      });
+    }
+    
+    return results;
+  }
+
+  // Find optimal retirement age
+  let optimalRetirementAge = null;
+  let bestResult = null;
+  let closestToZero = Infinity;
+  
+  console.log('Finding optimal retirement age...');
+  
+  for (let testAge = values.currentAge + 1; testAge <= values.lifespan - 5; testAge++) {
+    const simulation = simulateWealth(testAge);
+    const finalYear = simulation[simulation.length - 1];
+    const finalWealth = finalYear.savings + finalYear.investments;
+    const distanceFromZero = Math.abs(finalWealth);
+    
+    // Prefer solutions that end close to zero but not negative
+    // Also ensure we can actually afford retirement (positive wealth when retiring)
+    const retirementYear = simulation.find(year => year.age === testAge);
+    const retirementWealth = retirementYear ? retirementYear.savings + retirementYear.investments : 0;
+    
+    if (distanceFromZero < closestToZero && 
+        finalWealth >= -5000 && // Allow small negative (within €5k)
+        retirementWealth > annualExpenses * 2) { // Must have at least 2 years of expenses at retirement
+      closestToZero = distanceFromZero;
+      optimalRetirementAge = testAge;
+      bestResult = simulation;
+    }
+  }
+  
+  console.log('Optimal retirement age found:', optimalRetirementAge);
+  
+  // If no valid retirement age found, use a default simulation
+  if (!optimalRetirementAge) {
+    optimalRetirementAge = Math.min(65, values.lifespan - 10);
+    bestResult = simulateWealth(optimalRetirementAge);
+  }
+  
+  // Organize results into phases
+  const phases = {
+    debtFree: [],
+    emergencyFund: [],
+    retirement: [],
+    death: []
+  };
+  
+  let debtFreeAge = null;
+  let emergencyFundAge = null;
+  
+  bestResult.forEach((yearData, index) => {
+    const prevYear = index > 0 ? bestResult[index - 1] : null;
+    const yearsFromStart = yearData.age - values.currentAge;
+    
+    // Track milestone ages (skip Year 0)
+    if (yearsFromStart > 0) {
+      if (yearData.debt <= 0 && !debtFreeAge) {
+        debtFreeAge = yearData.age;
+      }
+      if (yearData.savings >= emergencyFundTarget && !emergencyFundAge) {
+        emergencyFundAge = yearData.age;
+      }
+    }
+    
+    // Determine phase and add data
+    let currentPhase;
+    if (yearData.isRetired) {
+      currentPhase = 'death';
+    } else if (yearData.debt > 0) {
+      currentPhase = 'debtFree';
+    } else if (yearData.savings < emergencyFundTarget) {
+      currentPhase = 'emergencyFund';
+    } else {
+      currentPhase = 'retirement';
+    }
+    
+    // Calculate contributions properly
+    let debtPayment = 0;
+    let savingsContribution = 0;
+    let investmentContribution = 0;
+    
+    if (yearsFromStart === 0) {
+      // Year 0: No changes, just starting values
+      debtPayment = 0;
+      savingsContribution = 0;
+      investmentContribution = 0;
+    } else if (prevYear) {
+      // Years 1+: Calculate actual changes
+      debtPayment = Math.max(0, prevYear.debt - yearData.debt);
+      savingsContribution = yearData.savings - prevYear.savings;
+      investmentContribution = yearData.investments - prevYear.investments;
+    }
+    
+    const enhancedYearData = {
+      ...yearData,
+      yearsFromNow: yearsFromStart,
+      debtPayment,
+      savingsContribution,
+      investmentContribution,
+      phase: currentPhase
+    };
+    
+    phases[currentPhase].push(enhancedYearData);
+  });
+
+  console.log('Phases created:', {
+    debtFree: phases.debtFree.length,
+    emergencyFund: phases.emergencyFund.length,
+    retirement: phases.retirement.length,
+    death: phases.death.length
+  });
+
+  // Generate output
+  let outputHTML = `<h2>Financial Plan Overview</h2>`;
+  
+  // Basic info
+  outputHTML += `<div class="result">`;
+  outputHTML += `<p><strong>Gross Salary Income (Monthly):</strong> ${formatMoney(grossSalaryMonthly)}</p>`;
+  outputHTML += `<p><strong>Net Salary Income (Years 1-2, Tax-Free):</strong> ${formatMoney(netSalaryMonthly0)}</p>`;
+  outputHTML += `<p><strong>Net Salary Income (After 2 Years, ${Math.round(values.taxRate * 100)}% Tax):</strong> ${formatMoney(netSalaryMonthly1)}</p>`;
+  outputHTML += `<p><strong>Total Monthly Expenses:</strong> ${formatMoney(monthlyExpenses)}</p>`;
+  outputHTML += `<p><strong>Emergency Fund Target:</strong> ${formatMoney(emergencyFundTarget)}</p>`;
+  outputHTML += `</div>`;
+
+  // Milestone summary
+  outputHTML += `<div class="milestone-summary">`;
+  outputHTML += `<h3>Key Milestones</h3>`;
+  if (debtFreeAge) {
+    outputHTML += `<p><strong>🎯 Debt-Free:</strong> Age ${debtFreeAge} (${debtFreeAge - values.currentAge} years from now)</p>`;
+  }
+  if (emergencyFundAge) {
+    outputHTML += `<p><strong>🛡️ Emergency Fund Complete:</strong> Age ${emergencyFundAge} (${emergencyFundAge - values.currentAge} years from now)</p>`;
+  }
+  if (optimalRetirementAge) {
+    outputHTML += `<p><strong>🏖️ Optimal Retirement Age:</strong> Age ${optimalRetirementAge} (${optimalRetirementAge - values.currentAge} years from now)</p>`;
+    const finalWealth = bestResult[bestResult.length - 1].savings + bestResult[bestResult.length - 1].investments;
+    outputHTML += `<p><strong>💰 Final Wealth at Death:</strong> ${formatMoney(finalWealth)}</p>`;
+  } else {
+    outputHTML += `<p><strong>🏖️ Retirement:</strong> Not achievable with current plan</p>`;
+  }
+  outputHTML += `</div>`;
+
+  // Helper function to format delta values
+  function formatDelta(current, previous) {
+    if (!previous) return '';
+    const delta = current - previous;
+    if (Math.abs(delta) < 1) return ''; // Don't show zero or near-zero changes
+    const sign = delta >= 0 ? '+' : '';
+    const color = delta >= 0 ? '#10b981' : '#ef4444';
+    return `<span style="color: ${color}; font-size: 0.9em;">${sign} ${formatMoney(Math.abs(delta)).replace('€', '€')}</span>`;
+  }
+
+  // Function to create phase card
+  function createPhaseCard(phaseData, phaseTitle, phaseIcon, includeDebt = false, previousPhaseLastRow = null) {
+    if (phaseData.length === 0) return '';
+    
+    const startAge = phaseData[0].age;
+    const endAge = phaseData[phaseData.length - 1].age;
+    
+    let card = `<div class="phase-card">`;
+    card += `<div class="phase-card-header">`;
+    card += `<div class="phase-header">`;
+    card += `<h3>${phaseIcon} ${phaseTitle}</h3>`;
+    card += `<div class="phase-age-range">${startAge} - ${endAge}</div>`;
+    card += `</div>`;
+    card += `</div>`;
+    
+    card += `<table>`;
+    card += `<thead><tr>`;
+    card += `<th>Age</th>`;
+    if (includeDebt) card += `<th>Remaining Debt</th>`;
+    card += `<th>Total Savings</th>`;
+    card += `<th>Savings Delta</th>`;
+    card += `<th>Total Investments</th>`;
+    card += `<th>Investments Delta</th>`;
+    card += `<th>Investment Net Income</th>`;
+    card += `<th>Total Wealth</th>`;
+    card += `</tr></thead><tbody>`;
+    
+    phaseData.forEach((year, index) => {
+      let prevYear = null;
+      
+      // For Year 0 (starting values), never show deltas
+      if (year.yearsFromNow === 0) {
+        prevYear = null;
+      } else if (index === 0) {
+        // First row of this phase (but not Year 0) - use last row from previous phase if available
+        prevYear = previousPhaseLastRow;
+      } else {
+        // Subsequent rows - use previous row from this phase
+        prevYear = phaseData[index - 1];
+      }
+      
+      const savingsDelta = formatDelta(year.savings, prevYear?.savings);
+      const investmentsDelta = formatDelta(year.investments, prevYear?.investments);
+      const totalWealth = year.savings + year.investments;
+      
+      const isLastYear = index === phaseData.length - 1;
+      const rowClass = isLastYear ? 'milestone-row' : '';
+      
+      card += `<tr class="${rowClass}">`;
+      card += `<td>${year.age} <span style="color: #94a3b8; font-size: 0.85em;">(${year.yearsFromNow})</span></td>`;
+      
+      if (includeDebt) {
+        card += `<td>${formatMoney(year.debt)}</td>`;
+      }
+      
+      card += `<td>${formatMoney(year.savings)}</td>`;
+      card += `<td>${savingsDelta}</td>`;
+      card += `<td>${formatMoney(year.investments)}</td>`;
+      card += `<td>${investmentsDelta}</td>`;
+      card += `<td>${formatMoney(year.investmentNetIncome || (year.investmentGrossIncome * values.taxRate) || 0)}</td>`;
+      card += `<td><strong>${formatMoney(totalWealth)}</strong></td>`;
+      card += `</tr>`;
+    });
+    
+    card += `</tbody></table></div>`;
+    return card;
+  }
+
+  // Get last rows from each phase for continuity
+  const lastDebtFreeRow = phases.debtFree.length > 0 ? phases.debtFree[phases.debtFree.length - 1] : null;
+  const lastEmergencyFundRow = phases.emergencyFund.length > 0 ? phases.emergencyFund[phases.emergencyFund.length - 1] : lastDebtFreeRow;
+  const lastRetirementRow = phases.retirement.length > 0 ? phases.retirement[phases.retirement.length - 1] : lastEmergencyFundRow;
+
+  // Phase 1: Debt Elimination (no previous phase)
+  if (phases.debtFree.length > 0) {
+    outputHTML += createPhaseCard(phases.debtFree, 'Debt Elimination', '🎯', true, null);
+  }
+
+  // Phase 2: Emergency Fund (continues from Phase 1)
+  if (phases.emergencyFund.length > 0) {
+    outputHTML += createPhaseCard(phases.emergencyFund, 'Emergency Fund', '🛡️', false, lastDebtFreeRow);
+  }
+
+  // Phase 3: Retirement Planning (continues from Phase 2)
+  if (phases.retirement.length > 0) {
+    outputHTML += createPhaseCard(phases.retirement, 'Retirement Planning', '🏖️', false, lastEmergencyFundRow);
+  }
+
+  // Phase 4: Retirement Years (continues from Phase 3)
+  if (phases.death.length > 0) {
+    outputHTML += createPhaseCard(phases.death, 'Retirement Years', '💀', false, lastRetirementRow);
+  }
+
+  document.getElementById('output').innerHTML = outputHTML;
+  console.log('Calculate function completed successfully');
+  
+  } catch (error) {
+    console.error('Error in calculate function:', error);
+    document.getElementById('output').innerHTML = `<div class="result" style="color: #ef4444;">
+      <h3>Calculation Error</h3>
+      <p>There was an error running the simulation: ${error.message}</p>
+      <p>Please check your input values and try again.</p>
+    </div>`;
+  }
+}
+
+// Load defaults and calculate on page load
+window.onload = () => {
+  console.log('Page loaded, initializing...');
+  loadDefaults();
+  setTimeout(() => {
+    console.log('Running initial calculation...');
+    calculate();
+  }, 100); // Small delay to ensure DOM is ready
+};
+
+// Auto-calculate when any input changes (using event delegation for dynamic inputs)
+document.addEventListener('input', function(e) {
+  if (e.target.type === 'number') {
+    setTimeout(calculate, 50); // Small delay to ensure value is updated
+  }
+});
+
+// Also trigger on change events
+document.addEventListener('change', function(e) {
+  if (e.target.type === 'number') {
+    setTimeout(calculate, 50);
+  }
+});
+</script>
+</body>
+</html>
