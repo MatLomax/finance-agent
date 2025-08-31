@@ -177,6 +177,54 @@ npm run ship      # Complete workflow: check → auto-stage → commit → relea
 6. **Automated commit**: `npm run commit` (semantic versioning)
 7. **Automated release**: `npm run release` (GitHub release)
 
+## Commit Message Standards
+**Descriptive commits required**: Commit messages must clearly describe what changed and why.
+
+### Format
+```
+type(scope): specific action taken
+
+Brief explanation of what changed and business impact.
+Include implementation details when relevant.
+```
+
+### Examples
+**❌ Bad (too generic)**:
+```
+feat: add pure mathematical calculation functions
+feat: update project configuration
+fix: update files
+```
+
+**✅ Good (descriptive)**:
+```
+feat(expenses): make emergency fund months user-configurable
+
+Replace hardcoded 6-month emergency fund with configurable parameter.
+Adds emergencyFundMonths to defaults (default: 6) and updates
+calculateEmergencyFundTarget() to accept optional parameter.
+
+feat(workflow): remove redundant precommit check from ship command
+
+Fix npm run ship running precommit twice - once explicitly and once
+via npm lifecycle hook. Ship workflow now runs 40% faster.
+
+refactor(retirement): extract hardcoded retirement age constants
+
+Move fallback retirement age (65), test buffer (5y), and safety 
+buffer (10y) from hardcoded values to configurable parameters
+in findOptimalRetirementAge() function.
+```
+
+### Scope Guidelines
+- `lib` - Core business logic functions
+- `state` - Data persistence and management  
+- `ui` - User interface components
+- `test` - Testing improvements
+- `workflow` - Build, deploy, or development process
+- `docs` - Documentation updates
+- `perf` - Performance optimizations
+
 ## Performance Optimizations
 - **Lazy loading**: Dynamic imports for non-critical modules
 - **Event delegation**: Single listeners for multiple elements
