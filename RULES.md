@@ -9,7 +9,8 @@
 
 ## File Structure & Complexity
 - **Auto-enforced by ESLint**: 100 lines max per file, 10 cyclomatic complexity max
-- **Co-located tests**: `module.test.js` next to `module.js` (one test file per module)
+- **Co-located tests**: `module.test.js` next to `module.js` (REQUIRED for any .js file with functions)
+- **Integration tests**: `integration.test.js` files test module interactions
 - **Flattened structure**: `src/lib/domain.js` instead of `src/lib/domain/calculations.js`
 - **Domain organization**: Direct files in `src/lib/`, `src/ui/`, `src/state/`
 - **Split when violated**: ESLint will fail - must refactor into smaller modules
@@ -27,7 +28,23 @@ src/
     retirement.test.js # Retirement tests
     growth.js       # Growth calculation functions
     growth.test.js  # Growth tests
+    integration.test.js # Cross-module integration tests
+  state/
+    financial-data.js     # Data persistence functions
+    financial-data.test.js # Data persistence tests
+    defaults.js          # Default values
+    defaults.test.js     # Default values tests
+  utils/
+    formatting/
+      currency.js      # Currency formatting functions
+      currency.test.js # Currency formatting tests
 ```
+
+**Testing Requirements**:
+- **Mandatory**: Every .js file containing functions MUST have a corresponding .test.js file
+- **Co-location**: Test files placed directly adjacent to source files (no `__tests__` folders)
+- **Integration tests**: Required for testing module interactions and data flow
+- **100% coverage**: All functions must be tested with comprehensive test cases
 
 ## Dependencies & Imports
 **Tree-shakeable imports ONLY**:
@@ -100,6 +117,17 @@ describe('functionName', () => {
   });
 });
 ```
+
+**Testing Standards**:
+- **Co-located tests**: Each `module.js` has `module.test.js` in same directory
+- **Integration tests**: `integration.test.js` files test module interactions
+- **100% coverage**: All functions must have comprehensive test cases
+- **TDD workflow**: Write tests first, then implement functions
+- **Test categories**:
+  - Unit tests: Individual function behavior
+  - Integration tests: Module interaction and data flow
+  - Edge cases: Boundary conditions, error scenarios
+  - Performance tests: Execution time validation
 
 ## UI Modules (Native Web APIs)
 ```javascript

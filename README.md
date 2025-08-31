@@ -47,15 +47,33 @@ npm run build          # Build with esbuild (only if needed)
 ```
 src/
 ├── lib/               # Pure business logic functions
-│   ├── __tests__/     # Unit tests for lib functions
-│   └── *.js          # Individual function files
+│   ├── *.js          # Individual function files
+│   ├── *.test.js     # Co-located unit tests for each module
+│   └── integration.test.js # Cross-module integration tests
 ├── ui/               # UI creation modules
-│   ├── __tests__/    # UI component tests
-│   └── *.js         # UI module files
+│   ├── *.js         # UI module files
+│   └── *.test.js    # UI component tests
 ├── state/           # State management modules
-├── types/           # TypeBox schemas and validators
+│   ├── *.js         # State management files
+│   └── *.test.js    # State management tests
+├── utils/           # Utility functions
+│   └── formatting/ # Formatting utilities
+│       ├── *.js    # Formatting functions
+│       └── *.test.js # Formatting tests
 └── main.js         # Application entry point
 ```
+
+**Testing Standards**:
+- **Mandatory Co-location**: Every `.js` file with functions must have a `.test.js` file in the same directory
+- **Integration Tests**: `integration.test.js` files test module interactions and complete data flows
+- **100% Coverage**: All functions must be tested with comprehensive test cases
+- **No `__tests__` folders**: Tests are placed directly adjacent to source files
+
+**Currency Handling**:
+- **User Input**: All user expense inputs are in EUR (not THB)
+- **Default Values**: All default expense values are in EUR
+- **Conversions**: USD → EUR → THB conversion chain for Thai cost-of-living calculations
+- **Display**: Local currency formatting respects user's currency preferences
 
 ## Dependencies
 
@@ -70,14 +88,21 @@ src/
 
 ## AI Agent Development Workflow
 
-1. **Write Tests First** - Follow TDD methodology
+1. **Write Tests First** - Follow TDD methodology with co-located test files
 2. **Design Types** - Use JSDoc comments for TypeScript inference
 3. **Implement Functions** - Pure functions with TypeBox validation
 4. **Document Thoroughly** - Educational comments explaining formulas
-5. **Quality Gate** - AI agent runs `npm run precommit` (validates everything)
-6. **Automated Commit** - AI agent runs `npm run commit` (version bump, commit, push)
-7. **Automated Release** - AI agent runs `npm run release` (GitHub release with assets)
-8. **Complete Workflow** - AI agent uses `npm run ship` for full automation
+5. **Integration Testing** - Test module interactions and complete data flows
+6. **Quality Gate** - AI agent runs `npm run precommit` (validates everything)
+7. **Automated Commit** - AI agent runs `npm run commit` (version bump, commit, push)
+8. **Automated Release** - AI agent runs `npm run release` (GitHub release with assets)
+9. **Complete Workflow** - AI agent uses `npm run ship` for full automation
+
+**Testing Requirements**:
+- Every `.js` file with functions MUST have a corresponding `.test.js` file
+- Integration tests required for testing module interactions
+- Tests co-located with source files (no separate test directories)
+- 100% test coverage with comprehensive edge case testing
 
 ## Performance Targets
 

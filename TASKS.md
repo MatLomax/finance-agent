@@ -212,6 +212,49 @@ This document outlines the complete transformation of the Thailand.html single-f
   - Verified all 196 tests pass with new structure
   - Updated documentation to reflect co-located testing standard
 
+- [x] **COMPLETED: Barrel file elimination** (direct imports only)
+  - Removed all barrel export files (calc.js, formatters.js, formatting/index.js)
+  - Extracted unique tests from barrel test files to domain-specific test files
+  - Created dedicated performance.test.js and integration.test.js files
+  - Updated all imports to use direct module imports instead of barrel files
+  - Verified all 184 tests pass with flattened import structure
+  - Updated npm test script to include deeper test file patterns
+
+- [x] **COMPLETED: Complete test coverage for all .js files**
+  - Created test files for all previously untested modules:
+    - `src/state/defaults.test.js` - Tests default financial data values
+    - `src/lib/validators.test.js` - Tests TypeBox validation helpers
+    - `src/lib/simulation-helpers.test.js` - Tests wealth simulation helpers
+    - `src/lib/optimal-retirement.test.js` - Tests optimal retirement age calculation
+    - `src/lib/phase-organization.test.js` - Tests phase organization functionality
+    - `src/lib/allocations.test.js` - Tests financial allocation functions
+    - `src/lib/investments.test.js` - Tests investment calculation functions
+    - `src/state/observers.test.js` - Tests observer pattern implementation
+    - `src/state/validation.test.js` - Tests data validation and migration
+  - All test files are co-located with their corresponding source files
+  - Tests cover normal cases, edge cases, error conditions, and validation scenarios
+
+- [x] **COMPLETED: Integration testing implementation**
+  - Created comprehensive `src/lib/integration.test.js` file
+  - Tests complete data flow from input processing to final calculations
+  - Validates module interactions and realistic usage scenarios
+  - Covers currency conversion pipeline, allocation strategies, wealth simulation integration
+  - Tests error handling across module boundaries
+  - Ensures modules work together correctly in real-world use cases
+
+- [x] **COMPLETED: Currency assumption correction**
+  - Updated `src/state/defaults.js` to correctly reflect EUR currency for user inputs
+  - Fixed documentation to clarify that expense categories are in EUR, not THB
+  - Maintained USD → EUR → THB conversion chain for Thai cost-of-living context
+  - Updated comments and descriptions to reflect accurate currency handling
+
+- [x] **COMPLETED: Documentation updates**
+  - Updated `RULES.md` with mandatory testing requirements and file structure standards
+  - Updated `README.md` with testing standards and currency handling clarifications
+  - Documented co-located testing approach (no `__tests__` folders)
+  - Added integration testing requirements and standards
+  - Clarified currency handling throughout the application
+
 - [ ] **Integration tests for UI modules**
   - DOM manipulation testing with jsdom
   - User interaction simulation

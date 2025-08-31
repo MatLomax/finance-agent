@@ -22,19 +22,19 @@ const SCHEMA_VERSION = 1;
  * - 37.75 THB/EUR exchange rate (approximate for Chiang Mai)
  * - 17% tax rate (Thai tax rate after 2-year tax exemption expires)
  * 
- * Expense Categories (monthly THB amounts):
- * - Housing: Quality 1-2BR condo in central Chiang Mai
- * - Utilities: AC, internet, electricity for comfortable living
- * - Food: Mix of local and international dining plus groceries
- * - Staff: Part-time cleaning service (common for expats)
- * - Transport: Scooter/car expenses for local travel
- * - Healthcare: International insurance for comprehensive coverage
- * - Pet care: Dog/cat expenses including vet and boarding
- * - Wellness: Gym, spa, massage, personal development
- * - Entertainment: Movies, events, social activities
- * - Weekend trips: Domestic travel within Thailand
- * - Annual holiday: International vacation budget (divided monthly)
- * - Discretionary: Shopping, unexpected expenses, buffer
+ * Expense Categories (monthly EUR amounts):
+ * - Housing: Quality 1-2BR condo in central Chiang Mai (€1400/month)
+ * - Utilities: AC, internet, electricity for comfortable living (€200/month)
+ * - Food: Mix of local and international dining plus groceries (€750/month)
+ * - Staff: Part-time cleaning service (common for expats) (€340/month)
+ * - Transport: Scooter/car expenses for local travel (€100/month)
+ * - Healthcare: International insurance for comprehensive coverage (€550/month)
+ * - Pet care: Dog/cat expenses including vet and boarding (€120/month)
+ * - Wellness: Gym, spa, massage, personal development (€605/month)
+ * - Entertainment: Movies, events, social activities (€150/month)
+ * - Weekend trips: Domestic travel within Thailand (€167/month)
+ * - Annual holiday: International vacation budget (divided monthly) (€750/month)
+ * - Discretionary: Shopping, unexpected expenses, buffer (€350/month)
  * 
  * Financial Position:
  * - Starting age 33 (mid-career professional)
@@ -58,7 +58,7 @@ const DEFAULT_FINANCIAL_DATA = {
   thbEur: 37.75,
   taxRate: 0.17,
   
-  // Monthly expenses (THB amounts)
+  // Monthly expenses (EUR amounts - user inputs are in EUR)
   housing: 1400,
   utilities: 200,
   diningGroceries: 750,
