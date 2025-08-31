@@ -19,7 +19,7 @@ import {
   findOptimalRetirementAge,
   organizeSimulationByPhases,
   simulateWealthTrajectory
-} from '../simulate-wealth.js';
+} from './simulate-wealth.js';
 
 describe('Financial Phase Determination', () => {
   test('should identify debt phase when debt exists', () => {

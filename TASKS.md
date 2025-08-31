@@ -83,7 +83,7 @@ This document outlines the complete transformation of the Thailand.html single-f
 ## Phase 3: Data Management & Persistence
 
 ### 3.1 State Management
-- [ ] **Create localStorage persistence module** (`src/state/financial-data.js`)
+- [x] **Create localStorage persistence module** (`src/state/financial-data.js`)
   - Save/load financial input data
   - Default value management and restoration
   - Observer pattern for state change notifications
@@ -195,11 +195,19 @@ This document outlines the complete transformation of the Thailand.html single-f
 ## Phase 6: Testing & Quality Assurance
 
 ### 6.1 Comprehensive Test Suite
-- [x] **Unit tests for all pure functions** (src/lib/\_\_tests\_\_/)
+- [x] **Unit tests for all pure functions** (co-located with source files)
   - Test mathematical accuracy with known values
   - Test edge cases and error conditions
   - Achieve 100% test coverage
   - Performance testing (functions complete in < 50ms)
+  - **Structure**: Each `module.js` file has corresponding `module.test.js` file in same directory
+
+- [x] **COMPLETED: Test file reorganization** (eliminated `__tests__` folders)
+  - Moved all test files to be co-located with source files
+  - Updated import paths from `../module.js` to `./module.js`
+  - Removed all empty `__tests__` directories
+  - Verified all 196 tests pass with new structure
+  - Updated documentation to reflect co-located testing standard
 
 - [ ] **Integration tests for UI modules**
   - DOM manipulation testing with jsdom
@@ -259,12 +267,18 @@ This document outlines the complete transformation of the Thailand.html single-f
 - **Native Web APIs**: No framework dependencies, use modern browser features
 - **Educational Code**: Every function includes step-by-step explanations of financial concepts
 - **Performance First**: Bundle size < 15KB, TTI < 300ms on 3G
+- **Co-located Testing**: Each module file has its test file directly adjacent (no `__tests__` folders)
 
 ### Development Workflow
 1. **Test-Driven Development**: Write tests before implementation
 2. **Quality Gates**: All checks must pass before commit (type check, lint, test, coverage, bundle size)
 3. **Educational Documentation**: JSDoc with business context and formula explanations
 4. **Automated Workflow**: Use `npm run ship` for complete development → release cycle
+5. **Co-located Testing**: Test files are placed directly next to their corresponding source files
+6. **Task Completion Protocol**: Upon completing any task, must:
+   - Mark task as `[x] **COMPLETED**` in TASKS.md
+   - Run `npm run ship` (precommit → commit → release)
+   - Verify deployment and version bump
 
 ### Critical Dependencies
 - **TypeBox**: Runtime validation (~2KB per schema)

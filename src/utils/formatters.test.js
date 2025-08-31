@@ -23,7 +23,7 @@ import {
   formatAgeRange,
   getAccessibleColors,
   getResponsiveFontSize
-} from '../formatters.js';
+} from './formatters.js';
 
 // =============================================================================
 // CURRENCY FORMATTING TESTS

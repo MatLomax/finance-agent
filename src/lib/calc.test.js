@@ -27,7 +27,7 @@ import {
   calculateRetirementShortfall,
   convertEurToThb,
   convertUsdToEur
-} from '../calc.js';
+} from './calc.js';
 
 // =============================================================================
 // CURRENCY CONVERSION TESTS
