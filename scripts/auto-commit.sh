@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# AI Development Agent - Automated Commit Script
+# Usage: ./auto-commit.sh ["Custom commit message"]
+# If no message provided, uses default: "feat: v{version} - automated commit"
+# The AI agent should analyze changes and provide descriptive commit messages
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -59,98 +64,37 @@ analyze_changes() {
 generate_changelog() {
     local version=$1
     local changes=$(git diff --cached --name-only)
+    local changelog=""
     
     echo "## Changes in v${version}"
     echo ""
     
-    # Analyze specific changes and provide detailed descriptions
+    # Analyze specific file changes
     for file in $changes; do
         case $file in
-            src/lib/expenses.js)
-                if git diff --cached | grep -q "emergencyFundMonths.*=.*6"; then
-                    echo "- **Emergency Fund Configuration**: Made emergency fund months user-configurable"
-                    echo "  - Added \`emergencyFundMonths\` parameter to \`calculateEmergencyFundTarget()\`"
-                    echo "  - Default value remains 6 months for backward compatibility"
-                    echo "  - Enhanced validation for new parameter"
-                else
-                    echo "- **Expense Calculations**: Updated expense calculation functions in \`$file\`"
-                fi
-                ;;
-            src/lib/optimal-retirement.js)
-                if git diff --cached | grep -q "defaultRetirementAge\|retirementTestBuffer"; then
-                    echo "- **Retirement Age Configuration**: Extracted hardcoded retirement parameters"
-                    echo "  - Added configurable \`defaultRetirementAge\` (default: 65)"
-                    echo "  - Added configurable \`retirementTestBuffer\` (default: 5 years)"
-                    echo "  - Added configurable \`retirementSafetyBuffer\` (default: 10 years)"
-                else
-                    echo "- **Retirement Optimization**: Updated optimal retirement age calculations in \`$file\`"
-                fi
-                ;;
-            src/lib/simulate-wealth.js)
-                if git diff --cached | grep -q "emergencyFundMonths"; then
-                    echo "- **Wealth Simulation**: Updated to use configurable emergency fund months"
-                    echo "  - Replaced hardcoded 6-month calculation with parameter"
-                    echo "  - Maintains backward compatibility with default values"
-                else
-                    echo "- **Wealth Simulation**: Updated wealth trajectory simulation in \`$file\`"
-                fi
-                ;;
-            src/state/defaults.js)
-                if git diff --cached | grep -q "emergencyFundMonths\|defaultRetirementAge"; then
-                    echo "- **Default Configuration**: Added new configurable financial planning parameters"
-                    echo "  - \`emergencyFundMonths: 6\` - Months of expenses for emergency fund"
-                    echo "  - \`defaultRetirementAge: 65\` - Fallback retirement age"
-                    echo "  - \`retirementTestBuffer: 5\` - Minimum years before lifespan to test"
-                    echo "  - \`retirementSafetyBuffer: 10\` - Safety buffer years before end of life"
-                else
-                    echo "- **Default Values**: Updated default financial data in \`$file\`"
-                fi
+            *.mdc)
+                echo "- Updated rule file: \`$file\`"
                 ;;
             package.json)
-                if git diff --cached | grep -q "\"ship\".*npm run commit"; then
-                    echo "- **Workflow Optimization**: Removed redundant precommit check from ship command"
-                    echo "  - Fixed npm run ship running precommit twice (explicit + lifecycle hook)"
-                    echo "  - Ship workflow now runs ~40% faster"
-                else
-                    echo "- **Project Configuration**: Updated package.json dependencies and scripts"
-                fi
+                echo "- Updated project dependencies and configuration"
                 ;;
-            RULES.md)
-                if git diff --cached | grep -q "Commit Message Standards"; then
-                    echo "- **Development Standards**: Added descriptive commit message guidelines"
-                    echo "  - Defined commit format with scope and detailed descriptions"
-                    echo "  - Added examples of good vs bad commit messages"
-                    echo "  - Specified scope guidelines for different code areas"
-                else
-                    echo "- **Documentation**: Updated development rules and guidelines in \`$file\`"
-                fi
+            tsconfig.json)
+                echo "- Updated TypeScript configuration"
                 ;;
-            TASKS.md)
-                echo "- **Project Status**: Updated task completion tracking in \`$file\`"
+            check.sh)
+                echo "- Updated quality check script"
                 ;;
-            *.test.js)
-                echo "- **Testing**: Updated test coverage for \`$file\`"
+            scripts/*)
+                echo "- Updated automation script: \`$file\`"
                 ;;
-            scripts/*.sh)
-                echo "- **Automation**: Updated automation script \`$file\`"
-                ;;
-            src/lib/*.js)
-                echo "- **Core Logic**: Updated business logic in \`$file\`"
-                ;;
-            src/utils/*.js)
-                echo "- **Utilities**: Updated utility functions in \`$file\`"
-                ;;
-            src/ui/*.js)
-                echo "- **User Interface**: Updated UI components in \`$file\`"
-                ;;
-            src/state/*.js)
-                echo "- **State Management**: Updated state management in \`$file\`"
+            src/*)
+                echo "- Updated source code: \`$file\`"
                 ;;
             README.md)
-                echo "- **Documentation**: Updated project documentation"
+                echo "- Updated project documentation"
                 ;;
             *)
-                echo "- **File Update**: Updated \`$file\`"
+                echo "- Updated: \`$file\`"
                 ;;
         esac
     done
@@ -194,63 +138,11 @@ if ! git diff --cached --quiet; then
     npm version "$new_version" --no-git-tag-version
     git add package.json package-lock.json
     
-    # Analyze staged changes to create meaningful commit title
-    staged_files=$(git diff --cached --name-only)
-    commit_title="feat: update project"
-    
-    # Generate descriptive commit title based on actual changes
-    if echo "$staged_files" | grep -q "src/lib/expenses\.js"; then
-        if git diff --cached | grep -q "emergencyFundMonths.*=.*6"; then
-            commit_title="feat(expenses): make emergency fund months user-configurable"
-        elif git diff --cached | grep -q "calculateEmergencyFundTarget"; then
-            commit_title="refactor(expenses): update emergency fund calculation"
-        else
-            commit_title="feat(expenses): update expense calculation functions"
-        fi
-    elif echo "$staged_files" | grep -q "src/lib/optimal-retirement\.js"; then
-        if git diff --cached | grep -q "defaultRetirementAge\|retirementTestBuffer\|retirementSafetyBuffer"; then
-            commit_title="refactor(retirement): extract hardcoded retirement age constants"
-        else
-            commit_title="feat(retirement): update optimal retirement age calculation"
-        fi
-    elif echo "$staged_files" | grep -q "src/lib/simulate-wealth\.js"; then
-        if git diff --cached | grep -q "emergencyFundMonths"; then
-            commit_title="feat(simulation): add configurable emergency fund calculation"
-        else
-            commit_title="feat(simulation): update wealth trajectory simulation"
-        fi
-    elif echo "$staged_files" | grep -q "src/state/defaults\.js"; then
-        if git diff --cached | grep -q "emergencyFundMonths\|defaultRetirementAge"; then
-            commit_title="feat(state): add configurable financial planning parameters"
-        else
-            commit_title="feat(state): update default financial data"
-        fi
-    elif echo "$staged_files" | grep -q "package\.json" && git diff --cached | grep -q "\"ship\".*npm run commit"; then
-        commit_title="feat(workflow): remove redundant precommit check from ship command"
-    elif echo "$staged_files" | grep -q "RULES\.md" && git diff --cached | grep -q "Commit Message Standards"; then
-        commit_title="docs(workflow): add descriptive commit message standards"
-    elif echo "$staged_files" | grep -q "TASKS\.md"; then
-        commit_title="docs(tasks): update project completion status"
-    elif echo "$staged_files" | grep -q "src/lib/.*\.js$"; then
-        commit_title="feat(lib): add core business logic functions"
-    elif echo "$staged_files" | grep -q "src/utils/.*\.js$"; then
-        if echo "$staged_files" | grep -q "formatters"; then
-            commit_title="feat(utils): add formatting utility functions"
-        else
-            commit_title="feat(utils): add utility functions"
-        fi
-    elif echo "$staged_files" | grep -q "src/ui/.*\.js$"; then
-        commit_title="feat(ui): add user interface components"
-    elif echo "$staged_files" | grep -q "src/state/.*\.js$"; then
-        commit_title="feat(state): add state management modules"
-    elif echo "$staged_files" | grep -q "\.test\.js$"; then
-        commit_title="test: add comprehensive test coverage"
-    elif echo "$staged_files" | grep -q "scripts/.*\.sh$"; then
-        commit_title="feat(workflow): update automation scripts"
-    elif echo "$staged_files" | grep -q "^[^/]*\.json$"; then
-        commit_title="feat(config): update project configuration"
+    # Accept commit message as parameter or use default
+    if [[ -n "$1" ]]; then
+        commit_title="$1"
     else
-        commit_title="feat: update project files"
+        commit_title="feat: v${new_version} - automated commit"
     fi
     
     # Generate commit message and changelog

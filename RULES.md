@@ -168,62 +168,55 @@ npm run ship      # Complete workflow: check → auto-stage → commit → relea
 - Bundle size < 15KB
 - Educational comments validation
 
+## Automation Scripts
+- **`scripts/auto-commit.sh`**: Accepts descriptive commit message as parameter
+  - Usage: `./scripts/auto-commit.sh "detailed commit message"`
+  - Auto-stages all changes, increments version, generates changelog
+  - AI agent must provide the commit message after analyzing changes
+- **`scripts/check.sh`**: Runs all quality gates and validation
+- **`scripts/auto-release.sh`**: Creates GitHub releases with automated changelog
+
 ## Workflow
 1. **TDD**: Write failing test first
 2. **Implement**: Pure function with TypeBox validation
 3. **Document**: JSDoc + educational comments
 4. **Quality gate**: `npm run check` must pass
 5. **Auto-stage changes**: `git add .` to stage all working tree files
-6. **Automated commit**: `npm run commit` (semantic versioning)
-7. **Automated release**: `npm run release` (GitHub release)
+6. **Generate descriptive commit**: AI agent analyzes all staged changes and creates detailed commit message
+7. **Automated commit**: `scripts/auto-commit.sh "descriptive commit message"` (semantic versioning)
+8. **Automated release**: `npm run release` (GitHub release)
 
-## Commit Message Standards
-**Descriptive commits required**: Commit messages must clearly describe what changed and why.
+## Commit Message Generation
+The AI development agent must analyze all staged changes and generate detailed, descriptive commit messages that:
+- **Summarize the actual changes**: Examine file diffs and understand what was modified
+- **Use semantic commit format**: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, etc.
+- **Be specific and detailed**: Instead of generic titles, describe the actual functionality added
+- **Include business context**: Explain WHY the changes were made, not just WHAT changed
+- **Avoid switch-case logic**: Each commit message should be unique and contextual
 
-### Format
+**Examples of good commit messages**:
 ```
-type(scope): specific action taken
+feat: implement compound interest calculation with monthly compounding support
 
-Brief explanation of what changed and business impact.
-Include implementation details when relevant.
-```
+Add calculateCompoundInterest function to src/lib/growth.js with TypeBox validation,
+comprehensive test coverage, and educational JSDoc comments explaining the mathematical
+formula A = P(1 + r/n)^(nt). Includes edge case handling for zero rates and validation
+for negative inputs.
 
-### Examples
-**❌ Bad (too generic)**:
-```
-feat: add pure mathematical calculation functions
-feat: update project configuration
-fix: update files
-```
+feat: add responsive transaction card component with accessibility features
 
-**✅ Good (descriptive)**:
-```
-feat(expenses): make emergency fund months user-configurable
-
-Replace hardcoded 6-month emergency fund with configurable parameter.
-Adds emergencyFundMonths to defaults (default: 6) and updates
-calculateEmergencyFundTarget() to accept optional parameter.
-
-feat(workflow): remove redundant precommit check from ship command
-
-Fix npm run ship running precommit twice - once explicitly and once
-via npm lifecycle hook. Ship workflow now runs 40% faster.
-
-refactor(retirement): extract hardcoded retirement age constants
-
-Move fallback retirement age (65), test buffer (5y), and safety 
-buffer (10y) from hardcoded values to configurable parameters
-in findOptimalRetirementAge() function.
+Create TransactionCard UI component in src/ui/transaction-card.js with ARIA labels,
+keyboard navigation support, and CSS Grid layout. Includes comprehensive test suite
+for DOM manipulation and event handling.
 ```
 
-### Scope Guidelines
-- `lib` - Core business logic functions
-- `state` - Data persistence and management  
-- `ui` - User interface components
-- `test` - Testing improvements
-- `workflow` - Build, deploy, or development process
-- `docs` - Documentation updates
-- `perf` - Performance optimizations
+**Anti-pattern examples**:
+```
+❌ feat: add utility functions
+❌ feat: update source code
+❌ feat: add new files
+❌ feat: v1.2.3 - automated commit
+```
 
 ## Performance Optimizations
 - **Lazy loading**: Dynamic imports for non-critical modules
