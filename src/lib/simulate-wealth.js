@@ -141,7 +141,8 @@ export function calculateRetirementWithdrawal(
  */
 export function simulateWealthTrajectory(input, retirementAge) {
   const { currentAge, lifespan, totalDebt, totalSavings, totalInvestments,
-    grossSalaryMonthly, taxRate, investmentReturnRate, monthlyExpenses, allocations } = input;
+    grossSalaryMonthly, taxRate, investmentReturnRate, monthlyExpenses, allocations,
+    emergencyFundMonths = 6 } = input;
   
   let debt = totalDebt;
   let savings = totalSavings;
@@ -149,7 +150,7 @@ export function simulateWealthTrajectory(input, retirementAge) {
   
   const results = [];
   const annualExpenses = monthlyExpenses * 12;
-  const emergencyFundTarget = monthlyExpenses * 6;
+  const emergencyFundTarget = monthlyExpenses * emergencyFundMonths;
   const netSalaryMonthly0 = grossSalaryMonthly;
   const netSalaryMonthly1 = grossSalaryMonthly * (1 - taxRate);
   

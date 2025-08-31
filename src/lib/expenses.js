@@ -65,27 +65,31 @@ export function calculateAnnualExpenses(monthlyExpenses) {
 }
 
 /**
- * Calculates emergency fund target (6 months of expenses)
- * Emergency fund formula: Monthly Expenses × 6
+ * Calculates emergency fund target based on configurable months
+ * Emergency fund formula: Monthly Expenses × Emergency Fund Months
  * 
  * @param {number} monthlyExpenses - Total monthly expenses (must be positive)
+ * @param {number} emergencyFundMonths - Number of months of expenses to save (default: 6)
  * @returns {number} Emergency fund target amount
  * 
  * @example
- * const emergencyFund = calculateEmergencyFundTarget(4882);
+ * const emergencyFund = calculateEmergencyFundTarget(4882, 6);
  * // Returns: 29292
  * // Explanation: €4882/month × 6 months = €29,292 emergency fund
  * 
- * @throws {Error} If monthly expenses is negative
+ * @throws {Error} If monthly expenses or emergency fund months is negative
  */
-export function calculateEmergencyFundTarget(monthlyExpenses) {
+export function calculateEmergencyFundTarget(monthlyExpenses, emergencyFundMonths = 6) {
   if (typeof monthlyExpenses !== 'number' || monthlyExpenses < 0) {
     throw new Error('Monthly expenses must be a non-negative number');
   }
   
-  // Emergency fund calculation: 6 months of expenses
+  if (typeof emergencyFundMonths !== 'number' || emergencyFundMonths < 0) {
+    throw new Error('Emergency fund months must be a non-negative number');
+  }
+  
+  // Emergency fund calculation: configurable months of expenses
   // This provides a safety net for job loss or unexpected expenses
   // 6 months is considered conservative but provides good security
-  const emergencyFundMonths = 6;
   return monthlyExpenses * emergencyFundMonths;
 }

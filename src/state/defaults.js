@@ -90,6 +90,12 @@ const DEFAULT_FINANCIAL_DATA = {
   totalSavings: 0,
   totalInvestments: 0,
   
+  // Financial planning parameters
+  emergencyFundMonths: 6,          // Months of expenses for emergency fund
+  defaultRetirementAge: 65,        // Fallback retirement age if optimization fails
+  retirementTestBuffer: 5,         // Minimum years before lifespan to test retirement
+  retirementSafetyBuffer: 10,      // Safety buffer years before end of life
+  
   // Metadata
   lastUpdated: new Date().toISOString(),
   version: '1.0.0'

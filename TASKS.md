@@ -166,13 +166,13 @@ This document outlines the complete transformation of the Thailand.html single-f
 ## Phase 5: Application Assembly & Integration
 
 ### 5.1 Main Application Module
-- [x] **Create main application controller** (`src/main.js`)
+- [ ] **Create main application controller** (`src/main.js`)
   - Initialize all UI modules
   - Setup event listeners and data flow
   - Handle application lifecycle
   - Error boundary and graceful degradation
 
-- [x] **Create HTML structure** (`dist/index.html`)
+- [ ] **Create HTML structure** (`dist/index.html`)
   - Semantic HTML5 structure
   - CSS custom properties for theming
   - Import maps for module loading (zero-build approach)

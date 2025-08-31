@@ -21,15 +21,23 @@ import { simulateWealthTrajectory } from './simulate-wealth.js';
  * @returns {OptimalRetirementResult} Optimal retirement result
  */
 export function findOptimalRetirementAge(input) {
-  const { currentAge, lifespan, monthlyExpenses } = input;
+  const { 
+    currentAge, 
+    lifespan, 
+    monthlyExpenses,
+    defaultRetirementAge = 65,
+    retirementTestBuffer = 5,
+    retirementSafetyBuffer = 10
+  } = input;
+  
   const annualExpenses = monthlyExpenses * 12;
   
   let optimalAge = null;
   let bestSimulation = null;
   let closestToZero = Infinity;
   
-  // Test retirement ages from next year to 5 years before death
-  for (let testAge = currentAge + 1; testAge <= lifespan - 5; testAge++) {
+  // Test retirement ages from next year to retirementTestBuffer years before death
+  for (let testAge = currentAge + 1; testAge <= lifespan - retirementTestBuffer; testAge++) {
     const result = evaluateRetirementAge(input, testAge, annualExpenses, closestToZero);
     if (result.isOptimal) {
       closestToZero = result.distanceFromZero;
@@ -40,7 +48,7 @@ export function findOptimalRetirementAge(input) {
   
   // Fallback if no valid retirement found
   if (!optimalAge || !bestSimulation) {
-    optimalAge = Math.min(65, lifespan - 10);
+    optimalAge = Math.min(defaultRetirementAge, lifespan - retirementSafetyBuffer);
     bestSimulation = simulateWealthTrajectory(input, optimalAge);
   }
   
