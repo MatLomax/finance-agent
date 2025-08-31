@@ -1,0 +1,239 @@
+---
+description: Comprehensive code commenting standards for educational, self-documenting code
+globs: ["src/**/*.js"]
+alwaysApply: true
+---
+
+# Code Commenting Standards
+
+## Philosophy
+- **Code should teach**: Comments should educate readers about domain concepts, not just implementation
+- **Self-documenting**: Code should be readable by finance professionals, not just developers
+- **No magic**: Every formula, constant, and complex operation must be explained
+- **Educational value**: Comments should help readers understand WHY, not just WHAT
+
+## JSDoc Documentation Requirements
+
+### Function Documentation
+```javascript
+/**
+ * Brief description of what the function does.
+ * 
+ * [Optional: Mathematical formula if applicable]
+ * Formula: A = P(1 + r/n)^(nt)
+ * Where: A = final amount, P = principal, r = annual rate, n = frequency, t = time
+ * 
+ * [Context: How this function is used in the finance domain]
+ * This function is used in the finance agent to compute investment 
+ * growth projections and loan interest calculations.
+ * 
+ * @param {type} paramName - Description with constraints and examples
+ * @param {number} rate - Annual interest rate (as decimal, 0.05 = 5%)
+ * @returns {type} Description of return value and its meaning
+ * 
+ * @example
+ * const result = functionName(1000, 0.05, 2, 12);
+ * // Returns: 1104.89 (approximately)
+ * // Explanation: $1000 at 5% annual rate, compounded monthly for 2 years
+ * 
+ * @throws {Error} When and why this function might throw errors
+ */
+```
+
+### Variable Documentation
+```javascript
+/**
+ * @typedef {Object} Transaction
+ * @property {string} id - Unique identifier (UUID format)
+ * @property {number} amount - Amount in cents (avoids floating point issues)
+ * @property {'income'|'expense'|'transfer'} type - Transaction category
+ * @property {string} description - Human-readable description (1-500 chars)
+ * @property {Date} createdAt - When transaction was recorded
+ */
+```
+
+## Inline Comment Standards
+
+### Formula Breakdown Pattern
+```javascript
+// ❌ BAD: Cryptic one-liner
+return principal * Math.pow(1 + rate / n, n * t);
+
+// ✅ GOOD: Educational step-by-step breakdown
+// Apply compound interest formula: A = P(1 + r/n)^(nt)
+
+// Step 1: Calculate periodic interest rate
+// Convert annual rate to per-compounding-period rate
+// Example: 5% annual with monthly compounding = 0.05/12 = 0.00417 per month
+const periodicRate = annualRate / compoundingFrequency;
+
+// Step 2: Calculate growth factor per period
+// This represents "1 dollar becomes X dollars" each compounding period
+// Example: 1 + 0.00417 = 1.00417 (grows by 0.417% each month)
+const growthFactor = 1 + periodicRate;
+
+// Step 3: Calculate total compounding periods
+// Example: 2 years × 12 months/year = 24 total compounding periods
+const totalPeriods = timeInYears * compoundingFrequency;
+
+// Step 4: Apply exponential growth
+// Each period, the ENTIRE current amount (not just principal) grows
+// This is why compound interest is more powerful than simple interest
+const finalAmount = principal * Math.pow(growthFactor, totalPeriods);
+```
+
+### Domain Context Comments
+```javascript
+// Financial context: Why we use cents instead of dollars
+// Storing monetary amounts as integers (cents) avoids floating-point precision errors
+// Example: $12.34 stored as 1234 cents
+const amountInCents = Math.round(dollarAmount * 100);
+
+// Business rule: Transaction limits
+// Daily transfer limit is $10,000 to comply with banking regulations
+const DAILY_TRANSFER_LIMIT = 1000000; // 10,000 dollars in cents
+
+// Algorithm choice: Why we chose this approach
+// Using binary search for transaction lookup because we expect
+// large datasets (10k+ transactions) and need O(log n) performance
+const transactionIndex = binarySearch(sortedTransactions, targetId);
+```
+
+### Complex Logic Comments
+```javascript
+// Multi-step validation process
+// We validate in this specific order to fail fast on the most common errors
+
+// Step 1: Type validation (fastest check)
+if (typeof amount !== 'number') {
+  throw new Error('Amount must be a number');
+}
+
+// Step 2: Range validation (business rule)
+// Minimum transaction is $0.01 to prevent spam/testing abuse
+if (amount < 1) { // 1 cent minimum
+  throw new Error('Amount must be at least $0.01');
+}
+
+// Step 3: Maximum validation (regulatory compliance)
+// Maximum single transaction is $50,000 for anti-money-laundering compliance
+if (amount > 5000000) { // $50,000 in cents
+  throw new Error('Amount exceeds maximum transaction limit');
+}
+```
+
+## Comment Patterns by Code Type
+
+### Mathematical Calculations
+```javascript
+// Always include:
+// 1. The mathematical formula
+// 2. Variable definitions
+// 3. Step-by-step breakdown
+// 4. Real-world example with numbers
+
+// Present Value calculation: PV = FV / (1 + r)^n
+// Where: PV = present value, FV = future value, r = discount rate, n = periods
+
+// Example: What's $1000 in 2 years worth today at 5% discount rate?
+const discountRate = 0.05; // 5% annual discount rate
+const periods = 2; // 2 years
+const futureValue = 1000; // $1000 future value
+
+// Calculate discount factor: 1 / (1 + r)^n
+const discountFactor = 1 / Math.pow(1 + discountRate, periods);
+// Result: 1 / (1.05)^2 = 1 / 1.1025 = 0.907
+
+// Apply discount factor to future value
+const presentValue = futureValue * discountFactor;
+// Result: $1000 × 0.907 = $907 (today's equivalent value)
+```
+
+### API Integration
+```javascript
+// API call context and error handling strategy
+try {
+  // Fetch user's transaction history from external bank API
+  // Using pagination to handle large datasets efficiently
+  // Timeout set to 5 seconds to prevent UI blocking
+  const response = await fetch(`/api/transactions?page=${page}&limit=50`, {
+    timeout: 5000,
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  
+  // Handle different response scenarios
+  if (!response.ok) {
+    // Log for debugging but don't expose internal errors to user
+    console.error(`API error: ${response.status} ${response.statusText}`);
+    throw new Error('Unable to fetch transactions. Please try again.');
+  }
+  
+} catch (error) {
+  // Network errors, timeouts, or API failures
+  // Provide user-friendly message while preserving technical details for logs
+  throw new Error('Connection problem. Check your internet and try again.');
+}
+```
+
+### State Management
+```javascript
+// State update pattern with explanation
+// We use immutable updates to prevent accidental mutations
+// This ensures React re-renders correctly and state history works
+
+// Create new transaction object (don't mutate existing)
+const newTransaction = {
+  ...existingTransaction,
+  amount: newAmount, // Only update the amount field
+  updatedAt: new Date() // Track when modification occurred
+};
+
+// Update state immutably
+// This creates a new array with the updated transaction
+const updatedTransactions = transactions.map(transaction => 
+  transaction.id === targetId ? newTransaction : transaction
+);
+```
+
+## Anti-Patterns to Avoid
+
+### ❌ Bad Comments
+```javascript
+// Bad: Obvious comments that don't add value
+const total = a + b; // Add a and b
+
+// Bad: Outdated comments
+const rate = 0.06; // 5% interest rate (WRONG!)
+
+// Bad: Commented-out code
+// const oldCalculation = principal * rate;
+
+// Bad: Vague comments
+// Do the calculation
+const result = complexFormula();
+```
+
+### ✅ Good Comments
+```javascript
+// Good: Explains business context
+const rate = 0.06; // Current prime rate as of 2024-01-15, updated monthly
+
+// Good: Explains non-obvious logic
+// Use floor() instead of round() for tax calculations to be conservative
+const taxAmount = Math.floor(income * TAX_RATE);
+
+// Good: Explains algorithm choice
+// Binary search chosen over linear search because we expect 10k+ transactions
+const index = binarySearch(transactions, targetId);
+```
+
+## Documentation Maintenance
+- **Update comments with code**: Comments must be updated when code changes
+- **Review for accuracy**: Comments should be reviewed during code review
+- **Remove obsolete comments**: Delete comments that no longer apply
+- **Consistent terminology**: Use the same terms throughout the codebase
+
+## Performance Considerations
+- **Comment density**: Aim for 20-30% comment lines in complex functions
+- **Avoid over-commenting**: Don't comment obvious code
+- **Focus on complexity**: More comments for complex algorithms, fewer for simple operations

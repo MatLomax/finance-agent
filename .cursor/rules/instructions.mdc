@@ -1,0 +1,211 @@
+---
+description: Complete AI agent workflow instructions from request to release
+alwaysApply: true
+---
+
+# AI Agent Development Instructions
+
+## Workflow Overview
+
+This file defines the complete step-by-step process for the AI development agent to handle any development task from initial user request to final commit and release. Follow these instructions in sequence for every development task.
+
+## Pre-Task Analysis
+
+### Step 1: Understand the Request
+- **Read carefully**: Analyze the user's request for scope, complexity, and requirements
+- **Identify type**: Feature, bug fix, documentation, refactoring, or configuration change
+- **Assess complexity**: Simple (< 30 lines of code), Medium (30-90 lines of code), Complex (> 90 lines of code)
+- **Check dependencies**: Does this require new external libraries or major architectural changes?
+
+### Step 2: Plan Task Breakdown
+- **Create TODO list**: Use `todo_write` tool to break down the task into specific steps
+- **Estimate scope**: Mark todo items as in_progress one at a time
+- **Identify files**: List which files will need to be created, modified, or deleted
+- **Plan testing**: Determine what tests need to be written or updated
+
+## Development Workflow
+
+### Step 3: Setup and Validation
+```bash
+# Ensure we're in a clean state
+git status
+npm run check  # Verify current state passes all quality gates
+```
+
+### Step 4: Test-Driven Development (TDD)
+- **Write tests first**: Create failing tests that define the desired behavior
+- **Test file naming**: Use `__tests__/[module-name].test.js` pattern
+- **Test framework**: Use Node.js native test runner with assert
+- **Run tests**: `npm run test` to confirm tests fail initially
+
+### Step 5: Implementation
+- **Pure functions**: Business logic goes in `src/lib/` with TypeBox validation
+- **UI modules**: DOM manipulation goes in `src/ui/` using native web APIs
+- **Type safety**: Use JSDoc comments for TypeScript type checking
+- **Import patterns**: Use tree-shakeable imports: `import { specific } from 'library-es'`
+- **Educational comments**: Follow `comments.mdc` standards for all code
+- **Constants**: Reference values from `src/lib/consts.js` where applicable
+
+### Step 6: Code Quality Validation
+```bash
+# Fast validation during development (core checks only)
+npm run check:fast
+
+# Individual checks for focused debugging
+./scripts/check.sh --type-check  # TypeScript/JSDoc validation
+./scripts/check.sh --lint        # ESLint code quality
+./scripts/check.sh --test        # Testing with coverage
+
+# Full quality gate (all checks including bundle size, deps, comments)
+npm run check
+```
+
+### Step 7: Documentation
+- **JSDoc**: Document all functions with parameters, returns, examples, and business context
+- **Educational comments**: Explain formulas step-by-step, include financial context
+- **README updates**: Update root README.md if new scripts or major features added
+- **Rule updates**: Update relevant `.mdc` files if new patterns or standards introduced
+
+## Commit and Release Workflow
+
+### Step 8: Pre-Commit Validation
+```bash
+# Stage all changes
+git add .
+
+# Run comprehensive quality gate (mandatory)
+npm run precommit
+```
+
+**Quality gate must pass 100% before proceeding:**
+- TypeScript type checking (`tsc --noEmit`)
+- ESLint with zero warnings
+- 100% test coverage
+- Bundle size < 15KB
+- Max 5 dependencies
+- Educational comments validation
+
+### Step 9: Automated Commit
+```bash
+# AI agent performs automated commit with semantic versioning
+npm run commit
+```
+
+**Commit process includes:**
+- Automatic version bump (patch/minor/major based on changes)
+- Conventional commit message format
+- Changelog generation
+- Git commit and push to main branch
+
+### Step 10: Automated Release
+```bash
+# AI agent creates GitHub release
+npm run release
+```
+
+**Release process includes:**
+- GitHub release creation with version tag
+- Release notes with quality assurance summary
+- Asset package with essential project files
+- Documentation of architecture highlights
+
+### Step 11: Complete Workflow (One Command)
+```bash
+# For streamlined workflow, use single command:
+npm run ship
+```
+
+**This executes:** `precommit` → `commit` → `release` in sequence
+
+## Task Completion Checklist
+
+### ✅ Code Quality Gates
+- [ ] All TypeScript type checking passes (`npm run type-check`)
+- [ ] ESLint passes with zero warnings (`npm run lint`)
+- [ ] 100% test coverage achieved (`npm run test:coverage`)
+- [ ] Bundle size under 15KB limit
+- [ ] Maximum 5 runtime dependencies
+- [ ] Educational comments on all functions
+
+### ✅ Documentation Standards
+- [ ] JSDoc comments on all public functions
+- [ ] Step-by-step formula explanations
+- [ ] Business context for financial calculations
+- [ ] Import statements use tree-shakeable patterns
+- [ ] Constants referenced from `src/lib/consts.js`
+
+### ✅ Testing Requirements
+- [ ] TDD approach: tests written before implementation
+- [ ] Tests use Node.js native test runner
+- [ ] All edge cases covered
+- [ ] Tests run in < 50ms for pure functions
+- [ ] Tests run in < 2 seconds for full suite
+
+### ✅ Architecture Compliance
+- [ ] Pure functions in `src/lib/` with no side effects
+- [ ] UI modules use native DOM APIs only
+- [ ] No framework dependencies (React, Vue, etc.)
+- [ ] ES2022+ JavaScript with no transpilation
+- [ ] Maximum file size: 100 lines including comments
+
+## Error Handling and Recovery
+
+### If Quality Gate Fails
+1. **Read error output carefully** - understand what failed
+2. **Run individual checks for debugging**:
+   - `./scripts/check.sh --type-check` - Fix JSDoc/TypeScript issues
+   - `./scripts/check.sh --lint` - Fix ESLint warnings
+   - `./scripts/check.sh --test` - Fix failing tests or coverage
+   - `./scripts/check.sh --build` - Fix bundle size issues
+   - `./scripts/check.sh --deps` - Fix dependency count issues
+   - `./scripts/check.sh --comments` - Fix missing educational comments
+3. **Fix issues systematically** - don't skip quality checks
+4. **Never proceed with failed checks** - quality gates are mandatory
+
+### If Commit Fails
+1. **Check git status** - ensure all files are staged
+2. **Verify branch state** - must be on main branch and up-to-date
+3. **Check script permissions** - ensure `scripts/*.sh` are executable
+4. **Re-run quality gate** - `npm run precommit` must pass first
+
+### If Release Fails
+1. **Verify GitHub CLI authentication** - `gh auth status`
+2. **Check repository permissions** - must have release creation access
+3. **Ensure version uniqueness** - check for conflicting tags
+4. **Verify assets** - ensure all required files exist
+
+## Communication with User
+
+### During Development
+- **Update TODO list**: Mark progress and completion of tasks
+- **Explain decisions**: Why specific approaches were chosen
+- **Show quality results**: Share test coverage, bundle size, etc.
+- **Educational focus**: Explain what the code does and why
+
+### After Completion
+- **Summarize changes**: What was implemented and how
+- **Quality metrics**: Coverage, bundle size, performance impact
+- **Usage instructions**: How to run, test, and extend the new code
+- **Architecture notes**: How changes fit into overall system design
+
+## Advanced Scenarios
+
+### Multiple Related Changes
+- **Atomic commits**: Each logical change gets its own commit
+- **Sequential releases**: Run workflow for each complete feature
+- **Integration testing**: Ensure changes work together
+
+### Breaking Changes
+- **Major version bump**: Requires manual confirmation
+- **Migration guide**: Document any breaking API changes
+- **Backward compatibility**: Maintain when possible
+
+### Emergency Fixes
+- **Hotfix branch**: Create from main for critical fixes
+- **Minimal changes**: Fix only the specific issue
+- **Fast-track testing**: Focus on affected functionality
+- **Immediate release**: Skip non-critical quality checks if necessary
+
+---
+
+**Remember**: The AI agent should follow this workflow for EVERY development task, ensuring consistent quality, proper documentation, and automated delivery from initial request to final release.

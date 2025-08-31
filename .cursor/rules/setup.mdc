@@ -1,0 +1,176 @@
+---
+description: Environment setup and project initialization for new AI agents
+alwaysApply: true
+---
+
+# Project Setup and Environment
+
+## Prerequisites Check
+
+Before starting any development work, verify the environment meets these requirements:
+
+### Required Software
+- **Node.js**: >= 18.0.0 (check with `node --version`)
+- **npm**: Latest version (check with `npm --version`)
+- **Git**: For version control (check with `git --version`)
+- **GitHub CLI**: For automated releases (check with `gh --version`)
+
+### Project Initialization
+```bash
+# 1. Verify you're in the correct directory
+pwd  # Should show: /path/to/finance-agent
+
+# 2. Install dependencies
+npm install
+
+# 3. Verify setup works
+npm run check:fast
+
+# 4. Test build system
+npm run build
+```
+
+## Project Structure Understanding
+
+### Key Directories
+- **`.cursor/rules/`** - AI agent guidance (this directory)
+- **`src/lib/`** - Pure business logic functions with TypeBox validation
+- **`src/ui/`** - DOM manipulation modules using native web APIs
+- **`scripts/`** - Automation scripts (check.sh, auto-commit.sh, auto-release.sh)
+- **`dist/`** - Built/minified output (created by `npm run build`)
+
+### Key Files
+- **`package.json`** - Dependencies and npm scripts
+- **`tsconfig.json`** - TypeScript configuration (type checking only)
+- **`.eslintrc.json`** - Code quality rules
+- **`build.js`** - Minification and bundling script
+- **`src/lib/consts.js`** - Project-wide constants and standards
+
+## First-Time Setup Checklist
+
+### ✅ Environment Verification
+- [ ] Node.js >= 18.0.0 installed
+- [ ] npm dependencies installed (`npm install`)
+- [ ] TypeScript type checking works (`npm run type-check`)
+- [ ] ESLint passes (`npm run lint`)
+- [ ] Tests run successfully (`npm run test`)
+- [ ] Build system works (`npm run build`)
+- [ ] Full quality gate passes (`npm run check`)
+
+### ✅ GitHub Integration (for releases)
+- [ ] GitHub CLI authenticated (`gh auth login`)
+- [ ] Repository access confirmed (`gh repo view`)
+- [ ] Release permissions verified
+
+### ✅ Development Workflow Test
+```bash
+# Test the complete workflow
+echo "console.log('test');" > test-file.js
+git add test-file.js
+npm run ship  # Should: check → commit → release
+rm test-file.js
+```
+
+## Common Setup Issues
+
+### Node.js Version Mismatch
+```bash
+# If Node.js version is too old:
+# 1. Install Node Version Manager (nvm)
+# 2. Use project's Node version
+nvm use  # Reads from .nvmrc if present
+```
+
+### Missing Dependencies
+```bash
+# If npm install fails:
+npm cache clean --force
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### GitHub CLI Not Authenticated
+```bash
+# Authenticate with GitHub
+gh auth login
+# Verify access
+gh auth status
+```
+
+### Permission Issues (Linux/Mac)
+```bash
+# Make scripts executable
+chmod +x scripts/*.sh
+```
+
+## Finance Domain Context
+
+### Project Purpose
+This is an **ultra-lightweight vanilla JavaScript finance agent** designed for:
+- **Financial calculations** (interest, loans, investments)
+- **Transaction management** (income, expenses, transfers)
+- **Data visualization** (charts, reports)
+- **Educational content** (explaining financial formulas)
+
+### Architecture Philosophy
+- **Zero-build preferred** - Direct ES modules when possible
+- **Ultra-lightweight** - < 15KB total bundle size
+- **Educational code** - All formulas explained step-by-step
+- **Type-safe** - JSDoc + TypeScript + TypeBox validation
+- **Pure functions** - No side effects, easy to test
+- **Native web APIs** - No framework dependencies
+
+### Development Principles
+1. **Test-Driven Development** - Write tests first
+2. **Educational commenting** - Explain WHY, not just WHAT
+3. **Performance first** - Every byte counts
+4. **Quality gates** - All checks must pass before commit
+5. **Automated workflow** - From development to release
+
+## Quick Reference Commands
+
+### Development
+```bash
+npm run dev          # Start development server
+npm run test:watch   # Run tests in watch mode
+npm run check:fast   # Quick quality validation
+```
+
+### Quality Assurance
+```bash
+npm run type-check   # TypeScript validation
+npm run lint         # Code quality check
+npm run test         # Run all tests
+npm run check        # Full quality gate
+```
+
+### Build and Release
+```bash
+npm run build        # Create minified bundle
+npm run precommit    # Pre-commit validation
+npm run ship         # Complete workflow: check → commit → release
+```
+
+## Troubleshooting
+
+### If Quality Gates Fail
+1. **Read error output carefully**
+2. **Use individual checks**: `./scripts/check.sh --lint`, `--test`, etc.
+3. **Fix issues systematically**
+4. **Never skip quality checks**
+
+### If Build Fails
+1. **Check Node.js version** (`node --version`)
+2. **Reinstall dependencies** (`npm install`)
+3. **Clear build cache** (`rm -rf dist/`)
+4. **Check for TypeScript errors** (`npm run type-check`)
+
+### If Tests Fail
+1. **Run tests individually** (`npm run test`)
+2. **Check test file patterns** (must end in `.test.js`)
+3. **Verify imports** (use correct paths and extensions)
+4. **Check Node.js native test syntax**
+
+---
+
+**Remember**: This project prioritizes **quality over speed**. All quality gates must pass before any code is committed. The automated workflow ensures consistent, high-quality releases.
