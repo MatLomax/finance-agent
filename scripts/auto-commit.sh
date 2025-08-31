@@ -107,6 +107,14 @@ generate_changelog() {
 echo -e "${WHITE}🤖 AI Dev Agent - Automated Commit${NC}"
 echo ""
 
+# Auto-stage all working tree changes
+if [[ -n $(git status --porcelain) ]]; then
+    echo -e "${YELLOW}📝 Auto-staging all working tree changes...${NC}"
+    git add .
+    echo -e "${GREEN}✅ All changes staged${NC}"
+    echo ""
+fi
+
 # Check if there are staged changes
 if ! git diff --cached --quiet; then
     echo -e "${YELLOW}📝 Analyzing staged changes...${NC}"
@@ -174,7 +182,7 @@ Automated commit by AI development agent following quality gate validation."
     echo -e "${GREEN}🚀 Pushed to remote repository${NC}"
     
 else
-    echo -e "${YELLOW}⚠️  No staged changes found${NC}"
-    echo -e "${GREY}Use 'git add' to stage files before running auto-commit${NC}"
-    exit 1
+    echo -e "${YELLOW}⚠️  No changes found in working tree${NC}"
+    echo -e "${GREY}All changes are already committed or no modifications detected${NC}"
+    exit 0
 fi

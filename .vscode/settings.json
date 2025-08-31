@@ -7,11 +7,23 @@
   "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
-},
+  },
   "files.associations": {
     "*.js": "javascript"
   },
   "emmet.includeLanguages": {
     "javascript": "html"
-  }
+  },
+  "github.copilot.advanced": {
+    "debug.overrideLogLevel": "DEBUG"
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": true,
+    "markdown": true
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "workbench.commandPalette.experimental.askChatLocation": "chatView",
+  "chat.experimental.defaultAgent": "@workspace"
 }
