@@ -307,7 +307,7 @@ This document outlines the complete transformation of the Thailand.html single-f
 
 ### 6.2 Performance & Bundle Optimization
 - [ ] **Bundle size validation and optimization**
-  - Measure actual bundle size vs 15KB target
+  - Measure actual bundle size vs 25KB target
   - Identify and eliminate unnecessary imports
   - Implement tree-shaking optimizations
   - Test loading performance metrics
@@ -350,7 +350,7 @@ This document outlines the complete transformation of the Thailand.html single-f
 - **Pure Functions**: All business logic in `src/lib/` with no side effects
 - **Native Web APIs**: No framework dependencies, use modern browser features
 - **Educational Code**: Every function includes step-by-step explanations of financial concepts
-- **Performance First**: Bundle size < 15KB, TTI < 300ms on 3G
+- **Performance First**: Bundle size < 25KB, TTI < 300ms on 3G
 - **Co-located Testing**: Each module file has its test file directly adjacent (no `__tests__` folders)
 
 ### Development Workflow
@@ -366,9 +366,10 @@ This document outlines the complete transformation of the Thailand.html single-f
 
 ### Critical Dependencies
 - **TypeBox**: Runtime validation (~2KB per schema)
-- **lodash-es**: Utilities (~500B per function) - MUST use ES module version
+- **lodash-es**: Utilities (~500B per function) - MUST use ES module version for tree-shaking
 - **date-fns**: Date handling (~1.5KB per function)
-- **Tree-shaking essential**: Use specific imports only
+- **esbuild**: Production bundling with minification and tree-shaking
+- **Tree-shaking essential**: Use specific imports only for optimal bundle size
 
 ### Current Feature Parity
 The modular version must maintain 100% feature parity with Thailand.html:

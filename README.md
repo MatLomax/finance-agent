@@ -4,10 +4,10 @@ Ultra-lightweight vanilla JavaScript finance agent with TypeScript design-time v
 
 ## Architecture
 
-- **Pure JavaScript ES2022+** - No transpilation needed for runtime
+- **Pure JavaScript ES2022+** - Modern ES modules with esbuild production bundling
 - **JSDoc + TypeScript** - Compile-time type checking in pure .js files
-- **Zero dependencies** - Only 3 carefully chosen utilities
-- **< 15kb bundle** - Ultra-lightweight for fast loading
+- **Minimal dependencies** - Only 3 carefully chosen utilities (external in production)
+- **< 25kb bundle** - Ultra-lightweight with tree-shaking and minification
 - **Native DOM APIs** - No framework overhead
 
 ## Development Scripts
@@ -37,9 +37,11 @@ npm run lint           # Check code with ESLint
 npm run lint:fix       # Fix ESLint issues automatically
 ```
 
-### Build (Optional)
+### Build & Production
 ```bash
-npm run build          # Build with esbuild (only if needed)
+npm run build          # Build production bundle with esbuild (minified, tree-shaken)
+npm run build:check    # Build and validate bundle size
+npm run build:dev      # Development build (CSS modularized, JS copied)
 ```
 
 ## Project Structure
@@ -84,7 +86,9 @@ src/
 
 ### Development Dependencies
 - **eslint** - Code linting
-- **esbuild** - Optional build tool for minification
+- **esbuild** - Production bundling with minification and tree-shaking
+- **typescript** - Type checking (compile-time only)
+- **knip** - Unused dependency detection
 
 ## AI Agent Development Workflow
 
@@ -106,7 +110,7 @@ src/
 
 ## Performance Targets
 
-- **Bundle Size**: < 15kb gzipped
+- **Bundle Size**: < 25kb minified (external dependencies loaded separately)
 - **Time to Interactive**: < 300ms on 3G
 - **Memory Usage**: < 5MB heap
 - **Test Execution**: < 2 seconds total

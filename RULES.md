@@ -1,7 +1,7 @@
 # AI Development Agent Rules
 
 ## Core Architecture
-- **Pure vanilla JS**: ES2022+ with zero transpilation, no frameworks
+- **Pure vanilla JS**: ES2022+ with esbuild production bundling, no frameworks
 - **Bundle size**: < 25KB total, < 2KB per module
 - **Performance**: TTI < 300ms, no main thread blocking > 8ms
 - **Type safety**: JSDoc + TypeScript checking with basic runtime validation
@@ -47,13 +47,13 @@ src/
 - **100% coverage**: All functions must be tested with comprehensive test cases
 
 ## Dependencies & Imports
-**Tree-shakeable imports ONLY**:
+**Tree-shakeable imports for optimal bundling**:
 ```javascript
-// ✅ CORRECT
+// ✅ CORRECT - esbuild can tree-shake these
 import { debounce } from 'lodash-es';
 import { format } from 'date-fns';
 
-// ❌ WRONG - massive bundle impact
+// ❌ WRONG - massive bundle impact, poor tree-shaking
 import _ from 'lodash';
 ```
 
@@ -161,7 +161,7 @@ npm run ship      # Complete workflow: check → auto-stage → commit → relea
 - TypeScript type checking (tsc --noEmit)
 - ESLint with zero warnings
 - 100% test coverage
-- Bundle size < 15KB
+- Bundle size < 25KB (production build)
 - Educational comments validation
 
 ## Automation Scripts
@@ -247,7 +247,7 @@ export function subscribe(callback) {
 
 ## Key Constants Reference
 All limits and thresholds are defined in `src/lib/consts.js`:
-- MAX_BUNDLE_SIZE_KB: 15
+- MAX_BUNDLE_SIZE_KB: 25
 - MAX_MODULE_SIZE_KB: 2
 - MAX_TTI_MS: 300
 - REQUIRED_TEST_COVERAGE_PERCENT: 100
@@ -255,7 +255,7 @@ All limits and thresholds are defined in `src/lib/consts.js`:
 
 ## Anti-Patterns
 ❌ Framework dependencies (React, Vue, Angular)
-❌ Build tools (webpack, vite) - prefer zero-build
+❌ Poor bundling practices (non-tree-shakeable imports)
 ❌ Non-tree-shakeable imports
 ❌ Magic numbers without constants
 ❌ Functions > 30 lines of implementation

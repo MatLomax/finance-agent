@@ -139,10 +139,3 @@ window.addEventListener('error', (event) => {
 window.addEventListener('unhandledrejection', (event) => {
   handleCriticalError(new Error(event.reason), 'Unhandled Promise Rejection');
 });
-
-// Export for testing and external access
-export default { 
-  initializeApp, 
-  cleanup, 
-  getAppState: () => ({ ...appState }) 
-};

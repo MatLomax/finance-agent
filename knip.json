@@ -1,7 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@latest/schema.json",
   "entry": [
-    "src/main.js",
     "src/**/*.test.js"
   ],
   "project": [

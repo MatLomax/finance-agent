@@ -187,9 +187,6 @@ export function getSimulationCacheStats() {
   };
 }
 
-// Alias for backward compatibility
-export const getCacheStats = getSimulationCacheStats;
-
 /*
  * Utility functions kept for future use - currently unused to avoid linting errors
  * 
