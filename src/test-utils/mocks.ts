@@ -4,7 +4,7 @@
  * Provides properly typed mocks for browser APIs used in tests.
  */
 
-export interface MockStorage extends Storage {
+export type MockStorage = Storage & {
   store: Record<string, string>;
 }
 
@@ -33,7 +33,7 @@ export function createMockStorage(): MockStorage {
   };
 }
 
-export interface MockDocument {
+export type MockDocument = {
   documentElement: {
     setAttribute: () => void;
     getAttribute: () => null;

@@ -7,19 +7,19 @@
 
 // ==================== CORE FINANCIAL DATA TYPES ====================
 
-export interface PhaseAllocation {
+export type PhaseAllocation = {
   readonly debt: number;
   readonly savings: number;
   readonly investments: number;
 }
 
-export interface FinancialAllocations {
+export type FinancialAllocations = {
   readonly debtPhase: PhaseAllocation;
   readonly emergencyPhase: PhaseAllocation;
   readonly retirementPhase: PhaseAllocation;
 }
 
-export interface FinancialInputData {
+export type FinancialInputData = {
   // Schema information
   readonly schemaVersion: number;
   readonly lastUpdated: string;
@@ -74,13 +74,13 @@ export interface FinancialInputData {
 
 export type FinancialPhase = 'debt' | 'emergency' | 'retirement';
 
-export interface AllocationAmounts {
+export type AllocationAmounts = {
   readonly debtPayment: number;
   readonly savingsContribution: number;
   readonly investmentContribution: number;
 }
 
-export interface SimulationYearParams {
+export type SimulationYearParams = {
   readonly age: number;
   readonly currentAge: number;
   readonly retirementAge: number;
@@ -97,7 +97,7 @@ export interface SimulationYearParams {
   readonly allocations: FinancialAllocations;
 }
 
-export interface SimulationYearResult {
+export type SimulationYearResult = {
   readonly age: number;
   readonly debt: number;
   readonly savings: number;
@@ -111,12 +111,12 @@ export interface SimulationYearResult {
   readonly phase: FinancialPhase;
 }
 
-export interface RetirementWithdrawal {
+export type RetirementWithdrawal = {
   readonly savingsWithdrawal: number;
   readonly investmentSale: number;
 }
 
-export interface YearlySimulationData {
+export type YearlySimulationData = {
   readonly age: number;
   readonly yearsFromNow: number;
   readonly grossIncome: number;
@@ -132,13 +132,13 @@ export interface YearlySimulationData {
   readonly phase: FinancialPhase;
 }
 
-export interface SimulationPhases {
+export type SimulationPhases = {
   readonly debt: readonly YearlySimulationData[];
   readonly emergency: readonly YearlySimulationData[];
   readonly retirement: readonly YearlySimulationData[];
 }
 
-export interface WealthSimulationResult {
+export type WealthSimulationResult = {
   readonly yearlyData: readonly YearlySimulationData[];
   readonly phases: SimulationPhases;
   readonly finalWealth: number;
@@ -148,28 +148,28 @@ export interface WealthSimulationResult {
 
 // ==================== ENHANCED SIMULATION INPUT ====================
 
-export interface SimulationInput extends FinancialInputData {
+export type SimulationInput = FinancialInputData & {
   readonly grossSalaryMonthly: number; // Derived from grossUsd * eurUsd
   readonly allocations: FinancialAllocations; // Structured allocations
 }
 
 // ==================== CALCULATION RESULT TYPES ====================
 
-export interface CalculationResult {
+export type CalculationResult = {
   readonly success: boolean;
   readonly data?: WealthSimulationResult;
   readonly error?: string;
   readonly fromCache?: boolean;
 }
 
-export interface CalculationEvent {
+export type CalculationEvent = {
   readonly type: 'calculation-start' | 'calculation-complete';
   readonly results?: WealthSimulationResult;
 }
 
 // ==================== UI COMPONENT TYPES ====================
 
-export interface FinancialSummaryData {
+export type FinancialSummaryData = {
   readonly grossSalaryMonthly: number;
   readonly netSalaryMonthly0: number;
   readonly netSalaryMonthly1: number;
@@ -179,7 +179,7 @@ export interface FinancialSummaryData {
   readonly currentAge: number;
 }
 
-export interface InputFieldProps {
+export type InputFieldProps = {
   readonly key: string;
   readonly label: string;
   readonly value: number;
@@ -189,13 +189,13 @@ export interface InputFieldProps {
 
 // ==================== CACHE TYPES ====================
 
-export interface CacheEntry<T> {
+export type CacheEntry<T> = {
   readonly data: T;
   readonly timestamp: number;
   readonly accessCount: number;
 }
 
-export interface CacheStats {
+export type CacheStats = {
   readonly entries: number;
   readonly hits: number;
   readonly misses: number;
@@ -204,13 +204,13 @@ export interface CacheStats {
 
 // ==================== ERROR TYPES ====================
 
-export interface ValidationError {
+export type ValidationError = {
   readonly field: string;
   readonly message: string;
   readonly value: unknown;
 }
 
-export interface AppError {
+export type AppError = {
   readonly error: Error;
   readonly context: string;
   readonly timestamp: number;
@@ -220,7 +220,7 @@ export interface AppError {
 
 export type ThemeName = 'light' | 'dark';
 
-export interface EventDelegatorConfig {
+export type EventDelegatorConfig = {
   readonly [selector: string]: (event: Event, element: HTMLElement) => void;
 }
 

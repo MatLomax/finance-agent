@@ -5,6 +5,7 @@
 - **Bundle size**: < 25KB total, < 2KB per module
 - **Performance**: TTI < 300ms, no main thread blocking > 8ms
 - **Type safety**: JSDoc + TypeScript checking with basic runtime validation
+- **TypeScript types**: Prefer `type` over `interface` (enforced by ESLint)
 - **Testing**: Node.js native test runner, 100% coverage, < 2s total runtime
 
 ## File Structure & Complexity
@@ -63,6 +64,26 @@ import _ from 'lodash';
 - **Educational comments**: Explain WHY and business context, not just WHAT
 - **Mathematical formulas**: Step-by-step breakdown with real examples
 - **Basic runtime validation**: Critical edge case checking
+
+### TypeScript Types
+- **Use `type` over `interface`**: Enforced by ESLint `@typescript-eslint/consistent-type-definitions`
+- **Type inheritance**: Use intersection types (`&`) instead of `extends`
+- **Readonly properties**: All type properties should be `readonly` for immutability
+- **Type definitions**: Centralized in `src/types/index.ts` for consistency
+
+```typescript
+// ✅ CORRECT - Use type with intersection for inheritance
+export type SimulationInput = FinancialInputData & {
+  readonly grossSalaryMonthly: number;
+  readonly allocations: FinancialAllocations;
+}
+
+// ❌ WRONG - Don't use interface
+export interface SimulationInput extends FinancialInputData {
+  readonly grossSalaryMonthly: number;
+  readonly allocations: FinancialAllocations;
+}
+```
 
 ### Documentation
 ```javascript
