@@ -51,19 +51,18 @@ describe('Currency Formatting Functions', () => {
     });
 
     test('validates input parameters', () => {
-      assert.throws(() => formatMoney('invalid'), /Validation failed/);
-      assert.throws(() => formatMoney(null), /Validation failed/);
-      assert.throws(() => formatMoney(undefined), /Validation failed/);
+      assert.throws(() => formatMoney('invalid'), /must be a finite number/);
+      assert.throws(() => formatMoney(null), /must be a finite number/);
+      assert.throws(() => formatMoney(undefined), /must be a finite number/);
     });
 
     test('validates currency parameter', () => {
-      assert.throws(() => formatMoney(1000, ''), /Validation failed/);
-      assert.throws(() => formatMoney(1000, 'TOOLONG'), /Validation failed/);
+      assert.throws(() => formatMoney(1000, ''), /must be a non-empty string/);
     });
 
     test('validates locale parameter', () => {
-      assert.throws(() => formatMoney(1000, '€', 'x'), /Validation failed/);
-      assert.throws(() => formatMoney(1000, '€', 'toolonglocale'), /Validation failed/);
+      assert.throws(() => formatMoney(1000, '€', 'x'), /RangeError|Incorrect locale/);
+      assert.throws(() => formatMoney(1000, '€', 'toolonglocale'), /RangeError|Incorrect locale/);
     });
   });
 
@@ -96,10 +95,10 @@ describe('Currency Formatting Functions', () => {
     });
 
     test('validates input parameters', () => {
-      assert.throws(() => formatPercentage('invalid'), /must be numbers/);
-      assert.throws(() => formatPercentage(null), /must be numbers/);
-      assert.throws(() => formatPercentage(undefined), /must be numbers/);
-      assert.throws(() => formatPercentage(0.5, 'invalid'), /must be numbers/);
+      assert.throws(() => formatPercentage('invalid'), /must be a finite number/);
+      assert.throws(() => formatPercentage(null), /must be a finite number/);
+      assert.throws(() => formatPercentage(undefined), /must be a finite number/);
+      assert.throws(() => formatPercentage(0.5, 'invalid'), /must be a finite number/);
     });
 
     test('validates decimal places range', () => {

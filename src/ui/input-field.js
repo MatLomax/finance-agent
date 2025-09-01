@@ -5,22 +5,8 @@
  * Handles different input types (number, text, range) with proper attributes.
  */
 
-import { Type } from '@sinclair/typebox';
-import { validate } from '../lib/validators.js';
+import { validateString, validateNumber } from '../lib/validators.js';
 import { createElement } from '../utils/dom-helpers.js';
-
-// Validation schema for input configuration
-const InputConfigSchema = Type.Object({
-  id: Type.String({ minLength: 1 }),
-  label: Type.String({ minLength: 1 }),
-  type: Type.Union([Type.Literal('number'), Type.Literal('text'), Type.Literal('range')]),
-  value: Type.Number(),
-  min: Type.Optional(Type.Number()),
-  max: Type.Optional(Type.Number()),
-  step: Type.Optional(Type.Number()),
-  unit: Type.Optional(Type.String()),
-  helpText: Type.Optional(Type.String())
-});
 
 /**
  * Create the input element with proper attributes
@@ -74,7 +60,9 @@ function createInputElement(config) {
  * @returns {HTMLElement} Container element with label, input, and help text
  */
 export function createInputField(config) {
-  validate(InputConfigSchema, config);
+  validateString(config.id, 'id');
+  validateString(config.label, 'label');
+  validateNumber(config.value, 'value');
   
   const container = createElement('div', {
     className: 'input-field'

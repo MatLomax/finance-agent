@@ -60,7 +60,7 @@ describe('Summary Cards Module', () => {
     it('should throw error for invalid data', () => {
       const invalidData = { grossSalaryMonthly: -1000 };
       
-      assert.throws(() => createOverviewCard(invalidData), /Validation failed/);
+      assert.throws(() => createOverviewCard(invalidData), /must be a finite number/);
     });
   });
 

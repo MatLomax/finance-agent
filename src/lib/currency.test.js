@@ -22,15 +22,15 @@ describe('Currency Conversion Functions', () => {
     });
 
     it('should throw error for negative USD amount', () => {
-      assert.throws(() => convertUsdToEur(-100, 1.17), /Validation failed/);
+      assert.throws(() => convertUsdToEur(-100, 1.17), /cannot be negative/);
     });
 
     it('should throw error for zero exchange rate', () => {
-      assert.throws(() => convertUsdToEur(1000, 0), /Validation failed/);
+      assert.throws(() => convertUsdToEur(1000, 0), /must be positive/);
     });
 
     it('should throw error for negative exchange rate', () => {
-      assert.throws(() => convertUsdToEur(1000, -1.17), /Validation failed/);
+      assert.throws(() => convertUsdToEur(1000, -1.17), /must be positive/);
     });
   });
 
@@ -51,11 +51,11 @@ describe('Currency Conversion Functions', () => {
     });
 
     it('should throw error for negative EUR amount', () => {
-      assert.throws(() => convertEurToThb(-100, 37.75), /Validation failed/);
+      assert.throws(() => convertEurToThb(-100, 37.75), /cannot be negative/);
     });
 
     it('should throw error for zero exchange rate', () => {
-      assert.throws(() => convertEurToThb(1000, 0), /Validation failed/);
+      assert.throws(() => convertEurToThb(1000, 0), /must be positive/);
     });
   });
 });

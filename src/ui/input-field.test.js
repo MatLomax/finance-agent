@@ -59,9 +59,7 @@ describe('createInputField', () => {
   });
   
   it('should throw error for invalid config', () => {
-    assert.throws(() => {
-      createInputField({ invalid: 'config' });
-    }, /validation/i);
+    assert.throws(() => createInputField({}), /must be a non-empty string/);
   });
   
   it('should handle optional attributes', () => {

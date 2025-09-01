@@ -8,19 +8,6 @@
 import uPlot from 'uplot';
 import { createElement, batchDOMUpdates } from '../utils/dom-helpers.js';
 import { formatMoney } from '../utils/formatting/currency.js';
-import { Type } from '@sinclair/typebox';
-import { validate } from '../lib/validators.js';
-
-// Input validation schema
-const SimulationDataSchema = Type.Array(
-  Type.Object({
-    age: Type.Number({ minimum: 18, maximum: 120 }),
-    debt: Type.Number({ minimum: 0 }),
-    savings: Type.Number({ minimum: 0 }),
-    investments: Type.Number({ minimum: 0 }),
-    phase: Type.String()
-  })
-);
 
 /**
  * Transforms simulation data into uPlot format
@@ -67,7 +54,10 @@ export function formatChartTooltip(data) {
  * @returns {HTMLElement} Chart container element
  */
 export function createWealthChart(simulationData) {
-  validate(SimulationDataSchema, simulationData);
+  // Basic validation - ensure we have an array
+  if (!Array.isArray(simulationData)) {
+    throw new Error('simulationData must be an array');
+  }
 
   const container = createElement('div', { className: 'wealth-chart-container' });
   const chartElement = createElement('div', { className: 'wealth-chart' });

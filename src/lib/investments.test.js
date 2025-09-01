@@ -48,19 +48,19 @@ describe('calculateInvestmentGrossIncome', () => {
   it('should throw error for negative principal', () => {
     assert.throws(() => {
       calculateInvestmentGrossIncome(-1000, 0.06);
-    }, /Validation failed/);
+    }, /cannot be negative/);
   });
   
   it('should throw error for negative rate', () => {
     assert.throws(() => {
       calculateInvestmentGrossIncome(100000, -0.05);
-    }, /Validation failed/);
+    }, /must be between 0 and 1/);
   });
   
   it('should throw error for rate above 100%', () => {
     assert.throws(() => {
       calculateInvestmentGrossIncome(100000, 1.5);
-    }, /Validation failed/);
+    }, /must be between 0 and 1/);
   });
   
   it('should handle exact 100% return rate', () => {
@@ -114,19 +114,19 @@ describe('calculateInvestmentNetIncome', () => {
   it('should throw error for negative gross income', () => {
     assert.throws(() => {
       calculateInvestmentNetIncome(-1000, 0.17);
-    }, /Validation failed/);
+    }, /cannot be negative/);
   });
   
   it('should throw error for negative tax rate', () => {
     assert.throws(() => {
       calculateInvestmentNetIncome(6000, -0.05);
-    }, /Validation failed/);
+    }, /must be between 0 and 1/);
   });
   
   it('should throw error for tax rate above 100%', () => {
     assert.throws(() => {
       calculateInvestmentNetIncome(6000, 1.2);
-    }, /Validation failed/);
+    }, /must be between 0 and 1/);
   });
   
   it('should handle exact 100% tax rate', () => {

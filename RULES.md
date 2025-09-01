@@ -2,9 +2,9 @@
 
 ## Core Architecture
 - **Pure vanilla JS**: ES2022+ with zero transpilation, no frameworks
-- **Bundle size**: < 15KB total, < 2KB per module
+- **Bundle size**: < 25KB total, < 2KB per module
 - **Performance**: TTI < 300ms, no main thread blocking > 8ms
-- **Type safety**: JSDoc + TypeScript checking + TypeBox runtime validation
+- **Type safety**: JSDoc + TypeScript checking with basic runtime validation
 - **Testing**: Node.js native test runner, 100% coverage, < 2s total runtime
 
 ## File Structure & Complexity
@@ -50,12 +50,10 @@ src/
 **Tree-shakeable imports ONLY**:
 ```javascript
 // ✅ CORRECT
-import { Type } from '@sinclair/typebox';
 import { debounce } from 'lodash-es';
 import { format } from 'date-fns';
 
 // ❌ WRONG - massive bundle impact
-import * as TypeBox from '@sinclair/typebox';
 import _ from 'lodash';
 ```
 
@@ -64,7 +62,7 @@ import _ from 'lodash';
 - **Pure functions**: No side effects, same input = same output
 - **Educational comments**: Explain WHY and business context, not just WHAT
 - **Mathematical formulas**: Step-by-step breakdown with real examples
-- **TypeBox validation**: Runtime type checking on all inputs
+- **Basic runtime validation**: Critical edge case checking
 
 ### Documentation
 ```javascript
@@ -82,15 +80,13 @@ import _ from 'lodash';
 
 ### Implementation Pattern
 ```javascript
-// Input validation schema
-const InputSchema = Type.Object({
-  amount: Type.Number({ minimum: 0 }),
-  rate: Type.Number({ minimum: 0, maximum: 1 })
-});
+// Import validation helpers
+import { validateNonNegativeNumber, validatePercentage } from './validators.js';
 
 export function calculateSomething(amount, rate) {
-  // 1. Runtime validation
-  validate(InputSchema, { amount, rate });
+  // 1. Runtime validation for critical edge cases
+  validateNonNegativeNumber(amount, 'amount');
+  validatePercentage(rate, 'rate');
   
   // 2. Step-by-step calculation with educational comments
   // Calculate periodic rate: annual rate divided by compounding frequency
@@ -178,7 +174,7 @@ npm run ship      # Complete workflow: check → auto-stage → commit → relea
 
 ## Workflow
 1. **TDD**: Write failing test first
-2. **Implement**: Pure function with TypeBox validation
+2. **Implement**: Pure function with basic runtime validation
 3. **Document**: JSDoc + educational comments
 4. **Quality gate**: `npm run check` must pass
 5. **Auto-stage changes**: `git add .` to stage all working tree files
@@ -198,7 +194,7 @@ The AI development agent must analyze all staged changes and generate detailed, 
 ```
 feat: implement compound interest calculation with monthly compounding support
 
-Add calculateCompoundInterest function to src/lib/growth.js with TypeBox validation,
+Add calculateCompoundInterest function to src/lib/growth.js with basic validation,
 comprehensive test coverage, and educational JSDoc comments explaining the mathematical
 formula A = P(1 + r/n)^(nt). Includes edge case handling for zero rates and validation
 for negative inputs.

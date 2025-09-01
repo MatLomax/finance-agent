@@ -8,19 +8,6 @@
 
 import { createElement, batchDOMUpdates } from '../utils/dom-helpers.js';
 import { formatMoney } from '../utils/formatting/currency.js';
-import { Type } from '@sinclair/typebox';
-import { validate } from '../lib/validators.js';
-
-// Input validation schemas
-const SummaryDataSchema = Type.Object({
-  grossSalaryMonthly: Type.Number({ minimum: 0 }),
-  netSalaryMonthly0: Type.Number({ minimum: 0 }),
-  netSalaryMonthly1: Type.Number({ minimum: 0 }),
-  monthlyExpenses: Type.Number({ minimum: 0 }),
-  emergencyFundTarget: Type.Number({ minimum: 0 }),
-  taxRate: Type.Number({ minimum: 0, maximum: 1 }),
-  currentAge: Type.Number({ minimum: 18, maximum: 100 })
-});
 
 /**
  * Create income section for overview card
@@ -77,7 +64,10 @@ function createExpensesSection(summaryData) {
  * @returns {HTMLElement} Overview card element
  */
 export function createOverviewCard(summaryData) {
-  validate(SummaryDataSchema, summaryData);
+  // Basic validation - ensure we have the required object
+  if (!summaryData || typeof summaryData !== 'object') {
+    throw new Error('summaryData must be an object');
+  }
   
   const card = createElement('div', { className: 'summary-card overview-card' });
   const header = createElement('h2', { 

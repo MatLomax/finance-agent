@@ -43,7 +43,7 @@ describe('calculateDebtPayment', () => {
   it('should throw error for negative debt', () => {
     assert.throws(() => {
       calculateDebtPayment(-1000, 5000);
-    }, /Validation failed/);
+    }, /cannot be negative/);
   });
   
   it('should handle small debt amounts', () => {
@@ -110,11 +110,11 @@ describe('calculateAllocationAmounts', () => {
   it('should throw error for invalid allocation percentages', () => {
     assert.throws(() => {
       calculateAllocationAmounts(1000, 1.5, 0.1, 0.1); // > 1.0
-    }, /Validation failed/);
+    }, /must be between 0 and 1/);
     
     assert.throws(() => {
       calculateAllocationAmounts(1000, -0.1, 0.1, 0.1); // < 0.0
-    }, /Validation failed/);
+    }, /must be between 0 and 1/);
   });
   
   it('should handle small capital amounts', () => {

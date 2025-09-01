@@ -5,24 +5,10 @@
  * tax calculations, and net return computations. Essential for long-term
  * financial planning and retirement strategies.
  * 
- * All functions are pure with TypeBox validation and educational documentation.
+ * All functions are pure with TypeScript type safety and educational documentation.
  */
 
-import { Type } from '@sinclair/typebox';
-import { validate } from './validators.js';
-
-
-
-/**
- * Schema for investment income calculations
- */
-const InvestmentIncomeSchema = Type.Object({
-  principal: Type.Number({ minimum: 0 }),
-  annualRate: Type.Number({ minimum: 0, maximum: 1 }),
-  taxRate: Type.Number({ minimum: 0, maximum: 1 })
-});
-
-
+import { validateNonNegativeNumber, validatePercentage } from './validators.js';
 
 /**
  * Calculates gross investment income from principal and annual rate
@@ -42,7 +28,8 @@ const InvestmentIncomeSchema = Type.Object({
  * @throws {Error} If input validation fails
  */
 export function calculateInvestmentGrossIncome(principal, annualRate) {
-  validate(InvestmentIncomeSchema, { principal, annualRate, taxRate: 0 });
+  validateNonNegativeNumber(principal, 'principal');
+  validatePercentage(annualRate, 'annualRate');
   
   // Simple interest calculation: Principal × Rate
   // This assumes annual compounding and represents gross income before taxes
@@ -68,7 +55,8 @@ export function calculateInvestmentGrossIncome(principal, annualRate) {
  * @throws {Error} If input validation fails
  */
 export function calculateInvestmentNetIncome(grossIncome, taxRate) {
-  validate(InvestmentIncomeSchema, { principal: grossIncome, annualRate: 1, taxRate });
+  validateNonNegativeNumber(grossIncome, 'grossIncome');
+  validatePercentage(taxRate, 'taxRate');
   
   // Calculate tax on investment income
   // Note: Original code calculates tax amount, not net income

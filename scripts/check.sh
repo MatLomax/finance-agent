@@ -159,8 +159,8 @@ fi
 
 # Check bundle size
 if [ "$BUILD" = true ]; then
-    if ! run_check "npm run build:analyze" "Bundle Size Check"; then
-        echo -e "${RED}💥 Bundle analysis failed${NC}"
+    if ! run_check "npm run build:check" "Bundle Size Check"; then
+        echo -e "${RED}💥 Bundle size check failed${NC}"
         exit 1
     fi
 fi

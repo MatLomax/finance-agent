@@ -5,33 +5,7 @@
  * rounding and localization support. Essential for financial data presentation.
  */
 
-import { Type } from '@sinclair/typebox';
-import { Value } from '@sinclair/typebox/value';
-
-
-
-const CurrencyAmountSchema = Type.Object({
-  amount: Type.Number(),
-  currency: Type.Optional(Type.String({ minLength: 1, maxLength: 3 })),
-  locale: Type.Optional(Type.String({ minLength: 2, maxLength: 10 }))
-});
-
-/**
- * Validates data against a TypeBox schema
- * 
- * @param {import('@sinclair/typebox').TSchema} schema - TypeBox schema to validate against
- * @param {any} data - Data to validate
- * @throws {Error} When validation fails with detailed error messages
- */
-function validate(schema, data) {
-  if (!Value.Check(schema, data)) {
-    const errors = [...Value.Errors(schema, data)];
-    const message = errors.map(e => `${e.path}: ${e.message}`).join(', ');
-    throw new Error(`Validation failed: ${message}`);
-  }
-}
-
-
+import { validateNumber, validateString } from '../../lib/validators.js';
 
 /**
  * Formats monetary amounts with intelligent rounding and localization
@@ -43,7 +17,9 @@ function validate(schema, data) {
  * @returns {string} Formatted currency string
  */
 export function formatMoney(amount, currency = '€', locale = 'en-US') {
-  validate(CurrencyAmountSchema, { amount, currency, locale });
+  validateNumber(amount, 'amount');
+  validateString(currency, 'currency');
+  validateString(locale, 'locale');
   
   let rounded;
   if (Math.abs(amount) >= 10000) {
@@ -64,9 +40,8 @@ export function formatMoney(amount, currency = '€', locale = 'en-US') {
  * @returns {string} Formatted percentage string
  */
 export function formatPercentage(value, decimalPlaces = 1) {
-  if (typeof value !== 'number' || typeof decimalPlaces !== 'number') {
-    throw new Error('Value and decimal places must be numbers');
-  }
+  validateNumber(value, 'value');
+  validateNumber(decimalPlaces, 'decimalPlaces');
   
   if (decimalPlaces < 0 || decimalPlaces > 10) {
     throw new Error('Decimal places must be between 0 and 10');

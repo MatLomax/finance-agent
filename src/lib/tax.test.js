@@ -29,15 +29,15 @@ describe('Tax Calculation Functions', () => {
     });
 
     it('should throw error for negative gross salary', () => {
-      assert.throws(() => calculateNetSalary(-1000, 0.17), /Validation failed/);
+      assert.throws(() => calculateNetSalary(-1000, 0.17), /cannot be negative/);
     });
 
     it('should throw error for tax rate above 100%', () => {
-      assert.throws(() => calculateNetSalary(1000, 1.5), /Validation failed/);
+      assert.throws(() => calculateNetSalary(1000, 1.5), /must be between 0 and 1/);
     });
 
     it('should throw error for negative tax rate', () => {
-      assert.throws(() => calculateNetSalary(1000, -0.1), /Validation failed/);
+      assert.throws(() => calculateNetSalary(1000, -0.1), /must be between 0 and 1/);
     });
   });
 });

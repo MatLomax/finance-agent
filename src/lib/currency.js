@@ -4,19 +4,10 @@
  * This module handles all currency conversion operations used in the finance agent.
  * Supports USD → EUR → THB conversion chain for expat financial planning.
  * 
- * All functions are pure with TypeBox validation and educational documentation.
+ * All functions are pure with TypeScript type safety and educational documentation.
  */
 
-import { Type } from '@sinclair/typebox';
-import { validate } from './validators.js';
-
-/**
- * Schema for currency conversion calculations
- */
-const CurrencyConversionSchema = Type.Object({
-  amount: Type.Number({ minimum: 0 }),
-  exchangeRate: Type.Number({ exclusiveMinimum: 0 })
-});
+import { validateNonNegativeNumber, validatePositiveNumber } from './validators.js';
 
 /**
  * Converts USD amount to EUR using exchange rate
@@ -39,7 +30,8 @@ const CurrencyConversionSchema = Type.Object({
  * @throws {Error} If input validation fails
  */
 export function convertUsdToEur(usdAmount, eurUsdRate) {
-  validate(CurrencyConversionSchema, { amount: usdAmount, exchangeRate: eurUsdRate });
+  validateNonNegativeNumber(usdAmount, 'usdAmount');
+  validatePositiveNumber(eurUsdRate, 'eurUsdRate');
   
   // Direct currency conversion: divide by exchange rate
   // Example: $9000 USD ÷ 1.17 EUR/USD = €7692.31 EUR
@@ -67,7 +59,8 @@ export function convertUsdToEur(usdAmount, eurUsdRate) {
  * @throws {Error} If input validation fails
  */
 export function convertEurToThb(eurAmount, thbEurRate) {
-  validate(CurrencyConversionSchema, { amount: eurAmount, exchangeRate: thbEurRate });
+  validateNonNegativeNumber(eurAmount, 'eurAmount');
+  validatePositiveNumber(thbEurRate, 'thbEurRate');
   
   // Direct currency conversion: multiply by exchange rate
   // Example: €1000 EUR × 37.75 THB/EUR = ฿37,750 THB

@@ -5,23 +5,10 @@
  * Supports both income tax calculations and investment tax scenarios
  * for expat financial planning in Thailand.
  * 
- * All functions are pure with TypeBox validation and educational documentation.
+ * All functions are pure with TypeScript type safety and educational documentation.
  */
 
-import { Type } from '@sinclair/typebox';
-import { validate } from './validators.js';
-
-
-
-/**
- * Schema for tax calculations
- */
-const TaxCalculationSchema = Type.Object({
-  grossAmount: Type.Number({ minimum: 0 }),
-  taxRate: Type.Number({ minimum: 0, maximum: 1 })
-});
-
-
+import { validateNonNegativeNumber, validatePercentage } from './validators.js';
 
 /**
  * Calculates net salary after tax deduction
@@ -44,7 +31,8 @@ const TaxCalculationSchema = Type.Object({
  * @throws {Error} If input validation fails
  */
 export function calculateNetSalary(grossSalary, taxRate) {
-  validate(TaxCalculationSchema, { grossAmount: grossSalary, taxRate });
+  validateNonNegativeNumber(grossSalary, 'grossSalary');
+  validatePercentage(taxRate, 'taxRate');
   
   // Calculate tax multiplier: (1 - tax rate)
   // This represents the percentage of income you keep after taxes

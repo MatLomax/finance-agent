@@ -5,32 +5,11 @@
  * Essential for optimizing cash flow between debt elimination, savings,
  * and investment goals in personal finance planning.
  * 
- * All functions are pure with TypeBox validation and educational documentation.
+ * All functions are pure with TypeScript type safety and educational documentation.
  */
 
 import { clamp } from 'lodash-es';
-import { Type } from '@sinclair/typebox';
-import { validate } from './validators.js';
-
-
-
-/**
- * Schema for allocation calculations
- */
-const AllocationSchema = Type.Object({
-  freeCapital: Type.Number(),
-  debtAllocation: Type.Number({ minimum: 0, maximum: 1 }),
-  savingsAllocation: Type.Number({ minimum: 0, maximum: 1 }),
-  investmentAllocation: Type.Number({ minimum: 0, maximum: 1 })
-});
-
-/**
- * Schema for debt payment calculations
- */
-const DebtPaymentSchema = Type.Object({
-  currentDebt: Type.Number({ minimum: 0 }),
-  availablePayment: Type.Number()
-});
+import { validateNonNegativeNumber, validatePercentage, validateNumber } from './validators.js';
 
 
 
@@ -53,7 +32,8 @@ const DebtPaymentSchema = Type.Object({
  * @throws {Error} If input validation fails
  */
 export function calculateDebtPayment(currentDebt, availablePayment) {
-  validate(DebtPaymentSchema, { currentDebt, availablePayment });
+  validateNonNegativeNumber(currentDebt, 'currentDebt');
+  validateNumber(availablePayment, 'availablePayment');
   
   // Clamp the payment between 0 and current debt
   // This ensures we never overpay (pay more than debt balance)
@@ -81,12 +61,10 @@ export function calculateDebtPayment(currentDebt, availablePayment) {
  * @throws {Error} If input validation fails
  */
 export function calculateAllocationAmounts(freeCapital, debtAllocation, savingsAllocation, investmentAllocation) {
-  validate(AllocationSchema, { 
-    freeCapital, 
-    debtAllocation, 
-    savingsAllocation, 
-    investmentAllocation 
-  });
+  validateNumber(freeCapital, 'freeCapital');
+  validatePercentage(debtAllocation, 'debtAllocation');
+  validatePercentage(savingsAllocation, 'savingsAllocation');
+  validatePercentage(investmentAllocation, 'investmentAllocation');
   
   // Apply percentage allocations to free capital
   // Each allocation represents how much of free capital goes to each category

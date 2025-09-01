@@ -1,11 +1,11 @@
 # Finance Agent
 
-Ultra-lightweight vanilla JavaScript finance agent with TypeBox validation and zero-build architecture.
+Ultra-lightweight vanilla JavaScript finance agent with TypeScript design-time validation and zero-build architecture.
 
 ## Architecture
 
 - **Pure JavaScript ES2022+** - No transpilation needed for runtime
-- **JSDoc + TypeScript + TypeBox** - Compile-time type checking + runtime validation in pure .js files
+- **JSDoc + TypeScript** - Compile-time type checking in pure .js files
 - **Zero dependencies** - Only 3 carefully chosen utilities
 - **< 15kb bundle** - Ultra-lightweight for fast loading
 - **Native DOM APIs** - No framework overhead
@@ -78,9 +78,9 @@ src/
 ## Dependencies
 
 ### Runtime Dependencies (3 total)
-- **@sinclair/typebox** - Runtime type validation
 - **lodash-es** - Utility functions (tree-shakeable)
 - **date-fns** - Date manipulation utilities
+- **uplot** - High-performance charting library
 
 ### Development Dependencies
 - **eslint** - Code linting
@@ -90,7 +90,7 @@ src/
 
 1. **Write Tests First** - Follow TDD methodology with co-located test files
 2. **Design Types** - Use JSDoc comments for TypeScript inference
-3. **Implement Functions** - Pure functions with TypeBox validation
+3. **Implement Functions** - Pure functions with TypeScript type safety
 4. **Document Thoroughly** - Educational comments explaining formulas
 5. **Integration Testing** - Test module interactions and complete data flows
 6. **Quality Gate** - AI agent runs `npm run precommit` (validates everything)
@@ -115,7 +115,8 @@ src/
 
 All code follows comprehensive standards defined in `.cursor/rules/`:
 - Educational commenting with formula breakdowns
-- TypeBox schemas for runtime validation
+- JSDoc comments with type annotations
+- Basic runtime validation for critical edge cases
 - Pure functions with SOLID principles
 - Zero magic - every line explained
 - ESLint must pass before task completion

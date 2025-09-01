@@ -149,13 +149,13 @@ describe('createWealthChart', () => {
   it('should throw error for invalid input', () => {
     assert.throws(
       () => createWealthChart(null),
-      /Validation failed/,
+      /simulationData must be an array/,
       'Should throw validation error for null input'
     );
 
     assert.throws(
       () => createWealthChart('invalid'),
-      /Validation failed/,
+      /simulationData must be an array/,
       'Should throw validation error for non-array input'
     );
   });

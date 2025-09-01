@@ -5,23 +5,10 @@
  * throughout the finance agent for tracking portfolio performance,
  * wealth progression, and financial metrics over time.
  * 
- * All functions are pure with TypeBox validation and educational documentation.
+ * All functions are pure with TypeScript type safety and educational documentation.
  */
 
-import { Type } from '@sinclair/typebox';
-import { validate } from './validators.js';
-
-
-
-/**
- * Schema for percentage growth calculations
- */
-const PercentageGrowthSchema = Type.Object({
-  current: Type.Number(),
-  previous: Type.Number()
-});
-
-
+import { validateNumber } from './validators.js';
 
 /**
  * Calculates percentage growth between two values
@@ -41,7 +28,8 @@ const PercentageGrowthSchema = Type.Object({
  * @throws {Error} If previous value is zero or validation fails
  */
 export function calculatePercentageGrowth(current, previous) {
-  validate(PercentageGrowthSchema, { current, previous });
+  validateNumber(current, 'current');
+  validateNumber(previous, 'previous');
   
   if (previous === 0) {
     throw new Error('Previous value cannot be zero for percentage calculation');
@@ -75,7 +63,8 @@ export function calculatePercentageGrowth(current, previous) {
  * @throws {Error} If input validation fails
  */
 export function calculateAbsoluteGrowth(current, previous) {
-  validate(PercentageGrowthSchema, { current, previous });
+  validateNumber(current, 'current');
+  validateNumber(previous, 'previous');
   
   // Simple subtraction to get absolute change
   // Positive result indicates growth, negative indicates decline

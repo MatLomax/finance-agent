@@ -5,27 +5,9 @@
  * Handles the organization and layout of multiple input fields.
  */
 
-import { Type } from '@sinclair/typebox';
-import { validate } from '../lib/validators.js';
+import { validateString } from '../lib/validators.js';
 import { createElement } from '../utils/dom-helpers.js';
 import { createInputField } from './input-field.js';
-
-// Validation schema for section configuration
-const SectionConfigSchema = Type.Object({
-  title: Type.String({ minLength: 1 }),
-  description: Type.Optional(Type.String()),
-  inputs: Type.Array(Type.Object({
-    id: Type.String({ minLength: 1 }),
-    label: Type.String({ minLength: 1 }),
-    type: Type.Union([Type.Literal('number'), Type.Literal('text'), Type.Literal('range')]),
-    value: Type.Number(),
-    min: Type.Optional(Type.Number()),
-    max: Type.Optional(Type.Number()),
-    step: Type.Optional(Type.Number()),
-    unit: Type.Optional(Type.String()),
-    helpText: Type.Optional(Type.String())
-  }))
-});
 
 /**
  * Create a section of related input fields
@@ -37,7 +19,7 @@ const SectionConfigSchema = Type.Object({
  * @returns {HTMLElement} Section element with title, description, and inputs
  */
 export function createInputSection(sectionConfig) {
-  validate(SectionConfigSchema, sectionConfig);
+  validateString(sectionConfig.title, 'title');
   
   const section = createElement('section', {
     className: 'input-section'

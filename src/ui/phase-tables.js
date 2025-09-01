@@ -8,16 +8,6 @@
 import { createElement } from '../utils/dom-helpers.js';
 import { formatMoney } from '../utils/formatting/currency.js';
 import { createAgeCell, createSavingsCells, createInvestmentCells, createWealthCells } from './phase-table-helpers.js';
-import { Type } from '@sinclair/typebox';
-import { validate } from '../lib/validators.js';
-
-const PhaseDataSchema = Type.Array(Type.Object({
-  age: Type.Number({ minimum: 18, maximum: 120 }),
-  debt: Type.Number({ minimum: 0 }),
-  savings: Type.Number({ minimum: 0 }),
-  investments: Type.Number({ minimum: 0 }),
-  yearsFromNow: Type.Number({ minimum: 0 })
-}));
 
 /**
  * Creates table header with appropriate columns
@@ -88,7 +78,10 @@ function createTableRow(yearData, previousYearData, includeDebt, isLastYear, tax
  * @returns {HTMLElement} Complete phase card with table
  */
 export function createPhaseTable(phaseData, phaseConfig, previousPhaseLastRow = null, taxRate = 0.15) {
-  validate(PhaseDataSchema, phaseData);
+  // Basic validation - ensure we have an array
+  if (!Array.isArray(phaseData)) {
+    throw new Error('phaseData must be an array');
+  }
   
   if (phaseData.length === 0) return createElement('div');
   

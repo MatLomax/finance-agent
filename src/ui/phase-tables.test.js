@@ -104,6 +104,6 @@ describe('createPhaseTable', () => {
     
     assert.throws(() => {
       createPhaseTable(invalidData, debtPhaseConfig);
-    }, /Validation failed/);
+    }, /must be a finite number/);
   });
 });

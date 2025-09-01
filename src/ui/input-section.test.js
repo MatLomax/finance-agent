@@ -62,6 +62,6 @@ describe('createInputSection', () => {
   it('should throw error for invalid config', () => {
     assert.throws(() => {
       createInputSection({ invalid: 'config' });
-    }, /validation/i);
+    }, /must be a non-empty string/);
   });
 });

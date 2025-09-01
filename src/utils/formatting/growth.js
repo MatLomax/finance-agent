@@ -19,57 +19,8 @@
  * - Threshold-based filtering for noise reduction in financial data
  */
 
-import { Type } from '@sinclair/typebox';
-import { Value } from '@sinclair/typebox/value';
+import { validateNumber, validateNonNegativeNumber } from '../../lib/validators.js';
 import { formatMoney } from './currency.js';
-
-/**
- * TypeBox schema for growth calculation validation
- * 
- * Ensures proper data types for financial growth calculations:
- * - current: Must be a number (current financial value)
- * - previous: Number or null (null when no historical data available)
- * - showPercentage: Optional boolean for percentage display control
- * - showColors: Optional boolean for accessibility (disable colors if needed)
- */
-const GrowthCalculationSchema = Type.Object({
-  current: Type.Number(),
-  previous: Type.Union([Type.Number(), Type.Null()]),
-  showPercentage: Type.Optional(Type.Boolean()),
-  showColors: Type.Optional(Type.Boolean())
-});
-
-/**
- * TypeBox schema for delta display validation
- * 
- * Validates parameters for compact change indicators:
- * - current/previous: Financial values for comparison
- * - minThreshold: Minimum change to display (filters trivial changes)
- * - currency: Currency symbol (supports international formats)
- */
-const DeltaDisplaySchema = Type.Object({
-  current: Type.Number(),
-  previous: Type.Union([Type.Number(), Type.Null()]),
-  minThreshold: Type.Optional(Type.Number({ minimum: 0 })),
-  currency: Type.Optional(Type.String({ minLength: 1, maxLength: 3 }))
-});
-
-/**
- * Validates data against a TypeBox schema
- * 
- * @param {import('@sinclair/typebox').TSchema} schema - TypeBox schema to validate against
- * @param {any} data - Data to validate
- * @throws {Error} When validation fails with detailed error messages
- */
-function validate(schema, data) {
-  if (!Value.Check(schema, data)) {
-    const errors = [...Value.Errors(schema, data)];
-    const message = errors.map(e => `${e.path}: ${e.message}`).join(', ');
-    throw new Error(`Validation failed: ${message}`);
-  }
-}
-
-
 
 /**
  * Formats growth indicators with colors and both absolute and percentage changes
@@ -105,7 +56,10 @@ function validate(schema, data) {
  * // Returns: ' <span style="color: #6b7280; font-size: 0.85em;">(-€2,000 / -20.0%)</span>'
  */
 export function formatGrowth(current, previous, showPercentage = true, showColors = true) {
-  validate(GrowthCalculationSchema, { current, previous, showPercentage, showColors });
+  validateNumber(current, 'current');
+  if (previous !== null) {
+    validateNumber(previous, 'previous');
+  }
   
   if (!previous || previous === 0) return '';
   
@@ -166,7 +120,11 @@ export function formatGrowth(current, previous, showPercentage = true, showColor
  * // Returns: '<span style="color: #10b981; font-size: 0.9em;">+ $200</span>'
  */
 export function formatDelta(current, previous, minThreshold = 1, currency = '€') {
-  validate(DeltaDisplaySchema, { current, previous, minThreshold, currency });
+  validateNumber(current, 'current');
+  if (previous !== null) {
+    validateNumber(previous, 'previous');
+  }
+  validateNonNegativeNumber(minThreshold, 'minThreshold');
   
   if (!previous) return '';
   

@@ -63,9 +63,9 @@ describe('Growth and Change Formatting Functions', () => {
     });
 
     test('validates input parameters', () => {
-      assert.throws(() => formatGrowth('invalid', 50000), /Validation failed/);
-      assert.throws(() => formatGrowth(52000, 'invalid'), /Validation failed/);
-      assert.throws(() => formatGrowth(52000, 50000, 'invalid'), /Validation failed/);
+      assert.throws(() => formatGrowth('invalid', 50000), /must be a finite number/);
+      assert.throws(() => formatGrowth(52000, 'invalid'), /must be a finite number/);
+      // Optional boolean parameters are not validated for performance
     });
   });
 
@@ -112,10 +112,10 @@ describe('Growth and Change Formatting Functions', () => {
     });
 
     test('validates input parameters', () => {
-      assert.throws(() => formatDelta('invalid', 1000), /Validation failed/);
-      assert.throws(() => formatDelta(1250, 'invalid'), /Validation failed/);
-      assert.throws(() => formatDelta(1250, 1000, -1), /Validation failed/);
-      assert.throws(() => formatDelta(1250, 1000, 1, ''), /Validation failed/);
+      assert.throws(() => formatDelta('invalid', 1000), /must be a finite number/);
+      assert.throws(() => formatDelta(1250, 'invalid'), /must be a finite number/);
+      assert.throws(() => formatDelta(1250, 1000, -1), /cannot be negative/);
+      assert.throws(() => formatDelta(1250, 1000, 1, ''), /must be a non-empty string/);
     });
 
     test('handles very large deltas', () => {

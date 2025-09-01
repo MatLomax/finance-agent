@@ -254,12 +254,12 @@ describe('Integration Tests', () => {
       // Currency conversion should throw on invalid rates
       assert.throws(() => {
         convertUsdToEur(1000, 0);
-      }, /Validation failed/);
+      }, /must be positive/);
       
       // Expense calculation should throw on invalid data
       assert.throws(() => {
         calculateMonthlyExpenses({ housing: 'invalid' });
-      }, /must be non-negative numbers/);
+      }, /All expense values must be non-negative numbers/);
     });
   });
   

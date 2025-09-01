@@ -88,12 +88,32 @@ find "$SRC_DIR/styles" -name "*.css" 2>/dev/null | while read -r file; do
     total_css_size=$((total_css_size + gzipped_kb))
 done
 
-# Check HTML file
-echo -e "\n${BLUE}📄 HTML Analysis:${NC}"
-html_size=0
-if [ -f "$DIST_DIR/index.html" ]; then
-    html_size=$(get_gzipped_size_kb "$DIST_DIR/index.html")
+# Analyze production bundles in dist/
+echo -e "\n${BLUE}� Production Bundle Analysis:${NC}"
+production_total_size=0
+
+if [ -f "dist/bundle.js" ]; then
+    js_size=$(get_size_kb "dist/bundle.js")
+    js_gzipped=$(get_gzipped_size_kb "dist/bundle.js")
+    echo -e "${GREEN}✅ bundle.js: ${js_size}KB (${js_gzipped}KB gzipped)${NC}"
+    production_total_size=$((production_total_size + js_gzipped))
+else
+    echo -e "${YELLOW}⚠️  dist/bundle.js not found - run 'npm run build' first${NC}"
+fi
+
+if [ -f "dist/bundle.css" ]; then
+    css_size=$(get_size_kb "dist/bundle.css")
+    css_gzipped=$(get_gzipped_size_kb "dist/bundle.css")
+    echo -e "${GREEN}✅ bundle.css: ${css_size}KB (${css_gzipped}KB gzipped)${NC}"
+    production_total_size=$((production_total_size + css_gzipped))
+else
+    echo -e "${YELLOW}⚠️  dist/bundle.css not found - run 'npm run build' first${NC}"
+fi
+
+if [ -f "dist/index.html" ]; then
+    html_size=$(get_gzipped_size_kb "dist/index.html")
     echo -e "${GREEN}✅ index.html: ${html_size}KB gzipped${NC}"
+    production_total_size=$((production_total_size + html_size))
 fi
 
 # Calculate total bundle size
@@ -103,15 +123,23 @@ echo "CSS stylesheets: ${total_css_size}KB gzipped"
 echo "HTML structure: ${html_size}KB gzipped"
 
 total_bundle_size=$((total_js_size + total_css_size + html_size))
-echo -e "\nTotal bundle size: ${total_bundle_size}KB gzipped"
+echo -e "\nDevelopment bundle size: ${total_bundle_size}KB gzipped"
+
+if [ "$production_total_size" -gt 0 ]; then
+    echo -e "Production bundle size: ${production_total_size}KB gzipped"
+    bundle_size_to_check=$production_total_size
+else
+    echo -e "${YELLOW}⚠️  Using development bundle size for validation${NC}"
+    bundle_size_to_check=$total_bundle_size
+fi
 
 # Validation results
 echo -e "\n${BLUE}✨ Validation Results:${NC}"
 
-if [ "$total_bundle_size" -le "$MAX_TOTAL_SIZE_KB" ]; then
-    echo -e "${GREEN}✅ Total bundle size: ${total_bundle_size}KB (within ${MAX_TOTAL_SIZE_KB}KB limit)${NC}"
+if [ "$bundle_size_to_check" -le "$MAX_TOTAL_SIZE_KB" ]; then
+    echo -e "${GREEN}✅ Total bundle size: ${bundle_size_to_check}KB (within ${MAX_TOTAL_SIZE_KB}KB limit)${NC}"
 else
-    echo -e "${RED}❌ Total bundle size: ${total_bundle_size}KB (exceeds ${MAX_TOTAL_SIZE_KB}KB limit)${NC}"
+    echo -e "${RED}❌ Total bundle size: ${bundle_size_to_check}KB (exceeds ${MAX_TOTAL_SIZE_KB}KB limit)${NC}"
     exit 1
 fi
 
