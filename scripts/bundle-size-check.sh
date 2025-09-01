@@ -58,12 +58,23 @@ if ! command -v gzip &> /dev/null; then
     exit 1
 fi
 
-# Analyze individual JavaScript modules
-echo -e "\n${BLUE}📁 Individual Module Analysis:${NC}"
+# Function to check if file is a test file
+is_test_file() {
+    local file="$1"
+    [[ "$file" == *.test.js ]]
+}
+
+# Analyze individual JavaScript modules (exclude test files from production analysis)
+echo -e "\n${BLUE}📁 Individual Module Analysis (Production Files Only):${NC}"
 total_js_size=0
 module_violations=0
 
 find "$SRC_DIR" -name "*.js" -not -path "*/node_modules/*" | while read -r file; do
+    # Skip test files for production bundle analysis
+    if is_test_file "$file"; then
+        continue
+    fi
+    
     size_kb=$(get_size_kb "$file")
     gzipped_kb=$(get_gzipped_size_kb "$file")
     

@@ -1,12 +1,13 @@
 {
   "name": "finance-agent",
-  "version": "1.11.2",
+  "version": "1.12.0",
   "description": "Ultra-lightweight vanilla JavaScript finance agent",
   "type": "module",
   "main": "src/main.js",
   "scripts": {
     "build": "node build-production.js",
     "build:check": "npm run build && size-limit",
+    "build:analyze": "npm run build && node scripts/performance-analyzer.js",
     "build:dev": "mkdir -p dist/styles && cp -r src/styles/* dist/styles/ && cp src/main.js dist/ && echo 'Dev build complete - CSS modularized, JS copied'",
     "test": "node --test src/**/*.test.js src/**/**/*.test.js",
     "test:watch": "node --test --watch src/**/*.test.js src/**/**/*.test.js",
