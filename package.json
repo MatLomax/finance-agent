@@ -1,6 +1,6 @@
 {
   "name": "finance-agent",
-  "version": "1.12.3",
+  "version": "1.12.4",
   "description": "Ultra-lightweight vanilla JavaScript finance agent",
   "type": "module",
   "main": "src/main.js",
