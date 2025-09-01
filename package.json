@@ -1,6 +1,6 @@
 {
   "name": "finance-agent",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "description": "Ultra-lightweight vanilla JavaScript finance agent",
   "type": "module",
   "main": "src/main.js",
@@ -21,9 +21,9 @@
     "check": "./scripts/check.sh",
     "check:fast": "./scripts/check.sh --fast",
     "precommit": "./scripts/check.sh",
-    "commit": "./scripts/auto-commit.sh",
+    "commit": "echo 'ERROR: Use ./scripts/auto-commit.sh \"detailed commit message\" instead of npm run commit' && exit 1",
     "release": "./scripts/auto-release.sh",
-    "ship": "npm run commit && npm run release"
+    "ship": "echo 'ERROR: AI agent must use ./scripts/auto-commit.sh \"detailed message\" followed by npm run release' && exit 1"
   },
   "dependencies": {
     "date-fns": "^2.29.3",

@@ -28,13 +28,28 @@ npm run dev            # Start development server (Python HTTP server on port 30
 ```bash
 npm run check          # Run all quality checks (type, lint, test, bundle size)
 npm run precommit      # Same as check - use before committing
-npm run commit         # Automated commit with version bump and changelog
+# For commits: Use ./scripts/auto-commit.sh "detailed commit message"
 npm run release        # Automated GitHub release with assets
-npm run ship           # Complete workflow: check → commit → release
 npm run type-check     # Check types with TypeScript (no emit)
 npm run type-check:watch # Check types in watch mode
 npm run lint           # Check code with ESLint
 npm run lint:fix       # Fix ESLint issues automatically
+```
+
+**Commit & Release Workflow**:
+```bash
+# 1. Run quality checks
+npm run check
+
+# 2. Stage changes and commit with detailed message
+git add .
+./scripts/auto-commit.sh "feat: implement advanced feature X
+
+Detailed description of what was changed and why.
+Include business context and impact analysis."
+
+# 3. Create GitHub release
+npm run release
 ```
 
 ### Build & Production
@@ -98,9 +113,40 @@ src/
 4. **Document Thoroughly** - Educational comments explaining formulas
 5. **Integration Testing** - Test module interactions and complete data flows
 6. **Quality Gate** - AI agent runs `npm run precommit` (validates everything)
-7. **Automated Commit** - AI agent runs `npm run commit` (version bump, commit, push)
-8. **Automated Release** - AI agent runs `npm run release` (GitHub release with assets)
-9. **Complete Workflow** - AI agent uses `npm run ship` for full automation
+7. **Analyze Changes** - AI agent examines all staged changes and generates detailed commit message
+8. **Automated Commit** - AI agent runs `./scripts/auto-commit.sh "detailed message"` with comprehensive description
+9. **Automated Release** - AI agent runs `npm run release` (GitHub release with assets)
+10. **Complete Workflow** - AI agent must use direct script calls for detailed commit messages
+
+**Commit Message Requirements**:
+- **Detailed Analysis**: Must analyze all file changes and explain what/why/impact
+- **Semantic Format**: Use `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `perf:`, etc.
+- **Business Context**: Explain motivation and architectural decisions
+- **Impact Description**: How changes affect users, performance, or development
+- **Multi-paragraph**: Include summary, detailed description, motivation, and impact
+
+**Example commit workflow**:
+```bash
+# After making changes...
+npm run check                    # Validate all quality gates
+git add .                       # Stage all changes  
+
+# Generate detailed commit message and commit
+./scripts/auto-commit.sh "feat: implement advanced caching with LRU eviction strategy
+
+Add intelligent simulation result caching to src/state/simulation-results.js with
+memory-bounded LRU cache (max 100 entries), deterministic key generation, and
+performance tracking. Includes comprehensive test suite with 13 test cases.
+
+Motivation: Expensive simulation calculations were being repeated unnecessarily
+when users made minor input adjustments, causing UI lag and poor UX.
+
+Impact: Reduces calculation time by 80% for repeated scenarios, improves
+responsiveness, and maintains memory efficiency through automatic eviction."
+
+# Create GitHub release
+npm run release
+```
 
 **Testing Requirements**:
 - Every `.js` file with functions MUST have a corresponding `.test.js` file

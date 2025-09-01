@@ -357,12 +357,42 @@ This document outlines the complete transformation of the Thailand.html single-f
 1. **Test-Driven Development**: Write tests before implementation
 2. **Quality Gates**: All checks must pass before commit (type check, lint, test, coverage, bundle size)
 3. **Educational Documentation**: JSDoc with business context and formula explanations
-4. **Automated Workflow**: Use `npm run ship` for complete development → release cycle
-5. **Co-located Testing**: Test files are placed directly next to their corresponding source files
-6. **Task Completion Protocol**: Upon completing any task, must:
+4. **Detailed Commit Analysis**: AI agent must analyze all changes and provide comprehensive commit messages
+5. **Automated Workflow**: Use `npm run ship` for complete development → release cycle
+6. **Co-located Testing**: Test files are placed directly next to their corresponding source files
+7. **Task Completion Protocol**: Upon completing any task, must:
    - Mark task as `[x] **COMPLETED**` in TASKS.md
-   - Run `npm run ship` (precommit → commit → release)
+   - Generate detailed commit message analyzing what changed, why, and impact
    - Verify deployment and version bump
+
+### Commit Message Standards
+Every commit must include:
+- **Semantic prefix**: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `perf:`
+- **Detailed summary**: What files/functionality changed
+- **Business motivation**: Why the change was necessary
+- **Impact analysis**: How it affects users, performance, or architecture
+- **Context**: Related requirements or architectural decisions
+
+**Example**:
+```
+feat: implement memory-efficient LRU simulation cache with performance tracking
+
+Add intelligent caching system to src/state/simulation-results.js with deterministic
+key generation, automatic eviction (max 100 entries), and hit/miss statistics.
+Includes comprehensive test suite covering normal operations, edge cases, and
+memory management scenarios.
+
+Motivation: Expensive financial simulations were being recalculated unnecessarily
+when users made minor input adjustments, causing noticeable UI lag and poor UX
+during interactive financial planning sessions.
+
+Impact: Reduces calculation time by 80% for repeated scenarios, improves UI
+responsiveness during user interactions, and maintains memory efficiency through
+automatic LRU eviction preventing memory leaks.
+
+Architecture: Follows pure functional design with immutable cache operations,
+zero side effects, and predictable performance characteristics.
+```
 
 ### Critical Dependencies
 - **TypeBox**: Runtime validation (~2KB per schema)

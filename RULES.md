@@ -154,7 +154,8 @@ document.addEventListener('click', (e) => {
 ## Quality Gates (Automated)
 ```bash
 npm run check     # Full validation: type-check, lint, test, coverage, bundle size
-npm run ship      # Complete workflow: check → auto-stage → commit → release
+# Commit: ./scripts/auto-commit.sh "detailed commit message"
+# Release: npm run release
 ```
 
 **All checks must pass before commit:**
@@ -164,11 +165,20 @@ npm run ship      # Complete workflow: check → auto-stage → commit → relea
 - Bundle size < 25KB (production build)
 - Educational comments validation
 
+**Commit Process**:
+```bash
+npm run check                             # Validate all quality gates
+git add .                                # Stage all changes
+./scripts/auto-commit.sh "detailed msg"  # Commit with analysis
+npm run release                          # Create GitHub release
+```
+
 ## Automation Scripts
-- **`scripts/auto-commit.sh`**: Accepts descriptive commit message as parameter
+- **`scripts/auto-commit.sh`**: **REQUIRES** descriptive commit message as parameter
   - Usage: `./scripts/auto-commit.sh "detailed commit message"`
+  - **MANDATORY**: AI agent must provide comprehensive commit message analyzing all changes
   - Auto-stages all changes, increments version, generates changelog
-  - AI agent must provide the commit message after analyzing changes
+  - **Example**: `./scripts/auto-commit.sh "docs: replace zero-build terminology with esbuild production bundling\n\nUpdate architecture documentation across README.md, RULES.md, TASKS.md and package.json\nto accurately reflect current build process using esbuild for production bundling.\nChanged bundle size targets from 15KB to 25KB to match actual configuration.\n\nMotivation: Previous 'zero-build' terminology was misleading since we now use\nesbuild for production minification, tree-shaking, and optimization."`
 - **`scripts/check.sh`**: Runs all quality gates and validation
 - **`scripts/auto-release.sh`**: Creates GitHub releases with automated changelog
 
@@ -179,8 +189,27 @@ npm run ship      # Complete workflow: check → auto-stage → commit → relea
 4. **Quality gate**: `npm run check` must pass
 5. **Auto-stage changes**: `git add .` to stage all working tree files
 6. **Generate descriptive commit**: AI agent analyzes all staged changes and creates detailed commit message
-7. **Automated commit**: `scripts/auto-commit.sh "descriptive commit message"` (semantic versioning)
+7. **Automated commit**: `./scripts/auto-commit.sh "descriptive commit message"` (semantic versioning)
 8. **Automated release**: `npm run release` (GitHub release)
+
+### Detailed Commit Message Requirements
+The AI agent **MUST** provide comprehensive commit messages that include:
+- **Semantic prefix**: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `perf:`, `style:`, `chore:`
+- **What changed**: Specific files and functionality modified
+- **Why changed**: Business justification and motivation
+- **Impact**: How this affects users, performance, or architecture
+- **Context**: Any related issues, requirements, or architectural decisions
+
+**Template**:
+```
+<type>: <brief summary in imperative mood>
+
+<detailed description of what was changed>
+
+<explanation of why the change was necessary>
+
+<impact on users, performance, or architecture>
+```
 
 ## Commit Message Generation
 The AI development agent must analyze all staged changes and generate detailed, descriptive commit messages that:
@@ -189,8 +218,9 @@ The AI development agent must analyze all staged changes and generate detailed, 
 - **Be specific and detailed**: Instead of generic titles, describe the actual functionality added
 - **Include business context**: Explain WHY the changes were made, not just WHAT changed
 - **Avoid switch-case logic**: Each commit message should be unique and contextual
+- **Analyze impact**: Describe how changes affect users, performance, or architecture
 
-**Examples of good commit messages**:
+**Examples of excellent commit messages**:
 ```
 feat: implement compound interest calculation with monthly compounding support
 
@@ -199,19 +229,30 @@ comprehensive test coverage, and educational JSDoc comments explaining the mathe
 formula A = P(1 + r/n)^(nt). Includes edge case handling for zero rates and validation
 for negative inputs.
 
-feat: add responsive transaction card component with accessibility features
+Impact: Enables accurate investment growth projections for financial planning.
+Performance: O(1) calculation with memoization for repeated calls.
 
-Create TransactionCard UI component in src/ui/transaction-card.js with ARIA labels,
-keyboard navigation support, and CSS Grid layout. Includes comprehensive test suite
-for DOM manipulation and event handling.
+docs: replace zero-build terminology with esbuild production bundling architecture
+
+Update documentation across README.md, RULES.md, TASKS.md and package.json to accurately
+reflect current build process. Changed bundle size targets from 15KB to 25KB to match
+actual esbuild configuration with tree-shaking and minification.
+
+Motivation: Previous 'zero-build' terminology was misleading since we now use esbuild
+for production optimization. This clarifies the modern ES modules + production bundling
+approach for better developer understanding.
+
+Impact: Removes confusion about build process, improves onboarding for new developers.
 ```
 
 **Anti-pattern examples**:
 ```
 ❌ feat: add utility functions
-❌ feat: update source code
+❌ feat: update source code  
 ❌ feat: add new files
 ❌ feat: v1.2.3 - automated commit
+❌ docs: update documentation
+❌ fix: various improvements
 ```
 
 ## Performance Optimizations
