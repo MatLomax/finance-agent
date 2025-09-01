@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Finance Agent - Development Version">
+  <title>Finance Agent (Dev)</title>
+  
+  <!-- Development CSS - Import main styles -->
+  <link rel="stylesheet" href="src/styles/main.css">
+  
+  <!-- Import Maps for external dependencies -->
+  <script type="importmap">
+  {
+    "imports": {
+      "lodash-es": "https://cdn.skypack.dev/lodash-es@4.17.21",
+      "date-fns": "https://cdn.skypack.dev/date-fns@2.30.0", 
+      "uplot": "https://cdn.skypack.dev/uplot@1.6.32"
+    }
+  }
+  </script>
+  
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' cdn.skypack.dev;
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data:;
+    connect-src 'self';
+    base-uri 'self';
+    form-action 'none';
+  ">
+</head>
+<body>
+  <!-- Main application container -->
+  <div id="app"></div>
+  
+  <!-- Load main application module directly from source for development -->
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

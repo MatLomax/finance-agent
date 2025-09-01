@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Agent Debug</title>
+  
+  <!-- Import Maps for external dependencies -->
+  <script type="importmap">
+  {
+    "imports": {
+      "lodash-es": "https://cdn.skypack.dev/lodash-es@4.17.21",
+      "date-fns": "https://cdn.skypack.dev/date-fns@2.30.0", 
+      "uplot": "https://cdn.skypack.dev/uplot@1.6.32"
+    }
+  }
+  </script>
+</head>
+<body>
+  <h1>Finance Agent Debug</h1>
+  <div id="debug-output"></div>
+  
+  <script type="module">
+    import { getDefaultFinancialData } from './src/state/defaults.js';
+    import { simulateWealthTrajectory } from './src/lib/simulate-wealth.js';
+    import { triggerCalculation } from './src/ui/calculation-controller.js';
+    
+    console.log('=== Debug Session Started ===');
+    
+    // Test 1: Check default data
+    const defaultData = getDefaultFinancialData();
+    console.log('Default data:', defaultData);
+    document.getElementById('debug-output').innerHTML += '<h2>Default Data</h2><pre>' + JSON.stringify(defaultData, null, 2) + '</pre>';
+    
+    // Test 2: Try manual simulation
+    try {
+      console.log('Testing direct simulation...');
+      const results = simulateWealthTrajectory(defaultData, 65);
+      console.log('Simulation results:', results);
+      document.getElementById('debug-output').innerHTML += '<h2>Simulation Results</h2><pre>' + JSON.stringify(results, null, 2) + '</pre>';
+    } catch (error) {
+      console.error('Simulation failed:', error);
+      document.getElementById('debug-output').innerHTML += '<h2>Simulation Error</h2><pre>' + error.message + '</pre>';
+    }
+    
+    // Test 3: Try calculation controller
+    try {
+      console.log('Testing calculation controller...');
+      const calcResult = triggerCalculation();
+      console.log('Calculation controller result:', calcResult);
+      document.getElementById('debug-output').innerHTML += '<h2>Calculation Controller</h2><pre>' + JSON.stringify(calcResult, null, 2) + '</pre>';
+    } catch (error) {
+      console.error('Calculation controller failed:', error);
+      document.getElementById('debug-output').innerHTML += '<h2>Calculation Controller Error</h2><pre>' + error.message + '</pre>';
+    }
+  </script>
+</body>
+</html>

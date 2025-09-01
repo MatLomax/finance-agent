@@ -1,0 +1,485 @@
+src/lib/allocations.ts(52,147): error TS2304: Cannot find name 'AllocationAmounts'.
+src/lib/integration.test.ts(129,51): error TS2345: Argument of type '{ grossSalaryMonthly: number; currentAge: number; lifespan: number; grossUsd: number; eurUsd: number; thbEur: number; taxRate: number; monthlyExpenses: number; totalDebt: number; totalSavings: number; totalInvestments: number; investmentReturnRate: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ grossSalaryMonthly: number; currentAge: number; lifespan: number; grossUsd: number; eurUsd: number; thbEur: number; taxRate: number; monthlyExpenses: number; totalDebt: number; totalSavings: number; totalInvestments: number; investmentReturnRate: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, housing, and 23 more.
+src/lib/integration.test.ts(138,26): error TS18048: 'firstYear' is possibly 'undefined'.
+src/lib/integration.test.ts(139,26): error TS18048: 'lastYear' is possibly 'undefined'.
+src/lib/integration.test.ts(146,15): error TS2532: Object is possibly 'undefined'.
+src/lib/integration.test.ts(146,35): error TS2532: Object is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(95,40): error TS2345: Argument of type '"unknown"' is not assignable to parameter of type 'FinancialPhase'.
+src/lib/simulate-wealth.test.ts(173,49): error TS2345: Argument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(180,31): error TS2339: Property 'isRetired' does not exist on type 'YearlySimulationData'.
+src/lib/simulate-wealth.test.ts(185,49): error TS2345: Argument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(198,49): error TS2345: Argument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(205,15): error TS18048: 'year3.freeCapital' is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(205,36): error TS2532: Object is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(217,49): error TS2345: Argument of type '{ totalDebt: number; grossSalaryMonthly: number; monthlyExpenses: number; currentAge: number; lifespan: number; totalSavings: number; totalInvestments: number; taxRate: number; investmentReturnRate: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ totalDebt: number; grossSalaryMonthly: number; monthlyExpenses: number; currentAge: number; lifespan: number; totalSavings: number; totalInvestments: number; taxRate: number; investmentReturnRate: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(241,49): error TS2345: Argument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(250,27): error TS2339: Property 'savingsWithdrawal' does not exist on type 'YearlySimulationData'.
+src/lib/simulate-wealth.test.ts(250,65): error TS2551: Property 'investmentSale' does not exist on type 'YearlySimulationData'. Did you mean 'investments'?
+src/lib/simulate-wealth.test.ts(254,49): error TS2345: Argument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(257,61): error TS2339: Property 'isRetired' does not exist on type 'YearlySimulationData'.
+src/lib/simulate-wealth.test.ts(262,39): error TS2339: Property 'savingsWithdrawal' does not exist on type 'YearlySimulationData'.
+src/lib/simulate-wealth.test.ts(262,65): error TS2551: Property 'investmentSale' does not exist on type 'YearlySimulationData'. Did you mean 'investments'?
+src/lib/simulate-wealth.ts(20,3): error TS6196: 'SimulationYearParams' is declared but never used.
+src/lib/simulate-wealth.ts(22,3): error TS6196: 'WealthSimulationResult' is declared but never used.
+src/lib/simulate-wealth.ts(162,56): error TS2339: Property 'monthlyExpenses' does not exist on type 'SimulationInput'.
+src/lib/simulation-helpers.ts(14,47): error TS2304: Cannot find name 'SimulationYearParams'.
+src/lib/simulation-helpers.ts(14,70): error TS2304: Cannot find name 'SimulationYearResult'.
+src/lib/simulation-helpers.ts(44,45): error TS2304: Cannot find name 'SimulationYearParams'.
+src/lib/simulation-helpers.ts(44,234): error TS2304: Cannot find name 'SimulationYearResult'.
+src/lib/simulation-helpers.ts(67,42): error TS2304: Cannot find name 'SimulationYearParams'.
+src/lib/simulation-helpers.ts(67,317): error TS2304: Cannot find name 'SimulationYearResult'.
+src/main.ts(47,3): error TS2322: Type '{ error: any; context: string; timestamp: number; }' is not assignable to type 'null'.
+src/main.ts(111,52): error TS2339: Property 'destroy' does not exist on type 'never'.
+src/state/financial-data.test.ts(15,12): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/state/financial-data.test.ts(18,5): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/state/financial-data.test.ts(21,12): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/state/financial-data.test.ts(29,1): error TS2739: Type '{ store: {}; getItem(key: string): any; setItem(key: string, value: string): void; removeItem(key: string): void; clear(): void; }' is missing the following properties from type 'Storage': length, key
+src/state/financial-data.test.ts(54,29): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(55,29): error TS2339: Property 'currentAge' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(56,29): error TS2339: Property 'totalDebt' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(68,31): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(69,31): error TS2339: Property 'housing' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(96,32): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(97,32): error TS2339: Property 'housing' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(99,32): error TS2339: Property 'currentAge' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(114,29): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(127,41): error TS2345: Argument of type 'boolean' is not assignable to parameter of type 'string'.
+src/state/financial-data.test.ts(131,33): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(150,24): error TS18047: 'receivedData' is possibly 'null'.
+src/state/financial-data.ts(137,25): error TS2698: Spread types may only be created from object types.
+src/state/financial-data.ts(148,3): error TS2322: Type 'string' is not assignable to type 'boolean'.
+src/state/observers.test.ts(14,7): error TS7034: Variable 'observerCalls' implicitly has type 'any[]' in some locations where its type cannot be determined.
+src/state/observers.test.ts(38,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(40,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(45,21): error TS2345: Argument of type 'string' is not assignable to parameter of type '(...args: any[]) => any'.
+src/state/observers.test.ts(49,21): error TS2345: Argument of type 'null' is not assignable to parameter of type '(...args: any[]) => any'.
+src/state/observers.test.ts(53,21): error TS2345: Argument of type 'number' is not assignable to parameter of type '(...args: any[]) => any'.
+src/state/observers.test.ts(63,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(66,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(67,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(68,26): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(81,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(101,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(103,26): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(115,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(118,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(119,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(132,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(133,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(149,9): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(153,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(160,9): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(178,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(181,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/simulation-results.test.ts(166,32): error TS2339: Property 'entries' does not exist on type 'string'.
+src/state/simulation-results.test.ts(167,32): error TS2339: Property 'hits' does not exist on type 'string'.
+src/state/simulation-results.test.ts(168,32): error TS2339: Property 'misses' does not exist on type 'string'.
+src/state/simulation-results.test.ts(173,32): error TS2339: Property 'misses' does not exist on type 'string'.
+src/state/simulation-results.test.ts(178,32): error TS2339: Property 'entries' does not exist on type 'string'.
+src/state/simulation-results.test.ts(183,32): error TS2339: Property 'hits' does not exist on type 'string'.
+src/state/simulation-results.test.ts(196,23): error TS2339: Property 'entries' does not exist on type 'string'.
+src/state/simulation-results.test.ts(209,32): error TS2339: Property 'entries' does not exist on type 'string'.
+src/state/simulation-results.test.ts(218,32): error TS2339: Property 'entries' does not exist on type 'string'.
+src/state/simulation-results.ts(149,56): error TS2355: A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.
+src/state/simulation-results.ts(164,41): error TS2355: A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.
+src/state/simulation-results.ts(179,3): error TS2322: Type '{ entries: number; hits: number; misses: number; hitRate: number; }' is not assignable to type 'string'.
+src/state/validation.test.ts(71,12): error TS2790: The operand of a 'delete' operator must be optional.
+src/state/validation.test.ts(131,14): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ grossUsd: number; eurUsd: number; thbEur: number; taxRate: number; housing: number; utilities: number; diningGroceries: number; hiredStaff: number; transportation: number; healthInsurance: number; ... 19 more ...; totalInvestments: number; }'.
+  No index signature with a parameter of type 'string' was found on type '{ grossUsd: number; eurUsd: number; thbEur: number; taxRate: number; housing: number; utilities: number; diningGroceries: number; hiredStaff: number; transportation: number; healthInsurance: number; ... 19 more ...; totalInvestments: number; }'.
+src/state/validation.test.ts(155,33): error TS2339: Property 'schemaVersion' does not exist on type 'boolean'.
+src/state/validation.test.ts(156,40): error TS2339: Property 'lastUpdated' does not exist on type 'boolean'.
+src/state/validation.test.ts(157,33): error TS2339: Property 'version' does not exist on type 'boolean'.
+src/state/validation.test.ts(158,33): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/validation.test.ts(171,33): error TS2339: Property 'schemaVersion' does not exist on type 'boolean'.
+src/state/validation.test.ts(172,33): error TS2339: Property 'lastUpdated' does not exist on type 'boolean'.
+src/state/validation.test.ts(173,33): error TS2339: Property 'version' does not exist on type 'boolean'.
+src/state/validation.test.ts(181,37): error TS2339: Property 'schemaVersion' does not exist on type '{ grossUsd: number; }'.
+src/state/validation.test.ts(182,33): error TS2339: Property 'schemaVersion' does not exist on type 'boolean'.
+src/state/validation.test.ts(189,33): error TS2339: Property 'schemaVersion' does not exist on type 'boolean'.
+src/state/validation.test.ts(190,40): error TS2339: Property 'lastUpdated' does not exist on type 'boolean'.
+src/state/validation.test.ts(191,33): error TS2339: Property 'version' does not exist on type 'boolean'.
+src/state/validation.test.ts(204,33): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/validation.test.ts(205,37): error TS2339: Property 'expenses' does not exist on type 'boolean'.
+src/state/validation.test.ts(206,37): error TS2339: Property 'goals' does not exist on type 'boolean'.
+src/state/validation.test.ts(207,37): error TS2339: Property 'metadata' does not exist on type 'boolean'.
+src/state/validation.test.ts(208,33): error TS2339: Property 'schemaVersion' does not exist on type 'boolean'.
+src/state/validation.test.ts(215,41): error TS2339: Property 'lastUpdated' does not exist on type 'boolean'.
+src/state/validation.test.ts(221,22): error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/state/validation.test.ts(221,28): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/ui/app-controllers.test.ts(14,5): error TS2322: Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+src/ui/app-controllers.test.ts(15,5): error TS2739: Type '{ getItem: () => null; setItem: () => void; removeItem: () => void; }' is missing the following properties from type 'Storage': length, clear, key
+src/ui/app-controllers.test.ts(40,5): error TS2322: Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+src/ui/app-controllers.test.ts(41,5): error TS2739: Type '{ getItem: () => null; setItem: () => void; removeItem: () => void; }' is missing the following properties from type 'Storage': length, clear, key
+src/ui/app-controllers.ts(145,20): error TS2345: Argument of type 'Element' is not assignable to parameter of type 'HTMLElement'.
+  Type 'Element' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, autocorrect, and 129 more.
+src/ui/app-layout.test.ts(14,5): error TS2322: Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+src/ui/app-layout.test.ts(34,5): error TS2322: Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+src/ui/calculation-controller.test.ts(45,40): error TS2339: Property 'success' does not exist on type '(...args: any[]) => any'.
+src/ui/calculation-controller.test.ts(52,40): error TS2339: Property 'success' does not exist on type '(...args: any[]) => any'.
+src/ui/calculation-controller.test.ts(62,20): error TS2339: Property 'success' does not exist on type '(...args: any[]) => any'.
+src/ui/calculation-controller.test.ts(62,39): error TS2339: Property 'error' does not exist on type '(...args: any[]) => any'.
+src/ui/calculation-controller.test.ts(92,40): error TS2339: Property 'success' does not exist on type '(...args: any[]) => any'.
+src/ui/calculation-controller.test.ts(99,40): error TS2339: Property 'success' does not exist on type '(...args: any[]) => any'.
+src/ui/calculation-controller.test.ts(104,60): error TS6133: 't' is declared but its value is never read.
+src/ui/calculation-controller.ts(38,44): error TS2355: A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.
+src/ui/calculation-controller.ts(60,36): error TS2339: Property 'grossUsd' does not exist on type 'object'.
+src/ui/calculation-controller.ts(60,61): error TS2339: Property 'eurUsd' does not exist on type 'object'.
+src/ui/calculation-controller.ts(66,31): error TS2339: Property 'allocDebt1' does not exist on type 'object'.
+src/ui/calculation-controller.ts(67,34): error TS2339: Property 'allocSavings1' does not exist on type 'object'.
+src/ui/calculation-controller.ts(68,38): error TS2339: Property 'allocInvestment1' does not exist on type 'object'.
+src/ui/calculation-controller.ts(71,31): error TS2339: Property 'allocDebt2' does not exist on type 'object'.
+src/ui/calculation-controller.ts(72,34): error TS2339: Property 'allocSavings2' does not exist on type 'object'.
+src/ui/calculation-controller.ts(73,38): error TS2339: Property 'allocInvestment2' does not exist on type 'object'.
+src/ui/calculation-controller.ts(77,34): error TS2339: Property 'allocSavings3' does not exist on type 'object'.
+src/ui/calculation-controller.ts(78,38): error TS2339: Property 'allocInvestment3' does not exist on type 'object'.
+src/ui/calculation-controller.ts(83,56): error TS2345: Argument of type '{ grossSalaryMonthly: number; allocations: { debtPhase: { debt: any; savings: any; investments: any; }; emergencyPhase: { debt: any; savings: any; investments: any; }; retirementPhase: { debt: number; savings: any; investments: any; }; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ grossSalaryMonthly: number; allocations: { debtPhase: { debt: any; savings: any; investments: any; }; emergencyPhase: { debt: any; savings: any; investments: any; }; retirementPhase: { debt: number; savings: any; investments: any; }; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 33 more.
+src/ui/calculation-controller.ts(84,14): error TS2353: Object literal may only specify known properties, and 'success' does not exist in type '(...args: any[]) => any'.
+src/ui/calculation-controller.ts(86,14): error TS2353: Object literal may only specify known properties, and 'success' does not exist in type '(...args: any[]) => any'.
+src/ui/calculation-controller.ts(86,37): error TS18046: 'error' is of type 'unknown'.
+src/ui/calculation-controller.ts(96,14): error TS2353: Object literal may only specify known properties, and 'success' does not exist in type '(...args: any[]) => any'.
+src/ui/calculation-controller.ts(108,16): error TS2353: Object literal may only specify known properties, and 'success' does not exist in type '(...args: any[]) => any'.
+src/ui/calculation-controller.ts(111,39): error TS2345: Argument of type 'boolean' is not assignable to parameter of type 'object'.
+src/ui/calculation-controller.ts(112,16): error TS2339: Property 'success' does not exist on type '(...args: any[]) => any'.
+src/ui/calculation-controller.ts(112,34): error TS2339: Property 'data' does not exist on type '(...args: any[]) => any'.
+src/ui/calculation-controller.ts(113,49): error TS2339: Property 'data' does not exist on type '(...args: any[]) => any'.
+src/ui/calculation-controller.ts(116,71): error TS2339: Property 'data' does not exist on type '(...args: any[]) => any'.
+src/ui/chart-loader.ts(12,81): error TS1064: The return type of an async function or method must be the global Promise<T> type. Did you mean to write 'Promise<any>'?
+src/ui/chart-loader.ts(26,27): error TS2345: Argument of type 'number[][]' is not assignable to parameter of type 'Node'.
+  Type 'number[][]' is missing the following properties from type 'Node': baseURI, childNodes, firstChild, isConnected, and 46 more.
+src/ui/chart-loader.ts(48,46): error TS2339: Property 'effectiveType' does not exist on type '{}'.
+src/ui/financial-inputs-extended.ts(105,68): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/ui/financial-inputs-extended.ts(106,63): error TS2339: Property 'eurUsd' does not exist on type 'boolean'.
+src/ui/financial-inputs-extended.ts(107,63): error TS2339: Property 'thbEur' does not exist on type 'boolean'.
+src/ui/financial-inputs-extended.ts(108,69): error TS2339: Property 'taxRate' does not exist on type 'boolean'.
+src/ui/financial-inputs-extended.ts(133,36): error TS7006: Parameter '_e' implicitly has an 'any' type.
+src/ui/financial-inputs-extended.ts(133,72): error TS7006: Parameter 'el' implicitly has an 'any' type.
+src/ui/financial-inputs.test.ts(15,1): error TS2322: Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+src/ui/financial-inputs.test.ts(27,1): error TS2739: Type '{ store: {}; getItem(key: string): any; setItem(key: string, value: string): void; removeItem(key: string): void; clear(): void; }' is missing the following properties from type 'Storage': length, key
+src/ui/financial-inputs.test.ts(30,17): error TS4111: Property 'store' comes from an index signature, so it must be accessed with ['store'].
+src/ui/financial-inputs.test.ts(33,10): error TS4111: Property 'store' comes from an index signature, so it must be accessed with ['store'].
+src/ui/financial-inputs.test.ts(36,17): error TS4111: Property 'store' comes from an index signature, so it must be accessed with ['store'].
+src/ui/financial-inputs.test.ts(39,10): error TS4111: Property 'store' comes from an index signature, so it must be accessed with ['store'].
+src/ui/financial-inputs.test.ts(98,29): error TS2345: Argument of type 'null' is not assignable to parameter of type 'HTMLElement'.
+src/ui/financial-inputs.ts(97,53): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/ui/financial-inputs.ts(98,54): error TS2339: Property 'eurUsd' does not exist on type 'boolean'.
+src/ui/financial-inputs.ts(99,55): error TS2339: Property 'taxRate' does not exist on type 'boolean'.
+src/ui/financial-inputs.ts(111,36): error TS7006: Parameter '_e' implicitly has an 'any' type.
+src/ui/financial-inputs.ts(111,72): error TS7006: Parameter 'el' implicitly has an 'any' type.
+src/ui/input-field.test.ts(13,1): error TS2322: Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+src/ui/input-field.ts(17,65): error TS2339: Property 'type' does not exist on type 'object'.
+src/ui/input-field.ts(21,35): error TS2339: Property 'id' does not exist on type 'object'.
+src/ui/input-field.ts(22,37): error TS2339: Property 'id' does not exist on type 'object'.
+src/ui/input-field.ts(23,37): error TS2339: Property 'type' does not exist on type 'object'.
+src/ui/input-field.ts(24,38): error TS2339: Property 'value' does not exist on type 'object'.
+src/ui/input-field.ts(26,14): error TS2339: Property 'min' does not exist on type 'object'.
+src/ui/input-field.ts(27,38): error TS2339: Property 'min' does not exist on type 'object'.
+src/ui/input-field.ts(29,14): error TS2339: Property 'max' does not exist on type 'object'.
+src/ui/input-field.ts(30,38): error TS2339: Property 'max' does not exist on type 'object'.
+src/ui/input-field.ts(32,14): error TS2339: Property 'step' does not exist on type 'object'.
+src/ui/input-field.ts(33,39): error TS2339: Property 'step' does not exist on type 'object'.
+src/ui/input-field.ts(44,25): error TS2339: Property 'id' does not exist on type 'object'.
+src/ui/input-field.ts(45,25): error TS2339: Property 'label' does not exist on type 'object'.
+src/ui/input-field.ts(46,25): error TS2339: Property 'value' does not exist on type 'object'.
+src/ui/input-field.ts(53,50): error TS2339: Property 'id' does not exist on type 'object'.
+src/ui/input-field.ts(58,25): error TS2339: Property 'label' does not exist on type 'object'.
+src/ui/input-field.ts(60,36): error TS2339: Property 'id' does not exist on type 'object'.
+src/ui/input-section.test.ts(13,1): error TS2322: Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+src/ui/input-section.ts(17,32): error TS2339: Property 'title' does not exist on type 'object'.
+src/ui/input-section.ts(30,32): error TS2339: Property 'title' does not exist on type 'object'.
+src/ui/input-section.ts(35,21): error TS2339: Property 'description' does not exist on type 'object'.
+src/ui/input-section.ts(38,34): error TS2339: Property 'description' does not exist on type 'object'.
+src/ui/input-section.ts(49,17): error TS2339: Property 'inputs' does not exist on type 'object'.
+src/ui/input-section.ts(49,33): error TS7006: Parameter 'inputConfig' implicitly has an 'any' type.
+src/ui/integration.test.ts(49,1): error TS2322: Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+src/ui/integration.test.ts(65,5): error TS7034: Variable 'storageObservers' implicitly has type 'any[]' in some locations where its type cannot be determined.
+src/ui/integration.test.ts(66,1): error TS2739: Type '{ store: {}; getItem(key: string): any; setItem(key: string, value: string): void; removeItem(key: string): void; clear(): void; }' is missing the following properties from type 'Storage': length, key
+src/ui/integration.test.ts(69,17): error TS4111: Property 'store' comes from an index signature, so it must be accessed with ['store'].
+src/ui/integration.test.ts(72,27): error TS4111: Property 'store' comes from an index signature, so it must be accessed with ['store'].
+src/ui/integration.test.ts(73,10): error TS4111: Property 'store' comes from an index signature, so it must be accessed with ['store'].
+src/ui/integration.test.ts(74,5): error TS7005: Variable 'storageObservers' implicitly has an 'any[]' type.
+src/ui/integration.test.ts(77,27): error TS4111: Property 'store' comes from an index signature, so it must be accessed with ['store'].
+src/ui/integration.test.ts(78,17): error TS4111: Property 'store' comes from an index signature, so it must be accessed with ['store'].
+src/ui/integration.test.ts(79,5): error TS7005: Variable 'storageObservers' implicitly has an 'any[]' type.
+src/ui/integration.test.ts(82,32): error TS4111: Property 'store' comes from an index signature, so it must be accessed with ['store'].
+src/ui/integration.test.ts(83,10): error TS4111: Property 'store' comes from an index signature, so it must be accessed with ['store'].
+src/ui/integration.test.ts(85,7): error TS7005: Variable 'storageObservers' implicitly has an 'any[]' type.
+src/ui/integration.test.ts(159,23): error TS7006: Parameter 'unsubscribe' implicitly has an 'any' type.
+src/ui/integration.test.ts(170,5): error TS2554: Expected 1 arguments, but got 0.
+src/ui/integration.test.ts(180,29): error TS2345: Argument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+src/ui/integration.test.ts(193,27): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(194,26): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(195,26): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(196,26): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(202,21): error TS2339: Property 'value' does not exist on type 'Element'.
+src/ui/integration.test.ts(218,19): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(221,19): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(230,29): error TS2345: Argument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+src/ui/integration.test.ts(242,27): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(243,26): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(244,26): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(247,21): error TS2339: Property 'value' does not exist on type 'Element'.
+src/ui/integration.test.ts(276,9): error TS2554: Expected 2 arguments, but got 1.
+src/ui/integration.test.ts(291,30): error TS18047: 'summaryContainer' is possibly 'null'.
+src/ui/integration.test.ts(299,75): error TS18046: 'error' is of type 'unknown'.
+src/ui/integration.test.ts(311,9): error TS2554: Expected 2 arguments, but got 1.
+src/ui/integration.test.ts(323,9): error TS18047: 'summaryContainer' is possibly 'null'.
+src/ui/integration.test.ts(330,61): error TS18046: 'error' is of type 'unknown'.
+src/ui/integration.test.ts(348,29): error TS2345: Argument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+src/ui/integration.test.ts(351,9): error TS2554: Expected 2 arguments, but got 1.
+src/ui/integration.test.ts(385,9): error TS2554: Expected 1 arguments, but got 0.
+src/ui/integration.test.ts(396,29): error TS2345: Argument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+src/ui/integration.test.ts(399,9): error TS2554: Expected 2 arguments, but got 1.
+src/ui/integration.test.ts(417,86): error TS1064: The return type of an async function or method must be the global Promise<T> type. Did you mean to write 'Promise<any>'?
+src/ui/integration.test.ts(422,21): error TS2339: Property 'value' does not exist on type 'Element'.
+src/ui/integration.test.ts(431,87): error TS1064: The return type of an async function or method must be the global Promise<T> type. Did you mean to write 'Promise<any>'?
+src/ui/integration.test.ts(436,18): error TS2339: Property 'value' does not exist on type 'Element'.
+src/ui/integration.test.ts(458,23): error TS2339: Property 'grossUsd' does not exist on type 'object'.
+src/ui/integration.test.ts(458,45): error TS2339: Property 'salary' does not exist on type 'object'.
+src/ui/integration.test.ts(459,42): error TS2339: Property 'grossUsd' does not exist on type 'object'.
+src/ui/integration.test.ts(459,64): error TS2339: Property 'salary' does not exist on type 'object'.
+src/ui/integration.test.ts(459,86): error TS2339: Property 'grossUsd' does not exist on type 'object'.
+src/ui/integration.test.ts(459,110): error TS2339: Property 'salary' does not exist on type 'object'.
+src/ui/integration.test.ts(492,43): error TS2345: Argument of type 'boolean' is not assignable to parameter of type 'object'.
+src/ui/integration.test.ts(501,29): error TS2345: Argument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+src/ui/integration.test.ts(510,27): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(513,23): error TS2339: Property 'value' does not exist on type 'Element'.
+src/ui/integration.test.ts(523,21): error TS2339: Property 'salary' does not exist on type 'boolean'.
+src/ui/integration.test.ts(524,38): error TS2339: Property 'salary' does not exist on type 'boolean'.
+src/ui/integration.test.ts(539,31): error TS2345: Argument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+src/ui/integration.test.ts(550,7): error TS18047: 'appElement' is possibly 'null'.
+src/ui/integration.test.ts(565,29): error TS2345: Argument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+src/ui/integration.test.ts(568,7): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(571,7): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(575,26): error TS18047: 'inputsContainer' is possibly 'null'.
+src/ui/integration.test.ts(583,9): error TS7053: Element implicitly has an 'any' type because expression of type '`category${number}`' can't be used to index type '{}'.
+src/ui/phase-table-helpers.test.ts(38,11): error TS2488: Type 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/phase-table-helpers.test.ts(48,11): error TS2488: Type 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/phase-table-helpers.test.ts(59,11): error TS2488: Type 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/phase-table-helpers.test.ts(70,11): error TS2488: Type 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/phase-table-helpers.test.ts(84,11): error TS2488: Type 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/phase-table-helpers.test.ts(99,11): error TS2488: Type 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/phase-table-helpers.test.ts(106,11): error TS2488: Type 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/phase-table-helpers.ts(34,3): error TS2740: Type 'HTMLElement[]' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, autocorrect, and 314 more.
+src/ui/phase-table-helpers.ts(49,3): error TS2740: Type 'HTMLElement[]' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, autocorrect, and 314 more.
+src/ui/phase-table-helpers.ts(68,3): error TS2740: Type 'HTMLElement[]' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, autocorrect, and 314 more.
+src/ui/phase-tables-container.test.ts(48,25): error TS18047: 'debtTable' is possibly 'null'.
+src/ui/phase-tables-container.test.ts(52,30): error TS18047: 'emergencyTable' is possibly 'null'.
+src/ui/phase-tables-container.test.ts(99,12): error TS18047: 'incomeCell' is possibly 'null'.
+src/ui/phase-tables.test.ts(33,12): error TS18047: 'header' is possibly 'null'.
+src/ui/phase-tables.test.ts(34,12): error TS18047: 'header' is possibly 'null'.
+src/ui/phase-tables.test.ts(40,25): error TS18047: 'headerRow' is possibly 'null'.
+src/ui/phase-tables.test.ts(54,25): error TS18047: 'headerRow' is possibly 'null'.
+src/ui/phase-tables.test.ts(99,12): error TS18047: 'incomeCell' is possibly 'null'.
+src/ui/phase-tables.ts(49,9): error TS2488: Type 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/phase-tables.ts(50,9): error TS2488: Type 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/phase-tables.ts(51,9): error TS2488: Type 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/summary-cards.test.ts(37,26): error TS2531: Object is possibly 'null'.
+src/ui/theme-manager.test.ts(15,12): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/ui/theme-manager.test.ts(18,5): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/ui/theme-manager.test.ts(21,12): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/ui/theme-manager.test.ts(41,1): error TS2739: Type '{ store: {}; getItem(key: string): any; setItem(key: string, value: string): void; removeItem(key: string): void; clear(): void; }' is missing the following properties from type 'Storage': length, key
+src/ui/theme-manager.test.ts(42,1): error TS2740: Type '{ documentElement: { setAttribute: () => void; getAttribute: () => null; style: { setProperty: () => void; getPropertyValue: () => string; }; }; }' is missing the following properties from type 'Document': URL, alinkColor, all, anchors, and 258 more.
+src/ui/theme-manager.test.ts(124,33): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
+src/ui/theme-manager.ts(60,20): error TS2339: Property 'theme' does not exist on type 'object'.
+src/ui/theme-manager.ts(60,49): error TS2339: Property 'theme' does not exist on type 'object'.
+src/ui/theme-manager.ts(61,26): error TS2339: Property 'preferredCurrency' does not exist on type 'object'.
+src/ui/theme-manager.ts(62,26): error TS2339: Property 'schemaVersion' does not exist on type 'object'.
+src/ui/wealth-chart.test.ts(11,20): error TS7034: Variable 'window' implicitly has type 'any' in some locations where its type cannot be determined.
+src/ui/wealth-chart.test.ts(18,3): error TS2322: Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+src/ui/wealth-chart.test.ts(32,17): error TS7006: Parameter 'opts' implicitly has an 'any' type.
+src/ui/wealth-chart.test.ts(32,23): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/ui/wealth-chart.test.ts(32,29): error TS7006: Parameter 'target' implicitly has an 'any' type.
+src/ui/wealth-chart.test.ts(33,12): error TS2339: Property 'opts' does not exist on type 'MockUPlot'.
+src/ui/wealth-chart.test.ts(34,12): error TS2339: Property 'data' does not exist on type 'MockUPlot'.
+src/ui/wealth-chart.test.ts(35,12): error TS2339: Property 'target' does not exist on type 'MockUPlot'.
+src/ui/wealth-chart.test.ts(36,12): error TS2551: Property 'destroyed' does not exist on type 'MockUPlot'. Did you mean 'destroy'?
+src/ui/wealth-chart.test.ts(40,12): error TS2551: Property 'destroyed' does not exist on type 'MockUPlot'. Did you mean 'destroy'?
+src/ui/wealth-chart.test.ts(43,13): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/ui/wealth-chart.test.ts(44,12): error TS2339: Property 'data' does not exist on type 'MockUPlot'.
+src/ui/wealth-chart.test.ts(47,3): error TS2740: Type 'typeof MockUPlot' is missing the following properties from type 'typeof uPlot': paths, assign, rangeNum, rangeLog, and 18 more.
+src/ui/wealth-chart.test.ts(51,10): error TS2790: The operand of a 'delete' operator must be optional.
+src/ui/wealth-chart.test.ts(52,10): error TS2790: The operand of a 'delete' operator must be optional.
+src/ui/wealth-chart.test.ts(53,10): error TS2790: The operand of a 'delete' operator must be optional.
+src/ui/wealth-chart.test.ts(54,10): error TS2790: The operand of a 'delete' operator must be optional.
+src/ui/wealth-chart.test.ts(55,10): error TS2790: The operand of a 'delete' operator must be optional.
+src/ui/wealth-chart.test.ts(56,10): error TS2790: The operand of a 'delete' operator must be optional.
+src/ui/wealth-chart.test.ts(57,10): error TS2790: The operand of a 'delete' operator must be optional.
+src/ui/wealth-chart.test.ts(97,31): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number[]'.
+src/ui/wealth-chart.test.ts(98,31): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number[]'.
+src/ui/wealth-chart.test.ts(99,31): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number[]'.
+src/ui/wealth-chart.test.ts(100,31): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number[]'.
+src/ui/wealth-chart.test.ts(101,31): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number[]'.
+src/ui/wealth-chart.test.ts(102,31): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number[]'.
+src/ui/wealth-chart.test.ts(115,31): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number[]'.
+src/ui/wealth-chart.test.ts(116,31): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number[]'.
+src/ui/wealth-chart.test.ts(129,36): error TS7005: Variable 'window' implicitly has an 'any' type.
+src/ui/wealth-chart.test.ts(130,34): error TS2339: Property 'className' does not exist on type 'number[][]'.
+src/ui/wealth-chart.test.ts(136,36): error TS2339: Property 'querySelector' does not exist on type 'number[][]'.
+src/ui/wealth-chart.test.ts(146,36): error TS7005: Variable 'window' implicitly has an 'any' type.
+src/ui/wealth-chart.test.ts(151,31): error TS2345: Argument of type 'null' is not assignable to parameter of type 'any[]'.
+src/ui/wealth-chart.test.ts(157,31): error TS2345: Argument of type 'string' is not assignable to parameter of type 'any[]'.
+src/ui/wealth-chart.ts(35,3): error TS2322: Type 'string' is not assignable to type 'number[][]'.
+src/ui/wealth-chart.ts(81,41): error TS7006: Parameter '_' implicitly has an 'any' type.
+src/ui/wealth-chart.ts(81,68): error TS7006: Parameter 'vals' implicitly has an 'any' type.
+src/ui/wealth-chart.ts(82,61): error TS7006: Parameter 'v' implicitly has an 'any' type.
+src/ui/wealth-chart.ts(88,43): error TS2345: Argument of type 'number[][]' is not assignable to parameter of type 'AlignedData | undefined'.
+  Type 'number[][]' is not assignable to type 'TypedArray[]'.
+    Type 'number[]' is not assignable to type 'TypedArray'.
+      Type 'number[]' is missing the following properties from type 'Float64Array<ArrayBufferLike>': BYTES_PER_ELEMENT, buffer, byteLength, byteOffset, and 3 more.
+src/ui/wealth-chart.ts(94,3): error TS2740: Type 'HTMLElement' is missing the following properties from type 'number[][]': length, pop, push, concat, and 29 more.
+src/utils/calculation-benchmarks.test.ts(14,15): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/utils/calculation-benchmarks.test.ts(14,18): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/utils/calculation-benchmarks.test.ts(15,20): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/utils/calculation-benchmarks.test.ts(15,23): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/utils/calculation-benchmarks.test.ts(16,18): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/utils/calculation-benchmarks.test.ts(16,21): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/utils/calculation-benchmarks.ts(33,49): error TS2345: Argument of type 'unknown' is not assignable to parameter of type '(...args: any[]) => any'.
+src/utils/calculation-benchmarks.ts(40,7): error TS18046: 'func' is of type 'unknown'.
+src/utils/calculation-benchmarks.ts(47,5): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+src/utils/calculation-benchmarks.ts(72,9): error TS18046: 'result' is of type 'unknown'.
+src/utils/calculation-benchmarks.ts(76,52): error TS18046: 'result' is of type 'unknown'.
+src/utils/dom-helpers.test.ts(32,12): error TS2790: The operand of a 'delete' operator must be optional.
+src/utils/dom-helpers.test.ts(33,12): error TS2790: The operand of a 'delete' operator must be optional.
+src/utils/dom-helpers.test.ts(34,12): error TS2790: The operand of a 'delete' operator must be optional.
+src/utils/dom-helpers.test.ts(35,12): error TS2790: The operand of a 'delete' operator must be optional.
+src/utils/dom-helpers.test.ts(36,12): error TS2790: The operand of a 'delete' operator must be optional.
+src/utils/dom-helpers.test.ts(56,34): error TS2339: Property 'type' does not exist on type 'HTMLElement'.
+src/utils/dom-helpers.test.ts(58,42): error TS4111: Property 'testid' comes from an index signature, so it must be accessed with ['testid'].
+src/utils/dom-helpers.test.ts(149,43): error TS2345: Argument of type 'null' is not assignable to parameter of type 'string'.
+src/utils/dom-helpers.test.ts(191,7): error TS2349: This expression is not callable.
+  Type 'HTMLElement' has no call signatures.
+src/utils/dom-helpers.test.ts(206,31): error TS2345: Argument of type 'string' is not assignable to parameter of type '(...args: any[]) => any'.
+src/utils/dom-helpers.test.ts(231,18): error TS6133: 'event' is declared but its value is never read.
+src/utils/dom-helpers.test.ts(231,18): error TS7006: Parameter 'event' implicitly has an 'any' type.
+src/utils/dom-helpers.test.ts(231,25): error TS7006: Parameter 'element' implicitly has an 'any' type.
+src/utils/dom-helpers.test.ts(243,17): error TS2339: Property 'destroy' does not exist on type 'HTMLElement'.
+src/utils/dom-helpers.test.ts(250,18): error TS6133: 'event' is declared but its value is never read.
+src/utils/dom-helpers.test.ts(250,18): error TS7006: Parameter 'event' implicitly has an 'any' type.
+src/utils/dom-helpers.test.ts(250,25): error TS7006: Parameter 'element' implicitly has an 'any' type.
+src/utils/dom-helpers.test.ts(253,25): error TS6133: 'event' is declared but its value is never read.
+src/utils/dom-helpers.test.ts(253,25): error TS7006: Parameter 'event' implicitly has an 'any' type.
+src/utils/dom-helpers.test.ts(253,32): error TS7006: Parameter 'element' implicitly has an 'any' type.
+src/utils/dom-helpers.test.ts(263,17): error TS2339: Property 'destroy' does not exist on type 'HTMLElement'.
+src/utils/dom-helpers.test.ts(270,25): error TS6133: 'event' is declared but its value is never read.
+src/utils/dom-helpers.test.ts(270,25): error TS7006: Parameter 'event' implicitly has an 'any' type.
+src/utils/dom-helpers.test.ts(270,32): error TS7006: Parameter 'element' implicitly has an 'any' type.
+src/utils/dom-helpers.test.ts(281,17): error TS2339: Property 'destroy' does not exist on type 'HTMLElement'.
+src/utils/dom-helpers.test.ts(289,43): error TS2339: Property 'destroy' does not exist on type 'HTMLElement'.
+src/utils/dom-helpers.test.ts(292,17): error TS2339: Property 'destroy' does not exist on type 'HTMLElement'.
+src/utils/dom-helpers.test.ts(297,36): error TS2345: Argument of type 'null' is not assignable to parameter of type 'HTMLElement'.
+src/utils/dom-helpers.test.ts(311,56): error TS2345: Argument of type 'null' is not assignable to parameter of type 'object'.
+src/utils/dom-helpers.test.ts(361,45): error TS4111: Property 'value' comes from an index signature, so it must be accessed with ['value'].
+src/utils/dom-helpers.test.ts(375,39): error TS2345: Argument of type 'null' is not assignable to parameter of type 'HTMLElement'.
+src/utils/dom-helpers.ts(43,122): error TS2355: A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.
+src/utils/dom-helpers.ts(60,3): error TS2322: Type 'string' is not assignable to type 'HTMLElement'.
+src/utils/dom-helpers.ts(79,3): error TS2322: Type '() => void' is not assignable to type 'HTMLElement'.
+src/utils/dom-helpers.ts(98,58): error TS2355: A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.
+src/utils/dom-helpers.ts(110,5): error TS2353: Object literal may only specify known properties, and 'destroy' does not exist in type 'HTMLElement'.
+src/utils/dom-helpers.ts(128,3): error TS2740: Type 'Node' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, autocorrect, and 264 more.
+src/utils/formatting/accessibility.test.ts(62,47): error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+src/utils/formatting/accessibility.test.ts(63,47): error TS2345: Argument of type 'null' is not assignable to parameter of type 'string'.
+src/utils/formatting/accessibility.test.ts(64,47): error TS2345: Argument of type 'undefined' is not assignable to parameter of type 'string'.
+src/utils/formatting/accessibility.test.ts(81,19): error TS18046: 'error' is of type 'unknown'.
+src/utils/formatting/accessibility.test.ts(82,19): error TS18046: 'error' is of type 'unknown'.
+src/utils/formatting/accessibility.test.ts(83,19): error TS18046: 'error' is of type 'unknown'.
+src/utils/formatting/accessibility.test.ts(150,49): error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+src/utils/formatting/accessibility.test.ts(151,49): error TS2345: Argument of type 'null' is not assignable to parameter of type 'string'.
+src/utils/formatting/accessibility.test.ts(152,49): error TS2345: Argument of type 'undefined' is not assignable to parameter of type 'string'.
+src/utils/formatting/accessibility.test.ts(169,19): error TS18046: 'error' is of type 'unknown'.
+src/utils/formatting/accessibility.test.ts(170,19): error TS18046: 'error' is of type 'unknown'.
+src/utils/formatting/accessibility.test.ts(171,19): error TS18046: 'error' is of type 'unknown'.
+src/utils/formatting/accessibility.test.ts(172,19): error TS18046: 'error' is of type 'unknown'.
+src/utils/formatting/currency.test.ts(54,39): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
+src/utils/formatting/currency.test.ts(55,39): error TS2345: Argument of type 'null' is not assignable to parameter of type 'number'.
+src/utils/formatting/currency.test.ts(56,39): error TS2345: Argument of type 'undefined' is not assignable to parameter of type 'number'.
+src/utils/formatting/currency.test.ts(98,44): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
+src/utils/formatting/currency.test.ts(99,44): error TS2345: Argument of type 'null' is not assignable to parameter of type 'number'.
+src/utils/formatting/currency.test.ts(100,44): error TS2345: Argument of type 'undefined' is not assignable to parameter of type 'number'.
+src/utils/formatting/display.test.ts(60,44): error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+src/utils/formatting/display.test.ts(61,44): error TS2345: Argument of type 'null' is not assignable to parameter of type 'string'.
+src/utils/formatting/display.test.ts(62,44): error TS2345: Argument of type 'undefined' is not assignable to parameter of type 'string'.
+src/utils/formatting/display.test.ts(79,19): error TS18046: 'error' is of type 'unknown'.
+src/utils/formatting/display.test.ts(80,19): error TS18046: 'error' is of type 'unknown'.
+src/utils/formatting/display.test.ts(81,19): error TS18046: 'error' is of type 'unknown'.
+src/utils/formatting/display.test.ts(82,19): error TS18046: 'error' is of type 'unknown'.
+src/utils/formatting/display.test.ts(111,42): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
+src/utils/formatting/display.test.ts(112,46): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
+src/utils/formatting/display.test.ts(113,42): error TS2345: Argument of type 'null' is not assignable to parameter of type 'number'.
+src/utils/formatting/display.test.ts(114,46): error TS2345: Argument of type 'undefined' is not assignable to parameter of type 'number'.
+src/utils/formatting/growth.test.ts(66,40): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
+src/utils/formatting/growth.test.ts(67,47): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
+src/utils/formatting/growth.test.ts(115,39): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
+src/utils/formatting/growth.test.ts(116,45): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
+src/utils/main-thread-blocking.test.ts(61,37): error TS2551: Property 'maxTimeMs' does not exist on type '{ averageTime: number; maxTime: number; minTime: number; measurements: number[]; isBlocking: boolean; blockingThreshold: number; isHealthy: boolean; }'. Did you mean 'maxTime'?
+src/utils/main-thread-blocking.test.ts(62,37): error TS2339: Property 'threshold' does not exist on type '{ averageTime: number; maxTime: number; minTime: number; measurements: number[]; isBlocking: boolean; blockingThreshold: number; isHealthy: boolean; }'.
+src/utils/main-thread-blocking.test.ts(75,37): error TS2551: Property 'maxTimeMs' does not exist on type '{ averageTime: number; maxTime: number; minTime: number; measurements: number[]; isBlocking: boolean; blockingThreshold: number; isHealthy: boolean; }'. Did you mean 'maxTime'?
+src/utils/memory-profiling.test.ts(21,46): error TS2339: Property 'usedJSHeapSize' does not exist on type 'Object'.
+src/utils/memory-profiling.test.ts(22,46): error TS2339: Property 'totalJSHeapSize' does not exist on type 'Object'.
+src/utils/memory-profiling.test.ts(26,48): error TS2339: Property 'usedJSHeapSize' does not exist on type 'Object'.
+src/utils/memory-profiling.test.ts(30,46): error TS2339: Property 'usedJSHeapSize' does not exist on type 'Object'.
+src/utils/runtime-performance.test.ts(78,22): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ convertUsdToEur: number[]; convertEurToThb: number[]; calculateNetSalary: number[]; calculateMonthlyExpenses: { housing: number; utilities: number; diningGroceries: number; hiredStaff: number; ... 7 more ...; discretionary: number; }[]; ... 9 more ...; calculateAbsoluteGrowth: number[]; }'.
+  No index signature with a parameter of type 'string' was found on type '{ convertUsdToEur: number[]; convertEurToThb: number[]; calculateNetSalary: number[]; calculateMonthlyExpenses: { housing: number; utilities: number; diningGroceries: number; hiredStaff: number; ... 7 more ...; discretionary: number; }[]; ... 9 more ...; calculateAbsoluteGrowth: number[]; }'.
+src/utils/runtime-performance.test.ts(100,19): error TS18046: 'result' is of type 'unknown'.
+src/utils/runtime-performance.test.ts(101,19): error TS18046: 'result' is of type 'unknown'.
+src/utils/runtime-performance.test.ts(102,19): error TS18046: 'result' is of type 'unknown'.
+src/utils/runtime-performance.test.ts(110,22): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ convertUsdToEur: number[]; convertEurToThb: number[]; calculateNetSalary: number[]; calculateMonthlyExpenses: { housing: number; utilities: number; diningGroceries: number; hiredStaff: number; ... 7 more ...; discretionary: number; }[]; ... 9 more ...; calculateAbsoluteGrowth: number[]; }'.
+  No index signature with a parameter of type 'string' was found on type '{ convertUsdToEur: number[]; convertEurToThb: number[]; calculateNetSalary: number[]; calculateMonthlyExpenses: { housing: number; utilities: number; diningGroceries: number; hiredStaff: number; ... 7 more ...; discretionary: number; }[]; ... 9 more ...; calculateAbsoluteGrowth: number[]; }'.

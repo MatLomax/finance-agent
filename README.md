@@ -85,7 +85,13 @@ npm run test:coverage   # Run tests with coverage report
 
 ### Development
 ```bash
-npm run dev            # Start development server (Python HTTP server on port 3000)
+# Option 1: Production build + server
+npm run build              # Build the production bundle first
+npm run dev                # Start HTTP server on localhost:3000 (serves dist/)
+
+# Option 2: Development with source files
+# Serve the project root with any HTTP server to use index.html (dev version)
+python3 -m http.server 8000  # Then visit http://localhost:8000
 ```
 
 ### Code Quality & Automation

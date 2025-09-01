@@ -1,17 +1,14 @@
 {
   "compilerOptions": {
-    // Target and module settings for modern JavaScript
     "target": "ES2022",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     
-    // Type checking only - no emit
     "noEmit": true,
-    "allowJs": true,
-    "checkJs": true,
+    "allowJs": false,
+    "checkJs": false,
     
-    // Strict type checking for maximum safety
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -20,29 +17,26 @@
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true,
     
-    // Module resolution
-    "allowImportingTsExtensions": false,
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     
-    // Skip lib checking for faster compilation
     "skipLibCheck": true,
     
-    // Allow default imports from modules with no default export
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     
-    // Ensure consistent casing
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src/**/*.js",
-    "*.js"
+    "src/**/*.ts",
+    "*.ts"
   ],
   "exclude": [
     "node_modules",
     "dist",
-    "**/*.test.js"
+    "**/*.js"
   ]
 }

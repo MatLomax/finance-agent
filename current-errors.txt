@@ -1,0 +1,100 @@
+src/lib/allocations.test.ts(13,1): error TS6133: 'AllocationAmounts' is declared but its value is never read.
+src/lib/integration.test.ts(129,51): error TS2345: Argument of type '{ grossSalaryMonthly: number; currentAge: number; lifespan: number; grossUsd: number; eurUsd: number; thbEur: number; taxRate: number; monthlyExpenses: number; totalDebt: number; totalSavings: number; totalInvestments: number; investmentReturnRate: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ grossSalaryMonthly: number; currentAge: number; lifespan: number; grossUsd: number; eurUsd: number; thbEur: number; taxRate: number; monthlyExpenses: number; totalDebt: number; totalSavings: number; totalInvestments: number; investmentReturnRate: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, housing, and 23 more.
+src/lib/integration.test.ts(138,26): error TS18048: 'firstYear' is possibly 'undefined'.
+src/lib/integration.test.ts(139,26): error TS18048: 'lastYear' is possibly 'undefined'.
+src/lib/integration.test.ts(146,15): error TS2532: Object is possibly 'undefined'.
+src/lib/integration.test.ts(146,35): error TS2532: Object is possibly 'undefined'.
+src/lib/integration.test.ts(151,59): error TS2532: Object is possibly 'undefined'.
+src/lib/optimal-retirement.test.ts(63,51): error TS7006: Parameter 'year' implicitly has an 'any' type.
+src/lib/performance.test.ts(37,1): error TS6133: 'AllocationAmounts' is declared but its value is never read.
+src/lib/simulate-wealth.test.ts(24,1): error TS6192: All imports in import declaration are unused.
+src/lib/simulate-wealth.test.ts(96,40): error TS2345: Argument of type '"unknown"' is not assignable to parameter of type 'FinancialPhase'.
+src/lib/simulate-wealth.test.ts(174,49): error TS2345: Argument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(177,24): error TS18048: 'year0' is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(178,24): error TS18048: 'year0' is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(179,24): error TS18048: 'year0' is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(180,24): error TS18048: 'year0' is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(181,24): error TS18048: 'year0' is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(181,30): error TS2339: Property 'isRetired' does not exist on type 'YearlySimulationData'.
+src/lib/simulate-wealth.test.ts(182,24): error TS18048: 'year0' is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(186,49): error TS2345: Argument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(195,24): error TS18048: 'year1' is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(199,49): error TS2345: Argument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(206,15): error TS18048: 'year3' is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(206,35): error TS2532: Object is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(218,49): error TS2345: Argument of type '{ totalDebt: number; grossSalaryMonthly: number; monthlyExpenses: number; currentAge: number; lifespan: number; totalSavings: number; totalInvestments: number; taxRate: number; investmentReturnRate: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ totalDebt: number; grossSalaryMonthly: number; monthlyExpenses: number; currentAge: number; lifespan: number; totalSavings: number; totalInvestments: number; taxRate: number; investmentReturnRate: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(221,24): error TS2532: Object is possibly 'undefined'.
+src/lib/simulate-wealth.test.ts(233,13): error TS2339: Property 'isRetired' does not exist on type 'YearlySimulationData'.
+src/lib/simulate-wealth.test.ts(242,49): error TS2345: Argument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(244,54): error TS2339: Property 'isRetired' does not exist on type 'YearlySimulationData'.
+src/lib/simulate-wealth.test.ts(251,27): error TS2339: Property 'savingsWithdrawal' does not exist on type 'YearlySimulationData'.
+src/lib/simulate-wealth.test.ts(251,65): error TS2551: Property 'investmentSale' does not exist on type 'YearlySimulationData'. Did you mean 'investments'?
+src/lib/simulate-wealth.test.ts(255,49): error TS2345: Argument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+src/lib/simulate-wealth.test.ts(258,60): error TS2339: Property 'isRetired' does not exist on type 'YearlySimulationData'.
+src/lib/simulate-wealth.test.ts(263,38): error TS2339: Property 'savingsWithdrawal' does not exist on type 'YearlySimulationData'.
+src/lib/simulate-wealth.test.ts(263,63): error TS2551: Property 'investmentSale' does not exist on type 'YearlySimulationData'. Did you mean 'investments'?
+src/lib/simulate-wealth.test.ts(326,51): error TS7006: Parameter 'year' implicitly has an 'any' type.
+src/lib/simulate-wealth.ts(20,3): error TS6196: 'SimulationYearParams' is declared but never used.
+src/lib/simulate-wealth.ts(22,3): error TS6196: 'WealthSimulationResult' is declared but never used.
+src/lib/simulate-wealth.ts(162,56): error TS2339: Property 'monthlyExpenses' does not exist on type 'SimulationInput'.
+src/lib/simulation-helpers.ts(5,15): error TS6196: 'FinancialPhase' is declared but never used.
+src/lib/simulation-helpers.ts(5,75): error TS6196: 'RetirementWithdrawal' is declared but never used.
+src/lib/simulation-helpers.ts(5,97): error TS6196: 'AllocationAmounts' is declared but never used.
+src/main.ts(47,3): error TS2322: Type '{ error: any; context: string; timestamp: number; }' is not assignable to type 'null'.
+src/main.ts(111,52): error TS2339: Property 'destroy' does not exist on type 'never'.
+src/state/financial-data.test.ts(14,11): error TS7006: Parameter 'key' implicitly has an 'any' type.
+src/state/financial-data.test.ts(15,12): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+src/state/financial-data.test.ts(17,11): error TS7006: Parameter 'key' implicitly has an 'any' type.
+src/state/financial-data.test.ts(17,16): error TS7006: Parameter 'value' implicitly has an 'any' type.
+src/state/financial-data.test.ts(18,5): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+src/state/financial-data.test.ts(20,14): error TS7006: Parameter 'key' implicitly has an 'any' type.
+src/state/financial-data.test.ts(21,12): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+src/state/financial-data.test.ts(29,1): error TS2739: Type '{ store: {}; getItem(key: any): any; setItem(key: any, value: any): void; removeItem(key: any): void; clear(): void; }' is missing the following properties from type 'Storage': length, key
+src/state/financial-data.test.ts(54,29): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(55,29): error TS2339: Property 'currentAge' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(56,29): error TS2339: Property 'totalDebt' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(68,31): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(69,31): error TS2339: Property 'housing' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(96,32): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(97,32): error TS2339: Property 'housing' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(99,32): error TS2339: Property 'currentAge' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(114,29): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(127,41): error TS2345: Argument of type 'boolean' is not assignable to parameter of type 'string'.
+src/state/financial-data.test.ts(131,33): error TS2339: Property 'grossUsd' does not exist on type 'boolean'.
+src/state/financial-data.test.ts(150,24): error TS18047: 'receivedData' is possibly 'null'.
+src/state/financial-data.ts(137,25): error TS2698: Spread types may only be created from object types.
+src/state/financial-data.ts(148,3): error TS2322: Type 'string' is not assignable to type 'boolean'.
+src/state/observers.test.ts(14,7): error TS7034: Variable 'observerCalls' implicitly has type 'any[]' in some locations where its type cannot be determined.
+src/state/observers.test.ts(38,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(40,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(45,21): error TS2345: Argument of type 'string' is not assignable to parameter of type '(...args: any[]) => any'.
+src/state/observers.test.ts(49,21): error TS2345: Argument of type 'null' is not assignable to parameter of type '(...args: any[]) => any'.
+src/state/observers.test.ts(53,21): error TS2345: Argument of type 'number' is not assignable to parameter of type '(...args: any[]) => any'.
+src/state/observers.test.ts(63,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(66,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(67,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(68,26): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(81,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(101,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(103,26): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(115,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(118,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(119,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(132,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(133,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(149,9): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(153,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/observers.test.ts(160,9): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(178,7): error TS2554: Expected 2 arguments, but got 1.
+src/state/observers.test.ts(181,30): error TS7005: Variable 'observerCalls' implicitly has an 'any[]' type.
+src/state/simulation-results.test.ts(166,32): error TS2339: Property 'entries' does not exist on type 'string'.
+src/state/simulation-results.test.ts(167,32): error TS2339: Property 'hits' does not exist on type 'string'.
+src/state/simulation-results.test.ts(168,32): error TS2339: Property 'misses' does not exist on type 'string'.
+src/state/simulation-results.test.ts(173,32): error TS2339: Property 'misses' does not exist on type 'string'.

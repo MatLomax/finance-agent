@@ -1,0 +1,2515 @@
+[96msrc/lib/allocations.test.ts[0m:[93m13[0m:[93m1[0m - [91merror[0m[90m TS6133: [0m'AllocationAmounts' is declared but its value is never read.
+
+[7m13[0m import type { AllocationAmounts } from '../types/index.js';
+[7m  [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m22[0m:[93m1[0m - [91merror[0m[90m TS6133: [0m'AllocationAmounts' is declared but its value is never read.
+
+[7m22[0m import type { AllocationAmounts } from '../types/index.js';
+[7m  [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m89[0m:[93m42[0m - [91merror[0m[90m TS2339: [0mProperty 'debt' does not exist on type 'AllocationAmounts'.
+
+[7m89[0m       const totalAllocated = allocations.debt + allocations.savings + allocations.investment;
+[7m  [0m [91m                                         ~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m89[0m:[93m61[0m - [91merror[0m[90m TS2339: [0mProperty 'savings' does not exist on type 'AllocationAmounts'.
+
+[7m89[0m       const totalAllocated = allocations.debt + allocations.savings + allocations.investment;
+[7m  [0m [91m                                                            ~~~~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m89[0m:[93m83[0m - [91merror[0m[90m TS2339: [0mProperty 'investment' does not exist on type 'AllocationAmounts'.
+
+[7m89[0m       const totalAllocated = allocations.debt + allocations.savings + allocations.investment;
+[7m  [0m [91m                                                                                  ~~~~~~~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m93[0m:[93m82[0m - [91merror[0m[90m TS2339: [0mProperty 'debt' does not exist on type 'AllocationAmounts'.
+
+[7m93[0m       const debtPayment = calculateDebtPayment(testData.currentDebt, allocations.debt);
+[7m  [0m [91m                                                                                 ~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m96[0m:[93m41[0m - [91merror[0m[90m TS2339: [0mProperty 'debt' does not exist on type 'AllocationAmounts'.
+
+[7m96[0m       assert(debtPayment <= allocations.debt, 'Cannot pay more than allocated');
+[7m  [0m [91m                                        ~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m97[0m:[93m51[0m - [91merror[0m[90m TS2339: [0mProperty 'debt' does not exist on type 'AllocationAmounts'.
+
+[7m97[0m       assert.strictEqual(debtPayment, allocations.debt); // In this case, allocation < debt
+[7m  [0m [91m                                                  ~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m130[0m:[93m51[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ grossSalaryMonthly: number; currentAge: number; lifespan: number; grossUsd: number; eurUsd: number; thbEur: number; taxRate: number; monthlyExpenses: number; totalDebt: number; totalSavings: number; totalInvestments: number; investmentReturnRate: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ grossSalaryMonthly: number; currentAge: number; lifespan: number; grossUsd: number; eurUsd: number; thbEur: number; taxRate: number; monthlyExpenses: number; totalDebt: number; totalSavings: number; totalInvestments: number; investmentReturnRate: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, housing, and 23 more.
+
+[7m130[0m       const simulation = simulateWealthTrajectory(simulationData, 65);
+[7m   [0m [91m                                                  ~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m139[0m:[93m26[0m - [91merror[0m[90m TS18048: [0m'firstYear' is possibly 'undefined'.
+
+[7m139[0m       assert.strictEqual(firstYear.age, simulationInput.currentAge);
+[7m   [0m [91m                         ~~~~~~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m140[0m:[93m26[0m - [91merror[0m[90m TS18048: [0m'lastYear' is possibly 'undefined'.
+
+[7m140[0m       assert.strictEqual(lastYear.age, simulationInput.lifespan);
+[7m   [0m [91m                         ~~~~~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m147[0m:[93m15[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m147[0m           if (debtYears[i].debt < debtYears[i - 1].debt) {
+[7m   [0m [91m              ~~~~~~~~~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m147[0m:[93m35[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m147[0m           if (debtYears[i].debt < debtYears[i - 1].debt) {
+[7m   [0m [91m                                  ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/integration.test.ts[0m:[93m152[0m:[93m59[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m152[0m         return simulation.some(year => year.debt === 0 && simulation[0].debt > 0);
+[7m   [0m [91m                                                          ~~~~~~~~~~~~~[0m
+
+[96msrc/lib/optimal-retirement.test.ts[0m:[93m63[0m:[93m51[0m - [91merror[0m[90m TS7006: [0mParameter 'year' implicitly has an 'any' type.
+
+[7m63[0m     const retirementYear = result.simulation.find(year => year.age === result.age);
+[7m  [0m [91m                                                  ~~~~[0m
+
+[96msrc/lib/performance.test.ts[0m:[93m37[0m:[93m1[0m - [91merror[0m[90m TS6133: [0m'AllocationAmounts' is declared but its value is never read.
+
+[7m37[0m import type { AllocationAmounts } from '../types/index.js';
+[7m  [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m24[0m:[93m1[0m - [91merror[0m[90m TS6192: [0mAll imports in import declaration are unused.
+
+[7m24[0m import type { AllocationAmounts, FinancialPhase, RetirementWithdrawal } from '../types/index.js';
+[7m  [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m96[0m:[93m40[0m - [91merror[0m[90m TS2345: [0mArgument of type '"unknown"' is not assignable to parameter of type 'FinancialPhase'.
+
+[7m96[0m       calculateAllocationAmounts(1000, 'unknown', testAllocations, 0);
+[7m  [0m [91m                                       ~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m174[0m:[93m49[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+
+[7m174[0m     const simulation = simulateWealthTrajectory(baseInput, 65);
+[7m   [0m [91m                                                ~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m177[0m:[93m24[0m - [91merror[0m[90m TS18048: [0m'year0' is possibly 'undefined'.
+
+[7m177[0m     assert.strictEqual(year0.age, 30);
+[7m   [0m [91m                       ~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m178[0m:[93m24[0m - [91merror[0m[90m TS18048: [0m'year0' is possibly 'undefined'.
+
+[7m178[0m     assert.strictEqual(year0.debt, 5000);
+[7m   [0m [91m                       ~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m179[0m:[93m24[0m - [91merror[0m[90m TS18048: [0m'year0' is possibly 'undefined'.
+
+[7m179[0m     assert.strictEqual(year0.savings, 2000);
+[7m   [0m [91m                       ~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m180[0m:[93m24[0m - [91merror[0m[90m TS18048: [0m'year0' is possibly 'undefined'.
+
+[7m180[0m     assert.strictEqual(year0.investments, 1000);
+[7m   [0m [91m                       ~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m181[0m:[93m24[0m - [91merror[0m[90m TS18048: [0m'year0' is possibly 'undefined'.
+
+[7m181[0m     assert.strictEqual(year0.isRetired, false);
+[7m   [0m [91m                       ~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m181[0m:[93m30[0m - [91merror[0m[90m TS2339: [0mProperty 'isRetired' does not exist on type 'YearlySimulationData'.
+
+[7m181[0m     assert.strictEqual(year0.isRetired, false);
+[7m   [0m [91m                             ~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m182[0m:[93m24[0m - [91merror[0m[90m TS18048: [0m'year0' is possibly 'undefined'.
+
+[7m182[0m     assert.strictEqual(year0.freeCapital, 0);
+[7m   [0m [91m                       ~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m186[0m:[93m49[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+
+[7m186[0m     const simulation = simulateWealthTrajectory(baseInput, 65);
+[7m   [0m [91m                                                ~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m195[0m:[93m24[0m - [91merror[0m[90m TS18048: [0m'year1' is possibly 'undefined'.
+
+[7m195[0m     assert.strictEqual(year1.freeCapital, expectedFreeCapital);
+[7m   [0m [91m                       ~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m199[0m:[93m49[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+
+[7m199[0m     const simulation = simulateWealthTrajectory(baseInput, 65);
+[7m   [0m [91m                                                ~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m206[0m:[93m15[0m - [91merror[0m[90m TS18048: [0m'year3' is possibly 'undefined'.
+
+[7m206[0m     assert.ok(year3.freeCapital < simulation[1].freeCapital);
+[7m   [0m [91m              ~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m206[0m:[93m35[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m206[0m     assert.ok(year3.freeCapital < simulation[1].freeCapital);
+[7m   [0m [91m                                  ~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m218[0m:[93m49[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ totalDebt: number; grossSalaryMonthly: number; monthlyExpenses: number; currentAge: number; lifespan: number; totalSavings: number; totalInvestments: number; taxRate: number; investmentReturnRate: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ totalDebt: number; grossSalaryMonthly: number; monthlyExpenses: number; currentAge: number; lifespan: number; totalSavings: number; totalInvestments: number; taxRate: number; investmentReturnRate: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+
+[7m218[0m     const simulation = simulateWealthTrajectory(quickDebtInput, 65);
+[7m   [0m [91m                                                ~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m221[0m:[93m24[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m221[0m     assert.strictEqual(simulation[0].phase, 'debt');
+[7m   [0m [91m                       ~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m233[0m:[93m13[0m - [91merror[0m[90m TS2339: [0mProperty 'isRetired' does not exist on type 'YearlySimulationData'.
+
+[7m233[0m       !year.isRetired
+[7m   [0m [91m            ~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m242[0m:[93m49[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+
+[7m242[0m     const simulation = simulateWealthTrajectory(baseInput, 32); // Retire at 32
+[7m   [0m [91m                                                ~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m244[0m:[93m54[0m - [91merror[0m[90m TS2339: [0mProperty 'isRetired' does not exist on type 'YearlySimulationData'.
+
+[7m244[0m     const retiredYear = simulation.find(year => year.isRetired);
+[7m   [0m [91m                                                     ~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m251[0m:[93m27[0m - [91merror[0m[90m TS2339: [0mProperty 'savingsWithdrawal' does not exist on type 'YearlySimulationData'.
+
+[7m251[0m     assert.ok(retiredYear.savingsWithdrawal >= 0 || retiredYear.investmentSale >= 0);
+[7m   [0m [91m                          ~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m251[0m:[93m65[0m - [91merror[0m[90m TS2551: [0mProperty 'investmentSale' does not exist on type 'YearlySimulationData'. Did you mean 'investments'?
+
+[7m251[0m     assert.ok(retiredYear.savingsWithdrawal >= 0 || retiredYear.investmentSale >= 0);
+[7m   [0m [91m                                                                ~~~~~~~~~~~~~~[0m
+
+  [96msrc/types/index.ts[0m:[93m128[0m:[93m12[0m
+    [7m128[0m   readonly investments: number;
+    [7m   [0m [96m           ~~~~~~~~~~~[0m
+    'investments' is declared here.
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m255[0m:[93m49[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ currentAge: number; lifespan: number; totalDebt: number; totalSavings: number; totalInvestments: number; grossSalaryMonthly: number; taxRate: number; investmentReturnRate: number; monthlyExpenses: number; allocations: { ...; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 26 more.
+
+[7m255[0m     const simulation = simulateWealthTrajectory(baseInput, 65);
+[7m   [0m [91m                                                ~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m258[0m:[93m60[0m - [91merror[0m[90m TS2339: [0mProperty 'isRetired' does not exist on type 'YearlySimulationData'.
+
+[7m258[0m     const retirementYears = simulation.filter(year => year.isRetired);
+[7m   [0m [91m                                                           ~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m263[0m:[93m38[0m - [91merror[0m[90m TS2339: [0mProperty 'savingsWithdrawal' does not exist on type 'YearlySimulationData'.
+
+[7m263[0m         const totalWithdrawal = year.savingsWithdrawal + year.investmentSale;
+[7m   [0m [91m                                     ~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m263[0m:[93m63[0m - [91merror[0m[90m TS2551: [0mProperty 'investmentSale' does not exist on type 'YearlySimulationData'. Did you mean 'investments'?
+
+[7m263[0m         const totalWithdrawal = year.savingsWithdrawal + year.investmentSale;
+[7m   [0m [91m                                                              ~~~~~~~~~~~~~~[0m
+
+  [96msrc/types/index.ts[0m:[93m128[0m:[93m12[0m
+    [7m128[0m   readonly investments: number;
+    [7m   [0m [96m           ~~~~~~~~~~~[0m
+    'investments' is declared here.
+
+[96msrc/lib/simulate-wealth.test.ts[0m:[93m326[0m:[93m51[0m - [91merror[0m[90m TS7006: [0mParameter 'year' implicitly has an 'any' type.
+
+[7m326[0m     const retirementYear = result.simulation.find(year => year.age === result.age);
+[7m   [0m [91m                                                  ~~~~[0m
+
+[96msrc/lib/simulate-wealth.ts[0m:[93m20[0m:[93m3[0m - [91merror[0m[90m TS6196: [0m'SimulationYearParams' is declared but never used.
+
+[7m20[0m   SimulationYearParams,
+[7m  [0m [91m  ~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.ts[0m:[93m22[0m:[93m3[0m - [91merror[0m[90m TS6196: [0m'WealthSimulationResult' is declared but never used.
+
+[7m22[0m   WealthSimulationResult,
+[7m  [0m [91m  ~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulate-wealth.ts[0m:[93m162[0m:[93m56[0m - [91merror[0m[90m TS2339: [0mProperty 'monthlyExpenses' does not exist on type 'SimulationInput'.
+
+[7m162[0m     grossSalaryMonthly, taxRate, investmentReturnRate, monthlyExpenses, allocations,
+[7m   [0m [91m                                                       ~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulation-helpers.ts[0m:[93m5[0m:[93m15[0m - [91merror[0m[90m TS6196: [0m'FinancialPhase' is declared but never used.
+
+[7m5[0m import type { FinancialPhase, SimulationYearParams, SimulationYearResult, RetirementWithdrawal, AllocationAmounts } from '../types/index.js';
+[7m [0m [91m              ~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulation-helpers.ts[0m:[93m5[0m:[93m75[0m - [91merror[0m[90m TS6196: [0m'RetirementWithdrawal' is declared but never used.
+
+[7m5[0m import type { FinancialPhase, SimulationYearParams, SimulationYearResult, RetirementWithdrawal, AllocationAmounts } from '../types/index.js';
+[7m [0m [91m                                                                          ~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/simulation-helpers.ts[0m:[93m5[0m:[93m97[0m - [91merror[0m[90m TS6196: [0m'AllocationAmounts' is declared but never used.
+
+[7m5[0m import type { FinancialPhase, SimulationYearParams, SimulationYearResult, RetirementWithdrawal, AllocationAmounts } from '../types/index.js';
+[7m [0m [91m                                                                                                ~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/main.ts[0m:[93m47[0m:[93m3[0m - [91merror[0m[90m TS2322: [0mType '{ error: any; context: string; timestamp: number; }' is not assignable to type 'null'.
+
+[7m47[0m   appState.lastError = { error, context, timestamp: Date.now() };
+[7m  [0m [91m  ~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/main.ts[0m:[93m111[0m:[93m52[0m - [91merror[0m[90m TS2339: [0mProperty 'destroy' does not exist on type 'never'.
+
+[7m111[0m       /** @type {any} */ (appState.inputsInstance).destroy();
+[7m   [0m [91m                                                   ~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m14[0m:[93m11[0m - [91merror[0m[90m TS7006: [0mParameter 'key' implicitly has an 'any' type.
+
+[7m14[0m   getItem(key) {
+[7m  [0m [91m          ~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m15[0m:[93m12[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+
+[7m15[0m     return this.store[key] || null;
+[7m  [0m [91m           ~~~~~~~~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m17[0m:[93m11[0m - [91merror[0m[90m TS7006: [0mParameter 'key' implicitly has an 'any' type.
+
+[7m17[0m   setItem(key, value) {
+[7m  [0m [91m          ~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m17[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'value' implicitly has an 'any' type.
+
+[7m17[0m   setItem(key, value) {
+[7m  [0m [91m               ~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m18[0m:[93m5[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+
+[7m18[0m     this.store[key] = String(value);
+[7m  [0m [91m    ~~~~~~~~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m20[0m:[93m14[0m - [91merror[0m[90m TS7006: [0mParameter 'key' implicitly has an 'any' type.
+
+[7m20[0m   removeItem(key) {
+[7m  [0m [91m             ~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m21[0m:[93m12[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+
+[7m21[0m     delete this.store[key];
+[7m  [0m [91m           ~~~~~~~~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m29[0m:[93m1[0m - [91merror[0m[90m TS2739: [0mType '{ store: {}; getItem(key: any): any; setItem(key: any, value: any): void; removeItem(key: any): void; clear(): void; }' is missing the following properties from type 'Storage': length, key
+
+[7m29[0m global.localStorage = localStorageMock;
+[7m  [0m [91m~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m54[0m:[93m29[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'boolean'.
+
+[7m54[0m     assert.strictEqual(data.grossUsd, defaults.grossUsd);
+[7m  [0m [91m                            ~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m55[0m:[93m29[0m - [91merror[0m[90m TS2339: [0mProperty 'currentAge' does not exist on type 'boolean'.
+
+[7m55[0m     assert.strictEqual(data.currentAge, defaults.currentAge);
+[7m  [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m56[0m:[93m29[0m - [91merror[0m[90m TS2339: [0mProperty 'totalDebt' does not exist on type 'boolean'.
+
+[7m56[0m     assert.strictEqual(data.totalDebt, defaults.totalDebt);
+[7m  [0m [91m                            ~~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m68[0m:[93m31[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'boolean'.
+
+[7m68[0m     assert.strictEqual(loaded.grossUsd, 10000);
+[7m  [0m [91m                              ~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m69[0m:[93m31[0m - [91merror[0m[90m TS2339: [0mProperty 'housing' does not exist on type 'boolean'.
+
+[7m69[0m     assert.strictEqual(loaded.housing, 2000);
+[7m  [0m [91m                              ~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m96[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'boolean'.
+
+[7m96[0m     assert.strictEqual(updated.grossUsd, 12000);
+[7m  [0m [91m                               ~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m97[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'housing' does not exist on type 'boolean'.
+
+[7m97[0m     assert.strictEqual(updated.housing, 1800);
+[7m  [0m [91m                               ~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m99[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'currentAge' does not exist on type 'boolean'.
+
+[7m99[0m     assert.strictEqual(updated.currentAge, 33);
+[7m  [0m [91m                               ~~~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m114[0m:[93m29[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'boolean'.
+
+[7m114[0m     assert.strictEqual(data.grossUsd, defaults.grossUsd);
+[7m   [0m [91m                            ~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m127[0m:[93m41[0m - [91merror[0m[90m TS2345: [0mArgument of type 'boolean' is not assignable to parameter of type 'string'.
+
+[7m127[0m     const success = importFinancialData(exported);
+[7m   [0m [91m                                        ~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m131[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'boolean'.
+
+[7m131[0m     assert.strictEqual(imported.grossUsd, 11000);
+[7m   [0m [91m                                ~~~~~~~~[0m
+
+[96msrc/state/financial-data.test.ts[0m:[93m150[0m:[93m24[0m - [91merror[0m[90m TS18047: [0m'receivedData' is possibly 'null'.
+
+[7m150[0m     assert.strictEqual(receivedData.grossUsd, 13000);
+[7m   [0m [91m                       ~~~~~~~~~~~~[0m
+
+[96msrc/state/financial-data.ts[0m:[93m137[0m:[93m25[0m - [91merror[0m[90m TS2698: [0mSpread types may only be created from object types.
+
+[7m137[0m   const updatedData = { ...currentData, ...updates };
+[7m   [0m [91m                        ~~~~~~~~~~~~~~[0m
+
+[96msrc/state/financial-data.ts[0m:[93m148[0m:[93m3[0m - [91merror[0m[90m TS2322: [0mType 'string' is not assignable to type 'boolean'.
+
+[7m148[0m   return JSON.stringify(data, null, 2);
+[7m   [0m [91m  ~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m14[0m:[93m7[0m - [91merror[0m[90m TS7034: [0mVariable 'observerCalls' implicitly has type 'any[]' in some locations where its type cannot be determined.
+
+[7m14[0m   let observerCalls = [];
+[7m  [0m [91m      ~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m38[0m:[93m7[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m38[0m       notifyObservers({ balance: 1000 });
+[7m  [0m [91m      ~~~~~~~~~~~~~~~[0m
+
+  [96msrc/state/observers.ts[0m:[93m63[0m:[93m47[0m
+    [7m63[0m export function notifyObservers(newData: any, previousData: any): boolean {
+    [7m  [0m [96m                                              ~~~~~~~~~~~~~~~~~[0m
+    An argument for 'previousData' was not provided.
+
+[96msrc/state/observers.test.ts[0m:[93m40[0m:[93m30[0m - [91merror[0m[90m TS7005: [0mVariable 'observerCalls' implicitly has an 'any[]' type.
+
+[7m40[0m       assert.deepStrictEqual(observerCalls[0].data, { balance: 1000 });
+[7m  [0m [91m                             ~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m45[0m:[93m21[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type '(...args: any[]) => any'.
+
+[7m45[0m         addObserver('not a function');
+[7m  [0m [91m                    ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m49[0m:[93m21[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type '(...args: any[]) => any'.
+
+[7m49[0m         addObserver(null);
+[7m  [0m [91m                    ~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m53[0m:[93m21[0m - [91merror[0m[90m TS2345: [0mArgument of type 'number' is not assignable to parameter of type '(...args: any[]) => any'.
+
+[7m53[0m         addObserver(123);
+[7m  [0m [91m                    ~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m63[0m:[93m7[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m63[0m       notifyObservers({ balance: 2000 });
+[7m  [0m [91m      ~~~~~~~~~~~~~~~[0m
+
+  [96msrc/state/observers.ts[0m:[93m63[0m:[93m47[0m
+    [7m63[0m export function notifyObservers(newData: any, previousData: any): boolean {
+    [7m  [0m [96m                                              ~~~~~~~~~~~~~~~~~[0m
+    An argument for 'previousData' was not provided.
+
+[96msrc/state/observers.test.ts[0m:[93m66[0m:[93m30[0m - [91merror[0m[90m TS7005: [0mVariable 'observerCalls' implicitly has an 'any[]' type.
+
+[7m66[0m       assert.deepStrictEqual(observerCalls[0].data, { balance: 2000 });
+[7m  [0m [91m                             ~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m67[0m:[93m30[0m - [91merror[0m[90m TS7005: [0mVariable 'observerCalls' implicitly has an 'any[]' type.
+
+[7m67[0m       assert.deepStrictEqual(observerCalls[1].data, { balance: 2000 });
+[7m  [0m [91m                             ~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m68[0m:[93m26[0m - [91merror[0m[90m TS7005: [0mVariable 'observerCalls' implicitly has an 'any[]' type.
+
+[7m68[0m       assert.strictEqual(observerCalls[1].source, 'another');
+[7m  [0m [91m                         ~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m81[0m:[93m7[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m81[0m       notifyObservers({ balance: 3000 });
+[7m  [0m [91m      ~~~~~~~~~~~~~~~[0m
+
+  [96msrc/state/observers.ts[0m:[93m63[0m:[93m47[0m
+    [7m63[0m export function notifyObservers(newData: any, previousData: any): boolean {
+    [7m  [0m [96m                                              ~~~~~~~~~~~~~~~~~[0m
+    An argument for 'previousData' was not provided.
+
+[96msrc/state/observers.test.ts[0m:[93m101[0m:[93m7[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m101[0m       notifyObservers({ balance: 4000 });
+[7m   [0m [91m      ~~~~~~~~~~~~~~~[0m
+
+  [96msrc/state/observers.ts[0m:[93m63[0m:[93m47[0m
+    [7m63[0m export function notifyObservers(newData: any, previousData: any): boolean {
+    [7m  [0m [96m                                              ~~~~~~~~~~~~~~~~~[0m
+    An argument for 'previousData' was not provided.
+
+[96msrc/state/observers.test.ts[0m:[93m103[0m:[93m26[0m - [91merror[0m[90m TS7005: [0mVariable 'observerCalls' implicitly has an 'any[]' type.
+
+[7m103[0m       assert.strictEqual(observerCalls[0].source, 'another');
+[7m   [0m [91m                         ~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m115[0m:[93m7[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m115[0m       notifyObservers(data);
+[7m   [0m [91m      ~~~~~~~~~~~~~~~[0m
+
+  [96msrc/state/observers.ts[0m:[93m63[0m:[93m47[0m
+    [7m63[0m export function notifyObservers(newData: any, previousData: any): boolean {
+    [7m  [0m [96m                                              ~~~~~~~~~~~~~~~~~[0m
+    An argument for 'previousData' was not provided.
+
+[96msrc/state/observers.test.ts[0m:[93m118[0m:[93m30[0m - [91merror[0m[90m TS7005: [0mVariable 'observerCalls' implicitly has an 'any[]' type.
+
+[7m118[0m       assert.deepStrictEqual(observerCalls[0].data, data);
+[7m   [0m [91m                             ~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m119[0m:[93m30[0m - [91merror[0m[90m TS7005: [0mVariable 'observerCalls' implicitly has an 'any[]' type.
+
+[7m119[0m       assert.deepStrictEqual(observerCalls[1].data, data);
+[7m   [0m [91m                             ~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m132[0m:[93m30[0m - [91merror[0m[90m TS7005: [0mVariable 'observerCalls' implicitly has an 'any[]' type.
+
+[7m132[0m       assert.deepStrictEqual(observerCalls[0].data, newData);
+[7m   [0m [91m                             ~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m133[0m:[93m30[0m - [91merror[0m[90m TS7005: [0mVariable 'observerCalls' implicitly has an 'any[]' type.
+
+[7m133[0m       assert.deepStrictEqual(observerCalls[0].previous, previousData);
+[7m   [0m [91m                             ~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m149[0m:[93m9[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m149[0m         notifyObservers({ balance: 7000 });
+[7m   [0m [91m        ~~~~~~~~~~~~~~~[0m
+
+  [96msrc/state/observers.ts[0m:[93m63[0m:[93m47[0m
+    [7m63[0m export function notifyObservers(newData: any, previousData: any): boolean {
+    [7m  [0m [96m                                              ~~~~~~~~~~~~~~~~~[0m
+    An argument for 'previousData' was not provided.
+
+[96msrc/state/observers.test.ts[0m:[93m153[0m:[93m30[0m - [91merror[0m[90m TS7005: [0mVariable 'observerCalls' implicitly has an 'any[]' type.
+
+[7m153[0m       assert.deepStrictEqual(observerCalls[0].data, { balance: 7000 });
+[7m   [0m [91m                             ~~~~~~~~~~~~~[0m
+
+[96msrc/state/observers.test.ts[0m:[93m160[0m:[93m9[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m160[0m         notifyObservers({ balance: 8000 });
+[7m   [0m [91m        ~~~~~~~~~~~~~~~[0m
+
+  [96msrc/state/observers.ts[0m:[93m63[0m:[93m47[0m
+    [7m63[0m export function notifyObservers(newData: any, previousData: any): boolean {
+    [7m  [0m [96m                                              ~~~~~~~~~~~~~~~~~[0m
+    An argument for 'previousData' was not provided.
+
+[96msrc/state/observers.test.ts[0m:[93m178[0m:[93m7[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m178[0m       notifyObservers(complexData);
+[7m   [0m [91m      ~~~~~~~~~~~~~~~[0m
+
+  [96msrc/state/observers.ts[0m:[93m63[0m:[93m47[0m
+    [7m63[0m export function notifyObservers(newData: any, previousData: any): boolean {
+    [7m  [0m [96m                                              ~~~~~~~~~~~~~~~~~[0m
+    An argument for 'previousData' was not provided.
+
+[96msrc/state/observers.test.ts[0m:[93m181[0m:[93m30[0m - [91merror[0m[90m TS7005: [0mVariable 'observerCalls' implicitly has an 'any[]' type.
+
+[7m181[0m       assert.deepStrictEqual(observerCalls[0].data, complexData);
+[7m   [0m [91m                             ~~~~~~~~~~~~~[0m
+
+[96msrc/state/simulation-results.test.ts[0m:[93m166[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'entries' does not exist on type 'string'.
+
+[7m166[0m       assert.strictEqual(stats.entries, 0);
+[7m   [0m [91m                               ~~~~~~~[0m
+
+[96msrc/state/simulation-results.test.ts[0m:[93m167[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'hits' does not exist on type 'string'.
+
+[7m167[0m       assert.strictEqual(stats.hits, 0);
+[7m   [0m [91m                               ~~~~[0m
+
+[96msrc/state/simulation-results.test.ts[0m:[93m168[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'misses' does not exist on type 'string'.
+
+[7m168[0m       assert.strictEqual(stats.misses, 0);
+[7m   [0m [91m                               ~~~~~~[0m
+
+[96msrc/state/simulation-results.test.ts[0m:[93m173[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'misses' does not exist on type 'string'.
+
+[7m173[0m       assert.strictEqual(stats.misses, 1);
+[7m   [0m [91m                               ~~~~~~[0m
+
+[96msrc/state/simulation-results.test.ts[0m:[93m178[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'entries' does not exist on type 'string'.
+
+[7m178[0m       assert.strictEqual(stats.entries, 1);
+[7m   [0m [91m                               ~~~~~~~[0m
+
+[96msrc/state/simulation-results.test.ts[0m:[93m183[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'hits' does not exist on type 'string'.
+
+[7m183[0m       assert.strictEqual(stats.hits, 1);
+[7m   [0m [91m                               ~~~~[0m
+
+[96msrc/state/simulation-results.test.ts[0m:[93m196[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'entries' does not exist on type 'string'.
+
+[7m196[0m       assert.ok(stats.entries <= 100);
+[7m   [0m [91m                      ~~~~~~~[0m
+
+[96msrc/state/simulation-results.test.ts[0m:[93m209[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'entries' does not exist on type 'string'.
+
+[7m209[0m       assert.strictEqual(stats.entries, 100);
+[7m   [0m [91m                               ~~~~~~~[0m
+
+[96msrc/state/simulation-results.test.ts[0m:[93m218[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'entries' does not exist on type 'string'.
+
+[7m218[0m       assert.strictEqual(stats.entries, 100);
+[7m   [0m [91m                               ~~~~~~~[0m
+
+[96msrc/state/simulation-results.ts[0m:[93m149[0m:[93m56[0m - [91merror[0m[90m TS2355: [0mA function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.
+
+[7m149[0m export function invalidateSimulationCache(input: any): string {
+[7m   [0m [91m                                                       ~~~~~~[0m
+
+[96msrc/state/simulation-results.ts[0m:[93m164[0m:[93m41[0m - [91merror[0m[90m TS2355: [0mA function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.
+
+[7m164[0m export function clearSimulationCache(): string {
+[7m   [0m [91m                                        ~~~~~~[0m
+
+[96msrc/state/simulation-results.ts[0m:[93m179[0m:[93m3[0m - [91merror[0m[90m TS2322: [0mType '{ entries: number; hits: number; misses: number; hitRate: number; }' is not assignable to type 'string'.
+
+[7m179[0m   return {
+[7m   [0m [91m  ~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m71[0m:[93m12[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m71[0m     delete incompleteData.grossUsd;
+[7m  [0m [91m           ~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m131[0m:[93m14[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ grossUsd: number; eurUsd: number; thbEur: number; taxRate: number; housing: number; utilities: number; diningGroceries: number; hiredStaff: number; transportation: number; healthInsurance: number; ... 19 more ...; totalInvestments: number; }'.
+  No index signature with a parameter of type 'string' was found on type '{ grossUsd: number; eurUsd: number; thbEur: number; taxRate: number; housing: number; utilities: number; diningGroceries: number; hiredStaff: number; transportation: number; healthInsurance: number; ... 19 more ...; totalInvestments: number; }'.
+
+[7m131[0m       delete missingField[field];
+[7m   [0m [91m             ~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m155[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'schemaVersion' does not exist on type 'boolean'.
+
+[7m155[0m     assert.strictEqual(migrated.schemaVersion, 1);
+[7m   [0m [91m                                ~~~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m156[0m:[93m40[0m - [91merror[0m[90m TS2339: [0mProperty 'lastUpdated' does not exist on type 'boolean'.
+
+[7m156[0m     assert.strictEqual(typeof migrated.lastUpdated, 'string');
+[7m   [0m [91m                                       ~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m157[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'version' does not exist on type 'boolean'.
+
+[7m157[0m     assert.strictEqual(migrated.version, '1.0.0');
+[7m   [0m [91m                                ~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m158[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'boolean'.
+
+[7m158[0m     assert.strictEqual(migrated.grossUsd, 9000); // Original data preserved
+[7m   [0m [91m                                ~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m171[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'schemaVersion' does not exist on type 'boolean'.
+
+[7m171[0m     assert.strictEqual(migrated.schemaVersion, 1);
+[7m   [0m [91m                                ~~~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m172[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'lastUpdated' does not exist on type 'boolean'.
+
+[7m172[0m     assert.strictEqual(migrated.lastUpdated, '2023-01-01T00:00:00Z');
+[7m   [0m [91m                                ~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m173[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'version' does not exist on type 'boolean'.
+
+[7m173[0m     assert.strictEqual(migrated.version, '1.0.0');
+[7m   [0m [91m                                ~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m181[0m:[93m37[0m - [91merror[0m[90m TS2339: [0mProperty 'schemaVersion' does not exist on type '{ grossUsd: number; }'.
+
+[7m181[0m     assert.strictEqual(originalData.schemaVersion, undefined);
+[7m   [0m [91m                                    ~~~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m182[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'schemaVersion' does not exist on type 'boolean'.
+
+[7m182[0m     assert.strictEqual(migrated.schemaVersion, 1);
+[7m   [0m [91m                                ~~~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m189[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'schemaVersion' does not exist on type 'boolean'.
+
+[7m189[0m     assert.strictEqual(migrated.schemaVersion, 1);
+[7m   [0m [91m                                ~~~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m190[0m:[93m40[0m - [91merror[0m[90m TS2339: [0mProperty 'lastUpdated' does not exist on type 'boolean'.
+
+[7m190[0m     assert.strictEqual(typeof migrated.lastUpdated, 'string');
+[7m   [0m [91m                                       ~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m191[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'version' does not exist on type 'boolean'.
+
+[7m191[0m     assert.strictEqual(migrated.version, '1.0.0');
+[7m   [0m [91m                                ~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m204[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'boolean'.
+
+[7m204[0m     assert.strictEqual(migrated.grossUsd, 9000);
+[7m   [0m [91m                                ~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m205[0m:[93m37[0m - [91merror[0m[90m TS2339: [0mProperty 'expenses' does not exist on type 'boolean'.
+
+[7m205[0m     assert.deepStrictEqual(migrated.expenses, { housing: 1400, utilities: 200 });
+[7m   [0m [91m                                    ~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m206[0m:[93m37[0m - [91merror[0m[90m TS2339: [0mProperty 'goals' does not exist on type 'boolean'.
+
+[7m206[0m     assert.deepStrictEqual(migrated.goals, { retirement: true });
+[7m   [0m [91m                                    ~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m207[0m:[93m37[0m - [91merror[0m[90m TS2339: [0mProperty 'metadata' does not exist on type 'boolean'.
+
+[7m207[0m     assert.deepStrictEqual(migrated.metadata, { created: '2023-01-01' });
+[7m   [0m [91m                                    ~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m208[0m:[93m33[0m - [91merror[0m[90m TS2339: [0mProperty 'schemaVersion' does not exist on type 'boolean'.
+
+[7m208[0m     assert.strictEqual(migrated.schemaVersion, 1);
+[7m   [0m [91m                                ~~~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m215[0m:[93m41[0m - [91merror[0m[90m TS2339: [0mProperty 'lastUpdated' does not exist on type 'boolean'.
+
+[7m215[0m     const timestamp = new Date(migrated.lastUpdated);
+[7m   [0m [91m                                        ~~~~~~~~~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m221[0m:[93m22[0m - [91merror[0m[90m TS2362: [0mThe left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+
+[7m221[0m     const timeDiff = now - timestamp;
+[7m   [0m [91m                     ~~~[0m
+
+[96msrc/state/validation.test.ts[0m:[93m221[0m:[93m28[0m - [91merror[0m[90m TS2363: [0mThe right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+
+[7m221[0m     const timeDiff = now - timestamp;
+[7m   [0m [91m                           ~~~~~~~~~[0m
+
+[96msrc/ui/app-controllers.test.ts[0m:[93m14[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+
+[7m14[0m     global.window = dom.window;
+[7m  [0m [91m    ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/app-controllers.test.ts[0m:[93m15[0m:[93m5[0m - [91merror[0m[90m TS2739: [0mType '{ getItem: () => null; setItem: () => void; removeItem: () => void; }' is missing the following properties from type 'Storage': length, clear, key
+
+[7m15[0m     global.localStorage = {
+[7m  [0m [91m    ~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/app-controllers.test.ts[0m:[93m40[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+
+[7m40[0m     global.window = dom.window;
+[7m  [0m [91m    ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/app-controllers.test.ts[0m:[93m41[0m:[93m5[0m - [91merror[0m[90m TS2739: [0mType '{ getItem: () => null; setItem: () => void; removeItem: () => void; }' is missing the following properties from type 'Storage': length, clear, key
+
+[7m41[0m     global.localStorage = {
+[7m  [0m [91m    ~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/app-controllers.ts[0m:[93m145[0m:[93m20[0m - [91merror[0m[90m TS2345: [0mArgument of type 'Element' is not assignable to parameter of type 'HTMLElement'.
+  Type 'Element' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, autocorrect, and 129 more.
+
+[7m145[0m   setupThemeToggle(themeToggle);
+[7m   [0m [91m                   ~~~~~~~~~~~[0m
+
+[96msrc/ui/app-layout.test.ts[0m:[93m14[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+
+[7m14[0m     global.window = dom.window;
+[7m  [0m [91m    ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/app-layout.test.ts[0m:[93m34[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+
+[7m34[0m     global.window = dom.window;
+[7m  [0m [91m    ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.test.ts[0m:[93m45[0m:[93m40[0m - [91merror[0m[90m TS2339: [0mProperty 'success' does not exist on type '(...args: any[]) => any'.
+
+[7m45[0m       assert.strictEqual(typeof result.success, 'boolean');
+[7m  [0m [91m                                       ~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.test.ts[0m:[93m52[0m:[93m40[0m - [91merror[0m[90m TS2339: [0mProperty 'success' does not exist on type '(...args: any[]) => any'.
+
+[7m52[0m       assert.strictEqual(typeof result.success, 'boolean');
+[7m  [0m [91m                                       ~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.test.ts[0m:[93m62[0m:[93m20[0m - [91merror[0m[90m TS2339: [0mProperty 'success' does not exist on type '(...args: any[]) => any'.
+
+[7m62[0m       if (!result1.success && result1.error?.includes('already in progress')) {
+[7m  [0m [91m                   ~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.test.ts[0m:[93m62[0m:[93m39[0m - [91merror[0m[90m TS2339: [0mProperty 'error' does not exist on type '(...args: any[]) => any'.
+
+[7m62[0m       if (!result1.success && result1.error?.includes('already in progress')) {
+[7m  [0m [91m                                      ~~~~~[0m
+
+[96msrc/ui/calculation-controller.test.ts[0m:[93m92[0m:[93m40[0m - [91merror[0m[90m TS2339: [0mProperty 'success' does not exist on type '(...args: any[]) => any'.
+
+[7m92[0m       assert.strictEqual(typeof result.success, 'boolean');
+[7m  [0m [91m                                       ~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.test.ts[0m:[93m99[0m:[93m40[0m - [91merror[0m[90m TS2339: [0mProperty 'success' does not exist on type '(...args: any[]) => any'.
+
+[7m99[0m       assert.strictEqual(typeof result.success, 'boolean');
+[7m  [0m [91m                                       ~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.test.ts[0m:[93m104[0m:[93m60[0m - [91merror[0m[90m TS6133: [0m't' is declared but its value is never read.
+
+[7m104[0m     it('should notify subscribers of calculation events', (t, done) => {
+[7m   [0m [91m                                                           ~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m38[0m:[93m44[0m - [91merror[0m[90m TS2355: [0mA function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.
+
+[7m38[0m function notifySubscribers(event: object): (...args: any[]) => any {
+[7m  [0m [91m                                           ~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m60[0m:[93m36[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'object'.
+
+[7m60[0m     const grossEur = financialData.grossUsd / financialData.eurUsd;
+[7m  [0m [91m                                   ~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m60[0m:[93m61[0m - [91merror[0m[90m TS2339: [0mProperty 'eurUsd' does not exist on type 'object'.
+
+[7m60[0m     const grossEur = financialData.grossUsd / financialData.eurUsd;
+[7m  [0m [91m                                                            ~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m66[0m:[93m31[0m - [91merror[0m[90m TS2339: [0mProperty 'allocDebt1' does not exist on type 'object'.
+
+[7m66[0m           debt: financialData.allocDebt1,
+[7m  [0m [91m                              ~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m67[0m:[93m34[0m - [91merror[0m[90m TS2339: [0mProperty 'allocSavings1' does not exist on type 'object'.
+
+[7m67[0m           savings: financialData.allocSavings1,
+[7m  [0m [91m                                 ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m68[0m:[93m38[0m - [91merror[0m[90m TS2339: [0mProperty 'allocInvestment1' does not exist on type 'object'.
+
+[7m68[0m           investments: financialData.allocInvestment1
+[7m  [0m [91m                                     ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m71[0m:[93m31[0m - [91merror[0m[90m TS2339: [0mProperty 'allocDebt2' does not exist on type 'object'.
+
+[7m71[0m           debt: financialData.allocDebt2,
+[7m  [0m [91m                              ~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m72[0m:[93m34[0m - [91merror[0m[90m TS2339: [0mProperty 'allocSavings2' does not exist on type 'object'.
+
+[7m72[0m           savings: financialData.allocSavings2,
+[7m  [0m [91m                                 ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m73[0m:[93m38[0m - [91merror[0m[90m TS2339: [0mProperty 'allocInvestment2' does not exist on type 'object'.
+
+[7m73[0m           investments: financialData.allocInvestment2
+[7m  [0m [91m                                     ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m77[0m:[93m34[0m - [91merror[0m[90m TS2339: [0mProperty 'allocSavings3' does not exist on type 'object'.
+
+[7m77[0m           savings: financialData.allocSavings3,
+[7m  [0m [91m                                 ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m78[0m:[93m38[0m - [91merror[0m[90m TS2339: [0mProperty 'allocInvestment3' does not exist on type 'object'.
+
+[7m78[0m           investments: financialData.allocInvestment3
+[7m  [0m [91m                                     ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m83[0m:[93m56[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ grossSalaryMonthly: number; allocations: { debtPhase: { debt: any; savings: any; investments: any; }; emergencyPhase: { debt: any; savings: any; investments: any; }; retirementPhase: { debt: number; savings: any; investments: any; }; }; }' is not assignable to parameter of type 'SimulationInput'.
+  Type '{ grossSalaryMonthly: number; allocations: { debtPhase: { debt: any; savings: any; investments: any; }; emergencyPhase: { debt: any; savings: any; investments: any; }; retirementPhase: { debt: number; savings: any; investments: any; }; }; }' is missing the following properties from type 'SimulationInput': schemaVersion, lastUpdated, version, grossUsd, and 33 more.
+
+[7m83[0m     const simulationResults = simulateWealthTrajectory(simulationInput, 65);
+[7m  [0m [91m                                                       ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m84[0m:[93m14[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'success' does not exist in type '(...args: any[]) => any'.
+
+[7m84[0m     return { success: true, data: simulationResults };
+[7m  [0m [91m             ~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m86[0m:[93m14[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'success' does not exist in type '(...args: any[]) => any'.
+
+[7m86[0m     return { success: false, error: error.message || 'Calculation failed' };
+[7m  [0m [91m             ~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m86[0m:[93m37[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m86[0m     return { success: false, error: error.message || 'Calculation failed' };
+[7m  [0m [91m                                    ~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m96[0m:[93m14[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'success' does not exist in type '(...args: any[]) => any'.
+
+[7m96[0m     return { success: false, error: 'Calculation already in progress' };
+[7m  [0m [91m             ~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m108[0m:[93m16[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'success' does not exist in type '(...args: any[]) => any'.
+
+[7m108[0m       return { success: true, data: cached, fromCache: true };
+[7m   [0m [91m               ~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m111[0m:[93m39[0m - [91merror[0m[90m TS2345: [0mArgument of type 'boolean' is not assignable to parameter of type 'object'.
+
+[7m111[0m     const result = performCalculation(financialData);
+[7m   [0m [91m                                      ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m112[0m:[93m16[0m - [91merror[0m[90m TS2339: [0mProperty 'success' does not exist on type '(...args: any[]) => any'.
+
+[7m112[0m     if (result.success && result.data) {
+[7m   [0m [91m               ~~~~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m112[0m:[93m34[0m - [91merror[0m[90m TS2339: [0mProperty 'data' does not exist on type '(...args: any[]) => any'.
+
+[7m112[0m     if (result.success && result.data) {
+[7m   [0m [91m                                 ~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m113[0m:[93m49[0m - [91merror[0m[90m TS2339: [0mProperty 'data' does not exist on type '(...args: any[]) => any'.
+
+[7m113[0m       setCachedSimulation(financialData, result.data);
+[7m   [0m [91m                                                ~~~~[0m
+
+[96msrc/ui/calculation-controller.ts[0m:[93m116[0m:[93m71[0m - [91merror[0m[90m TS2339: [0mProperty 'data' does not exist on type '(...args: any[]) => any'.
+
+[7m116[0m     notifySubscribers({ type: 'calculation-complete', results: result.data });
+[7m   [0m [91m                                                                      ~~~~[0m
+
+[96msrc/ui/chart-loader.ts[0m:[93m12[0m:[93m81[0m - [91merror[0m[90m TS1064: [0mThe return type of an async function or method must be the global Promise<T> type. Did you mean to write 'Promise<any>'?
+
+[7m12[0m export async function loadChart(simulationData: any[], container: HTMLElement): any {
+[7m  [0m [91m                                                                                ~~~[0m
+
+[96msrc/ui/chart-loader.ts[0m:[93m26[0m:[93m27[0m - [91merror[0m[90m TS2345: [0mArgument of type 'number[][]' is not assignable to parameter of type 'Node'.
+  Type 'number[][]' is missing the following properties from type 'Node': baseURI, childNodes, firstChild, isConnected, and 46 more.
+
+[7m26[0m     container.appendChild(chartElement);
+[7m  [0m [91m                          ~~~~~~~~~~~~[0m
+
+[96msrc/ui/chart-loader.ts[0m:[93m48[0m:[93m46[0m - [91merror[0m[90m TS2339: [0mProperty 'effectiveType' does not exist on type '{}'.
+
+[7m48[0m   /** @type {any} */ (navigator).connection?.effectiveType !== 'slow-2g';
+[7m  [0m [91m                                             ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/financial-inputs-extended.ts[0m:[93m105[0m:[93m68[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'boolean'.
+
+[7m105[0m     createSimpleInput('grossUsd', 'Gross USD Monthly Income', data.grossUsd, '100').inputGroup,
+[7m   [0m [91m                                                                   ~~~~~~~~[0m
+
+[96msrc/ui/financial-inputs-extended.ts[0m:[93m106[0m:[93m63[0m - [91merror[0m[90m TS2339: [0mProperty 'eurUsd' does not exist on type 'boolean'.
+
+[7m106[0m     createSimpleInput('eurUsd', 'Exchange Rate EUR/USD', data.eurUsd, '0.01').inputGroup,
+[7m   [0m [91m                                                              ~~~~~~[0m
+
+[96msrc/ui/financial-inputs-extended.ts[0m:[93m107[0m:[93m63[0m - [91merror[0m[90m TS2339: [0mProperty 'thbEur' does not exist on type 'boolean'.
+
+[7m107[0m     createSimpleInput('thbEur', 'Exchange Rate THB/EUR', data.thbEur, '0.01').inputGroup,
+[7m   [0m [91m                                                              ~~~~~~[0m
+
+[96msrc/ui/financial-inputs-extended.ts[0m:[93m108[0m:[93m69[0m - [91merror[0m[90m TS2339: [0mProperty 'taxRate' does not exist on type 'boolean'.
+
+[7m108[0m     createSimpleInput('taxRate', 'Tax Rate After 2 Years (%)', data.taxRate, '0.01', true).inputGroup
+[7m   [0m [91m                                                                    ~~~~~~~[0m
+
+[96msrc/ui/financial-inputs-extended.ts[0m:[93m133[0m:[93m36[0m - [91merror[0m[90m TS7006: [0mParameter '_e' implicitly has an 'any' type.
+
+[7m133[0m     'input': (/** @type {Event} */ _e, /** @type {HTMLInputElement} */ el) => {
+[7m   [0m [91m                                   ~~[0m
+
+[96msrc/ui/financial-inputs-extended.ts[0m:[93m133[0m:[93m72[0m - [91merror[0m[90m TS7006: [0mParameter 'el' implicitly has an 'any' type.
+
+[7m133[0m     'input': (/** @type {Event} */ _e, /** @type {HTMLInputElement} */ el) => {
+[7m   [0m [91m                                                                       ~~[0m
+
+[96msrc/ui/financial-inputs.test.ts[0m:[93m15[0m:[93m1[0m - [91merror[0m[90m TS2322: [0mType 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+
+[7m15[0m global.window = dom.window;
+[7m  [0m [91m~~~~~~~~~~~~~[0m
+
+[96msrc/ui/financial-inputs.test.ts[0m:[93m27[0m:[93m1[0m - [91merror[0m[90m TS2739: [0mType '{ store: {}; getItem(key: string): any; setItem(key: string, value: string): void; removeItem(key: string): void; clear(): void; }' is missing the following properties from type 'Storage': length, key
+
+[7m27[0m global.localStorage = {
+[7m  [0m [91m~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/financial-inputs.test.ts[0m:[93m30[0m:[93m17[0m - [91merror[0m[90m TS4111: [0mProperty 'store' comes from an index signature, so it must be accessed with ['store'].
+
+[7m30[0m     return this.store[key] || null;
+[7m  [0m [91m                ~~~~~[0m
+
+[96msrc/ui/financial-inputs.test.ts[0m:[93m33[0m:[93m10[0m - [91merror[0m[90m TS4111: [0mProperty 'store' comes from an index signature, so it must be accessed with ['store'].
+
+[7m33[0m     this.store[key] = value;
+[7m  [0m [91m         ~~~~~[0m
+
+[96msrc/ui/financial-inputs.test.ts[0m:[93m36[0m:[93m17[0m - [91merror[0m[90m TS4111: [0mProperty 'store' comes from an index signature, so it must be accessed with ['store'].
+
+[7m36[0m     delete this.store[key];
+[7m  [0m [91m                ~~~~~[0m
+
+[96msrc/ui/financial-inputs.test.ts[0m:[93m39[0m:[93m10[0m - [91merror[0m[90m TS4111: [0mProperty 'store' comes from an index signature, so it must be accessed with ['store'].
+
+[7m39[0m     this.store = {};
+[7m  [0m [91m         ~~~~~[0m
+
+[96msrc/ui/financial-inputs.test.ts[0m:[93m98[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'HTMLElement'.
+
+[7m98[0m       createFinancialInputs(null);
+[7m  [0m [91m                            ~~~~[0m
+
+[96msrc/ui/financial-inputs.ts[0m:[93m97[0m:[93m53[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'boolean'.
+
+[7m97[0m     createSimpleInput('grossUsd', 'Gross USD', data.grossUsd || 9000),
+[7m  [0m [91m                                                    ~~~~~~~~[0m
+
+[96msrc/ui/financial-inputs.ts[0m:[93m98[0m:[93m54[0m - [91merror[0m[90m TS2339: [0mProperty 'eurUsd' does not exist on type 'boolean'.
+
+[7m98[0m     createSimpleInput('eurUsd', 'EUR/USD Rate', data.eurUsd || 1.17),
+[7m  [0m [91m                                                     ~~~~~~[0m
+
+[96msrc/ui/financial-inputs.ts[0m:[93m99[0m:[93m55[0m - [91merror[0m[90m TS2339: [0mProperty 'taxRate' does not exist on type 'boolean'.
+
+[7m99[0m     createSimpleInput('taxRate', 'Tax Rate (%)', data.taxRate || 0.17, '0.01', true)
+[7m  [0m [91m                                                      ~~~~~~~[0m
+
+[96msrc/ui/financial-inputs.ts[0m:[93m111[0m:[93m36[0m - [91merror[0m[90m TS7006: [0mParameter '_e' implicitly has an 'any' type.
+
+[7m111[0m     'input': (/** @type {Event} */ _e, /** @type {HTMLInputElement} */ el) => {
+[7m   [0m [91m                                   ~~[0m
+
+[96msrc/ui/financial-inputs.ts[0m:[93m111[0m:[93m72[0m - [91merror[0m[90m TS7006: [0mParameter 'el' implicitly has an 'any' type.
+
+[7m111[0m     'input': (/** @type {Event} */ _e, /** @type {HTMLInputElement} */ el) => {
+[7m   [0m [91m                                                                       ~~[0m
+
+[96msrc/ui/input-field.test.ts[0m:[93m13[0m:[93m1[0m - [91merror[0m[90m TS2322: [0mType 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+
+[7m13[0m global.window = dom.window;
+[7m  [0m [91m~~~~~~~~~~~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m17[0m:[93m65[0m - [91merror[0m[90m TS2339: [0mProperty 'type' does not exist on type 'object'.
+
+[7m17[0m     className: `input-field__input input-field__input--${config.type}`
+[7m  [0m [91m                                                                ~~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m21[0m:[93m35[0m - [91merror[0m[90m TS2339: [0mProperty 'id' does not exist on type 'object'.
+
+[7m21[0m   input.setAttribute('id', config.id);
+[7m  [0m [91m                                  ~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m22[0m:[93m37[0m - [91merror[0m[90m TS2339: [0mProperty 'id' does not exist on type 'object'.
+
+[7m22[0m   input.setAttribute('name', config.id);
+[7m  [0m [91m                                    ~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m23[0m:[93m37[0m - [91merror[0m[90m TS2339: [0mProperty 'type' does not exist on type 'object'.
+
+[7m23[0m   input.setAttribute('type', config.type === 'range' ? 'range' : 'number');
+[7m  [0m [91m                                    ~~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m24[0m:[93m38[0m - [91merror[0m[90m TS2339: [0mProperty 'value' does not exist on type 'object'.
+
+[7m24[0m   input.setAttribute('value', config.value.toString());
+[7m  [0m [91m                                     ~~~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m26[0m:[93m14[0m - [91merror[0m[90m TS2339: [0mProperty 'min' does not exist on type 'object'.
+
+[7m26[0m   if (config.min !== undefined) {
+[7m  [0m [91m             ~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m27[0m:[93m38[0m - [91merror[0m[90m TS2339: [0mProperty 'min' does not exist on type 'object'.
+
+[7m27[0m     input.setAttribute('min', config.min.toString());
+[7m  [0m [91m                                     ~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m29[0m:[93m14[0m - [91merror[0m[90m TS2339: [0mProperty 'max' does not exist on type 'object'.
+
+[7m29[0m   if (config.max !== undefined) {
+[7m  [0m [91m             ~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m30[0m:[93m38[0m - [91merror[0m[90m TS2339: [0mProperty 'max' does not exist on type 'object'.
+
+[7m30[0m     input.setAttribute('max', config.max.toString());
+[7m  [0m [91m                                     ~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m32[0m:[93m14[0m - [91merror[0m[90m TS2339: [0mProperty 'step' does not exist on type 'object'.
+
+[7m32[0m   if (config.step !== undefined) {
+[7m  [0m [91m             ~~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m33[0m:[93m39[0m - [91merror[0m[90m TS2339: [0mProperty 'step' does not exist on type 'object'.
+
+[7m33[0m     input.setAttribute('step', config.step.toString());
+[7m  [0m [91m                                      ~~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m44[0m:[93m25[0m - [91merror[0m[90m TS2339: [0mProperty 'id' does not exist on type 'object'.
+
+[7m44[0m   validateString(config.id, 'id');
+[7m  [0m [91m                        ~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m45[0m:[93m25[0m - [91merror[0m[90m TS2339: [0mProperty 'label' does not exist on type 'object'.
+
+[7m45[0m   validateString(config.label, 'label');
+[7m  [0m [91m                        ~~~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m46[0m:[93m25[0m - [91merror[0m[90m TS2339: [0mProperty 'value' does not exist on type 'object'.
+
+[7m46[0m   validateNumber(config.value, 'value');
+[7m  [0m [91m                        ~~~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m53[0m:[93m50[0m - [91merror[0m[90m TS2339: [0mProperty 'id' does not exist on type 'object'.
+
+[7m53[0m   container.setAttribute('data-input-id', config.id);
+[7m  [0m [91m                                                 ~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m58[0m:[93m25[0m - [91merror[0m[90m TS2339: [0mProperty 'label' does not exist on type 'object'.
+
+[7m58[0m     textContent: config.label
+[7m  [0m [91m                        ~~~~~[0m
+
+[96msrc/ui/input-field.ts[0m:[93m60[0m:[93m36[0m - [91merror[0m[90m TS2339: [0mProperty 'id' does not exist on type 'object'.
+
+[7m60[0m   label.setAttribute('for', config.id);
+[7m  [0m [91m                                   ~~[0m
+
+[96msrc/ui/input-section.test.ts[0m:[93m13[0m:[93m1[0m - [91merror[0m[90m TS2322: [0mType 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+
+[7m13[0m global.window = dom.window;
+[7m  [0m [91m~~~~~~~~~~~~~[0m
+
+[96msrc/ui/input-section.ts[0m:[93m17[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'title' does not exist on type 'object'.
+
+[7m17[0m   validateString(sectionConfig.title, 'title');
+[7m  [0m [91m                               ~~~~~[0m
+
+[96msrc/ui/input-section.ts[0m:[93m30[0m:[93m32[0m - [91merror[0m[90m TS2339: [0mProperty 'title' does not exist on type 'object'.
+
+[7m30[0m     textContent: sectionConfig.title
+[7m  [0m [91m                               ~~~~~[0m
+
+[96msrc/ui/input-section.ts[0m:[93m35[0m:[93m21[0m - [91merror[0m[90m TS2339: [0mProperty 'description' does not exist on type 'object'.
+
+[7m35[0m   if (sectionConfig.description) {
+[7m  [0m [91m                    ~~~~~~~~~~~[0m
+
+[96msrc/ui/input-section.ts[0m:[93m38[0m:[93m34[0m - [91merror[0m[90m TS2339: [0mProperty 'description' does not exist on type 'object'.
+
+[7m38[0m       textContent: sectionConfig.description
+[7m  [0m [91m                                 ~~~~~~~~~~~[0m
+
+[96msrc/ui/input-section.ts[0m:[93m49[0m:[93m17[0m - [91merror[0m[90m TS2339: [0mProperty 'inputs' does not exist on type 'object'.
+
+[7m49[0m   sectionConfig.inputs.forEach((inputConfig) => {
+[7m  [0m [91m                ~~~~~~[0m
+
+[96msrc/ui/input-section.ts[0m:[93m49[0m:[93m33[0m - [91merror[0m[90m TS7006: [0mParameter 'inputConfig' implicitly has an 'any' type.
+
+[7m49[0m   sectionConfig.inputs.forEach((inputConfig) => {
+[7m  [0m [91m                                ~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m49[0m:[93m1[0m - [91merror[0m[90m TS2322: [0mType 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+
+[7m49[0m global.window = dom.window;
+[7m  [0m [91m~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m65[0m:[93m5[0m - [91merror[0m[90m TS7034: [0mVariable 'storageObservers' implicitly has type 'any[]' in some locations where its type cannot be determined.
+
+[7m65[0m let storageObservers = [];
+[7m  [0m [91m    ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m66[0m:[93m1[0m - [91merror[0m[90m TS2739: [0mType '{ store: {}; getItem(key: string): any; setItem(key: string, value: string): void; removeItem(key: string): void; clear(): void; }' is missing the following properties from type 'Storage': length, key
+
+[7m66[0m global.localStorage = {
+[7m  [0m [91m~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m69[0m:[93m17[0m - [91merror[0m[90m TS4111: [0mProperty 'store' comes from an index signature, so it must be accessed with ['store'].
+
+[7m69[0m     return this.store[key] || null;
+[7m  [0m [91m                ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m72[0m:[93m27[0m - [91merror[0m[90m TS4111: [0mProperty 'store' comes from an index signature, so it must be accessed with ['store'].
+
+[7m72[0m     const oldValue = this.store[key];
+[7m  [0m [91m                          ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m73[0m:[93m10[0m - [91merror[0m[90m TS4111: [0mProperty 'store' comes from an index signature, so it must be accessed with ['store'].
+
+[7m73[0m     this.store[key] = value;
+[7m  [0m [91m         ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m74[0m:[93m5[0m - [91merror[0m[90m TS7005: [0mVariable 'storageObservers' implicitly has an 'any[]' type.
+
+[7m74[0m     storageObservers.forEach(observer => observer({ key, oldValue, newValue: value }));
+[7m  [0m [91m    ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m77[0m:[93m27[0m - [91merror[0m[90m TS4111: [0mProperty 'store' comes from an index signature, so it must be accessed with ['store'].
+
+[7m77[0m     const oldValue = this.store[key];
+[7m  [0m [91m                          ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m78[0m:[93m17[0m - [91merror[0m[90m TS4111: [0mProperty 'store' comes from an index signature, so it must be accessed with ['store'].
+
+[7m78[0m     delete this.store[key];
+[7m  [0m [91m                ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m79[0m:[93m5[0m - [91merror[0m[90m TS7005: [0mVariable 'storageObservers' implicitly has an 'any[]' type.
+
+[7m79[0m     storageObservers.forEach(observer => observer({ key, oldValue, newValue: null }));
+[7m  [0m [91m    ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m82[0m:[93m32[0m - [91merror[0m[90m TS4111: [0mProperty 'store' comes from an index signature, so it must be accessed with ['store'].
+
+[7m82[0m     const oldStore = { ...this.store };
+[7m  [0m [91m                               ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m83[0m:[93m10[0m - [91merror[0m[90m TS4111: [0mProperty 'store' comes from an index signature, so it must be accessed with ['store'].
+
+[7m83[0m     this.store = {};
+[7m  [0m [91m         ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m85[0m:[93m7[0m - [91merror[0m[90m TS7005: [0mVariable 'storageObservers' implicitly has an 'any[]' type.
+
+[7m85[0m       storageObservers.forEach(observer => observer({ key, oldValue: oldStore[key], newValue: null }));
+[7m  [0m [91m      ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m159[0m:[93m23[0m - [91merror[0m[90m TS7006: [0mParameter 'unsubscribe' implicitly has an 'any' type.
+
+[7m159[0m     observers.forEach(unsubscribe => {
+[7m   [0m [91m                      ~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m170[0m:[93m5[0m - [91merror[0m[90m TS2554: [0mExpected 1 arguments, but got 0.
+
+[7m170[0m     clearTimeout();
+[7m   [0m [91m    ~~~~~~~~~~~~[0m
+
+  [96mnode_modules/typescript/lib/lib.dom.d.ts[0m:[93m39137[0m:[93m31[0m
+    [7m39137[0m declare function clearTimeout(id: number | undefined): void;
+    [7m     [0m [96m                              ~~~~~~~~~~~~~~~~~~~~~~[0m
+    An argument for 'id' was not provided.
+
+[96msrc/ui/integration.test.ts[0m:[93m180[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+
+[7m180[0m       createFinancialInputs(inputsContainer);
+[7m   [0m [91m                            ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m193[0m:[93m27[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m193[0m       const salaryInput = inputsContainer.querySelector('input[name="salary"]') ||
+[7m   [0m [91m                          ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m194[0m:[93m26[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m194[0m                          inputsContainer.querySelector('#salary') ||
+[7m   [0m [91m                         ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m195[0m:[93m26[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m195[0m                          inputsContainer.querySelector('input[id="grossUsd"]') ||
+[7m   [0m [91m                         ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m196[0m:[93m26[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m196[0m                          inputsContainer.querySelector('input[type="number"]');
+[7m   [0m [91m                         ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m202[0m:[93m21[0m - [91merror[0m[90m TS2339: [0mProperty 'value' does not exist on type 'Element'.
+
+[7m202[0m         salaryInput.value = '6000';
+[7m   [0m [91m                    ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m218[0m:[93m19[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m218[0m         assert.ok(inputsContainer.children.length > 0, 'Financial inputs should create form structure');
+[7m   [0m [91m                  ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m221[0m:[93m19[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m221[0m         assert.ok(inputsContainer.children.length > 0, 'Financial inputs should create form structure');
+[7m   [0m [91m                  ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m230[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+
+[7m230[0m       createFinancialInputs(inputsContainer);
+[7m   [0m [91m                            ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m242[0m:[93m27[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m242[0m       const salaryInput = inputsContainer.querySelector('input[name="salary"]') ||
+[7m   [0m [91m                          ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m243[0m:[93m26[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m243[0m                          inputsContainer.querySelector('#salary') ||
+[7m   [0m [91m                         ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m244[0m:[93m26[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m244[0m                          inputsContainer.querySelector('input[type="number"]');
+[7m   [0m [91m                         ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m247[0m:[93m21[0m - [91merror[0m[90m TS2339: [0mProperty 'value' does not exist on type 'Element'.
+
+[7m247[0m         salaryInput.value = '-1000';
+[7m   [0m [91m                    ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m276[0m:[93m9[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m276[0m         createSummaryCards(summaryContainer);
+[7m   [0m [91m        ~~~~~~~~~~~~~~~~~~[0m
+
+  [96msrc/ui/summary-cards.ts[0m:[93m86[0m:[93m54[0m
+    [7m86[0m export function createSummaryCards(summaryData: any, _milestones: any): HTMLElement {
+    [7m  [0m [96m                                                     ~~~~~~~~~~~~~~~~[0m
+    An argument for '_milestones' was not provided.
+
+[96msrc/ui/integration.test.ts[0m:[93m291[0m:[93m30[0m - [91merror[0m[90m TS18047: [0m'summaryContainer' is possibly 'null'.
+
+[7m291[0m         const overviewCard = summaryContainer.querySelector('.summary-card');
+[7m   [0m [91m                             ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m299[0m:[93m75[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m299[0m         console.warn('Summary card creation failed in test environment:', error.message);
+[7m   [0m [91m                                                                          ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m311[0m:[93m9[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m311[0m         createSummaryCards(summaryContainer);
+[7m   [0m [91m        ~~~~~~~~~~~~~~~~~~[0m
+
+  [96msrc/ui/summary-cards.ts[0m:[93m86[0m:[93m54[0m
+    [7m86[0m export function createSummaryCards(summaryData: any, _milestones: any): HTMLElement {
+    [7m  [0m [96m                                                     ~~~~~~~~~~~~~~~~[0m
+    An argument for '_milestones' was not provided.
+
+[96msrc/ui/integration.test.ts[0m:[93m323[0m:[93m9[0m - [91merror[0m[90m TS18047: [0m'summaryContainer' is possibly 'null'.
+
+[7m323[0m         summaryContainer.querySelector('.error-message');
+[7m   [0m [91m        ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m330[0m:[93m61[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m330[0m         console.warn('Expected error in test environment:', error.message);
+[7m   [0m [91m                                                            ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m348[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+
+[7m348[0m       createFinancialInputs(inputsContainer);
+[7m   [0m [91m                            ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m351[0m:[93m9[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m351[0m         createSummaryCards(summaryContainer);
+[7m   [0m [91m        ~~~~~~~~~~~~~~~~~~[0m
+
+  [96msrc/ui/summary-cards.ts[0m:[93m86[0m:[93m54[0m
+    [7m86[0m export function createSummaryCards(summaryData: any, _milestones: any): HTMLElement {
+    [7m  [0m [96m                                                     ~~~~~~~~~~~~~~~~[0m
+    An argument for '_milestones' was not provided.
+
+[96msrc/ui/integration.test.ts[0m:[93m385[0m:[93m9[0m - [91merror[0m[90m TS2554: [0mExpected 1 arguments, but got 0.
+
+[7m385[0m         initializeAppLayout();
+[7m   [0m [91m        ~~~~~~~~~~~~~~~~~~~[0m
+
+  [96msrc/ui/app-layout.ts[0m:[93m14[0m:[93m37[0m
+    [7m14[0m export function initializeAppLayout(container: HTMLElement) {
+    [7m  [0m [96m                                    ~~~~~~~~~~~~~~~~~~~~~~[0m
+    An argument for 'container' was not provided.
+
+[96msrc/ui/integration.test.ts[0m:[93m396[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+
+[7m396[0m       createFinancialInputs(inputsContainer);
+[7m   [0m [91m                            ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m399[0m:[93m9[0m - [91merror[0m[90m TS2554: [0mExpected 2 arguments, but got 1.
+
+[7m399[0m         createSummaryCards(summaryContainer);
+[7m   [0m [91m        ~~~~~~~~~~~~~~~~~~[0m
+
+  [96msrc/ui/summary-cards.ts[0m:[93m86[0m:[93m54[0m
+    [7m86[0m export function createSummaryCards(summaryData: any, _milestones: any): HTMLElement {
+    [7m  [0m [96m                                                     ~~~~~~~~~~~~~~~~[0m
+    An argument for '_milestones' was not provided.
+
+[96msrc/ui/integration.test.ts[0m:[93m417[0m:[93m86[0m - [91merror[0m[90m TS1064: [0mThe return type of an async function or method must be the global Promise<T> type. Did you mean to write 'Promise<any>'?
+
+[7m417[0m     async function simulateSalaryInput(inputsContainer: HTMLElement, value: string): any {
+[7m   [0m [91m                                                                                     ~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m422[0m:[93m21[0m - [91merror[0m[90m TS2339: [0mProperty 'value' does not exist on type 'Element'.
+
+[7m422[0m         salaryInput.value = value;
+[7m   [0m [91m                    ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m431[0m:[93m87[0m - [91merror[0m[90m TS1064: [0mThe return type of an async function or method must be the global Promise<T> type. Did you mean to write 'Promise<any>'?
+
+[7m431[0m     async function simulateTaxRateInput(inputsContainer: HTMLElement, value: string): any {
+[7m   [0m [91m                                                                                      ~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m436[0m:[93m18[0m - [91merror[0m[90m TS2339: [0mProperty 'value' does not exist on type 'Element'.
+
+[7m436[0m         taxInput.value = value;
+[7m   [0m [91m                 ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m458[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'object'.
+
+[7m458[0m         if (finalData.grossUsd || finalData.salary) {
+[7m   [0m [91m                      ~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m458[0m:[93m45[0m - [91merror[0m[90m TS2339: [0mProperty 'salary' does not exist on type 'object'.
+
+[7m458[0m         if (finalData.grossUsd || finalData.salary) {
+[7m   [0m [91m                                            ~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m459[0m:[93m42[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'object'.
+
+[7m459[0m           const actualSalary = finalData.grossUsd || finalData.salary || initialData.grossUsd || initialData.salary;
+[7m   [0m [91m                                         ~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m459[0m:[93m64[0m - [91merror[0m[90m TS2339: [0mProperty 'salary' does not exist on type 'object'.
+
+[7m459[0m           const actualSalary = finalData.grossUsd || finalData.salary || initialData.grossUsd || initialData.salary;
+[7m   [0m [91m                                                               ~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m459[0m:[93m86[0m - [91merror[0m[90m TS2339: [0mProperty 'grossUsd' does not exist on type 'object'.
+
+[7m459[0m           const actualSalary = finalData.grossUsd || finalData.salary || initialData.grossUsd || initialData.salary;
+[7m   [0m [91m                                                                                     ~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m459[0m:[93m110[0m - [91merror[0m[90m TS2339: [0mProperty 'salary' does not exist on type 'object'.
+
+[7m459[0m           const actualSalary = finalData.grossUsd || finalData.salary || initialData.grossUsd || initialData.salary;
+[7m   [0m [91m                                                                                                             ~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m492[0m:[93m43[0m - [91merror[0m[90m TS2345: [0mArgument of type 'boolean' is not assignable to parameter of type 'object'.
+
+[7m492[0m       verifySalaryUpdate(inputsContainer, finalData, initialData);
+[7m   [0m [91m                                          ~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m501[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+
+[7m501[0m       createFinancialInputs(inputsContainer);
+[7m   [0m [91m                            ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m510[0m:[93m27[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m510[0m       const salaryInput = inputsContainer.querySelector('input[name="salary"]');
+[7m   [0m [91m                          ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m513[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'value' does not exist on type 'Element'.
+
+[7m513[0m           salaryInput.value = (5000 + i * 100).toString();
+[7m   [0m [91m                      ~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m523[0m:[93m21[0m - [91merror[0m[90m TS2339: [0mProperty 'salary' does not exist on type 'boolean'.
+
+[7m523[0m       if (finalData.salary) {
+[7m   [0m [91m                    ~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m524[0m:[93m38[0m - [91merror[0m[90m TS2339: [0mProperty 'salary' does not exist on type 'boolean'.
+
+[7m524[0m         assert.strictEqual(finalData.salary, 5900, 'Final salary should reflect last input');
+[7m   [0m [91m                                     ~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m539[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+
+[7m539[0m         createFinancialInputs(inputsContainer);
+[7m   [0m [91m                              ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m550[0m:[93m7[0m - [91merror[0m[90m TS18047: [0m'appElement' is possibly 'null'.
+
+[7m550[0m       appElement.innerHTML = '';
+[7m   [0m [91m      ~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m565[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type 'HTMLElement | null' is not assignable to parameter of type 'HTMLElement'.
+  Type 'null' is not assignable to type 'HTMLElement'.
+
+[7m565[0m       createFinancialInputs(inputsContainer);
+[7m   [0m [91m                            ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m568[0m:[93m7[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m568[0m       inputsContainer.querySelectorAll('input').length;
+[7m   [0m [91m      ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m571[0m:[93m7[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m571[0m       inputsContainer.innerHTML = '';
+[7m   [0m [91m      ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m575[0m:[93m26[0m - [91merror[0m[90m TS18047: [0m'inputsContainer' is possibly 'null'.
+
+[7m575[0m       assert.strictEqual(inputsContainer.children.length, 0,
+[7m   [0m [91m                         ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/integration.test.ts[0m:[93m583[0m:[93m9[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type '`category${number}`' can't be used to index type '{}'.
+
+[7m583[0m         largeExpenseData[`category${i}`] = Math.random() * 1000;
+[7m   [0m [91m        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-table-helpers.test.ts[0m:[93m38[0m:[93m11[0m - [91merror[0m[90m TS2488: [0mType 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m38[0m     const [savingsCell, deltaCell] = createSavingsCells(yearData, previousData);
+[7m  [0m [91m          ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-table-helpers.test.ts[0m:[93m48[0m:[93m11[0m - [91merror[0m[90m TS2488: [0mType 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m48[0m     const [savingsCell, deltaCell] = createSavingsCells(yearData, null);
+[7m  [0m [91m          ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-table-helpers.test.ts[0m:[93m59[0m:[93m11[0m - [91merror[0m[90m TS2488: [0mType 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m59[0m     const [investmentsCell, deltaCell] = createInvestmentCells(yearData, previousData);
+[7m  [0m [91m          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-table-helpers.test.ts[0m:[93m70[0m:[93m11[0m - [91merror[0m[90m TS2488: [0mType 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m70[0m     const [, deltaCell] = createInvestmentCells(yearData, previousData);
+[7m  [0m [91m          ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-table-helpers.test.ts[0m:[93m84[0m:[93m11[0m - [91merror[0m[90m TS2488: [0mType 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m84[0m     const [incomeCell, wealthCell] = createWealthCells(yearData, 0.2);
+[7m  [0m [91m          ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-table-helpers.test.ts[0m:[93m99[0m:[93m11[0m - [91merror[0m[90m TS2488: [0mType 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m99[0m     const [incomeCell] = createWealthCells(yearData, 0.25);
+[7m  [0m [91m          ~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-table-helpers.test.ts[0m:[93m106[0m:[93m11[0m - [91merror[0m[90m TS2488: [0mType 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m106[0m     const [incomeCell, wealthCell] = createWealthCells(yearData, 0.2);
+[7m   [0m [91m          ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-table-helpers.ts[0m:[93m34[0m:[93m3[0m - [91merror[0m[90m TS2740: [0mType 'HTMLElement[]' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, autocorrect, and 314 more.
+
+[7m34[0m   return [savingsCell, savingsDeltaCell];
+[7m  [0m [91m  ~~~~~~[0m
+
+[96msrc/ui/phase-table-helpers.ts[0m:[93m49[0m:[93m3[0m - [91merror[0m[90m TS2740: [0mType 'HTMLElement[]' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, autocorrect, and 314 more.
+
+[7m49[0m   return [investmentsCell, investmentsDeltaCell];
+[7m  [0m [91m  ~~~~~~[0m
+
+[96msrc/ui/phase-table-helpers.ts[0m:[93m68[0m:[93m3[0m - [91merror[0m[90m TS2740: [0mType 'HTMLElement[]' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, autocorrect, and 314 more.
+
+[7m68[0m   return [incomeCell, wealthCell];
+[7m  [0m [91m  ~~~~~~[0m
+
+[96msrc/ui/phase-tables-container.test.ts[0m:[93m39[0m:[93m12[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m39[0m     assert(titles[0].textContent.includes('Debt Elimination'));
+[7m  [0m [91m           ~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables-container.test.ts[0m:[93m40[0m:[93m12[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m40[0m     assert(titles[1].textContent.includes('Emergency Fund'));
+[7m  [0m [91m           ~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables-container.test.ts[0m:[93m41[0m:[93m12[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m41[0m     assert(titles[2].textContent.includes('Retirement Planning'));
+[7m  [0m [91m           ~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables-container.test.ts[0m:[93m48[0m:[93m25[0m - [91merror[0m[90m TS18047: [0m'debtTable' is possibly 'null'.
+
+[7m48[0m     const debtHeaders = debtTable.querySelectorAll('thead th');
+[7m  [0m [91m                        ~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables-container.test.ts[0m:[93m52[0m:[93m30[0m - [91merror[0m[90m TS18047: [0m'emergencyTable' is possibly 'null'.
+
+[7m52[0m     const emergencyHeaders = emergencyTable.querySelectorAll('thead th');
+[7m  [0m [91m                             ~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables-container.test.ts[0m:[93m99[0m:[93m12[0m - [91merror[0m[90m TS18047: [0m'incomeCell' is possibly 'null'.
+
+[7m99[0m     assert(incomeCell.textContent.includes('€1,400'));
+[7m  [0m [91m           ~~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables-container.test.ts[0m:[93m106[0m:[93m12[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m106[0m     assert(titles[0].includes('Debt Elimination'));
+[7m   [0m [91m           ~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables-container.test.ts[0m:[93m107[0m:[93m12[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m107[0m     assert(titles[1].includes('Emergency Fund'));
+[7m   [0m [91m           ~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables-container.test.ts[0m:[93m108[0m:[93m12[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m108[0m     assert(titles[2].includes('Retirement Planning'));
+[7m   [0m [91m           ~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables.test.ts[0m:[93m33[0m:[93m12[0m - [91merror[0m[90m TS18047: [0m'header' is possibly 'null'.
+
+[7m33[0m     assert(header.innerHTML.includes('🎯'));
+[7m  [0m [91m           ~~~~~~[0m
+
+[96msrc/ui/phase-tables.test.ts[0m:[93m34[0m:[93m12[0m - [91merror[0m[90m TS18047: [0m'header' is possibly 'null'.
+
+[7m34[0m     assert(header.innerHTML.includes('Debt Elimination'));
+[7m  [0m [91m           ~~~~~~[0m
+
+[96msrc/ui/phase-tables.test.ts[0m:[93m40[0m:[93m25[0m - [91merror[0m[90m TS18047: [0m'headerRow' is possibly 'null'.
+
+[7m40[0m     const headerCells = headerRow.querySelectorAll('th');
+[7m  [0m [91m                        ~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables.test.ts[0m:[93m42[0m:[93m24[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m42[0m     assert.strictEqual(headerCells[1].textContent, 'Remaining Debt');
+[7m  [0m [91m                       ~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables.test.ts[0m:[93m54[0m:[93m25[0m - [91merror[0m[90m TS18047: [0m'headerRow' is possibly 'null'.
+
+[7m54[0m     const headerCells = headerRow.querySelectorAll('th');
+[7m  [0m [91m                        ~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables.test.ts[0m:[93m57[0m:[93m24[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m57[0m     assert.strictEqual(headerCells[1].textContent, 'Total Savings');
+[7m  [0m [91m                       ~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables.test.ts[0m:[93m65[0m:[93m24[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m65[0m     assert.strictEqual(rows[2].className, 'milestone-row');
+[7m  [0m [91m                       ~~~~~~~[0m
+
+[96msrc/ui/phase-tables.test.ts[0m:[93m66[0m:[93m24[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m66[0m     assert.strictEqual(rows[0].className, '');
+[7m  [0m [91m                       ~~~~~~~[0m
+
+[96msrc/ui/phase-tables.test.ts[0m:[93m67[0m:[93m24[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m67[0m     assert.strictEqual(rows[1].className, '');
+[7m  [0m [91m                       ~~~~~~~[0m
+
+[96msrc/ui/phase-tables.test.ts[0m:[93m99[0m:[93m12[0m - [91merror[0m[90m TS18047: [0m'incomeCell' is possibly 'null'.
+
+[7m99[0m     assert(incomeCell.textContent.includes('€3,200'));
+[7m  [0m [91m           ~~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables.ts[0m:[93m49[0m:[93m9[0m - [91merror[0m[90m TS2488: [0mType 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m49[0m   const [savingsCell, savingsDeltaCell] = createSavingsCells(yearData, previousYearData);
+[7m  [0m [91m        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables.ts[0m:[93m50[0m:[93m9[0m - [91merror[0m[90m TS2488: [0mType 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m50[0m   const [investmentsCell, investmentsDeltaCell] = createInvestmentCells(yearData, previousYearData);
+[7m  [0m [91m        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/phase-tables.ts[0m:[93m51[0m:[93m9[0m - [91merror[0m[90m TS2488: [0mType 'HTMLElement' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m51[0m   const [incomeCell, wealthCell] = createWealthCells(yearData, taxRate);
+[7m  [0m [91m        ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/summary-cards.test.ts[0m:[93m37[0m:[93m26[0m - [91merror[0m[90m TS2531: [0mObject is possibly 'null'.
+
+[7m37[0m       assert.strictEqual(card.querySelector('.summary-card-title').textContent, 'Financial Plan Overview');
+[7m  [0m [91m                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/summary-cards.test.ts[0m:[93m46[0m:[93m17[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m46[0m       assert.ok(incomeItems[0].innerHTML.includes('€10,500')); // Rounded from 10530
+[7m  [0m [91m                ~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/summary-cards.test.ts[0m:[93m47[0m:[93m17[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m47[0m       assert.ok(incomeItems[1].innerHTML.includes('Tax-Free'));
+[7m  [0m [91m                ~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/summary-cards.test.ts[0m:[93m48[0m:[93m17[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m48[0m       assert.ok(incomeItems[2].innerHTML.includes('17% Tax'));
+[7m  [0m [91m                ~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/theme-manager.test.ts[0m:[93m14[0m:[93m11[0m - [91merror[0m[90m TS7006: [0mParameter 'key' implicitly has an 'any' type.
+
+[7m14[0m   getItem(key) {
+[7m  [0m [91m          ~~~[0m
+
+[96msrc/ui/theme-manager.test.ts[0m:[93m15[0m:[93m12[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+
+[7m15[0m     return this.store[key] || null;
+[7m  [0m [91m           ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/theme-manager.test.ts[0m:[93m17[0m:[93m11[0m - [91merror[0m[90m TS7006: [0mParameter 'key' implicitly has an 'any' type.
+
+[7m17[0m   setItem(key, value) {
+[7m  [0m [91m          ~~~[0m
+
+[96msrc/ui/theme-manager.test.ts[0m:[93m17[0m:[93m16[0m - [91merror[0m[90m TS7006: [0mParameter 'value' implicitly has an 'any' type.
+
+[7m17[0m   setItem(key, value) {
+[7m  [0m [91m               ~~~~~[0m
+
+[96msrc/ui/theme-manager.test.ts[0m:[93m18[0m:[93m5[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+
+[7m18[0m     this.store[key] = String(value);
+[7m  [0m [91m    ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/theme-manager.test.ts[0m:[93m20[0m:[93m14[0m - [91merror[0m[90m TS7006: [0mParameter 'key' implicitly has an 'any' type.
+
+[7m20[0m   removeItem(key) {
+[7m  [0m [91m             ~~~[0m
+
+[96msrc/ui/theme-manager.test.ts[0m:[93m21[0m:[93m12[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+
+[7m21[0m     delete this.store[key];
+[7m  [0m [91m           ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/theme-manager.test.ts[0m:[93m41[0m:[93m1[0m - [91merror[0m[90m TS2739: [0mType '{ store: {}; getItem(key: any): any; setItem(key: any, value: any): void; removeItem(key: any): void; clear(): void; }' is missing the following properties from type 'Storage': length, key
+
+[7m41[0m global.localStorage = localStorageMock;
+[7m  [0m [91m~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/theme-manager.test.ts[0m:[93m42[0m:[93m1[0m - [91merror[0m[90m TS2740: [0mType '{ documentElement: { setAttribute: () => void; getAttribute: () => null; style: { setProperty: () => void; getPropertyValue: () => string; }; }; }' is missing the following properties from type 'Document': URL, alinkColor, all, anchors, and 258 more.
+
+[7m42[0m global.document = documentMock;
+[7m  [0m [91m~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/theme-manager.test.ts[0m:[93m124[0m:[93m33[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
+
+[7m124[0m       const parsed = JSON.parse(stored);
+[7m   [0m [91m                                ~~~~~~[0m
+
+[96msrc/ui/theme-manager.ts[0m:[93m60[0m:[93m20[0m - [91merror[0m[90m TS2339: [0mProperty 'theme' does not exist on type 'object'.
+
+[7m60[0m          (settings.theme === 'dark' || settings.theme === 'light') &&
+[7m  [0m [91m                   ~~~~~[0m
+
+[96msrc/ui/theme-manager.ts[0m:[93m60[0m:[93m49[0m - [91merror[0m[90m TS2339: [0mProperty 'theme' does not exist on type 'object'.
+
+[7m60[0m          (settings.theme === 'dark' || settings.theme === 'light') &&
+[7m  [0m [91m                                                ~~~~~[0m
+
+[96msrc/ui/theme-manager.ts[0m:[93m61[0m:[93m26[0m - [91merror[0m[90m TS2339: [0mProperty 'preferredCurrency' does not exist on type 'object'.
+
+[7m61[0m          typeof settings.preferredCurrency === 'string' &&
+[7m  [0m [91m                         ~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/theme-manager.ts[0m:[93m62[0m:[93m26[0m - [91merror[0m[90m TS2339: [0mProperty 'schemaVersion' does not exist on type 'object'.
+
+[7m62[0m          typeof settings.schemaVersion === 'number';
+[7m  [0m [91m                         ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m11[0m:[93m20[0m - [91merror[0m[90m TS7034: [0mVariable 'window' implicitly has type 'any' in some locations where its type cannot be determined.
+
+[7m11[0m let dom, document, window, uplot;
+[7m  [0m [91m                   ~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m18[0m:[93m3[0m - [91merror[0m[90m TS2322: [0mType 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+  Type 'DOMWindow' is not assignable to type 'Window'.
+    Types of property 'self' are incompatible.
+      Type 'DOMWindow' is not assignable to type 'Window & typeof globalThis'.
+        Type 'DOMWindow' is missing the following properties from type 'typeof globalThis': AnalyserNode, Animation, AnimationEffect, AnimationEvent, and 487 more.
+
+[7m18[0m   global.window = window;
+[7m  [0m [91m  ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m32[0m:[93m17[0m - [91merror[0m[90m TS7006: [0mParameter 'opts' implicitly has an 'any' type.
+
+[7m32[0m     constructor(opts, data, target) {
+[7m  [0m [91m                ~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m32[0m:[93m23[0m - [91merror[0m[90m TS7006: [0mParameter 'data' implicitly has an 'any' type.
+
+[7m32[0m     constructor(opts, data, target) {
+[7m  [0m [91m                      ~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m32[0m:[93m29[0m - [91merror[0m[90m TS7006: [0mParameter 'target' implicitly has an 'any' type.
+
+[7m32[0m     constructor(opts, data, target) {
+[7m  [0m [91m                            ~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m33[0m:[93m12[0m - [91merror[0m[90m TS2339: [0mProperty 'opts' does not exist on type 'MockUPlot'.
+
+[7m33[0m       this.opts = opts;
+[7m  [0m [91m           ~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m34[0m:[93m12[0m - [91merror[0m[90m TS2339: [0mProperty 'data' does not exist on type 'MockUPlot'.
+
+[7m34[0m       this.data = data;
+[7m  [0m [91m           ~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m35[0m:[93m12[0m - [91merror[0m[90m TS2339: [0mProperty 'target' does not exist on type 'MockUPlot'.
+
+[7m35[0m       this.target = target;
+[7m  [0m [91m           ~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m36[0m:[93m12[0m - [91merror[0m[90m TS2551: [0mProperty 'destroyed' does not exist on type 'MockUPlot'. Did you mean 'destroy'?
+
+[7m36[0m       this.destroyed = false;
+[7m  [0m [91m           ~~~~~~~~~[0m
+
+  [96msrc/ui/wealth-chart.test.ts[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     destroy() {
+    [7m  [0m [96m    ~~~~~~~[0m
+    'destroy' is declared here.
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m40[0m:[93m12[0m - [91merror[0m[90m TS2551: [0mProperty 'destroyed' does not exist on type 'MockUPlot'. Did you mean 'destroy'?
+
+[7m40[0m       this.destroyed = true;
+[7m  [0m [91m           ~~~~~~~~~[0m
+
+  [96msrc/ui/wealth-chart.test.ts[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     destroy() {
+    [7m  [0m [96m    ~~~~~~~[0m
+    'destroy' is declared here.
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m43[0m:[93m13[0m - [91merror[0m[90m TS7006: [0mParameter 'data' implicitly has an 'any' type.
+
+[7m43[0m     setData(data) {
+[7m  [0m [91m            ~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m44[0m:[93m12[0m - [91merror[0m[90m TS2339: [0mProperty 'data' does not exist on type 'MockUPlot'.
+
+[7m44[0m       this.data = data;
+[7m  [0m [91m           ~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m47[0m:[93m3[0m - [91merror[0m[90m TS2740: [0mType 'typeof MockUPlot' is missing the following properties from type 'typeof uPlot': paths, assign, rangeNum, rangeLog, and 18 more.
+
+[7m47[0m   global.uPlot = uplot;
+[7m  [0m [91m  ~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m51[0m:[93m10[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m51[0m   delete global.document;
+[7m  [0m [91m         ~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m52[0m:[93m10[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m52[0m   delete global.window;
+[7m  [0m [91m         ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m53[0m:[93m10[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m53[0m   delete global.HTMLElement;
+[7m  [0m [91m         ~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m54[0m:[93m10[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m54[0m   delete global.Element;
+[7m  [0m [91m         ~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m55[0m:[93m10[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m55[0m   delete global.uPlot;
+[7m  [0m [91m         ~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m56[0m:[93m10[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m56[0m   delete global.requestAnimationFrame;
+[7m  [0m [91m         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m57[0m:[93m10[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m57[0m   delete global.cancelAnimationFrame;
+[7m  [0m [91m         ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m97[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number[]'.
+
+[7m97[0m     assert.ok(result.includes('Age: 30'), 'Should include age');
+[7m  [0m [91m                              ~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m98[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number[]'.
+
+[7m98[0m     assert.ok(result.includes('€50,000'), 'Should include formatted debt');
+[7m  [0m [91m                              ~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m99[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number[]'.
+
+[7m99[0m     assert.ok(result.includes('€10,000'), 'Should include formatted savings');
+[7m  [0m [91m                              ~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m100[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number[]'.
+
+[7m100[0m     assert.ok(result.includes('€5,000'), 'Should include formatted investments');
+[7m   [0m [91m                              ~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m101[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number[]'.
+
+[7m101[0m     assert.ok(result.includes('€-35,000'), 'Should include formatted wealth');
+[7m   [0m [91m                              ~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m102[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number[]'.
+
+[7m102[0m     assert.ok(result.includes('debt'), 'Should include phase information');
+[7m   [0m [91m                              ~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m115[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number[]'.
+
+[7m115[0m     assert.ok(result.includes('€55,000'), 'Should format positive wealth correctly');
+[7m   [0m [91m                              ~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m116[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number[]'.
+
+[7m116[0m     assert.ok(result.includes('retirement'), 'Should show retirement phase');
+[7m   [0m [91m                              ~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m129[0m:[93m36[0m - [91merror[0m[90m TS7005: [0mVariable 'window' implicitly has an 'any' type.
+
+[7m129[0m     assert.ok(container instanceof window.HTMLElement, 'Should return an HTMLElement');
+[7m   [0m [91m                                   ~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m130[0m:[93m34[0m - [91merror[0m[90m TS2339: [0mProperty 'className' does not exist on type 'number[][]'.
+
+[7m130[0m     assert.strictEqual(container.className, 'wealth-chart-container', 'Should have correct CSS class');
+[7m   [0m [91m                                 ~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m136[0m:[93m36[0m - [91merror[0m[90m TS2339: [0mProperty 'querySelector' does not exist on type 'number[][]'.
+
+[7m136[0m     const chartElement = container.querySelector('.wealth-chart');
+[7m   [0m [91m                                   ~~~~~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m146[0m:[93m36[0m - [91merror[0m[90m TS7005: [0mVariable 'window' implicitly has an 'any' type.
+
+[7m146[0m     assert.ok(container instanceof window.HTMLElement, 'Should return an HTMLElement even with empty data');
+[7m   [0m [91m                                   ~~~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m151[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'any[]'.
+
+[7m151[0m       () => createWealthChart(null),
+[7m   [0m [91m                              ~~~~[0m
+
+[96msrc/ui/wealth-chart.test.ts[0m:[93m157[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'any[]'.
+
+[7m157[0m       () => createWealthChart('invalid'),
+[7m   [0m [91m                              ~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.ts[0m:[93m35[0m:[93m3[0m - [91merror[0m[90m TS2322: [0mType 'string' is not assignable to type 'number[][]'.
+
+[7m35[0m   return `
+[7m  [0m [91m  ~~~~~~[0m
+
+[96msrc/ui/wealth-chart.ts[0m:[93m81[0m:[93m41[0m - [91merror[0m[90m TS7006: [0mParameter '_' implicitly has an 'any' type.
+
+[7m81[0m             values: (/** @type {any} */ _, /** @type {number[]} */ vals) =>
+[7m  [0m [91m                                        ~[0m
+
+[96msrc/ui/wealth-chart.ts[0m:[93m81[0m:[93m68[0m - [91merror[0m[90m TS7006: [0mParameter 'vals' implicitly has an 'any' type.
+
+[7m81[0m             values: (/** @type {any} */ _, /** @type {number[]} */ vals) =>
+[7m  [0m [91m                                                                   ~~~~[0m
+
+[96msrc/ui/wealth-chart.ts[0m:[93m82[0m:[93m61[0m - [91merror[0m[90m TS7006: [0mParameter 'v' implicitly has an 'any' type.
+
+[7m82[0m               vals.map(/** @type {(v: number) => string} */ v => formatMoney(v).replace('€', '€ '))
+[7m  [0m [91m                                                            ~[0m
+
+[96msrc/ui/wealth-chart.ts[0m:[93m88[0m:[93m43[0m - [91merror[0m[90m TS2345: [0mArgument of type 'number[][]' is not assignable to parameter of type 'AlignedData | undefined'.
+  Type 'number[][]' is not assignable to type 'TypedArray[]'.
+    Type 'number[]' is not assignable to type 'TypedArray'.
+      Type 'number[]' is missing the following properties from type 'Float64Array<ArrayBufferLike>': BYTES_PER_ELEMENT, buffer, byteLength, byteOffset, and 3 more.
+
+[7m88[0m       new uPlot(opts, /** @type {any} */ (chartData), chartElement);
+[7m  [0m [91m                                          ~~~~~~~~~[0m
+
+[96msrc/ui/wealth-chart.ts[0m:[93m94[0m:[93m3[0m - [91merror[0m[90m TS2740: [0mType 'HTMLElement' is missing the following properties from type 'number[][]': length, pop, push, concat, and 29 more.
+
+[7m94[0m   return container;
+[7m  [0m [91m  ~~~~~~[0m
+
+[96msrc/utils/calculation-benchmarks.test.ts[0m:[93m14[0m:[93m15[0m - [91merror[0m[90m TS7006: [0mParameter 'a' implicitly has an 'any' type.
+
+[7m14[0m         add: (a, b) => a + b,
+[7m  [0m [91m              ~[0m
+
+[96msrc/utils/calculation-benchmarks.test.ts[0m:[93m14[0m:[93m18[0m - [91merror[0m[90m TS7006: [0mParameter 'b' implicitly has an 'any' type.
+
+[7m14[0m         add: (a, b) => a + b,
+[7m  [0m [91m                 ~[0m
+
+[96msrc/utils/calculation-benchmarks.test.ts[0m:[93m15[0m:[93m20[0m - [91merror[0m[90m TS7006: [0mParameter 'a' implicitly has an 'any' type.
+
+[7m15[0m         multiply: (a, b) => a * b,
+[7m  [0m [91m                   ~[0m
+
+[96msrc/utils/calculation-benchmarks.test.ts[0m:[93m15[0m:[93m23[0m - [91merror[0m[90m TS7006: [0mParameter 'b' implicitly has an 'any' type.
+
+[7m15[0m         multiply: (a, b) => a * b,
+[7m  [0m [91m                      ~[0m
+
+[96msrc/utils/calculation-benchmarks.test.ts[0m:[93m16[0m:[93m18[0m - [91merror[0m[90m TS7006: [0mParameter 'a' implicitly has an 'any' type.
+
+[7m16[0m         divide: (a, b) => a / b
+[7m  [0m [91m                 ~[0m
+
+[96msrc/utils/calculation-benchmarks.test.ts[0m:[93m16[0m:[93m21[0m - [91merror[0m[90m TS7006: [0mParameter 'b' implicitly has an 'any' type.
+
+[7m16[0m         divide: (a, b) => a / b
+[7m  [0m [91m                    ~[0m
+
+[96msrc/utils/calculation-benchmarks.ts[0m:[93m33[0m:[93m49[0m - [91merror[0m[90m TS2345: [0mArgument of type 'unknown' is not assignable to parameter of type '(...args: any[]) => any'.
+
+[7m33[0m     const singleRun = measureMainThreadBlocking(func, ...funcTestData);
+[7m  [0m [91m                                                ~~~~[0m
+
+[96msrc/utils/calculation-benchmarks.ts[0m:[93m40[0m:[93m7[0m - [91merror[0m[90m TS18046: [0m'func' is of type 'unknown'.
+
+[7m40[0m       func(...funcTestData);
+[7m  [0m [91m      ~~~~[0m
+
+[96msrc/utils/calculation-benchmarks.ts[0m:[93m47[0m:[93m5[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+
+[7m47[0m     results[funcName] = {
+[7m  [0m [91m    ~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/calculation-benchmarks.ts[0m:[93m72[0m:[93m9[0m - [91merror[0m[90m TS18046: [0m'result' is of type 'unknown'.
+
+[7m72[0m     if (result.passesThreshold) {
+[7m  [0m [91m        ~~~~~~[0m
+
+[96msrc/utils/calculation-benchmarks.ts[0m:[93m76[0m:[93m52[0m - [91merror[0m[90m TS18046: [0m'result' is of type 'unknown'.
+
+[7m76[0m       failures.push(`${funcName}: execution time ${result.singleExecution.maxTime}ms exceeds limit ${CALCULATION_THRESHOLDS.MAX_CALCULATION_TIME_MS}ms`);
+[7m  [0m [91m                                                   ~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m32[0m:[93m12[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m32[0m     delete global.document;
+[7m  [0m [91m           ~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m33[0m:[93m12[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m33[0m     delete global.window;
+[7m  [0m [91m           ~~~~~~~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m34[0m:[93m12[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m34[0m     delete global.getComputedStyle;
+[7m  [0m [91m           ~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m35[0m:[93m12[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m35[0m     delete global.requestAnimationFrame;
+[7m  [0m [91m           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m36[0m:[93m12[0m - [91merror[0m[90m TS2790: [0mThe operand of a 'delete' operator must be optional.
+
+[7m36[0m     delete global.cancelAnimationFrame;
+[7m  [0m [91m           ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m56[0m:[93m34[0m - [91merror[0m[90m TS2339: [0mProperty 'type' does not exist on type 'HTMLElement'.
+
+[7m56[0m       assert.strictEqual(element.type, 'text');
+[7m  [0m [91m                                 ~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m58[0m:[93m42[0m - [91merror[0m[90m TS4111: [0mProperty 'testid' comes from an index signature, so it must be accessed with ['testid'].
+
+[7m58[0m       assert.strictEqual(element.dataset.testid, 'input-field');
+[7m  [0m [91m                                         ~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m86[0m:[93m26[0m - [91merror[0m[90m TS2532: [0mObject is possibly 'undefined'.
+
+[7m86[0m       assert.strictEqual(element.children[0].tagName, 'SPAN');
+[7m  [0m [91m                         ~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m149[0m:[93m43[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'string'.
+
+[7m149[0m         () => setCustomProperty('--test', null),
+[7m   [0m [91m                                          ~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m191[0m:[93m7[0m - [91merror[0m[90m TS2349: [0mThis expression is not callable.
+  Type 'HTMLElement' has no call signatures.
+
+[7m191[0m       cancel(); // Cancel the update
+[7m   [0m [91m      ~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m206[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type '(...args: any[]) => any'.
+
+[7m206[0m         () => batchDOMUpdates('not a function'),
+[7m   [0m [91m                              ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m231[0m:[93m18[0m - [91merror[0m[90m TS6133: [0m'event' is declared but its value is never read.
+
+[7m231[0m         '.btn': (event, element) => {
+[7m   [0m [91m                 ~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m231[0m:[93m18[0m - [91merror[0m[90m TS7006: [0mParameter 'event' implicitly has an 'any' type.
+
+[7m231[0m         '.btn': (event, element) => {
+[7m   [0m [91m                 ~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m231[0m:[93m25[0m - [91merror[0m[90m TS7006: [0mParameter 'element' implicitly has an 'any' type.
+
+[7m231[0m         '.btn': (event, element) => {
+[7m   [0m [91m                        ~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m243[0m:[93m17[0m - [91merror[0m[90m TS2339: [0mProperty 'destroy' does not exist on type 'HTMLElement'.
+
+[7m243[0m       delegator.destroy();
+[7m   [0m [91m                ~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m250[0m:[93m18[0m - [91merror[0m[90m TS6133: [0m'event' is declared but its value is never read.
+
+[7m250[0m         '.btn': (event, element) => {
+[7m   [0m [91m                 ~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m250[0m:[93m18[0m - [91merror[0m[90m TS7006: [0mParameter 'event' implicitly has an 'any' type.
+
+[7m250[0m         '.btn': (event, element) => {
+[7m   [0m [91m                 ~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m250[0m:[93m25[0m - [91merror[0m[90m TS7006: [0mParameter 'element' implicitly has an 'any' type.
+
+[7m250[0m         '.btn': (event, element) => {
+[7m   [0m [91m                        ~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m253[0m:[93m25[0m - [91merror[0m[90m TS6133: [0m'event' is declared but its value is never read.
+
+[7m253[0m         '.delete-btn': (event, element) => {
+[7m   [0m [91m                        ~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m253[0m:[93m25[0m - [91merror[0m[90m TS7006: [0mParameter 'event' implicitly has an 'any' type.
+
+[7m253[0m         '.delete-btn': (event, element) => {
+[7m   [0m [91m                        ~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m253[0m:[93m32[0m - [91merror[0m[90m TS7006: [0mParameter 'element' implicitly has an 'any' type.
+
+[7m253[0m         '.delete-btn': (event, element) => {
+[7m   [0m [91m                               ~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m263[0m:[93m17[0m - [91merror[0m[90m TS2339: [0mProperty 'destroy' does not exist on type 'HTMLElement'.
+
+[7m263[0m       delegator.destroy();
+[7m   [0m [91m                ~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m270[0m:[93m25[0m - [91merror[0m[90m TS6133: [0m'event' is declared but its value is never read.
+
+[7m270[0m         '.delete-btn': (event, element) => {
+[7m   [0m [91m                        ~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m270[0m:[93m25[0m - [91merror[0m[90m TS7006: [0mParameter 'event' implicitly has an 'any' type.
+
+[7m270[0m         '.delete-btn': (event, element) => {
+[7m   [0m [91m                        ~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m270[0m:[93m32[0m - [91merror[0m[90m TS7006: [0mParameter 'element' implicitly has an 'any' type.
+
+[7m270[0m         '.delete-btn': (event, element) => {
+[7m   [0m [91m                               ~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m281[0m:[93m17[0m - [91merror[0m[90m TS2339: [0mProperty 'destroy' does not exist on type 'HTMLElement'.
+
+[7m281[0m       delegator.destroy();
+[7m   [0m [91m                ~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m289[0m:[93m43[0m - [91merror[0m[90m TS2339: [0mProperty 'destroy' does not exist on type 'HTMLElement'.
+
+[7m289[0m       assert.strictEqual(typeof delegator.destroy, 'function');
+[7m   [0m [91m                                          ~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m292[0m:[93m17[0m - [91merror[0m[90m TS2339: [0mProperty 'destroy' does not exist on type 'HTMLElement'.
+
+[7m292[0m       delegator.destroy();
+[7m   [0m [91m                ~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m297[0m:[93m36[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'HTMLElement'.
+
+[7m297[0m         () => createEventDelegator(null, 'click', {}),
+[7m   [0m [91m                                   ~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m311[0m:[93m56[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'object'.
+
+[7m311[0m         () => createEventDelegator(container, 'click', null),
+[7m   [0m [91m                                                       ~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m361[0m:[93m45[0m - [91merror[0m[90m TS4111: [0mProperty 'value' comes from an index signature, so it must be accessed with ['value'].
+
+[7m361[0m       assert.strictEqual(newElement.dataset.value, '123');
+[7m   [0m [91m                                            ~~~~~[0m
+
+[96msrc/utils/dom-helpers.test.ts[0m:[93m375[0m:[93m39[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'HTMLElement'.
+
+[7m375[0m         () => removeAllEventListeners(null),
+[7m   [0m [91m                                      ~~~~[0m
+
+[96msrc/utils/dom-helpers.ts[0m:[93m43[0m:[93m122[0m - [91merror[0m[90m TS2355: [0mA function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.
+
+[7m43[0m export function setCustomProperty(propertyName: string, value: string, element: HTMLElement = document.documentElement): HTMLElement {
+[7m  [0m [91m                                                                                                                         ~~~~~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.ts[0m:[93m60[0m:[93m3[0m - [91merror[0m[90m TS2322: [0mType 'string' is not assignable to type 'HTMLElement'.
+
+[7m60[0m   return getComputedStyle(element).getPropertyValue(normalizedName).trim();
+[7m  [0m [91m  ~~~~~~[0m
+
+[96msrc/utils/dom-helpers.ts[0m:[93m79[0m:[93m3[0m - [91merror[0m[90m TS2322: [0mType '() => void' is not assignable to type 'HTMLElement'.
+
+[7m79[0m   return () => cancelAnimationFrame(frameId);
+[7m  [0m [91m  ~~~~~~[0m
+
+[96msrc/utils/dom-helpers.ts[0m:[93m98[0m:[93m58[0m - [91merror[0m[90m TS2355: [0mA function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.
+
+[7m98[0m   const handleEvent = (/** @type {Event} */ event: any): HTMLElement => {
+[7m  [0m [91m                                                         ~~~~~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.ts[0m:[93m110[0m:[93m5[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'destroy' does not exist in type 'HTMLElement'.
+
+[7m110[0m     destroy() {
+[7m   [0m [91m    ~~~~~~~[0m
+
+[96msrc/utils/dom-helpers.ts[0m:[93m128[0m:[93m3[0m - [91merror[0m[90m TS2740: [0mType 'Node' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, autocorrect, and 264 more.
+
+[7m128[0m   return cloned;
+[7m   [0m [91m  ~~~~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m62[0m:[93m47[0m - [91merror[0m[90m TS2345: [0mArgument of type 'number' is not assignable to parameter of type 'string'.
+
+[7m62[0m       assert.throws(() => getAccessibleColors(123), /must be string/);
+[7m  [0m [91m                                              ~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m63[0m:[93m47[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'string'.
+
+[7m63[0m       assert.throws(() => getAccessibleColors(null), /must be string/);
+[7m  [0m [91m                                              ~~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m64[0m:[93m47[0m - [91merror[0m[90m TS2345: [0mArgument of type 'undefined' is not assignable to parameter of type 'string'.
+
+[7m64[0m       assert.throws(() => getAccessibleColors(undefined), /must be string/);
+[7m  [0m [91m                                              ~~~~~~~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m81[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m81[0m         assert.ok(error.message.includes('positive'));
+[7m  [0m [91m                  ~~~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m82[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m82[0m         assert.ok(error.message.includes('negative'));
+[7m  [0m [91m                  ~~~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m83[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m83[0m         assert.ok(error.message.includes('neutral'));
+[7m  [0m [91m                  ~~~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m150[0m:[93m49[0m - [91merror[0m[90m TS2345: [0mArgument of type 'number' is not assignable to parameter of type 'string'.
+
+[7m150[0m       assert.throws(() => getResponsiveFontSize(123), /must be string/);
+[7m   [0m [91m                                                ~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m151[0m:[93m49[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'string'.
+
+[7m151[0m       assert.throws(() => getResponsiveFontSize(null), /must be string/);
+[7m   [0m [91m                                                ~~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m152[0m:[93m49[0m - [91merror[0m[90m TS2345: [0mArgument of type 'undefined' is not assignable to parameter of type 'string'.
+
+[7m152[0m       assert.throws(() => getResponsiveFontSize(undefined), /must be string/);
+[7m   [0m [91m                                                ~~~~~~~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m169[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m169[0m         assert.ok(error.message.includes('primary'));
+[7m   [0m [91m                  ~~~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m170[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m170[0m         assert.ok(error.message.includes('secondary'));
+[7m   [0m [91m                  ~~~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m171[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m171[0m         assert.ok(error.message.includes('caption'));
+[7m   [0m [91m                  ~~~~~[0m
+
+[96msrc/utils/formatting/accessibility.test.ts[0m:[93m172[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m172[0m         assert.ok(error.message.includes('label'));
+[7m   [0m [91m                  ~~~~~[0m
+
+[96msrc/utils/formatting/currency.test.ts[0m:[93m54[0m:[93m39[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number'.
+
+[7m54[0m       assert.throws(() => formatMoney('invalid'), /must be a finite number/);
+[7m  [0m [91m                                      ~~~~~~~~~[0m
+
+[96msrc/utils/formatting/currency.test.ts[0m:[93m55[0m:[93m39[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'number'.
+
+[7m55[0m       assert.throws(() => formatMoney(null), /must be a finite number/);
+[7m  [0m [91m                                      ~~~~[0m
+
+[96msrc/utils/formatting/currency.test.ts[0m:[93m56[0m:[93m39[0m - [91merror[0m[90m TS2345: [0mArgument of type 'undefined' is not assignable to parameter of type 'number'.
+
+[7m56[0m       assert.throws(() => formatMoney(undefined), /must be a finite number/);
+[7m  [0m [91m                                      ~~~~~~~~~[0m
+
+[96msrc/utils/formatting/currency.test.ts[0m:[93m98[0m:[93m44[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number'.
+
+[7m98[0m       assert.throws(() => formatPercentage('invalid'), /must be a finite number/);
+[7m  [0m [91m                                           ~~~~~~~~~[0m
+
+[96msrc/utils/formatting/currency.test.ts[0m:[93m99[0m:[93m44[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'number'.
+
+[7m99[0m       assert.throws(() => formatPercentage(null), /must be a finite number/);
+[7m  [0m [91m                                           ~~~~[0m
+
+[96msrc/utils/formatting/currency.test.ts[0m:[93m100[0m:[93m44[0m - [91merror[0m[90m TS2345: [0mArgument of type 'undefined' is not assignable to parameter of type 'number'.
+
+[7m100[0m       assert.throws(() => formatPercentage(undefined), /must be a finite number/);
+[7m   [0m [91m                                           ~~~~~~~~~[0m
+
+[96msrc/utils/formatting/display.test.ts[0m:[93m60[0m:[93m44[0m - [91merror[0m[90m TS2345: [0mArgument of type 'number' is not assignable to parameter of type 'string'.
+
+[7m60[0m       assert.throws(() => formatPhaseLabel(123), /must be string/);
+[7m  [0m [91m                                           ~~~[0m
+
+[96msrc/utils/formatting/display.test.ts[0m:[93m61[0m:[93m44[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'string'.
+
+[7m61[0m       assert.throws(() => formatPhaseLabel(null), /must be string/);
+[7m  [0m [91m                                           ~~~~[0m
+
+[96msrc/utils/formatting/display.test.ts[0m:[93m62[0m:[93m44[0m - [91merror[0m[90m TS2345: [0mArgument of type 'undefined' is not assignable to parameter of type 'string'.
+
+[7m62[0m       assert.throws(() => formatPhaseLabel(undefined), /must be string/);
+[7m  [0m [91m                                           ~~~~~~~~~[0m
+
+[96msrc/utils/formatting/display.test.ts[0m:[93m79[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m79[0m         assert.ok(error.message.includes('debtFree'));
+[7m  [0m [91m                  ~~~~~[0m
+
+[96msrc/utils/formatting/display.test.ts[0m:[93m80[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m80[0m         assert.ok(error.message.includes('emergencyFund'));
+[7m  [0m [91m                  ~~~~~[0m
+
+[96msrc/utils/formatting/display.test.ts[0m:[93m81[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m81[0m         assert.ok(error.message.includes('retirement'));
+[7m  [0m [91m                  ~~~~~[0m
+
+[96msrc/utils/formatting/display.test.ts[0m:[93m82[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+
+[7m82[0m         assert.ok(error.message.includes('death'));
+[7m  [0m [91m                  ~~~~~[0m
+
+[96msrc/utils/formatting/display.test.ts[0m:[93m111[0m:[93m42[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number'.
+
+[7m111[0m       assert.throws(() => formatAgeRange('25', 30), /must be numbers/);
+[7m   [0m [91m                                         ~~~~[0m
+
+[96msrc/utils/formatting/display.test.ts[0m:[93m112[0m:[93m46[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number'.
+
+[7m112[0m       assert.throws(() => formatAgeRange(25, '30'), /must be numbers/);
+[7m   [0m [91m                                             ~~~~[0m
+
+[96msrc/utils/formatting/display.test.ts[0m:[93m113[0m:[93m42[0m - [91merror[0m[90m TS2345: [0mArgument of type 'null' is not assignable to parameter of type 'number'.
+
+[7m113[0m       assert.throws(() => formatAgeRange(null, 30), /must be numbers/);
+[7m   [0m [91m                                         ~~~~[0m
+
+[96msrc/utils/formatting/display.test.ts[0m:[93m114[0m:[93m46[0m - [91merror[0m[90m TS2345: [0mArgument of type 'undefined' is not assignable to parameter of type 'number'.
+
+[7m114[0m       assert.throws(() => formatAgeRange(25, undefined), /must be numbers/);
+[7m   [0m [91m                                             ~~~~~~~~~[0m
+
+[96msrc/utils/formatting/growth.test.ts[0m:[93m66[0m:[93m40[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number'.
+
+[7m66[0m       assert.throws(() => formatGrowth('invalid', 50000), /must be a finite number/);
+[7m  [0m [91m                                       ~~~~~~~~~[0m
+
+[96msrc/utils/formatting/growth.test.ts[0m:[93m67[0m:[93m47[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number'.
+
+[7m67[0m       assert.throws(() => formatGrowth(52000, 'invalid'), /must be a finite number/);
+[7m  [0m [91m                                              ~~~~~~~~~[0m
+
+[96msrc/utils/formatting/growth.test.ts[0m:[93m115[0m:[93m39[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number'.
+
+[7m115[0m       assert.throws(() => formatDelta('invalid', 1000), /must be a finite number/);
+[7m   [0m [91m                                      ~~~~~~~~~[0m
+
+[96msrc/utils/formatting/growth.test.ts[0m:[93m116[0m:[93m45[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'number'.
+
+[7m116[0m       assert.throws(() => formatDelta(1250, 'invalid'), /must be a finite number/);
+[7m   [0m [91m                                            ~~~~~~~~~[0m
+
+[96msrc/utils/main-thread-blocking.test.ts[0m:[93m61[0m:[93m37[0m - [91merror[0m[90m TS2551: [0mProperty 'maxTimeMs' does not exist on type '{ averageTime: number; maxTime: number; minTime: number; measurements: number[]; isBlocking: boolean; blockingThreshold: number; isHealthy: boolean; }'. Did you mean 'maxTime'?
+
+[7m61[0m       assert.strictEqual(validation.maxTimeMs, 2.5, 'Should report correct max time');
+[7m  [0m [91m                                    ~~~~~~~~~[0m
+
+  [96msrc/utils/main-thread-blocking.ts[0m:[93m51[0m:[93m89[0m
+    [7m51[0m export function validateBlockingPerformance(blockingResult: any): {averageTime: number, maxTime: number, minTime: number, measurements: number[], isBlocking: boolean, blockingThreshold: number, isHealthy: boolean} {
+    [7m  [0m [96m                                                                                        ~~~~~~~[0m
+    'maxTime' is declared here.
+
+[96msrc/utils/main-thread-blocking.test.ts[0m:[93m62[0m:[93m37[0m - [91merror[0m[90m TS2339: [0mProperty 'threshold' does not exist on type '{ averageTime: number; maxTime: number; minTime: number; measurements: number[]; isBlocking: boolean; blockingThreshold: number; isHealthy: boolean; }'.
+
+[7m62[0m       assert.strictEqual(validation.threshold, BLOCKING_THRESHOLDS.MAX_BLOCKING_TIME_MS, 'Should report correct threshold');
+[7m  [0m [91m                                    ~~~~~~~~~[0m
+
+[96msrc/utils/main-thread-blocking.test.ts[0m:[93m75[0m:[93m37[0m - [91merror[0m[90m TS2551: [0mProperty 'maxTimeMs' does not exist on type '{ averageTime: number; maxTime: number; minTime: number; measurements: number[]; isBlocking: boolean; blockingThreshold: number; isHealthy: boolean; }'. Did you mean 'maxTime'?
+
+[7m75[0m       assert.strictEqual(validation.maxTimeMs, 15.2, 'Should report actual max time');
+[7m  [0m [91m                                    ~~~~~~~~~[0m
+
+  [96msrc/utils/main-thread-blocking.ts[0m:[93m51[0m:[93m89[0m
+    [7m51[0m export function validateBlockingPerformance(blockingResult: any): {averageTime: number, maxTime: number, minTime: number, measurements: number[], isBlocking: boolean, blockingThreshold: number, isHealthy: boolean} {
+    [7m  [0m [96m                                                                                        ~~~~~~~[0m
+    'maxTime' is declared here.
+
+[96msrc/utils/memory-profiling.test.ts[0m:[93m21[0m:[93m46[0m - [91merror[0m[90m TS2339: [0mProperty 'usedJSHeapSize' does not exist on type 'Object'.
+
+[7m21[0m         assert.ok(typeof profile.memoryDelta.usedJSHeapSize === 'number', 'Should measure heap size delta');
+[7m  [0m [91m                                             ~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/memory-profiling.test.ts[0m:[93m22[0m:[93m46[0m - [91merror[0m[90m TS2339: [0mProperty 'totalJSHeapSize' does not exist on type 'Object'.
+
+[7m22[0m         assert.ok(typeof profile.memoryDelta.totalJSHeapSize === 'number', 'Should measure total heap delta');
+[7m  [0m [91m                                             ~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/memory-profiling.test.ts[0m:[93m26[0m:[93m48[0m - [91merror[0m[90m TS2339: [0mProperty 'usedJSHeapSize' does not exist on type 'Object'.
+
+[7m26[0m         assert.ok(typeof profile.initialMemory.usedJSHeapSize === 'number', 'Should capture initial memory');
+[7m  [0m [91m                                               ~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/memory-profiling.test.ts[0m:[93m30[0m:[93m46[0m - [91merror[0m[90m TS2339: [0mProperty 'usedJSHeapSize' does not exist on type 'Object'.
+
+[7m30[0m         assert.ok(typeof profile.finalMemory.usedJSHeapSize === 'number', 'Should capture final memory');
+[7m  [0m [91m                                             ~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/runtime-performance.test.ts[0m:[93m25[0m:[93m1[0m - [91merror[0m[90m TS6133: [0m'AllocationAmounts' is declared but its value is never read.
+
+[7m25[0m import type { AllocationAmounts } from '../types/index.js';
+[7m  [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/runtime-performance.test.ts[0m:[93m79[0m:[93m22[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ convertUsdToEur: number[]; convertEurToThb: number[]; calculateNetSalary: number[]; calculateMonthlyExpenses: { housing: number; utilities: number; diningGroceries: number; hiredStaff: number; ... 7 more ...; discretionary: number; }[]; ... 9 more ...; calculateAbsoluteGrowth: number[]; }'.
+  No index signature with a parameter of type 'string' was found on type '{ convertUsdToEur: number[]; convertEurToThb: number[]; calculateNetSalary: number[]; calculateMonthlyExpenses: { housing: number; utilities: number; diningGroceries: number; hiredStaff: number; ... 7 more ...; discretionary: number; }[]; ... 9 more ...; calculateAbsoluteGrowth: number[]; }'.
+
+[7m79[0m         const args = testData[funcName];
+[7m  [0m [91m                     ~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/utils/runtime-performance.test.ts[0m:[93m101[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'result' is of type 'unknown'.
+
+[7m101[0m         assert.ok(result.singleExecution.averageTime >= 0, `${funcName} should have single execution data`);
+[7m   [0m [91m                  ~~~~~~[0m
+
+[96msrc/utils/runtime-performance.test.ts[0m:[93m102[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'result' is of type 'unknown'.
+
+[7m102[0m         assert.ok(result.stressTest.iterationsPerSecond > 0, `${funcName} should have stress test data`);
+[7m   [0m [91m                  ~~~~~~[0m
+
+[96msrc/utils/runtime-performance.test.ts[0m:[93m103[0m:[93m19[0m - [91merror[0m[90m TS18046: [0m'result' is of type 'unknown'.
+
+[7m103[0m         assert.ok(result.passesThreshold, `${funcName} should pass performance threshold`);
+[7m   [0m [91m                  ~~~~~~[0m
+
+[96msrc/utils/runtime-performance.test.ts[0m:[93m111[0m:[93m22[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ convertUsdToEur: number[]; convertEurToThb: number[]; calculateNetSalary: number[]; calculateMonthlyExpenses: { housing: number; utilities: number; diningGroceries: number; hiredStaff: number; ... 7 more ...; discretionary: number; }[]; ... 9 more ...; calculateAbsoluteGrowth: number[]; }'.
+  No index signature with a parameter of type 'string' was found on type '{ convertUsdToEur: number[]; convertEurToThb: number[]; calculateNetSalary: number[]; calculateMonthlyExpenses: { housing: number; utilities: number; diningGroceries: number; hiredStaff: number; ... 7 more ...; discretionary: number; }[]; ... 9 more ...; calculateAbsoluteGrowth: number[]; }'.
+
+[7m111[0m         const args = testData[funcName];
+[7m   [0m [91m                     ~~~~~~~~~~~~~~~~~~[0m
+
+
+Found 460 errors in 49 files.
+
+Errors  Files
+     1  src/lib/allocations.test.ts[90m:13[0m
+    13  src/lib/integration.test.ts[90m:22[0m
+     1  src/lib/optimal-retirement.test.ts[90m:63[0m
+     1  src/lib/performance.test.ts[90m:37[0m
+    27  src/lib/simulate-wealth.test.ts[90m:24[0m
+     3  src/lib/simulate-wealth.ts[90m:20[0m
+     3  src/lib/simulation-helpers.ts[90m:5[0m
+     2  src/main.ts[90m:47[0m
+    20  src/state/financial-data.test.ts[90m:14[0m
+     2  src/state/financial-data.ts[90m:137[0m
+    23  src/state/observers.test.ts[90m:14[0m
+     9  src/state/simulation-results.test.ts[90m:166[0m
+     3  src/state/simulation-results.ts[90m:149[0m
+    22  src/state/validation.test.ts[90m:71[0m
+     4  src/ui/app-controllers.test.ts[90m:14[0m
+     1  src/ui/app-controllers.ts[90m:145[0m
+     2  src/ui/app-layout.test.ts[90m:14[0m
+     7  src/ui/calculation-controller.test.ts[90m:45[0m
+    22  src/ui/calculation-controller.ts[90m:38[0m
+     3  src/ui/chart-loader.ts[90m:12[0m
+     6  src/ui/financial-inputs-extended.ts[90m:105[0m
+     7  src/ui/financial-inputs.test.ts[90m:15[0m
+     5  src/ui/financial-inputs.ts[90m:97[0m
+     1  src/ui/input-field.test.ts[90m:13[0m
+    17  src/ui/input-field.ts[90m:17[0m
+     1  src/ui/input-section.test.ts[90m:13[0m
+     6  src/ui/input-section.ts[90m:17[0m
+    62  src/ui/integration.test.ts[90m:49[0m
+     7  src/ui/phase-table-helpers.test.ts[90m:38[0m
+     3  src/ui/phase-table-helpers.ts[90m:34[0m
+     9  src/ui/phase-tables-container.test.ts[90m:39[0m
+    10  src/ui/phase-tables.test.ts[90m:33[0m
+     3  src/ui/phase-tables.ts[90m:49[0m
+     4  src/ui/summary-cards.test.ts[90m:37[0m
+    10  src/ui/theme-manager.test.ts[90m:14[0m
+     4  src/ui/theme-manager.ts[90m:60[0m
+    34  src/ui/wealth-chart.test.ts[90m:11[0m
+     6  src/ui/wealth-chart.ts[90m:35[0m
+     6  src/utils/calculation-benchmarks.test.ts[90m:14[0m
+     5  src/utils/calculation-benchmarks.ts[90m:33[0m
+    32  src/utils/dom-helpers.test.ts[90m:32[0m
+     6  src/utils/dom-helpers.ts[90m:43[0m
+    13  src/utils/formatting/accessibility.test.ts[90m:62[0m
+     6  src/utils/formatting/currency.test.ts[90m:54[0m
+    11  src/utils/formatting/display.test.ts[90m:60[0m
+     4  src/utils/formatting/growth.test.ts[90m:66[0m
+     3  src/utils/main-thread-blocking.test.ts[90m:61[0m
+     4  src/utils/memory-profiling.test.ts[90m:21[0m
+     6  src/utils/runtime-performance.test.ts[90m:25[0m

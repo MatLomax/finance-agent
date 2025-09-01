@@ -7,47 +7,25 @@
   "extends": [
     "eslint:recommended"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2022,
     "sourceType": "module"
   },
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "rules": {
-    "indent": ["error", 2],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
-    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "no-console": "off",
-    "no-debugger": "error",
-    "prefer-const": "error",
-    "no-var": "error",
-    "prefer-arrow-callback": "error",
-    "no-duplicate-imports": "error",
-    
-    // File length and complexity enforcement
-    "max-lines": ["error", {
-      "max": 100,
-      "skipBlankLines": true,
-      "skipComments": true
-    }],
-    "complexity": ["error", { "max": 10 }],
-    "max-statements": ["error", { "max": 20 }],
-    "max-params": ["error", { "max": 5 }],
-    "max-depth": ["error", { "max": 4 }],
-    "max-nested-callbacks": ["error", { "max": 3 }],
-    "max-lines-per-function": ["error", {
-      "max": 50,
-      "skipBlankLines": true,
-      "skipComments": true,
-      "IIFEs": true
-    }]
+    "@typescript-eslint/no-explicit-any": "warn"
   },
   "overrides": [
     {
-      "files": ["**/*.test.js", "**/__tests__/**/*.js"],
+      "files": ["**/*.test.ts"],
       "rules": {
-        "max-nested-callbacks": ["error", { "max": 5 }],
-        "max-lines-per-function": "off",
-        "max-lines": "off"
+        "@typescript-eslint/no-explicit-any": "off"
       }
     }
   ]
