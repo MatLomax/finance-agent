@@ -31,15 +31,15 @@ $(echo "$commit_message" | sed -n '/## Changes in v/,/### Quality Assurance/p' |
 - ✅ **Type Safety**: JSDoc + TypeScript type checking passed
 - ✅ **Code Quality**: ESLint with zero warnings
 - ✅ **Testing**: 100% test coverage maintained
-- ✅ **Performance**: Bundle size < 20KB
-- ✅ **Architecture**: Maximum 5 dependencies enforced
+- ✅ **Performance**: Bundle size < 25KB (production build)
+- ✅ **Architecture**: Minimal dependencies with tree-shaking
 - ✅ **Documentation**: Educational comments validated
 
 ## Installation & Usage
 
 \`\`\`bash
 # Clone the repository
-git clone https://github.com/MatLomax/minimal-agent-rules.git
+git clone https://github.com/MatLomax/finance-agent.git
 
 # Install dependencies
 npm install
@@ -47,16 +47,16 @@ npm install
 # Run quality checks
 npm run check
 
-# Start development
-npm run dev
+# Start development (requires Python for local server)
+python -m http.server 3000 --directory .
 \`\`\`
 
 ## Architecture Highlights
-- **Ultra-lightweight**: < 15KB total bundle size
-- **Zero-build**: Pure JavaScript ES2022+ with no transpilation
-- **Type-safe**: JSDoc comments + TypeScript checking + TypeBox runtime validation
-- **Educational**: All code includes step-by-step explanations
-- **Automated**: AI agent handles commits and releases
+- **Ultra-lightweight**: < 25KB total bundle size with esbuild production bundling
+- **Modern ES Modules**: Pure JavaScript ES2022+ with esbuild for production optimization
+- **Type-safe**: JSDoc comments + TypeScript checking + runtime validation
+- **Educational**: All code includes step-by-step explanations of financial concepts
+- **Automated**: AI agent handles commits and releases with detailed analysis
 
 ---
 *This release was automatically created by the AI development agent following comprehensive quality validation.*
@@ -144,4 +144,4 @@ create_github_release "$version"
 
 echo ""
 echo -e "${GREEN}🎉 Release v${version} completed successfully!${NC}"
-echo -e "${GREY}🔗 View at: https://github.com/MatLomax/minimal-agent-rules/releases/tag/v${version}${NC}"
+echo -e "${GREY}🔗 View at: https://github.com/MatLomax/finance-agent/releases/tag/v${version}${NC}"
