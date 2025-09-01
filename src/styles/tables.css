@@ -1,0 +1,220 @@
+/**
+ * Table Components - Data tables for financial results display
+ * Educational: Accessible tables with clear hierarchy and responsive design
+ */
+
+/* Base table styling */
+.phase-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+  
+  /* Performance optimization: contain layout calculations */
+  contain: layout;
+}
+
+/* Table headers */
+.phase-table th {
+  padding: 12px;
+  text-align: right;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  
+  /* Sticky headers for long tables */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Table cells */
+.phase-table td {
+  padding: 12px;
+  text-align: right;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  transition: background-color var(--transition-fast);
+}
+
+/* Row hover effects */
+.phase-table tr:hover td {
+  background-color: var(--bg-tertiary);
+}
+
+/* Milestone row highlighting */
+.milestone-row td {
+  background-color: var(--accent-primary) !important;
+  color: white;
+  font-weight: bold;
+}
+
+.milestone-row:hover td {
+  background-color: var(--accent-secondary) !important;
+}
+
+/* Summary table for key metrics */
+.summary-table {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: var(--space-md) 0;
+}
+
+.summary-table th {
+  background-color: var(--bg-tertiary);
+  padding: var(--space-md);
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.summary-table td {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.summary-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Delta value styling for changes */
+.delta-positive {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.delta-negative {
+  color: var(--error-color);
+  font-weight: 600;
+}
+
+.delta-neutral {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Currency formatting */
+.currency {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.currency.large {
+  font-size: var(--font-size-lg);
+}
+
+.currency.small {
+  font-size: var(--font-size-sm);
+}
+
+/* Age display in tables */
+.age-display {
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* Percentage display in tables */
+.percentage {
+  font-weight: 500;
+  color: var(--accent-primary);
+}
+
+/* Table section headers */
+.table-section-header {
+  background-color: var(--accent-primary);
+  color: white;
+  padding: var(--space-md);
+  font-weight: 600;
+  text-align: center;
+  border: none;
+}
+
+/* Responsive table design */
+@media (max-width: 1024px) {
+  .phase-table {
+    font-size: var(--font-size-sm);
+  }
+  
+  .phase-table th,
+  .phase-table td {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Convert tables to card layout on mobile */
+  .phase-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .phase-table thead {
+    display: block;
+  }
+  
+  .phase-table tbody {
+    display: block;
+  }
+  
+  .phase-table tr {
+    display: block;
+    margin-bottom: var(--space-md);
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-light);
+  }
+  
+  .phase-table th,
+  .phase-table td {
+    display: block;
+    text-align: left;
+    padding: var(--space-xs) 0;
+    border: none;
+  }
+  
+  .phase-table th {
+    font-weight: 600;
+    color: var(--accent-primary);
+    margin-bottom: var(--space-xs);
+  }
+  
+  /* Add labels for mobile view */
+  .phase-table td:before {
+    content: attr(data-label) ": ";
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: inline-block;
+    width: 120px;
+  }
+}
+
+/* Print styles for tables */
+@media print {
+  .phase-table {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .phase-table th {
+    background-color: #f0f0f0 !important;
+    color: #000 !important;
+  }
+  
+  .milestone-row td {
+    background-color: #e0e0e0 !important;
+    color: #000 !important;
+  }
+}

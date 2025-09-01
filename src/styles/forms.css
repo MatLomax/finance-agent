@@ -1,0 +1,209 @@
+/**
+ * Form Components - Input fields, labels, and form validation styles
+ * Educational: Accessible form design with clear focus states and validation feedback
+ */
+
+/* Form structure and organization */
+.financial-form {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.section-title {
+  margin-top: 0;
+  margin-bottom: var(--space-lg);
+  color: var(--accent-secondary);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+
+/* Input field container */
+.input-field {
+  margin-bottom: var(--space-md);
+}
+
+/* Label styling for accessibility */
+.input-label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+/* Input control styling */
+.input-control {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  background-color: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  
+  /* Remove browser-specific styling for number inputs */
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Focus state for accessibility */
+.input-control:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Remove number input spinners for cleaner appearance */
+.input-control::-webkit-outer-spin-button,
+.input-control::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hover state for better interaction feedback */
+.input-control:hover {
+  border-color: var(--accent-tertiary);
+}
+
+/* Disabled state */
+.input-control:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--bg-tertiary);
+}
+
+/* Input validation states */
+.input-control.valid {
+  border-color: var(--success-color);
+}
+
+.input-control.invalid {
+  border-color: var(--error-color);
+}
+
+.input-control.warning {
+  border-color: var(--warning-color);
+}
+
+/* Validation feedback messages */
+.input-feedback {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.input-feedback.success {
+  color: var(--success-color);
+}
+
+.input-feedback.error {
+  color: var(--error-color);
+}
+
+.input-feedback.warning {
+  color: var(--warning-color);
+}
+
+/* Input group for related fields */
+.input-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+
+/* Range input styling for allocation percentages */
+.range-input {
+  width: 100%;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  outline: none;
+  margin: var(--space-sm) 0;
+}
+
+.range-input::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+}
+
+.range-input::-webkit-slider-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+.range-input::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  transition: background-color var(--transition-base);
+}
+
+.range-input::-moz-range-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* Percentage display for range inputs */
+.percentage-display {
+  font-weight: 600;
+  color: var(--accent-primary);
+  font-size: var(--font-size-lg);
+}
+
+/* Form explanation text */
+.explanation {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-sm);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Formula display boxes */
+.formula {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-sm);
+  font-family: 'Courier New', monospace;
+  background-color: var(--bg-secondary);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent-primary);
+}
+
+/* Responsive form adjustments */
+@media (max-width: 767px) {
+  .input-control {
+    max-width: 100%;
+  }
+  
+  .input-group {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Larger touch targets for mobile */
+  .input-control {
+    padding: 12px;
+    font-size: var(--font-size-lg);
+  }
+  
+  .range-input::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .range-input::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+  }
+}

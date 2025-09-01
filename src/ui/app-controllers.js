@@ -11,7 +11,7 @@ import { createSummaryCards } from './summary-cards.js';
 import { createPhaseTable } from './phase-tables.js';
 import { triggerCalculation, subscribeToCalculations, debouncedCalculation } from './calculation-controller.js';
 import { addObserver } from '../state/financial-data.js';
-import { createElement, batchDOMUpdates } from '../utils/dom-helpers.js';
+import { batchDOMUpdates } from '../utils/dom-helpers.js';
 
 /**
  * Initialize financial inputs module
@@ -35,7 +35,7 @@ function initializeInputs(container, appState) {
  * @param {HTMLElement} container - Container element for results
  * @param {any} results - Calculation results
  */
-function updateResults(container, results) {
+async function updateResults(container, results) {
   if (!results) {
     container.innerHTML = '<p class="loading">Calculating...</p>';
     return;
@@ -64,24 +64,19 @@ function updateResults(container, results) {
         const phaseConfig = { phase: 'debt-elimination', allocationPercentage: 100 };
         const phaseTable = createPhaseTable(results.simulationData, phaseConfig, null, 0.15);
         container.appendChild(phaseTable);
-        
-        // Create wealth chart (lightweight version)
-        const chartContainer = createElement('div', { className: 'chart-section' });
-        const chartTitle = createElement('h3', { 
-          textContent: 'Wealth Trajectory',
-          className: 'chart-title'
-        });
-        chartContainer.appendChild(chartTitle);
-        
-        // For now, just show a placeholder until full chart implementation
-        const chartPlaceholder = createElement('div', { 
-          className: 'chart-placeholder',
-          innerHTML: '<p>📈 Interactive chart available in full version</p>'
-        });
-        chartContainer.appendChild(chartPlaceholder);
-        container.appendChild(chartContainer);
       }
     });
+    
+    // Lazy load chart after DOM updates
+    if (results.simulationData && results.simulationData.length > 0) {
+      try {
+        const { createChartSection } = await import('./chart-loader.js');
+        const chartSection = createChartSection(results.simulationData);
+        container.appendChild(chartSection);
+      } catch (chartError) {
+        console.warn('Chart module not available:', chartError);
+      }
+    }
     
     console.log('✅ Results updated successfully');
   } catch (error) {

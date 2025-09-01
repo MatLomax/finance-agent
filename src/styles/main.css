@@ -1,0 +1,33 @@
+/**
+ * Main CSS Entry Point - Import all component stylesheets
+ * Educational: Modular CSS architecture for maintainability and performance
+ * 
+ * This approach provides:
+ * - Component-based organization for easier maintenance
+ * - CSS custom properties for consistent theming
+ * - Progressive enhancement and responsive design
+ * - Performance optimizations with CSS containment
+ * - Accessibility-first design patterns
+ */
+
+/* Import component stylesheets in dependency order */
+@import './base.css';          /* Core variables and reset */
+@import './layout.css';        /* Application layout and grid system */
+@import './forms.css';         /* Form inputs and validation */
+@import './tables.css';        /* Data tables and grids */
+@import './results.css';       /* Results display and charts */
+
+/**
+ * Component load order explanation:
+ * 1. base.css - Establishes CSS custom properties, typography, and foundational styles
+ * 2. layout.css - Defines responsive grid system and page structure  
+ * 3. forms.css - Form styling that builds on base typography and layout
+ * 4. tables.css - Table components using base variables and layout patterns
+ * 5. results.css - Result displays that combine all previous components
+ * 
+ * This modular approach allows for:
+ * - Easy component updates without affecting others
+ * - Selective loading for performance optimization
+ * - Clear separation of concerns
+ * - Consistent design system through shared variables
+ */

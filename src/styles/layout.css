@@ -1,0 +1,182 @@
+/**
+ * Layout Components - Application structure and responsive grid system
+ * Educational: Modern CSS Grid and Flexbox for responsive, accessible layouts
+ */
+
+/* Main application container */
+.app-container {
+  min-height: 100vh;
+}
+
+/* Application header with theme toggle */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.app-title {
+  margin: 0;
+  font-size: var(--font-size-4xl);
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  font-size: var(--font-size-2xl);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  color: var(--text-primary);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-primary);
+  transform: scale(1.05);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Main content area with responsive grid */
+.app-main {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+/* Section containers */
+.section,
+.inputs-section,
+.results-section {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  margin: var(--space-xl) 0;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-medium);
+  
+  /* Performance optimization: contain layout calculations */
+  contain: layout;
+}
+
+.form-section {
+  background-color: var(--bg-tertiary);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+/* Grid system for responsive layouts */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-xl);
+  margin: var(--space-xl) 0;
+}
+
+/* Phase cards with enhanced visual hierarchy */
+.phase-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  margin: var(--space-xl) 0;
+  box-shadow: var(--shadow-medium);
+  
+  /* Performance optimization */
+  contain: layout;
+}
+
+.phase-card-header {
+  padding: 24px 24px 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.phase-age-range {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--accent-primary);
+  letter-spacing: 0.05em;
+}
+
+/* Critical error display */
+.critical-error {
+  background-color: var(--error-color);
+  color: white;
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  margin: var(--space-xl) 0;
+}
+
+.critical-error button {
+  background-color: white;
+  color: var(--error-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: var(--space-md);
+  transition: opacity var(--transition-base);
+}
+
+.critical-error button:hover {
+  opacity: 0.9;
+}
+
+/* Responsive design breakpoints */
+@media (min-width: 768px) {
+  .app-main {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .inputs-section {
+    grid-column: 1;
+  }
+  
+  .results-section {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding: 10px;
+  }
+  
+  .app-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .app-header {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+  
+  .phase-age-range {
+    font-size: var(--font-size-2xl);
+  }
+  
+  /* Improve touch targets on mobile */
+  .theme-toggle {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
