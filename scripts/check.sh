@@ -2,7 +2,7 @@
 
 # Finance Agent Quality Check Script
 # Usage: ./scripts/check.sh [--fast] [--type-check] [--lint] [--test] [--build] [--deps]
-# Default: Run all checks
+# Default: Run all checks including comprehensive performance analysis
 # --fast: Run only type-check, lint, and test (skip build, deps)
 # Individual flags: Run only specified checks
 
@@ -151,10 +151,10 @@ if [ "$TEST" = true ]; then
     fi
 fi
 
-# Check bundle size
+# Check bundle size and performance
 if [ "$BUILD" = true ]; then
-    if ! run_check "npm run build:check" "Bundle Size Check"; then
-        echo -e "${RED}💥 Bundle size check failed${NC}"
+    if ! run_check "npm run build:analyze" "Bundle Size & Performance Analysis"; then
+        echo -e "${RED}💥 Bundle size or performance analysis failed${NC}"
         exit 1
     fi
 fi

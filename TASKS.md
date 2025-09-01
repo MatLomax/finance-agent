@@ -312,7 +312,8 @@ This document outlines the complete transformation of the Thailand.html single-f
   - **Implementation**: Comprehensive performance analysis toolkit with modular architecture
   - **Features**: Bundle size analysis (8.42KB gzipped, well under 25KB target), tree-shaking validation, dependency analysis, TTI estimation (166ms, under 300ms target)
   - **Tools Created**: Modular performance analyzer with separate modules for bundle analysis, dependency checking, tree-shaking validation, and performance estimation
-  - **Scripts Added**: `npm run build:analyze` command for complete build and performance analysis workflow
+  - **Scripts Added**: `npm run build:analyze` command for complete build and performance analysis workflow, integrated into `npm run check` quality gates
+  - **Quality Integration**: Performance analysis now runs as part of pre-commit checks via `./scripts/check.sh`
   - **Optimizations**: Fixed bundle size check script to exclude test files, corrected tree-shaking regex patterns, accurate 3G download time calculations
   - **Results**: All performance targets exceeded - bundle is well-optimized with excellent tree-shaking, minimal dependencies, and fast TTI
 
