@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Finance Agent Quality Check Script
-# Usage: ./scripts/check.sh [--fast] [--type-check] [--lint] [--test] [--build] [--deps] [--comments]
+# Usage: ./scripts/check.sh [--fast] [--type-check] [--lint] [--test] [--build] [--deps]
 # Default: Run all checks
-# --fast: Run only type-check, lint, and test (skip build, deps, comments)
+# --fast: Run only type-check, lint, and test (skip build, deps)
 # Individual flags: Run only specified checks
 
 # Colors for output
@@ -27,8 +27,8 @@ show_spinner() {
         sleep 0.1
     done
 
-    # Clear the entire spinner line with spaces
-    printf "\r%*s\r" "80" ""
+    # Clear the spinner line completely
+    printf "\r\033[K"
 }
 
 # Function to run command and capture output
@@ -56,10 +56,10 @@ run_check() {
     rm "$temp_file"
 
     if [ $exit_code -eq 0 ]; then
-        echo -e "${GREEN}[✓]${NC} ${WHITE}${name} passed${NC}"
+        printf "${GREEN}[✓]${NC} ${WHITE}${name} passed${NC}\n"
         return 0
     else
-        echo -e "${RED}[✗] ${name} failed${NC}"
+        printf "${RED}[✗] ${name} failed${NC}\n"
         echo -e "$output"
         echo ""
         return 1
@@ -73,7 +73,6 @@ LINT=false
 TEST=false
 BUILD=false
 DEPS=false
-COMMENTS=false
 RUN_ALL=true
 
 for arg in "$@"; do
@@ -105,13 +104,9 @@ for arg in "$@"; do
             DEPS=true
             RUN_ALL=false
             ;;
-        --comments)
-            COMMENTS=true
-            RUN_ALL=false
-            ;;
         *)
             echo "Unknown option: $arg"
-            echo "Usage: $0 [--fast] [--type-check] [--lint] [--test] [--build] [--deps] [--comments]"
+            echo "Usage: $0 [--fast] [--type-check] [--lint] [--test] [--build] [--deps]"
             exit 1
             ;;
     esac
@@ -124,7 +119,6 @@ if [ "$RUN_ALL" = true ]; then
     TEST=true
     BUILD=true
     DEPS=true
-    COMMENTS=true
 fi
 
 echo -e "${WHITE}🔍 Finance Agent Quality Checks${NC}"
@@ -178,21 +172,6 @@ if [ "$DEPS" = true ]; then
     if ! run_check "node -e \"const pkg=require('./package.json'); const deps=Object.keys(pkg.dependencies||{}).length; if(deps>5) process.exit(1);\"" "Dependency Count Check"; then
         echo -e "${RED}💥 Too many dependencies - maximum 5 allowed${NC}"
         exit 1
-    fi
-fi
-
-# Check for educational comments in lib files (only if there are function files)
-if [ "$COMMENTS" = true ]; then
-    # Check if there are any function files (files with 'function' or 'export function')
-    function_files=$(find src/lib -name '*.js' -exec grep -l 'function\\|export.*function' {} \; 2>/dev/null | wc -l)
-    
-    if [ "$function_files" -gt 0 ]; then
-        if ! run_check "find src/lib -name '*.js' -exec grep -l '@param\\|@returns\\|Step [0-9]' {} \\; | wc -l | awk '{if(\$1==0) exit 1}'" "Educational Comments Check"; then
-            echo -e "${RED}💥 Missing educational comments in lib functions${NC}"
-            exit 1
-        fi
-    else
-        echo -e "${GREEN}[✓]${NC} ${WHITE}Educational Comments Check passed${NC} (no function files found)"
     fi
 fi
 

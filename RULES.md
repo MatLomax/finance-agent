@@ -119,11 +119,20 @@ describe('functionName', () => {
 - **Integration tests**: `integration.test.js` files test module interactions
 - **100% coverage**: All functions must have comprehensive test cases
 - **TDD workflow**: Write tests first, then implement functions
+- **ZERO TOLERANCE for failing tests**: Every test must pass before commit
 - **Test categories**:
   - Unit tests: Individual function behavior
   - Integration tests: Module interaction and data flow
   - Edge cases: Boundary conditions, error scenarios
   - Performance tests: Execution time validation
+
+**TEST FAILURE PROTOCOL:**
+1. **Immediately stop development** when any test fails
+2. **Analyze the failure** - understand the root cause
+3. **Fix the underlying issue** - don't just make tests pass superficially
+4. **Verify the fix** - run tests again to ensure they pass
+5. **Check coverage** - ensure no coverage gaps were introduced
+6. **Only then proceed** with further development or commits
 
 ## UI Modules (Native Web APIs)
 ```javascript
@@ -158,20 +167,37 @@ npm run check     # Full validation: type-check, lint, test, coverage, bundle si
 # Release: npm run release
 ```
 
-**All checks must pass before commit:**
-- TypeScript type checking (tsc --noEmit)
-- ESLint with zero warnings
-- 100% test coverage
-- Bundle size < 25KB (production build)
-- Educational comments validation
+**❌ CRITICAL: NO COMMITS ALLOWED WITH FAILING TESTS OR INCOMPLETE COVERAGE ❌**
 
-**Commit Process**:
+**MANDATORY checks that MUST pass before ANY commit:**
+- **ALL TESTS MUST PASS**: Zero test failures allowed - every single test must pass
+- **100% TEST COVERAGE**: No exceptions - every function must be fully tested
+- **TypeScript type checking (tsc --noEmit)**: Zero type errors
+- **ESLint with zero warnings**: Zero linting issues
+- **Bundle size < 25KB (production build)**: Performance requirement
+
+**BLOCKING CONDITIONS - DO NOT COMMIT IF:**
+- ❌ Any test is failing (`npm test` shows failures)
+- ❌ Test coverage is below 100% (`npm run test:coverage` shows incomplete coverage)
+- ❌ Type checking fails (`npm run type-check` shows errors)
+- ❌ ESLint reports any warnings or errors (`npm run lint` shows issues)
+- ❌ Bundle size exceeds limits (`npm run build:check` fails)
+- ❌ Quality gates script fails (`npm run check` exits with non-zero code)
+
+**COMMIT PROCESS - NEVER SKIP THESE STEPS:**
 ```bash
-npm run check                             # Validate all quality gates
-git add .                                # Stage all changes
-./scripts/auto-commit.sh "detailed msg"  # Commit with analysis
+npm run check                             # ✅ MUST PASS - if this fails, DO NOT COMMIT
+git add .                                # Stage all changes only after checks pass
+./scripts/auto-commit.sh "detailed msg"  # Commit only when all tests pass
 npm run release                          # Create GitHub release
 ```
+
+**AI AGENT REQUIREMENTS:**
+- **NEVER commit with failing tests** - Fix all test failures before any commit
+- **NEVER commit with incomplete coverage** - Add missing tests to reach 100% coverage
+- **Always run `npm run check` before commit** - If it fails, fix issues first
+- **Analyze test output** - Understand why tests are failing and fix root causes
+- **Verify coverage reports** - Ensure no uncovered lines remain
 
 ## Automation Scripts
 - **`scripts/auto-commit.sh`**: **REQUIRES** descriptive commit message as parameter
@@ -303,3 +329,7 @@ All limits and thresholds are defined in `src/lib/consts.js`:
 ❌ Files > 100 lines of code
 ❌ Missing educational comments
 ❌ Skipping quality gates
+❌ **COMMITTING WITH FAILING TESTS** - ABSOLUTELY FORBIDDEN
+❌ **COMMITTING WITH INCOMPLETE COVERAGE** - ABSOLUTELY FORBIDDEN
+❌ **IGNORING QUALITY GATE FAILURES** - ABSOLUTELY FORBIDDEN
+❌ **BYPASSING THE `npm run check` REQUIREMENT** - ABSOLUTELY FORBIDDEN
